@@ -78,7 +78,7 @@ public class TapplableMapView: UIView {
 }
 
 public struct MapView: UIViewRepresentable {
-    @Binding public var locations: [CLLocationCoordinate2D]
+    @Binding var points: [Point]
     
     let mapViewDidTap: (_ location: CLLocationCoordinate2D) -> Void
     final public class Coordinator: NSObject, TapplableMapViewDelegate {
@@ -106,14 +106,12 @@ public struct MapView: UIViewRepresentable {
     }
     
     public func updateUIView(_ uiView: TapplableMapView, context: Context) {
-        for location in locations {
+        for point in points {
             let annotation = MKPointAnnotation()
-            let centerCoordinate = location
-            annotation.coordinate = centerCoordinate
-            annotation.title = "latitude: \(location.latitude), longitude: \(location.longitude)"
+            annotation.coordinate = point.location
+            annotation.title = point.layerName
             uiView.addAnnotation(annotation)
         }
-        
         
         uiView.addOverlayxxx()
     }

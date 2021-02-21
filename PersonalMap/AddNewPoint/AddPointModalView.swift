@@ -8,7 +8,7 @@ struct Info: Identifiable {
 }
 
 protocol AddPointModalViewDelegate {
-    func addLocation(location: CLLocationCoordinate2D)
+    func addPoint(point: Point)
 }
 
 struct AddPointModalView: View {
@@ -74,7 +74,7 @@ struct AddPointModalView: View {
                             showingAlert = true
                             return
                         }
-                        delegate.addLocation(location: location)
+                        delegate.addPoint(point: Point(layerName: layerName, location: location))
                         presentationMode.wrappedValue.dismiss()
                     }, label: {
                         Text("保存")
@@ -107,7 +107,7 @@ extension AddPointModalView: AddInfoViewDelegate {
 
 struct AddPointModalView_Previews: PreviewProvider {
     struct MockAddPointModalViewDelegate: AddPointModalViewDelegate {
-        func addLocation(location: CLLocationCoordinate2D) {}
+        func addPoint(point: Point) {}
     }
     
     static var previews: some View {

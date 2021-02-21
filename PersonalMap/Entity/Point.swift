@@ -1,5 +1,8 @@
-import Foundation
+import SwiftUI
+import MapKit
 
-struct Point {
-    
+struct Point: Identifiable {
+    let id = UUID()
+    let layerName: String
+    let location: CLLocationCoordinate2D
 }

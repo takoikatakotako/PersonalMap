@@ -2,7 +2,7 @@ import SwiftUI
 import MapKit
 
 enum Status {
-    case add
+    case ready
     case point
     case line
     case area
@@ -13,15 +13,15 @@ struct ContentView: View {
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            MapView(locations: $viewModel.points) { (location) in
-                if viewModel.status == .add {
+            MapView(points: $viewModel.points) { (location) in
+                if viewModel.status == .ready {
                     return
                 } else if viewModel.status == .point {
                      viewModel.addPoint(location: location)
                 }
             }
             
-            if viewModel.status == .add {
+            if viewModel.status == .ready {
                 Button(action: {
                     viewModel.showingActionSheet = true
                 }, label: {
@@ -37,7 +37,7 @@ struct ContentView: View {
                 .padding(32)
             } else if viewModel.status == .point {
                 Button(action: {
-                    viewModel.status = .add
+                    viewModel.status = .ready
                 }, label: {
                     Text("閉じる")
                         .font(Font.system(size: 24))
@@ -46,7 +46,9 @@ struct ContentView: View {
             }
         }
         .ignoresSafeArea()
-        .sheet(isPresented: $viewModel.showingAddPointModal, onDismiss: {}, content: {
+        .sheet(isPresented: $viewModel.showingAddPointModal, onDismiss: {
+            viewModel.status = .ready
+        }, content: {
             if let newPoint = viewModel.newPoint {
                 AddPointModalView(location: newPoint, delegate: self)
             } else {
@@ -77,8 +79,8 @@ struct ContentView: View {
 }
 
 extension ContentView: AddPointModalViewDelegate {
-    func addLocation(location: CLLocationCoordinate2D) {
-        viewModel.points.append(location)
+    func addPoint(point: Point) {
+        viewModel.points.append(point)
     }
 }
 

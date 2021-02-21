@@ -3,9 +3,9 @@ import MapKit
 
 class ContentViewModel: ObservableObject {
     @Published var showingActionSheet = false
-    @Published var status: Status = .add
+    @Published var status: Status = .ready
     
-    @Published var points: [CLLocationCoordinate2D] = []
+    @Published var points: [Point] = []
     
     
     @Published var showingAddPointModal = false
