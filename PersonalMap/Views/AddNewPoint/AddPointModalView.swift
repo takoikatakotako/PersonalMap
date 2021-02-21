@@ -1,11 +1,7 @@
 import SwiftUI
 import MapKit
 
-struct Info: Identifiable {
-    var id: UUID = UUID()
-    let key: String
-    let value: String
-}
+
 
 protocol AddPointModalViewDelegate {
     func addPoint(point: Point)
@@ -18,7 +14,7 @@ struct AddPointModalView: View {
     let delegate: AddPointModalViewDelegate
         
     @State var layerName: String = ""
-    @State var infos: [Info] = [Info(key: "鉄塔", value: "鉄塔１"), Info(key: "所在", value: "長野県"), Info(key: "色", value: "赤色")]
+    @State var infos: [Info] = []
     @State var showingAlert = false
 
     var body: some View {
@@ -74,7 +70,7 @@ struct AddPointModalView: View {
                             showingAlert = true
                             return
                         }
-                        delegate.addPoint(point: Point(layerName: layerName, location: location))
+                        delegate.addPoint(point: Point(isHidden: false, layerName: layerName, location: location, infos: infos))
                         presentationMode.wrappedValue.dismiss()
                     }, label: {
                         Text("保存")

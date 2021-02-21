@@ -38,6 +38,11 @@ public class TapplableMapView: UIView {
         mapView.addAnnotation(annotation)
     }
     
+    func removeAllAnnotations() {
+        mapView.removeAnnotations(mapView.annotations)
+    }
+    
+    
     func addOverlayxxx() {
         
 
@@ -106,7 +111,10 @@ public struct MapView: UIViewRepresentable {
     }
     
     public func updateUIView(_ uiView: TapplableMapView, context: Context) {
-        for point in points {
+        
+        uiView.removeAllAnnotations()
+        
+        for point in points where point.isHidden == false {
             let annotation = MKPointAnnotation()
             annotation.coordinate = point.location
             annotation.title = point.layerName

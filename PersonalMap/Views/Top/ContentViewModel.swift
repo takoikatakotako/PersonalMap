@@ -9,15 +9,23 @@ class ContentViewModel: ObservableObject {
     
     
     @Published var showingAddPointModal = false
+    @Published var showingPointListModal = false
     
-    
+    @Published var activeSheet: ActiveSheet?
+
+
     var newPoint: CLLocationCoordinate2D?
     
     func addPoint(location: CLLocationCoordinate2D) {
-        self.newPoint = location
-        showingAddPointModal = true
+        newPoint = location
+        activeSheet = .first
+        // showingAddPointModal = true
         
         // points.append(location)
+    }
+    
+    func showPointList() {
+        activeSheet = .second
     }
 }
 

@@ -17,6 +17,9 @@
 		8D7D7C5525D4F02600BA86BF /* TappableMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C5425D4F02600BA86BF /* TappableMapView.swift */; };
 		8D7D7C5A25D4F37200BA86BF /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C5925D4F37200BA86BF /* ContentViewModel.swift */; };
 		8DD13EF425E2308C00CEAB3B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD13EF325E2308C00CEAB3B /* Point.swift */; };
+		8DD13F0225E2389E00CEAB3B /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD13F0125E2389E00CEAB3B /* Info.swift */; };
+		8DD13F0A25E238F300CEAB3B /* ActiveSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD13F0925E238F300CEAB3B /* ActiveSheet.swift */; };
+		8DD13F1325E23BA300CEAB3B /* PointListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD13F1225E23BA300CEAB3B /* PointListView.swift */; };
 		8DE5AE5F25D8FD8400726DC1 /* AddInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5AE5E25D8FD8400726DC1 /* AddInfoView.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +57,9 @@
 		8D7D7C5425D4F02600BA86BF /* TappableMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableMapView.swift; sourceTree = "<group>"; };
 		8D7D7C5925D4F37200BA86BF /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		8DD13EF325E2308C00CEAB3B /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		8DD13F0125E2389E00CEAB3B /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		8DD13F0925E238F300CEAB3B /* ActiveSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSheet.swift; sourceTree = "<group>"; };
+		8DD13F1225E23BA300CEAB3B /* PointListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointListView.swift; sourceTree = "<group>"; };
 		8DE5AE5E25D8FD8400726DC1 /* AddInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,7 +121,6 @@
 			children = (
 				8D7D7C2625D4F00A00BA86BF /* PersonalMapApp.swift */,
 				8DD13EF225E2307F00CEAB3B /* Entity */,
-				8D472D5425D8F789004267C1 /* AddNewPoint */,
 				8DD13EFB25E230FD00CEAB3B /* Views */,
 				8D7D7C2A25D4F00C00BA86BF /* Assets.xcassets */,
 				8D7D7C2F25D4F00C00BA86BF /* Info.plist */,
@@ -155,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				8DD13EF325E2308C00CEAB3B /* Point.swift */,
+				8DD13F0125E2389E00CEAB3B /* Info.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -162,11 +168,38 @@
 		8DD13EFB25E230FD00CEAB3B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8D7D7C5425D4F02600BA86BF /* TappableMapView.swift */,
-				8D7D7C5925D4F37200BA86BF /* ContentViewModel.swift */,
-				8D7D7C2825D4F00A00BA86BF /* ContentView.swift */,
+				8DD13F1125E23B9100CEAB3B /* PointList */,
+				8DD13F0025E2386400CEAB3B /* Map */,
+				8D472D5425D8F789004267C1 /* AddNewPoint */,
+				8DD13EFF25E2385200CEAB3B /* Top */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		8DD13EFF25E2385200CEAB3B /* Top */ = {
+			isa = PBXGroup;
+			children = (
+				8D7D7C5925D4F37200BA86BF /* ContentViewModel.swift */,
+				8D7D7C2825D4F00A00BA86BF /* ContentView.swift */,
+				8DD13F0925E238F300CEAB3B /* ActiveSheet.swift */,
+			);
+			path = Top;
+			sourceTree = "<group>";
+		};
+		8DD13F0025E2386400CEAB3B /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				8D7D7C5425D4F02600BA86BF /* TappableMapView.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		8DD13F1125E23B9100CEAB3B /* PointList */ = {
+			isa = PBXGroup;
+			children = (
+				8DD13F1225E23BA300CEAB3B /* PointListView.swift */,
+			);
+			path = PointList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,9 +332,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DE5AE5F25D8FD8400726DC1 /* AddInfoView.swift in Sources */,
+				8DD13F1325E23BA300CEAB3B /* PointListView.swift in Sources */,
+				8DD13F0225E2389E00CEAB3B /* Info.swift in Sources */,
 				8D7D7C5A25D4F37200BA86BF /* ContentViewModel.swift in Sources */,
 				8D7D7C5525D4F02600BA86BF /* TappableMapView.swift in Sources */,
 				8D7D7C2925D4F00A00BA86BF /* ContentView.swift in Sources */,
+				8DD13F0A25E238F300CEAB3B /* ActiveSheet.swift in Sources */,
 				8DD13EF425E2308C00CEAB3B /* Point.swift in Sources */,
 				8D7D7C2725D4F00A00BA86BF /* PersonalMapApp.swift in Sources */,
 				8D472D5025D8F554004267C1 /* AddPointModalView.swift in Sources */,
