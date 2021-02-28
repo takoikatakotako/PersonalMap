@@ -42,48 +42,14 @@ public class TapplableMapView: UIView {
         mapView.removeAnnotations(mapView.annotations)
     }
     
-    
-    func addOverlayxxx() {
-        
-
-        class ImageOverlay : NSObject, MKOverlay {
-
-            let image:UIImage
-            let boundingMapRect: MKMapRect
-            let coordinate:CLLocationCoordinate2D
-
-            init(image: UIImage, rect: MKMapRect) {
-                self.image = image
-                self.boundingMapRect = rect
-                self.coordinate = CLLocationCoordinate2D(latitude: 35.6804, longitude: 139.7690)
-            }
-        }
-
-        class ImageOverlayRenderer : MKOverlayRenderer {
-
-            override func draw(_ mapRect: MKMapRect, zoomScale: MKZoomScale, in context: CGContext) {
-
-                guard let overlay = self.overlay as? ImageOverlay else {
-                    return
-                }
-
-                let rect = self.rect(for: overlay.boundingMapRect)
-
-                UIGraphicsPushContext(context)
-                overlay.image.draw(in: rect)
-                UIGraphicsPopContext()
-            }
-        }
-        
-        // let overlay = MKCircle(center: CLLocationCoordinate2D(latitude: 35.6804, longitude: 139.7690), radius: 10000)
-        
-        let overlay = ImageOverlay(image: UIImage(named: "icon")!, rect: MKMapRect(x: 0, y: 0, width: 10000, height: 10000))
-        mapView.addOverlay(overlay)
+    func changeMapType(mapType: MKMapType) {
+        mapView.mapType = mapType
     }
 }
 
 public struct MapView: UIViewRepresentable {
     @Binding var points: [Point]
+    @Binding var mapType: MKMapType
     
     let mapViewDidTap: (_ location: CLLocationCoordinate2D) -> Void
     final public class Coordinator: NSObject, TapplableMapViewDelegate {
@@ -111,8 +77,11 @@ public struct MapView: UIViewRepresentable {
     }
     
     public func updateUIView(_ uiView: TapplableMapView, context: Context) {
-        
+        // Clear
         uiView.removeAllAnnotations()
+        
+        // Set
+        uiView.changeMapType(mapType: mapType)
         
         for point in points where point.isHidden == false {
             let annotation = MKPointAnnotation()
@@ -120,7 +89,5 @@ public struct MapView: UIViewRepresentable {
             annotation.title = point.layerName
             uiView.addAnnotation(annotation)
         }
-        
-        uiView.addOverlayxxx()
     }
 }

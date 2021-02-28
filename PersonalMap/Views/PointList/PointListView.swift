@@ -26,6 +26,8 @@ struct PointListView: View {
                     }
                 }
             }
+            .navigationTitle("Point List")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

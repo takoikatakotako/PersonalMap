@@ -1,7 +1,7 @@
 import SwiftUI
 import MapKit
 
-enum Status {
+enum AddObjectStatus {
     case ready
     case point
     case line
@@ -13,63 +13,49 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            MapView(points: $viewModel.points) { (location) in
-                if viewModel.status == .ready {
+            MapView(points: $viewModel.points, mapType: $viewModel.mapType) { (location) in
+                if viewModel.addObjectStatus == .ready {
                     return
-                } else if viewModel.status == .point {
+                } else if viewModel.addObjectStatus == .point {
                     viewModel.addPoint(location: location)
+                } else if viewModel.addObjectStatus == .line {
+                    viewModel.addLine(location: location)
                 }
             }
             .ignoresSafeArea()
             
-            VStack {
-                HStack {
-                    Button(action: {
-                        viewModel.showPointList()
-                    }) {
-                        Image(systemName: "square.stack.3d.up")
-                            .padding(8)
-                            .background(Color.orange)
-                            .cornerRadius(5)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color.blue, lineWidth: 2))
+            if viewModel.addObjectStatus == .ready {
+                VStack {
+                    HStack {
+                        Button(action: {
+                            viewModel.showPointList()
+                        }) {
+                            Image(systemName: "square.stack.3d.up")
+                                .padding(8)
+                                .background(Color.orange)
+                                .cornerRadius(5)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(Color.blue, lineWidth: 2))
+                        }
+                        
+                        Button(action: {
+                            viewModel.changeMapTypeButtonTapped()
+                        }) {
+                            Image(systemName: "paperplane")
+                                .padding(8)
+                                .background(Color.orange)
+                                .cornerRadius(5)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(Color.blue, lineWidth: 2))
+                        }
                     }
                     
-                    //                    Button(action: {}) {
-                    //                        Image(systemName: "lightbulb")
-                    //                            .padding(8)
-                    //                            .background(Color.orange)
-                    //                            .cornerRadius(5)
-                    //                            .overlay(
-                    //                                RoundedRectangle(cornerRadius: 5)
-                    //                                    .stroke(Color.blue, lineWidth: 2))
-                    //                    }
-                    //                    Button(action: {}) {
-                    //                        Image(systemName: "lightbulb.fill")
-                    //                            .padding(8)
-                    //                            .background(Color.orange)
-                    //                            .cornerRadius(5)
-                    //                            .overlay(
-                    //                                RoundedRectangle(cornerRadius: 5)
-                    //                                    .stroke(Color.blue, lineWidth: 2))
-                    //                    }
-                    //                    Button(action: {}) {
-                    //                        Image(systemName: "gearshape")
-                    //                            .padding(8)
-                    //                            .background(Color.orange)
-                    //                            .cornerRadius(5)
-                    //                            .overlay(
-                    //                                RoundedRectangle(cornerRadius: 5)
-                    //                                    .stroke(Color.blue, lineWidth: 2))
-                    //                    }
-                }
-                
-                Spacer()
-                
-                if viewModel.status == .ready {
+                    Spacer()
+                    
                     Button(action: {
-                        viewModel.showingActionSheet = true
+                        viewModel.actionSheet = .newObject
                     }, label: {
                         Image(systemName: "plus")
                             .resizable()
@@ -81,56 +67,101 @@ struct ContentView: View {
                             .cornerRadius(30)
                     })
                     .padding(8)
-                } else if viewModel.status == .point {
+                }
+                
+            } else if viewModel.addObjectStatus == .point {
+                VStack {
+                    Spacer()
+                    
                     Button(action: {
-                        viewModel.status = .ready
+                        viewModel.addObjectStatus = .ready
                     }, label: {
                         Text("閉じる")
                             .font(Font.system(size: 24))
                     })
                     .padding(8)
                 }
-                
+            } else if viewModel.addObjectStatus == .line {
+                VStack {
+                    Spacer()
+                    
+                    HStack {
+                        Button(action: {
+                            viewModel.addObjectStatus = .ready
+                        }, label: {
+                            Text("閉じる")
+                                .font(Font.system(size: 24))
+                        })
+                        .padding(8)
+                        
+                        Button(action: {
+                            viewModel.addObjectStatus = .ready
+                        }, label: {
+                            Text("決定")
+                                .font(Font.system(size: 24))
+                        })
+                        .padding(8)
+                    }
+                }
             }
         }
         .sheet(
-            item: $viewModel.activeSheet,
+            item: $viewModel.sheet,
             onDismiss: {
-                viewModel.status = .ready
+                viewModel.addObjectStatus = .ready
             },
             content: { item in
-                
                 switch item {
-                case .first:
-                    if let newPoint = viewModel.newPoint {
-                        AddPointModalView(location: newPoint, delegate: self)
-                    } else {
-                        Text("Error")
-                    }
-                case .second:
+                case let .addPoint(_, location):
+                    AddPointModalView(location: location, delegate: self)
+                case .pointList:
                     PointListView(points: $viewModel.points)
                 }
             })
-        .actionSheet(isPresented: $viewModel.showingActionSheet) {
-            ActionSheet(
-                title: Text("追加"),
-                message: Text("追加するオブジェクトの種類を選択してください"),
-                buttons:
-                    [
-                        .default(Text("ポイント"), action: {
-                            viewModel.status = .point
-                        }),
-                        .default(Text("ライン"), action: {
-                            viewModel.status = .line
-                        }),
-                        .default(Text("エリア"), action: {
-                            viewModel.status = .area
-                        }),
-                        .cancel()
-                    ]
-            )
+        .actionSheet(item: $viewModel.actionSheet) { item in
+            switch item {
+            
+            case .newObject:
+                return ActionSheet(
+                    title: Text("追加"),
+                    message: Text("追加するオブジェクトの種類を選択してください"),
+                    buttons:
+                        [
+                            .default(Text("ポイント"), action: {
+                                viewModel.addObjectStatus(status: .point)
+                            }),
+                            .default(Text("ライン"), action: {
+                                viewModel.addObjectStatus(status: .line)
+                            }),
+                            .default(Text("エリア"), action: {
+                                viewModel.addObjectStatus(status: .area)
+                            }),
+                            .cancel()
+                        ]
+                )
+            case .changeMapType:
+                return ActionSheet(
+                    title: Text("マップタイプ変更"),
+                    message: Text("マップタイプを選択してください"),
+                    buttons:
+                        [
+                            .default(Text("standard"), action: {
+                                viewModel.changeMapType(mapType: .standard)
+                            }),
+                            .default(Text("hybrid"), action: {
+                                viewModel.changeMapType(mapType: .hybrid)
+                            }),
+                            .default(Text("hybridFlyover"), action: {
+                                viewModel.changeMapType(mapType: .hybridFlyover)
+                            }),
+                            .default(Text("satellite"), action: {
+                                viewModel.changeMapType(mapType: .satellite)
+                            }),
+                            .cancel()
+                        ]
+                )
+            }
         }
-        
     }
 }
 
