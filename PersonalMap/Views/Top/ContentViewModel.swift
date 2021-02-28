@@ -24,9 +24,9 @@ enum ContentViewModelActionSheet: Identifiable {
     }
 }
 
-
 class ContentViewModel: ObservableObject {
     // Map
+    @Published var mapObjects: [MapObject] = []
     @Published var points: [Point] = []
     @Published var mapType: MKMapType = MKMapType.standard
 
@@ -37,20 +37,29 @@ class ContentViewModel: ObservableObject {
     @Published var sheet: ContentViewModelSheet?
     @Published var actionSheet: ContentViewModelActionSheet?
     
+    var newLineLocations: [CLLocationCoordinate2D] = []
+    
+    // ButtonTapped
+    func changeMapTypeButtonTapped() {
+        actionSheet = .changeMapType
+    }
+    
+    func addMapObject(mapObject: MapObject) {
+        mapObjects.append(mapObject)
+    }
+    
     func addPoint(location: CLLocationCoordinate2D) {
         sheet = .addPoint(UUID(), location)
     }
     
     func addLine(location: CLLocationCoordinate2D) {
-        points.append(Point(isHidden: false, layerName: "\(points.count)", location: location, infos: []))
+        newLineLocations.append(location)
+        mapObjects = []
+        mapObjects.append(.line(Line(isHidden: false, layerName: "xxx", locations: newLineLocations, infos: [])))
     }
     
     func showPointList() {
         sheet = .pointList(UUID())
-    }
-    
-    func changeMapTypeButtonTapped() {
-        actionSheet = .changeMapType
     }
     
     func addObjectStatus(status: AddObjectStatus) {

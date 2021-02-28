@@ -13,7 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            MapView(points: $viewModel.points, mapType: $viewModel.mapType) { (location) in
+            MapView(mapObjects: $viewModel.mapObjects, mapType: $viewModel.mapType) { (location) in
                 if viewModel.addObjectStatus == .ready {
                     return
                 } else if viewModel.addObjectStatus == .point {
@@ -167,7 +167,7 @@ struct ContentView: View {
 
 extension ContentView: AddPointModalViewDelegate {
     func addPoint(point: Point) {
-        viewModel.points.append(point)
+        viewModel.addMapObject(mapObject: .point(point))
     }
 }
 

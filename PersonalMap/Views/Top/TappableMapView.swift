@@ -6,7 +6,7 @@ public protocol TapplableMapViewDelegate: AnyObject {
     func mapViewDidTap(location: CLLocationCoordinate2D)
 }
 
-public class TapplableMapView: UIView {
+public class TapplableMapView: UIView, MKMapViewDelegate {
     private lazy var mapView = MKMapView()
     weak public var delegate: TapplableMapViewDelegate?
     
@@ -21,6 +21,7 @@ public class TapplableMapView: UIView {
         tapGestureRecognizer.addTarget(self, action: #selector(onTap(sender:)))
         
         mapView.addGestureRecognizer(tapGestureRecognizer)
+        mapView.delegate = self
         addSubview(mapView)
     }
     
@@ -42,13 +43,29 @@ public class TapplableMapView: UIView {
         mapView.removeAnnotations(mapView.annotations)
     }
     
+    func addPolyLine(locations: [CLLocationCoordinate2D]) {
+        let polyLine = MKPolyline(coordinates: locations, count: locations.count)
+        mapView.addOverlay(polyLine)
+    }
+    
     func changeMapType(mapType: MKMapType) {
         mapView.mapType = mapType
+    }
+    
+    // Delegate Methods
+    public func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if let polyline = overlay as? MKPolyline {
+            let polylineRenderer = MKPolylineRenderer(polyline: polyline)
+            polylineRenderer.strokeColor = .blue
+            polylineRenderer.lineWidth = 2.0
+            return polylineRenderer
+        }
+        return MKOverlayRenderer()
     }
 }
 
 public struct MapView: UIViewRepresentable {
-    @Binding var points: [Point]
+    @Binding var mapObjects: [MapObject]
     @Binding var mapType: MKMapType
     
     let mapViewDidTap: (_ location: CLLocationCoordinate2D) -> Void
@@ -83,11 +100,20 @@ public struct MapView: UIViewRepresentable {
         // Set
         uiView.changeMapType(mapType: mapType)
         
-        for point in points where point.isHidden == false {
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = point.location
-            annotation.title = point.layerName
-            uiView.addAnnotation(annotation)
+        for mapObject in mapObjects {
+            switch mapObject {
+            case let .point(point):
+                if point.isHidden {
+                    continue
+                }
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = point.location
+                annotation.title = point.layerName
+                uiView.addAnnotation(annotation)
+            case let .line(line):
+                uiView.addPolyLine(locations: line.locations)
+                break
+            }
         }
     }
 }
