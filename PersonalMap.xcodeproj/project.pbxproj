@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8D472D5025D8F554004267C1 /* AddPointModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D472D4F25D8F554004267C1 /* AddPointModalView.swift */; };
+		8D472D5025D8F554004267C1 /* AddNewPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D472D4F25D8F554004267C1 /* AddNewPointView.swift */; };
 		8D7D7C2725D4F00A00BA86BF /* PersonalMapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C2625D4F00A00BA86BF /* PersonalMapApp.swift */; };
 		8D7D7C2925D4F00A00BA86BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C2825D4F00A00BA86BF /* ContentView.swift */; };
 		8D7D7C2B25D4F00C00BA86BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D7D7C2A25D4F00C00BA86BF /* Assets.xcassets */; };
@@ -16,6 +16,7 @@
 		8D7D7C4425D4F00C00BA86BF /* PersonalMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C4325D4F00C00BA86BF /* PersonalMapUITests.swift */; };
 		8D7D7C5525D4F02600BA86BF /* TappableMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C5425D4F02600BA86BF /* TappableMapView.swift */; };
 		8D7D7C5A25D4F37200BA86BF /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C5925D4F37200BA86BF /* ContentViewModel.swift */; };
+		8DAFC2E925F4B091005FC550 /* AddNewLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAFC2E825F4B091005FC550 /* AddNewLineView.swift */; };
 		8DCE59DB25EBB36400D080D2 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE59DA25EBB36400D080D2 /* Line.swift */; };
 		8DCE59E025EBB38F00D080D2 /* MapObjectProtcol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE59DF25EBB38F00D080D2 /* MapObjectProtcol.swift */; };
 		8DD13EF425E2308C00CEAB3B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD13EF325E2308C00CEAB3B /* Point.swift */; };
@@ -42,7 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8D472D4F25D8F554004267C1 /* AddPointModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointModalView.swift; sourceTree = "<group>"; };
+		8D472D4F25D8F554004267C1 /* AddNewPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPointView.swift; sourceTree = "<group>"; };
 		8D7D7C2325D4F00A00BA86BF /* PersonalMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PersonalMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D7D7C2625D4F00A00BA86BF /* PersonalMapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalMapApp.swift; sourceTree = "<group>"; };
 		8D7D7C2825D4F00A00BA86BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -57,6 +58,7 @@
 		8D7D7C4525D4F00C00BA86BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D7D7C5425D4F02600BA86BF /* TappableMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableMapView.swift; sourceTree = "<group>"; };
 		8D7D7C5925D4F37200BA86BF /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		8DAFC2E825F4B091005FC550 /* AddNewLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewLineView.swift; sourceTree = "<group>"; };
 		8DCE59DA25EBB36400D080D2 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		8DCE59DF25EBB38F00D080D2 /* MapObjectProtcol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectProtcol.swift; sourceTree = "<group>"; };
 		8DD13EF325E2308C00CEAB3B /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
@@ -93,7 +95,7 @@
 		8D472D5425D8F789004267C1 /* AddNewPoint */ = {
 			isa = PBXGroup;
 			children = (
-				8D472D4F25D8F554004267C1 /* AddPointModalView.swift */,
+				8D472D4F25D8F554004267C1 /* AddNewPointView.swift */,
 			);
 			path = AddNewPoint;
 			sourceTree = "<group>";
@@ -158,6 +160,14 @@
 			path = PersonalMapUITests;
 			sourceTree = "<group>";
 		};
+		8DAFC2E725F4B076005FC550 /* AddNewLine */ = {
+			isa = PBXGroup;
+			children = (
+				8DAFC2E825F4B091005FC550 /* AddNewLineView.swift */,
+			);
+			path = AddNewLine;
+			sourceTree = "<group>";
+		};
 		8DD13EF225E2307F00CEAB3B /* Entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +184,7 @@
 			children = (
 				8DD13F1125E23B9100CEAB3B /* PointList */,
 				8D472D5425D8F789004267C1 /* AddNewPoint */,
+				8DAFC2E725F4B076005FC550 /* AddNewLine */,
 				8DD13EFF25E2385200CEAB3B /* Top */,
 			);
 			path = Views;
@@ -335,7 +346,8 @@
 				8D7D7C2925D4F00A00BA86BF /* ContentView.swift in Sources */,
 				8DD13EF425E2308C00CEAB3B /* Point.swift in Sources */,
 				8D7D7C2725D4F00A00BA86BF /* PersonalMapApp.swift in Sources */,
-				8D472D5025D8F554004267C1 /* AddPointModalView.swift in Sources */,
+				8DAFC2E925F4B091005FC550 /* AddNewLineView.swift in Sources */,
+				8D472D5025D8F554004267C1 /* AddNewPointView.swift in Sources */,
 				8DCE59DB25EBB36400D080D2 /* Line.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

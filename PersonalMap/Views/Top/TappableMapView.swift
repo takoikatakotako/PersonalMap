@@ -35,6 +35,7 @@ public class TapplableMapView: UIView, MKMapViewDelegate {
         delegate?.mapViewDidTap(location: location)
     }
     
+    // Anotation
     func addAnnotation(_ annotation: MKAnnotation) {
         mapView.addAnnotation(annotation)
     }
@@ -43,9 +44,16 @@ public class TapplableMapView: UIView, MKMapViewDelegate {
         mapView.removeAnnotations(mapView.annotations)
     }
     
+    // PolyLine
     func addPolyLine(locations: [CLLocationCoordinate2D]) {
         let polyLine = MKPolyline(coordinates: locations, count: locations.count)
         mapView.addOverlay(polyLine)
+    }
+    
+    func removeAllPolyLines() {
+        for overlay in mapView.overlays {
+            mapView.removeOverlay(overlay)
+        }
     }
     
     func changeMapType(mapType: MKMapType) {
@@ -96,6 +104,7 @@ public struct MapView: UIViewRepresentable {
     public func updateUIView(_ uiView: TapplableMapView, context: Context) {
         // Clear
         uiView.removeAllAnnotations()
+        uiView.removeAllPolyLines()
         
         // Set
         uiView.changeMapType(mapType: mapType)

@@ -1,13 +1,11 @@
 import SwiftUI
 import MapKit
 
-
-
 protocol AddPointModalViewDelegate {
     func addPoint(point: Point)
 }
 
-struct AddPointModalView: View {
+struct AddNewPointView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     let location: CLLocationCoordinate2D
@@ -95,7 +93,7 @@ struct AddPointModalView: View {
     }
 }
 
-extension AddPointModalView: AddInfoViewDelegate {
+extension AddNewPointView: AddInfoViewDelegate {
     func addInfo(info: Info) {
         infos.append(info)
     }
@@ -107,6 +105,6 @@ struct AddPointModalView_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        AddPointModalView(location: CLLocationCoordinate2D(latitude: 36.2048, longitude: 138.2529), delegate: MockAddPointModalViewDelegate())
+        AddNewPointView(location: CLLocationCoordinate2D(latitude: 36.2048, longitude: 138.2529), delegate: MockAddPointModalViewDelegate())
     }
 }
