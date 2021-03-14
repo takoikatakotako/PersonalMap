@@ -30,7 +30,6 @@ enum ContentViewModelActionSheet: Identifiable {
 class ContentViewModel: ObservableObject {
     // Map
     @Published var mapObjects: [MapObject] = []
-    @Published var points: [Point] = []
     @Published var mapType: MKMapType = MKMapType.standard
 
     // Status

@@ -139,7 +139,7 @@ struct ContentView: View {
         case let .addLine(_, locations):
             AddNewLineView(locations: locations, delegate: self)
         case .pointList:
-            PointListView(points: $viewModel.points)
+            MapObjectListView(mapObjects: $viewModel.mapObjects)
         }
     }
     
