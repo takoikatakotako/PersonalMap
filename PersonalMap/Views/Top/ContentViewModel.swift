@@ -46,13 +46,20 @@ class ContentViewModel: ObservableObject {
     var newLineLocations: [CLLocationCoordinate2D] = []
     
     
-    // 追加
+    /// 追加
     
     // ポイント追加モード
     func setAddPointMode() {
         addObjectStatus = .point
         evacuatedMapObjects = mapObjects
         mapObjects = []
+    }
+    
+    // ポイント追加モード解除
+    func resetAddPointMode() {
+        addObjectStatus = .ready
+        mapObjects = evacuatedMapObjects
+        evacuatedMapObjects = []
     }
     
     // ポイントを追加
@@ -65,6 +72,13 @@ class ContentViewModel: ObservableObject {
         addObjectStatus = .line
         evacuatedMapObjects = mapObjects
         mapObjects = []
+    }
+    
+    // ライン追加モード解除
+    func resetAddLineMode() {
+        addObjectStatus = .ready
+        mapObjects = evacuatedMapObjects
+        evacuatedMapObjects = []
     }
     
     // ラインを追加
@@ -114,7 +128,6 @@ class ContentViewModel: ObservableObject {
         sheet = .addLine(UUID(), newLineLocations)
     }
     
-    
     func showPointList() {
         sheet = .pointList(UUID())
     }
@@ -123,8 +136,3 @@ class ContentViewModel: ObservableObject {
         self.mapType = mapType
     }
 }
-
-//レイヤー名
-//タイトル
-// 項目は自由に
-// 送電線名: xxx [String: String]

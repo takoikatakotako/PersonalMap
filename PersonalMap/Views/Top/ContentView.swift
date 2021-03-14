@@ -13,7 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            MapView(mapObjects: $viewModel.mapObjects, mapType: $viewModel.mapType) { (location) in
+            MapView(mapObjects: $viewModel.mapObjects, mapType: $viewModel.mapType) { (location: CLLocationCoordinate2D) in
                 if viewModel.addObjectStatus == .ready {
                     return
                 } else if viewModel.addObjectStatus == .point {
@@ -97,7 +97,7 @@ struct ContentView: View {
         VStack {
             Spacer()
             Button(action: {
-                viewModel.setReadyMode()
+                viewModel.resetAddPointMode()
             }, label: {
                 Text("閉じる")
                     .font(Font.system(size: 24))
@@ -113,7 +113,7 @@ struct ContentView: View {
             
             HStack {
                 Button(action: {
-                    viewModel.setReadyMode()
+                    viewModel.resetAddLineMode()
                 }, label: {
                     Text("閉じる")
                         .font(Font.system(size: 24))
