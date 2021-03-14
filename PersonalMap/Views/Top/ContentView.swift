@@ -49,28 +49,12 @@ struct ContentView: View {
     func readyContent() -> some View {
         VStack {
             HStack {
-                Button(action: {
+                TopHeaderButton(systemName: "square.stack.3d.up") {
                     viewModel.showPointList()
-                }) {
-                    Image(systemName: "square.stack.3d.up")
-                        .padding(8)
-                        .background(Color.orange)
-                        .cornerRadius(5)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.blue, lineWidth: 2))
                 }
                 
-                Button(action: {
+                TopHeaderButton(systemName: "paperplane") {
                     viewModel.showChangeMapTypeActionSheet()
-                }) {
-                    Image(systemName: "paperplane")
-                        .padding(8)
-                        .background(Color.orange)
-                        .cornerRadius(5)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.blue, lineWidth: 2))
                 }
             }
             

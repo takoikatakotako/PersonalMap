@@ -23,6 +23,7 @@
 		8DD13F0225E2389E00CEAB3B /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD13F0125E2389E00CEAB3B /* Info.swift */; };
 		8DD13F1325E23BA300CEAB3B /* MapObjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD13F1225E23BA300CEAB3B /* MapObjectListView.swift */; };
 		8DE5AE5F25D8FD8400726DC1 /* AddInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5AE5E25D8FD8400726DC1 /* AddInfoView.swift */; };
+		8DE9F87325FDEDB600302D31 /* TopHeaderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE9F87225FDEDB600302D31 /* TopHeaderButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		8DD13F0125E2389E00CEAB3B /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		8DD13F1225E23BA300CEAB3B /* MapObjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectListView.swift; sourceTree = "<group>"; };
 		8DE5AE5E25D8FD8400726DC1 /* AddInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInfoView.swift; sourceTree = "<group>"; };
+		8DE9F87225FDEDB600302D31 /* TopHeaderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopHeaderButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,7 +195,7 @@
 		8DD13EFF25E2385200CEAB3B /* Top */ = {
 			isa = PBXGroup;
 			children = (
-				8D7D7C5425D4F02600BA86BF /* TappableMapView.swift */,
+				8DE9F87125FDED6800302D31 /* View */,
 				8D7D7C5925D4F37200BA86BF /* ContentViewModel.swift */,
 				8D7D7C2825D4F00A00BA86BF /* ContentView.swift */,
 			);
@@ -206,6 +208,15 @@
 				8DD13F1225E23BA300CEAB3B /* MapObjectListView.swift */,
 			);
 			path = MapObjectList;
+			sourceTree = "<group>";
+		};
+		8DE9F87125FDED6800302D31 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8D7D7C5425D4F02600BA86BF /* TappableMapView.swift */,
+				8DE9F87225FDEDB600302D31 /* TopHeaderButton.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,6 +356,7 @@
 				8D7D7C5525D4F02600BA86BF /* TappableMapView.swift in Sources */,
 				8D7D7C2925D4F00A00BA86BF /* ContentView.swift in Sources */,
 				8DD13EF425E2308C00CEAB3B /* Point.swift in Sources */,
+				8DE9F87325FDEDB600302D31 /* TopHeaderButton.swift in Sources */,
 				8D7D7C2725D4F00A00BA86BF /* PersonalMapApp.swift in Sources */,
 				8DAFC2E925F4B091005FC550 /* AddNewLineView.swift in Sources */,
 				8D472D5025D8F554004267C1 /* AddNewPointView.swift in Sources */,
