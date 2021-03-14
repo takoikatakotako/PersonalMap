@@ -160,9 +160,6 @@ struct ContentView: View {
             )
         }
     }
-    
-    
-
 }
 
 extension ContentView: AddPointModalViewDelegate {
