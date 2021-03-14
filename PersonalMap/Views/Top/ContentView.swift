@@ -60,19 +60,9 @@ struct ContentView: View {
             
             Spacer()
             
-            Button(action: {
+            TopPlusButton {
                 viewModel.actionSheet = .newObject
-            }, label: {
-                Image(systemName: "plus")
-                    .resizable()
-                    .renderingMode(.template)
-                    .foregroundColor(Color.white)
-                    .frame(width: 30, height: 30)
-                    .padding(12)
-                    .background(Color.gray)
-                    .cornerRadius(30)
-            })
-            .padding(8)
+            }
         }
     }
     
