@@ -4,7 +4,7 @@ import MapKit
 enum ContentViewModelSheet: Identifiable {
     case addPoint(UUID, CLLocationCoordinate2D)
     case addLine(UUID, [CLLocationCoordinate2D])
-    case pointList(UUID)
+    case mapObjectList(UUID)
     
     var id: UUID {
         switch self {
@@ -12,7 +12,7 @@ enum ContentViewModelSheet: Identifiable {
             return id
         case let .addLine(id, _):
             return id
-        case let .pointList(id):
+        case let .mapObjectList(id):
             return id
         }
     }
@@ -47,7 +47,7 @@ class ContentViewModel: ObservableObject {
     
     
     /// 追加
-    
+    /// Point
     // ポイント追加モード
     func setAddPointMode() {
         addObjectStatus = .point
@@ -62,11 +62,21 @@ class ContentViewModel: ObservableObject {
         evacuatedMapObjects = []
     }
     
-    // ポイントを追加
-    func addPoint(point: Point) {
-        evacuatedMapObjects.append(.point(point))
+    // ポイント追加モーダルを表示
+    func showAddPointSheet(location: CLLocationCoordinate2D) {
+        sheet = .addPoint(UUID(), location)
     }
     
+    // ポイントを追加する
+    func addPoint(point: Point) {
+        // 追加のタイミングで戻す
+        evacuatedMapObjects.append(.point(point))
+        mapObjects = evacuatedMapObjects
+        evacuatedMapObjects = []
+    }
+    
+    
+    /// Line
     // ライン追加モード
     func setAddLineMode() {
         addObjectStatus = .line
@@ -81,11 +91,29 @@ class ContentViewModel: ObservableObject {
         evacuatedMapObjects = []
     }
     
-    // ラインを追加
-    func addLine(line: Line) {
-        evacuatedMapObjects.append(.line(line))
+    // ライン候補に追加
+    func appendLineLocation(location: CLLocationCoordinate2D) {
+        newLineLocations.append(location)
+        mapObjects = []
+        mapObjects.append(.line(Line(isHidden: false, layerName: "新しいライン", locations: newLineLocations, infos: [])))
     }
     
+    // ライン追加モーダルを表示
+    func showAddLineSheet() {
+        sheet = .addLine(UUID(), newLineLocations)
+    }
+    
+    // ラインを追加
+    func addLine(line: Line) {
+        // 追加のタイミングで戻す
+        evacuatedMapObjects.append(.line(line))
+        mapObjects = evacuatedMapObjects
+        newLineLocations = []
+        evacuatedMapObjects = []
+    }
+    
+    
+    /// Area
     // エリア追加モード
     func setAddAreaMode() {
         addObjectStatus = .area
@@ -95,9 +123,6 @@ class ContentViewModel: ObservableObject {
     
     // デフォルトモード
     func setReadyMode() {
-        mapObjects = evacuatedMapObjects
-        evacuatedMapObjects = []
-        newLineLocations = []
         addObjectStatus = .ready
     }
     
@@ -105,31 +130,12 @@ class ContentViewModel: ObservableObject {
     
     
     // Show
-    
-    func showAddPointSheet(location: CLLocationCoordinate2D) {
-        sheet = .addPoint(UUID(), location)
-    }
-    
     func showChangeMapTypeActionSheet() {
         actionSheet = .changeMapType
     }
     
-    
-    
-    // ラインを追加
-    func addLine(location: CLLocationCoordinate2D) {
-        newLineLocations.append(location)
-        mapObjects = []
-        mapObjects.append(.line(Line(isHidden: false, layerName: "新しいライン", locations: newLineLocations, infos: [])))
-    }
-    
-    func addLineXXX() {
-        mapObjects = []
-        sheet = .addLine(UUID(), newLineLocations)
-    }
-    
-    func showPointList() {
-        sheet = .pointList(UUID())
+    func showMapObjectList() {
+        sheet = .mapObjectList(UUID())
     }
     
     func changeMapType(mapType: MKMapType) {

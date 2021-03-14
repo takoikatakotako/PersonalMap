@@ -19,7 +19,7 @@ struct ContentView: View {
                 } else if viewModel.addObjectStatus == .point {
                     viewModel.showAddPointSheet(location: location)
                 } else if viewModel.addObjectStatus == .line {
-                    viewModel.addLine(location: location)
+                    viewModel.appendLineLocation(location: location)
                 }
             }
             .ignoresSafeArea()
@@ -50,7 +50,7 @@ struct ContentView: View {
         VStack {
             HStack {
                 TopHeaderButton(systemName: "square.stack.3d.up") {
-                    viewModel.showPointList()
+                    viewModel.showMapObjectList()
                 }
                 
                 TopHeaderButton(systemName: "paperplane") {
@@ -95,7 +95,7 @@ struct ContentView: View {
                 .padding(8)
                 
                 Button(action: {
-                    viewModel.addLineXXX()
+                    viewModel.showAddLineSheet()
                 }, label: {
                     Text("決定")
                         .font(Font.system(size: 24))
@@ -112,7 +112,7 @@ struct ContentView: View {
             AddNewPointView(location: location, delegate: self)
         case let .addLine(_, locations):
             AddNewLineView(locations: locations, delegate: self)
-        case .pointList:
+        case .mapObjectList:
             MapObjectListView(mapObjects: $viewModel.mapObjects)
         }
     }

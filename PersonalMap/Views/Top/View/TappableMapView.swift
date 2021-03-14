@@ -120,6 +120,9 @@ public struct MapView: UIViewRepresentable {
                 annotation.title = point.layerName
                 uiView.addAnnotation(annotation)
             case let .line(line):
+                if line.isHidden {
+                    continue
+                }
                 uiView.addPolyLine(locations: line.locations)
                 break
             }
