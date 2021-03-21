@@ -8,14 +8,14 @@ protocol MapObjectProtcol {
 
 enum  MapObject: Identifiable {
     case point(Point)
-    case line(Line)
+    case polyLine(PolyLine)
     case polygon(Polygon)
     
     var id: UUID {
         switch self {
         case let .point(point):
             return point.id
-        case let .line(line):
+        case let .polyLine(line):
             return line.id
         case let .polygon(polygon):
             return polygon.id
@@ -26,7 +26,7 @@ enum  MapObject: Identifiable {
         switch self {
         case let .point(point):
             return point
-        case let .line(line):
+        case let .polyLine(line):
             return line
         case let .polygon(polygon):
             return polygon

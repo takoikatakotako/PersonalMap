@@ -97,7 +97,7 @@ class ContentViewModel: ObservableObject {
     func appendLineLocations(location: CLLocationCoordinate2D) {
         newLineLocations.append(location)
         mapObjects = []
-        mapObjects.append(.line(Line(isHidden: false, layerName: "新しいライン", locations: newLineLocations, infos: [])))
+        mapObjects.append(.polyLine(PolyLine(isHidden: false, layerName: "新しいライン", locations: newLineLocations, infos: [])))
     }
     
     // ライン追加モーダルを表示
@@ -106,9 +106,9 @@ class ContentViewModel: ObservableObject {
     }
     
     // ラインを追加
-    func addLine(line: Line) {
+    func addLine(line: PolyLine) {
         // 追加のタイミングで戻す
-        evacuatedMapObjects.append(.line(line))
+        evacuatedMapObjects.append(.polyLine(line))
         mapObjects = evacuatedMapObjects
         newLineLocations = []
         evacuatedMapObjects = []

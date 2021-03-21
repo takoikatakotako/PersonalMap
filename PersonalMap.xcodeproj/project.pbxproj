@@ -18,7 +18,7 @@
 		8D7D7C5A25D4F37200BA86BF /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C5925D4F37200BA86BF /* ContentViewModel.swift */; };
 		8D82550A2607272700D73A6D /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8255092607272700D73A6D /* Polygon.swift */; };
 		8DAFC2E925F4B091005FC550 /* AddNewLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAFC2E825F4B091005FC550 /* AddNewLineView.swift */; };
-		8DCE59DB25EBB36400D080D2 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE59DA25EBB36400D080D2 /* Line.swift */; };
+		8DCE59DB25EBB36400D080D2 /* PolyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE59DA25EBB36400D080D2 /* PolyLine.swift */; };
 		8DCE59E025EBB38F00D080D2 /* MapObjectProtcol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE59DF25EBB38F00D080D2 /* MapObjectProtcol.swift */; };
 		8DD13EF425E2308C00CEAB3B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD13EF325E2308C00CEAB3B /* Point.swift */; };
 		8DD13F0225E2389E00CEAB3B /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD13F0125E2389E00CEAB3B /* Info.swift */; };
@@ -63,7 +63,7 @@
 		8D7D7C5925D4F37200BA86BF /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		8D8255092607272700D73A6D /* Polygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polygon.swift; sourceTree = "<group>"; };
 		8DAFC2E825F4B091005FC550 /* AddNewLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewLineView.swift; sourceTree = "<group>"; };
-		8DCE59DA25EBB36400D080D2 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		8DCE59DA25EBB36400D080D2 /* PolyLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyLine.swift; sourceTree = "<group>"; };
 		8DCE59DF25EBB38F00D080D2 /* MapObjectProtcol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectProtcol.swift; sourceTree = "<group>"; };
 		8DD13EF325E2308C00CEAB3B /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		8DD13F0125E2389E00CEAB3B /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 			children = (
 				8DD13EF325E2308C00CEAB3B /* Point.swift */,
 				8DD13F0125E2389E00CEAB3B /* Info.swift */,
-				8DCE59DA25EBB36400D080D2 /* Line.swift */,
+				8DCE59DA25EBB36400D080D2 /* PolyLine.swift */,
 				8D8255092607272700D73A6D /* Polygon.swift */,
 				8DCE59DF25EBB38F00D080D2 /* MapObjectProtcol.swift */,
 			);
@@ -367,7 +367,7 @@
 				8DAFC2E925F4B091005FC550 /* AddNewLineView.swift in Sources */,
 				8D82550A2607272700D73A6D /* Polygon.swift in Sources */,
 				8D472D5025D8F554004267C1 /* AddNewPointView.swift in Sources */,
-				8DCE59DB25EBB36400D080D2 /* Line.swift in Sources */,
+				8DCE59DB25EBB36400D080D2 /* PolyLine.swift in Sources */,
 				8DFB31B625FDEF200010FCA2 /* TopPlusButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

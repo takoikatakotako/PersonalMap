@@ -171,7 +171,7 @@ extension ContentView: AddPointModalViewDelegate {
 }
 
 extension ContentView: AddNewLineViewDelegate {
-    func addLine(line: Line) {
+    func addLine(line: PolyLine) {
         viewModel.addLine(line: line)
     }
 }

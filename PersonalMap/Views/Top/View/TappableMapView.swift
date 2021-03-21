@@ -135,7 +135,7 @@ public struct MapView: UIViewRepresentable {
                 annotation.coordinate = point.location
                 annotation.title = point.layerName
                 uiView.addAnnotation(annotation)
-            case let .line(line):
+            case let .polyLine(line):
                 if line.isHidden {
                     continue
                 }

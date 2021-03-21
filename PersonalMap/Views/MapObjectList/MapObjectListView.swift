@@ -20,11 +20,11 @@ struct MapObjectListView: View {
                             var newPoint = point
                             newPoint.isHidden.toggle()
                             mapObjects.insert(.point(newPoint), at: index)
-                        case let .line(line):
+                        case let .polyLine(line):
                             mapObjects.remove(at: index)
                             var newLine = line
                             newLine.isHidden.toggle()
-                            mapObjects.insert(.line(newLine), at: index)
+                            mapObjects.insert(.polyLine(newLine), at: index)
                         case .polygon(_):
                                 break
                         }

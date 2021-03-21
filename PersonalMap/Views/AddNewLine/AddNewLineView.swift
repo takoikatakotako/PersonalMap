@@ -2,7 +2,7 @@ import SwiftUI
 import MapKit
 
 protocol AddNewLineViewDelegate {
-    func addLine(line: Line)
+    func addLine(line: PolyLine)
 }
 
 struct AddNewLineView: View {
@@ -69,7 +69,7 @@ struct AddNewLineView: View {
                             showingAlert = true
                             return
                         }
-                        delegate.addLine(line: Line(isHidden: false, layerName: layerName, locations: locations, infos: infos))
+                        delegate.addLine(line: PolyLine(isHidden: false, layerName: layerName, locations: locations, infos: infos))
                         presentationMode.wrappedValue.dismiss()
                     }, label: {
                         Text("保存")
