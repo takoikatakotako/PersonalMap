@@ -24,7 +24,10 @@ struct MapObjectListView: View {
                             mapObjects.remove(at: index)
                             var newLine = line
                             newLine.isHidden.toggle()
-                            mapObjects.insert(.line(newLine), at: index)                        }
+                            mapObjects.insert(.line(newLine), at: index)
+                        case .polygon(_):
+                                break
+                        }
                     }) {
                         Text(mapObject.value.isHidden ? "表示する" : "非表示にする")
                     }

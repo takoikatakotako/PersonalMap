@@ -19,7 +19,9 @@ struct ContentView: View {
                 } else if viewModel.addObjectStatus == .point {
                     viewModel.showAddPointSheet(location: location)
                 } else if viewModel.addObjectStatus == .line {
-                    viewModel.appendLineLocation(location: location)
+                    viewModel.appendLineLocations(location: location)
+                } else if viewModel.addObjectStatus == .area {
+                    viewModel.appendAreaLocation(location: location)
                 }
             }
             .ignoresSafeArea()

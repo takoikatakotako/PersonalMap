@@ -56,6 +56,12 @@ public class TapplableMapView: UIView, MKMapViewDelegate {
         }
     }
     
+    // Polygon
+    func addPolygon(locations: [CLLocationCoordinate2D]) {
+        let polygon = MKPolygon(coordinates: locations, count: locations.count)
+        mapView.addOverlay(polygon)
+    }
+    
     func changeMapType(mapType: MKMapType) {
         mapView.mapType = mapType
     }
@@ -68,6 +74,16 @@ public class TapplableMapView: UIView, MKMapViewDelegate {
             polylineRenderer.lineWidth = 2.0
             return polylineRenderer
         }
+        
+        if let polygone = overlay as? MKPolygon {
+            let polylineRenderer = MKPolygonRenderer(polygon: polygone)
+            polylineRenderer.strokeColor = .orange
+            polylineRenderer.lineWidth = 2.0
+            polylineRenderer.fillColor = .orange
+            polylineRenderer.alpha = 0.2
+            return polylineRenderer
+        }
+        
         return MKOverlayRenderer()
     }
 }
@@ -124,6 +140,12 @@ public struct MapView: UIViewRepresentable {
                     continue
                 }
                 uiView.addPolyLine(locations: line.locations)
+                break
+            case let .polygon(polygon):
+                if polygon.isHidden {
+                    continue
+                }
+                uiView.addPolygon(locations: polygon.locations)
                 break
             }
         }

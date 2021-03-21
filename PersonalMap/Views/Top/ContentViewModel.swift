@@ -45,7 +45,9 @@ class ContentViewModel: ObservableObject {
     // New Line
     var newLineLocations: [CLLocationCoordinate2D] = []
     
-    
+    // new Area
+    var newAreaLocations: [CLLocationCoordinate2D] = []
+
     /// 追加
     /// Point
     // ポイント追加モード
@@ -92,7 +94,7 @@ class ContentViewModel: ObservableObject {
     }
     
     // ライン候補に追加
-    func appendLineLocation(location: CLLocationCoordinate2D) {
+    func appendLineLocations(location: CLLocationCoordinate2D) {
         newLineLocations.append(location)
         mapObjects = []
         mapObjects.append(.line(Line(isHidden: false, layerName: "新しいライン", locations: newLineLocations, infos: [])))
@@ -119,6 +121,13 @@ class ContentViewModel: ObservableObject {
         addObjectStatus = .area
         evacuatedMapObjects = mapObjects
         mapObjects = []
+    }
+    
+    // ライン候補に追加
+    func appendAreaLocation(location: CLLocationCoordinate2D) {
+        newAreaLocations.append(location)
+        mapObjects = []
+        mapObjects.append(.polygon(Polygon(isHidden: false, layerName: "新しいライン", locations: newAreaLocations, infos: [])))
     }
     
     // デフォルトモード
