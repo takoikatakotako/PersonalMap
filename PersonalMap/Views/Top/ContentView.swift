@@ -5,7 +5,7 @@ enum AddObjectStatus {
     case ready
     case point
     case line
-    case area
+    case polygon
 }
 
 struct ContentView: View {
@@ -20,7 +20,7 @@ struct ContentView: View {
                     viewModel.showAddPointSheet(location: location)
                 } else if viewModel.addObjectStatus == .line {
                     viewModel.appendLineLocations(location: location)
-                } else if viewModel.addObjectStatus == .area {
+                } else if viewModel.addObjectStatus == .polygon {
                     viewModel.appendAreaLocation(location: location)
                 }
             }
@@ -32,6 +32,8 @@ struct ContentView: View {
                 pointContent()
             } else if viewModel.addObjectStatus == .line {
                 lineContent()
+            } else if viewModel.addObjectStatus == .polygon {
+                polygonContent()
             }
         }
         .sheet(
@@ -108,6 +110,31 @@ struct ContentView: View {
     }
     
     @ViewBuilder
+    func polygonContent() -> some View {
+        VStack {
+            Spacer()
+            
+            HStack {
+                Button(action: {
+                    viewModel.resetPolygonMode()
+                }, label: {
+                    Text("閉じる")
+                        .font(Font.system(size: 24))
+                })
+                .padding(8)
+                
+                Button(action: {
+                    // viewModel.showAddLineSheet()
+                }, label: {
+                    Text("決定")
+                        .font(Font.system(size: 24))
+                })
+                .padding(8)
+            }
+        }
+    }
+    
+    @ViewBuilder
     func sheetContent(item: ContentViewModelSheet) -> some View {
         switch item {
         case let .addPoint(_, location):
@@ -134,7 +161,7 @@ struct ContentView: View {
                             viewModel.setAddLineMode()
                         }),
                         .default(Text("エリア"), action: {
-                            viewModel.setAddAreaMode()
+                            viewModel.setAddPolygonMode()
                         }),
                         .cancel()
                     ]

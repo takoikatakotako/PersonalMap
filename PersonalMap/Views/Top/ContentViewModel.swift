@@ -91,6 +91,7 @@ class ContentViewModel: ObservableObject {
         addObjectStatus = .ready
         mapObjects = evacuatedMapObjects
         evacuatedMapObjects = []
+        newLineLocations = []
     }
     
     // ライン候補に追加
@@ -115,15 +116,23 @@ class ContentViewModel: ObservableObject {
     }
     
     
-    /// Area
-    // エリア追加モード
-    func setAddAreaMode() {
-        addObjectStatus = .area
+    /// Polygon
+    // ポリゴン追加モード
+    func setAddPolygonMode() {
+        addObjectStatus = .polygon
         evacuatedMapObjects = mapObjects
         mapObjects = []
     }
     
-    // ライン候補に追加
+    // ポリゴン追加モード解除
+    func resetPolygonMode() {
+        addObjectStatus = .ready
+        mapObjects = evacuatedMapObjects
+        evacuatedMapObjects = []
+        newAreaLocations = []
+    }
+    
+    // エリア候補に追加
     func appendAreaLocation(location: CLLocationCoordinate2D) {
         newAreaLocations.append(location)
         mapObjects = []
