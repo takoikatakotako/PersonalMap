@@ -21,7 +21,7 @@ struct ContentView: View {
                 } else if viewModel.addObjectStatus == .line {
                     viewModel.appendLineLocations(location: location)
                 } else if viewModel.addObjectStatus == .polygon {
-                    viewModel.appendAreaLocation(location: location)
+                    viewModel.appendPolygonLocation(location: location)
                 }
             }
             .ignoresSafeArea()
@@ -124,7 +124,7 @@ struct ContentView: View {
                 .padding(8)
                 
                 Button(action: {
-                    // viewModel.showAddLineSheet()
+                    viewModel.shhowAddPolygonSheet()
                 }, label: {
                     Text("決定")
                         .font(Font.system(size: 24))
@@ -139,8 +139,10 @@ struct ContentView: View {
         switch item {
         case let .addPoint(_, location):
             AddNewPointView(location: location, delegate: self)
-        case let .addLine(_, locations):
-            AddNewLineView(locations: locations, delegate: self)
+        case let .addPolyLine(_, locations):
+            AddNewPolyLineView(locations: locations, delegate: self)
+        case let .addPolygon(_, locations):
+            AddNewPolygonView(locations: locations, delegate: self)
         case .mapObjectList:
             MapObjectListView(mapObjects: $viewModel.mapObjects)
         }
@@ -200,6 +202,12 @@ extension ContentView: AddPointModalViewDelegate {
 extension ContentView: AddNewLineViewDelegate {
     func addLine(line: PolyLine) {
         viewModel.addLine(line: line)
+    }
+}
+
+extension ContentView: AddNewPolygonViewDelegate {
+    func addPolygon(polygon: Polygon) {
+        viewModel.addPolygon(polygon: polygon)
     }
 }
 

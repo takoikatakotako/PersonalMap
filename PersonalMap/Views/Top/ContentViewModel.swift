@@ -3,14 +3,17 @@ import MapKit
 
 enum ContentViewModelSheet: Identifiable {
     case addPoint(UUID, CLLocationCoordinate2D)
-    case addLine(UUID, [CLLocationCoordinate2D])
+    case addPolyLine(UUID, [CLLocationCoordinate2D])
+    case addPolygon(UUID, [CLLocationCoordinate2D])
     case mapObjectList(UUID)
     
     var id: UUID {
         switch self {
         case let .addPoint(id, _):
             return id
-        case let .addLine(id, _):
+        case let .addPolyLine(id, _):
+            return id
+        case let .addPolygon(id, _):
             return id
         case let .mapObjectList(id):
             return id
@@ -46,7 +49,7 @@ class ContentViewModel: ObservableObject {
     var newLineLocations: [CLLocationCoordinate2D] = []
     
     // new Area
-    var newAreaLocations: [CLLocationCoordinate2D] = []
+    var newPolygonLocations: [CLLocationCoordinate2D] = []
 
     /// 追加
     /// Point
@@ -103,7 +106,7 @@ class ContentViewModel: ObservableObject {
     
     // ライン追加モーダルを表示
     func showAddLineSheet() {
-        sheet = .addLine(UUID(), newLineLocations)
+        sheet = .addPolyLine(UUID(), newLineLocations)
     }
     
     // ラインを追加
@@ -129,14 +132,28 @@ class ContentViewModel: ObservableObject {
         addObjectStatus = .ready
         mapObjects = evacuatedMapObjects
         evacuatedMapObjects = []
-        newAreaLocations = []
+        newPolygonLocations = []
     }
     
-    // エリア候補に追加
-    func appendAreaLocation(location: CLLocationCoordinate2D) {
-        newAreaLocations.append(location)
+    // ポリゴン候補に追加
+    func appendPolygonLocation(location: CLLocationCoordinate2D) {
+        newPolygonLocations.append(location)
         mapObjects = []
-        mapObjects.append(.polygon(Polygon(isHidden: false, layerName: "新しいライン", locations: newAreaLocations, infos: [])))
+        mapObjects.append(.polygon(Polygon(isHidden: false, layerName: "新しいライン", locations: newPolygonLocations, infos: [])))
+    }
+    
+    // ポリゴン追加モーダルを表示
+    func shhowAddPolygonSheet() {
+        sheet = .addPolygon(UUID(), newPolygonLocations)
+    }
+    
+    // ラインを追加
+    func addPolygon(polygon: Polygon) {
+        // 追加のタイミングで戻す
+        evacuatedMapObjects.append(.polygon(polygon))
+        mapObjects = evacuatedMapObjects
+        newLineLocations = []
+        evacuatedMapObjects = []
     }
     
     // デフォルトモード

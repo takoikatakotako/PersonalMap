@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D11EA57261059A800691E5D /* AddNewPolygonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D11EA56261059A800691E5D /* AddNewPolygonView.swift */; };
 		8D472D5025D8F554004267C1 /* AddNewPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D472D4F25D8F554004267C1 /* AddNewPointView.swift */; };
 		8D7D7C2725D4F00A00BA86BF /* PersonalMapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C2625D4F00A00BA86BF /* PersonalMapApp.swift */; };
 		8D7D7C2925D4F00A00BA86BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C2825D4F00A00BA86BF /* ContentView.swift */; };
@@ -17,7 +18,7 @@
 		8D7D7C5525D4F02600BA86BF /* TappableMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C5425D4F02600BA86BF /* TappableMapView.swift */; };
 		8D7D7C5A25D4F37200BA86BF /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C5925D4F37200BA86BF /* ContentViewModel.swift */; };
 		8D82550A2607272700D73A6D /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8255092607272700D73A6D /* Polygon.swift */; };
-		8DAFC2E925F4B091005FC550 /* AddNewLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAFC2E825F4B091005FC550 /* AddNewLineView.swift */; };
+		8DAFC2E925F4B091005FC550 /* AddNewPolyLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAFC2E825F4B091005FC550 /* AddNewPolyLineView.swift */; };
 		8DCE59DB25EBB36400D080D2 /* PolyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE59DA25EBB36400D080D2 /* PolyLine.swift */; };
 		8DCE59E025EBB38F00D080D2 /* MapObjectProtcol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE59DF25EBB38F00D080D2 /* MapObjectProtcol.swift */; };
 		8DD13EF425E2308C00CEAB3B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD13EF325E2308C00CEAB3B /* Point.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8D11EA56261059A800691E5D /* AddNewPolygonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPolygonView.swift; sourceTree = "<group>"; };
 		8D472D4F25D8F554004267C1 /* AddNewPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPointView.swift; sourceTree = "<group>"; };
 		8D7D7C2325D4F00A00BA86BF /* PersonalMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PersonalMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D7D7C2625D4F00A00BA86BF /* PersonalMapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalMapApp.swift; sourceTree = "<group>"; };
@@ -62,7 +64,7 @@
 		8D7D7C5425D4F02600BA86BF /* TappableMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableMapView.swift; sourceTree = "<group>"; };
 		8D7D7C5925D4F37200BA86BF /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		8D8255092607272700D73A6D /* Polygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polygon.swift; sourceTree = "<group>"; };
-		8DAFC2E825F4B091005FC550 /* AddNewLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewLineView.swift; sourceTree = "<group>"; };
+		8DAFC2E825F4B091005FC550 /* AddNewPolyLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPolyLineView.swift; sourceTree = "<group>"; };
 		8DCE59DA25EBB36400D080D2 /* PolyLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyLine.swift; sourceTree = "<group>"; };
 		8DCE59DF25EBB38F00D080D2 /* MapObjectProtcol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectProtcol.swift; sourceTree = "<group>"; };
 		8DD13EF325E2308C00CEAB3B /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
@@ -98,6 +100,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D11EA552610599400691E5D /* AddNewPolygon */ = {
+			isa = PBXGroup;
+			children = (
+				8D11EA56261059A800691E5D /* AddNewPolygonView.swift */,
+			);
+			path = AddNewPolygon;
+			sourceTree = "<group>";
+		};
 		8D472D5425D8F789004267C1 /* AddNewPoint */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,12 +176,12 @@
 			path = PersonalMapUITests;
 			sourceTree = "<group>";
 		};
-		8DAFC2E725F4B076005FC550 /* AddNewLine */ = {
+		8DAFC2E725F4B076005FC550 /* AddNewPolyLine */ = {
 			isa = PBXGroup;
 			children = (
-				8DAFC2E825F4B091005FC550 /* AddNewLineView.swift */,
+				8DAFC2E825F4B091005FC550 /* AddNewPolyLineView.swift */,
 			);
-			path = AddNewLine;
+			path = AddNewPolyLine;
 			sourceTree = "<group>";
 		};
 		8DD13EF225E2307F00CEAB3B /* Entity */ = {
@@ -189,9 +199,10 @@
 		8DD13EFB25E230FD00CEAB3B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8D11EA552610599400691E5D /* AddNewPolygon */,
 				8DD13F1125E23B9100CEAB3B /* MapObjectList */,
 				8D472D5425D8F789004267C1 /* AddNewPoint */,
-				8DAFC2E725F4B076005FC550 /* AddNewLine */,
+				8DAFC2E725F4B076005FC550 /* AddNewPolyLine */,
 				8DD13EFF25E2385200CEAB3B /* Top */,
 			);
 			path = Views;
@@ -363,8 +374,9 @@
 				8D7D7C2925D4F00A00BA86BF /* ContentView.swift in Sources */,
 				8DD13EF425E2308C00CEAB3B /* Point.swift in Sources */,
 				8DE9F87325FDEDB600302D31 /* TopHeaderButton.swift in Sources */,
+				8D11EA57261059A800691E5D /* AddNewPolygonView.swift in Sources */,
 				8D7D7C2725D4F00A00BA86BF /* PersonalMapApp.swift in Sources */,
-				8DAFC2E925F4B091005FC550 /* AddNewLineView.swift in Sources */,
+				8DAFC2E925F4B091005FC550 /* AddNewPolyLineView.swift in Sources */,
 				8D82550A2607272700D73A6D /* Polygon.swift in Sources */,
 				8D472D5025D8F554004267C1 /* AddNewPointView.swift in Sources */,
 				8DCE59DB25EBB36400D080D2 /* PolyLine.swift in Sources */,

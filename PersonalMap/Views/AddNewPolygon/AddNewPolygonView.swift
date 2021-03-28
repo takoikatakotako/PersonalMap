@@ -1,20 +1,19 @@
 import SwiftUI
 import MapKit
 
-protocol AddNewLineViewDelegate {
-    func addLine(line: PolyLine)
+protocol AddNewPolygonViewDelegate {
+    func addPolygon(polygon: Polygon)
 }
 
-struct AddNewLineView: View {
+struct AddNewPolygonView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     let locations: [CLLocationCoordinate2D]
-    let delegate: AddNewLineViewDelegate
+    let delegate: AddNewPolygonViewDelegate
         
     @State var layerName: String = ""
     @State var infos: [Info] = []
     @State var showingAlert = false
-    
     
     var body: some View {
         NavigationView {
@@ -69,7 +68,7 @@ struct AddNewLineView: View {
                             showingAlert = true
                             return
                         }
-                        delegate.addLine(line: PolyLine(isHidden: false, layerName: layerName, locations: locations, infos: infos))
+                        delegate.addPolygon(polygon: Polygon(isHidden: false, layerName: layerName, locations: locations, infos: infos))
                         presentationMode.wrappedValue.dismiss()
                     }, label: {
                         Text("保存")
@@ -89,19 +88,19 @@ struct AddNewLineView: View {
                          message: Text("レイヤー名を入力する必要があります"),
                          dismissButton: .default(Text("了解")))
             })
-            .navigationTitle("ラインを追加")
+            .navigationTitle("Polygonを追加")
         }
     }
 }
 
-extension AddNewLineView: AddInfoViewDelegate {
+extension AddNewPolygonView: AddInfoViewDelegate {
     func addInfo(info: Info) {
         infos.append(info)
     }
 }
 
-//struct AddNewLineView_Previews: PreviewProvider {
+//struct AddNewPolygon_Previews: PreviewProvider {
 //    static var previews: some View {
-//        AddNewLineView()
+//        AddNewPolygonView()
 //    }
 //}
