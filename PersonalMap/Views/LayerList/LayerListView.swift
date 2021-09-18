@@ -18,6 +18,9 @@ struct LayerListView: View {
                     Text(mapObject.objectName)
                 }
             }
+            .onAppear {
+                
+            }
             .listStyle(InsetGroupedListStyle())
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("List")
