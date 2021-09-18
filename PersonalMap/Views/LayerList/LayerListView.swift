@@ -3,12 +3,12 @@ import SwiftUI
 struct LayerListView: View {
     
     @State var mapObjects: [MapObject] = [
-        MapObject.polyLine(MapPolyLine(isHidden: true, layerName: "sss", locations: [], infos: [])),
-        MapObject.polyLine(MapPolyLine(isHidden: true, layerName: "sss", locations: [], infos: [])),
-        MapObject.polyLine(MapPolyLine(isHidden: true, layerName: "sss", locations: [], infos: [])),
-        MapObject.polyLine(MapPolyLine(isHidden: true, layerName: "sss", locations: [], infos: [])),
-        MapObject.polyLine(MapPolyLine(isHidden: true, layerName: "sss", locations: [], infos: [])),
-        MapObject.polyLine(MapPolyLine(isHidden: true, layerName: "sss", locations: [], infos: [])),
+        MapObject.polyLine(MapPolyLine(isHidden: true, layerName: "A", locations: [], infos: [])),
+        MapObject.polyLine(MapPolyLine(isHidden: true, layerName: "B", locations: [], infos: [])),
+        MapObject.polyLine(MapPolyLine(isHidden: true, layerName: "C", locations: [], infos: [])),
+        MapObject.polyLine(MapPolyLine(isHidden: true, layerName: "D", locations: [], infos: [])),
+        MapObject.polyLine(MapPolyLine(isHidden: true, layerName: "E", locations: [], infos: [])),
+        MapObject.polyLine(MapPolyLine(isHidden: true, layerName: "F", locations: [], infos: [])),
     ]
     
     var body: some View {
@@ -24,7 +24,7 @@ struct LayerListView: View {
             .listStyle(InsetGroupedListStyle())
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("List")
-            .navigationBarItems(trailing: NavigationLink("Add", destination: Text("Add")))
+            .navigationBarItems(trailing: NavigationLink("Add", destination: AddMapObjectView()))
         }
     }
 }
