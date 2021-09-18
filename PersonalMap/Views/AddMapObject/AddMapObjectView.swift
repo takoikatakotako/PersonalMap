@@ -2,7 +2,26 @@ import SwiftUI
 
 struct AddMapObjectView: View {
     var body: some View {
-        Text("AddMapObjectView")
+        NavigationView {
+            VStack {
+                NavigationLink(destination: AddPointObjectView()) {
+                    Text("ポイント")
+                        .font(Font.system(size: 20))
+                }
+                
+                NavigationLink(destination: AddPolyLineObjectView()) {
+                    Text("ポリライン")
+                        .font(Font.system(size: 20))
+                }
+                
+                NavigationLink(destination: AddPolygonObjectView()) {
+                    Text("ポリゴン")
+                        .font(Font.system(size: 20))
+                }
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Add Map Object")
+        }
     }
 }
 

@@ -8,7 +8,7 @@ struct RootView: View {
                     Image(systemName: "map")
                     Text("Map")
                 }
-            LayerListView()
+            MapObjectListView()
                 .tabItem {
                     Image(systemName: "list.dash")
                     Text("List")

@@ -144,7 +144,7 @@ struct ContentView: View {
         case let .addPolygon(_, locations):
             AddNewPolygonView(locations: locations, delegate: self)
         case .mapObjectList:
-            MapObjectListView(mapObjects: $viewModel.mapObjects)
+            MapObjectListViewOld(mapObjects: $viewModel.mapObjects)
         }
     }
     
