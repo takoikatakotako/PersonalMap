@@ -194,19 +194,19 @@ struct ContentView: View {
 }
 
 extension ContentView: AddPointModalViewDelegate {
-    func addPoint(point: Point) {
+    func addPoint(point: MapPoint) {
         viewModel.addPoint(point: point)
     }
 }
 
 extension ContentView: AddNewLineViewDelegate {
-    func addLine(line: PolyLine) {
+    func addLine(line: MapPolyLine) {
         viewModel.addLine(line: line)
     }
 }
 
 extension ContentView: AddNewPolygonViewDelegate {
-    func addPolygon(polygon: Polygon) {
+    func addPolygon(polygon: MapPolygon) {
         viewModel.addPolygon(polygon: polygon)
     }
 }

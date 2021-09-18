@@ -1,7 +1,7 @@
 import SwiftUI
 import MapKit
 
-struct Polygon: MapObjectProtcol, Identifiable {
+struct MapPolygon: MapObjectProtcol, Identifiable {
     let id = UUID()
     var isHidden: Bool
     let layerName: String

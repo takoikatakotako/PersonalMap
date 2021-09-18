@@ -2,7 +2,7 @@ import SwiftUI
 import MapKit
 
 protocol AddPointModalViewDelegate {
-    func addPoint(point: Point)
+    func addPoint(point: MapPoint)
 }
 
 struct AddNewPointView: View {
@@ -68,7 +68,7 @@ struct AddNewPointView: View {
                             showingAlert = true
                             return
                         }
-                        delegate.addPoint(point: Point(isHidden: false, layerName: layerName, location: location, infos: infos))
+                        delegate.addPoint(point: MapPoint(isHidden: false, layerName: layerName, location: location, infos: infos))
                         presentationMode.wrappedValue.dismiss()
                     }, label: {
                         Text("保存")
@@ -101,7 +101,7 @@ extension AddNewPointView: AddInfoViewDelegate {
 
 struct AddPointModalView_Previews: PreviewProvider {
     struct MockAddPointModalViewDelegate: AddPointModalViewDelegate {
-        func addPoint(point: Point) {}
+        func addPoint(point: MapPoint) {}
     }
     
     static var previews: some View {

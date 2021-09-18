@@ -2,7 +2,7 @@ import SwiftUI
 import MapKit
 
 protocol AddNewPolygonViewDelegate {
-    func addPolygon(polygon: Polygon)
+    func addPolygon(polygon: MapPolygon)
 }
 
 struct AddNewPolygonView: View {
@@ -68,7 +68,7 @@ struct AddNewPolygonView: View {
                             showingAlert = true
                             return
                         }
-                        delegate.addPolygon(polygon: Polygon(isHidden: false, layerName: layerName, locations: locations, infos: infos))
+                        delegate.addPolygon(polygon: MapPolygon(isHidden: false, layerName: layerName, locations: locations, infos: infos))
                         presentationMode.wrappedValue.dismiss()
                     }, label: {
                         Text("保存")

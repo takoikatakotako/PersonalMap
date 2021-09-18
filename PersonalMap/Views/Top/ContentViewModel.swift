@@ -73,7 +73,7 @@ class ContentViewModel: ObservableObject {
     }
     
     // ポイントを追加する
-    func addPoint(point: Point) {
+    func addPoint(point: MapPoint) {
         // 追加のタイミングで戻す
         evacuatedMapObjects.append(.point(point))
         mapObjects = evacuatedMapObjects
@@ -101,7 +101,7 @@ class ContentViewModel: ObservableObject {
     func appendLineLocations(location: CLLocationCoordinate2D) {
         newLineLocations.append(location)
         mapObjects = []
-        mapObjects.append(.polyLine(PolyLine(isHidden: false, layerName: "新しいライン", locations: newLineLocations, infos: [])))
+        mapObjects.append(.polyLine(MapPolyLine(isHidden: false, layerName: "新しいライン", locations: newLineLocations, infos: [])))
     }
     
     // ライン追加モーダルを表示
@@ -110,7 +110,7 @@ class ContentViewModel: ObservableObject {
     }
     
     // ラインを追加
-    func addLine(line: PolyLine) {
+    func addLine(line: MapPolyLine) {
         // 追加のタイミングで戻す
         evacuatedMapObjects.append(.polyLine(line))
         mapObjects = evacuatedMapObjects
@@ -139,7 +139,7 @@ class ContentViewModel: ObservableObject {
     func appendPolygonLocation(location: CLLocationCoordinate2D) {
         newPolygonLocations.append(location)
         mapObjects = []
-        mapObjects.append(.polygon(Polygon(isHidden: false, layerName: "新しいライン", locations: newPolygonLocations, infos: [])))
+        mapObjects.append(.polygon(MapPolygon(isHidden: false, layerName: "新しいライン", locations: newPolygonLocations, infos: [])))
     }
     
     // ポリゴン追加モーダルを表示
@@ -148,7 +148,7 @@ class ContentViewModel: ObservableObject {
     }
     
     // ラインを追加
-    func addPolygon(polygon: Polygon) {
+    func addPolygon(polygon: MapPolygon) {
         // 追加のタイミングで戻す
         evacuatedMapObjects.append(.polygon(polygon))
         mapObjects = evacuatedMapObjects
