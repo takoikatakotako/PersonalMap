@@ -3,17 +3,17 @@ import SwiftUI
 struct RootView: View {
     var body: some View {
         TabView {
-            Text("The First Tab")
+            TopView()
                 .tabItem {
                     Image(systemName: "map")
                     Text("Map")
                 }
-            Text("Another Tab")
+            LayerListView()
                 .tabItem {
                     Image(systemName: "list.dash")
                     Text("List")
                 }
-            Text("The Last Tab")
+            ConfigView()
                 .tabItem {
                     Image(systemName: "gearshape")
                     Text("Config")
