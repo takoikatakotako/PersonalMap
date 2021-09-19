@@ -10,7 +10,7 @@ struct MapLayerDetail: View {
             Text("オブジェクトの数: \(mapLayer.objectIds.count)")
             
             if mapLayer.mapLayerType == .point {
-                NavigationLink(destination: MapPointObjectList(mapLayerId: mapLayer.id, pointObjectIds: mapLayer.objectIds)) {
+                NavigationLink(destination: MapPointObjectList(mapLayerId: mapLayer.id)) {
                     Text("ポイントの追加、削除")
                 }
             }

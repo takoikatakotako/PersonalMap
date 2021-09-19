@@ -15,7 +15,9 @@ struct MapLayerListView: View {
                 }
             }
             .onAppear {
-                let mapLayers = try! FileRepository().getMapLyers()
+                let fileRepository = FileRepository()
+                try! fileRepository.initialize()
+                let mapLayers = try! fileRepository.getMapLyers()
                 self.mapLayers = mapLayers
                 print("onAppear")
             }

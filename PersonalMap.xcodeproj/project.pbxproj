@@ -38,6 +38,7 @@
 		8DEC412C26F71E4E0052A7D2 /* MapPointObjectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC412B26F71E4E0052A7D2 /* MapPointObjectList.swift */; };
 		8DEC412F26F7251D0052A7D2 /* AddMapPointObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC412E26F7251D0052A7D2 /* AddMapPointObjectView.swift */; };
 		8DEC413226F734F40052A7D2 /* LocationSelecterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC413126F734F40052A7D2 /* LocationSelecterView.swift */; };
+		8DEC413426F73A890052A7D2 /* MapPointObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC413326F73A890052A7D2 /* MapPointObject.swift */; };
 		8DFB31B625FDEF200010FCA2 /* TopPlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFB31B525FDEF200010FCA2 /* TopPlusButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +97,7 @@
 		8DEC412B26F71E4E0052A7D2 /* MapPointObjectList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPointObjectList.swift; sourceTree = "<group>"; };
 		8DEC412E26F7251D0052A7D2 /* AddMapPointObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapPointObjectView.swift; sourceTree = "<group>"; };
 		8DEC413126F734F40052A7D2 /* LocationSelecterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelecterView.swift; sourceTree = "<group>"; };
+		8DEC413326F73A890052A7D2 /* MapPointObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPointObject.swift; sourceTree = "<group>"; };
 		8DFB31B525FDEF200010FCA2 /* TopPlusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPlusButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -219,6 +221,7 @@
 				8D8255092607272700D73A6D /* MapPolygon.swift */,
 				8DCE59DF25EBB38F00D080D2 /* MapObjectProtcol.swift */,
 				8DEC411326F61B180052A7D2 /* MapLayerProtcol.swift */,
+				8DEC413326F73A890052A7D2 /* MapPointObject.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				8DEC411226F60BD50052A7D2 /* ConfigView.swift in Sources */,
 				8DEC411426F61B180052A7D2 /* MapLayerProtcol.swift in Sources */,
 				8DCE59DB25EBB36400D080D2 /* MapPolyLine.swift in Sources */,
+				8DEC413426F73A890052A7D2 /* MapPointObject.swift in Sources */,
 				8DEC410C26F60B9B0052A7D2 /* TopView.swift in Sources */,
 				8DFB31B625FDEF200010FCA2 /* TopPlusButton.swift in Sources */,
 			);

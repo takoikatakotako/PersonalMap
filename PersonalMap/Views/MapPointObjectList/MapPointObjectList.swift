@@ -2,12 +2,15 @@ import SwiftUI
 
 struct MapPointObjectList: View {
     let mapLayerId: UUID
-    let pointObjectIds: [UUID]
-
+    @State var mapPointObjects: [MapPointObject] = []
     @State var showingSheet = false
+    
     var body: some View {
-        List {
-            Text("ここに追加されたポイントが入る")
+        List(mapPointObjects) { mapPointObject in
+            Text(mapPointObject.id.description)
+        }
+        .onAppear {
+            getMapPointObjects()
         }
         .navigationBarItems(trailing: Button(action: {
             showingSheet = true
@@ -16,14 +19,21 @@ struct MapPointObjectList: View {
         }))
         .sheet(isPresented: $showingSheet) {
             // on dissmiss
+            getMapPointObjects()
         } content: {
             AddMapPointObjectView(mapLayerId: mapLayerId)
         }
+    }
+    
+    private func getMapPointObjects() {
+        let fileRepository = FileRepository()
+        let mapLayer = try! fileRepository.getMapLayer(mapLayerId: mapLayerId)
+        mapPointObjects = try! fileRepository.getMapPointObjects(mapPointObjectIds: mapLayer.objectIds)
     }
 }
 
 struct MapPointObjectList_Previews: PreviewProvider {
     static var previews: some View {
-        MapPointObjectList(mapLayerId: UUID(), pointObjectIds: [])
+        MapPointObjectList(mapLayerId: UUID())
     }
 }
