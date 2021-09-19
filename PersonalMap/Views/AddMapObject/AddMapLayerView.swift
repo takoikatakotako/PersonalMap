@@ -48,7 +48,7 @@ struct AddMapLayerView: View {
 
                         let fileRepository = FileRepository()
                         try! fileRepository.initialize()
-                        try! fileRepository.saveMapLayerFile(mapLayer: newMapLayer)
+                        try! fileRepository.saveMapLayer(mapLayer: newMapLayer)
                     } label: {
                         Text("追加")
                     }

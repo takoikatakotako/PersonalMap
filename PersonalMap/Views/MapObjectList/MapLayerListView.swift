@@ -9,10 +9,16 @@ struct MapLayerListView: View {
         NavigationView {
             List(mapLayers) { (mapLayer: MapLayer) in
                 NavigationLink(destination: Text("Hello")) {
-                    Text(mapLayer.layerName)
+                    VStack(alignment: .leading) {
+                        Text(mapLayer.id.description)
+                        Text(mapLayer.layerName)
+                        Text(mapLayer.mapLayerType.rawValue)
+                    }
                 }
             }
             .onAppear {
+                let mapLayers = try! FileRepository().getMapLyers()
+                self.mapLayers = mapLayers
                 print("onAppear")
             }
             .sheet(isPresented: $showingSheet, content: {
