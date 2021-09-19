@@ -34,6 +34,7 @@
 		8DEC411726F623510052A7D2 /* AddMapLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC411626F623510052A7D2 /* AddMapLayerView.swift */; };
 		8DEC412326F63D950052A7D2 /* FileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC412226F63D950052A7D2 /* FileRepository.swift */; };
 		8DEC412626F63DE70052A7D2 /* InternalFileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC412526F63DE70052A7D2 /* InternalFileError.swift */; };
+		8DEC412926F7164A0052A7D2 /* MapLayerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC412826F7164A0052A7D2 /* MapLayerDetail.swift */; };
 		8DFB31B625FDEF200010FCA2 /* TopPlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFB31B525FDEF200010FCA2 /* TopPlusButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,7 @@
 		8DEC411626F623510052A7D2 /* AddMapLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapLayerView.swift; sourceTree = "<group>"; };
 		8DEC412226F63D950052A7D2 /* FileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRepository.swift; sourceTree = "<group>"; };
 		8DEC412526F63DE70052A7D2 /* InternalFileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalFileError.swift; sourceTree = "<group>"; };
+		8DEC412826F7164A0052A7D2 /* MapLayerDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLayerDetail.swift; sourceTree = "<group>"; };
 		8DFB31B525FDEF200010FCA2 /* TopPlusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPlusButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -218,7 +220,8 @@
 		8DD13EFB25E230FD00CEAB3B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8DEC411526F6231B0052A7D2 /* AddMapObject */,
+				8DEC412726F716300052A7D2 /* MapLayerDetail */,
+				8DEC411526F6231B0052A7D2 /* AddMapLayer */,
 				8DEC411026F60BC90052A7D2 /* Config */,
 				8DEC410D26F60BAB0052A7D2 /* MapObjectList */,
 				8DEC410826F6091D0052A7D2 /* Root */,
@@ -284,12 +287,12 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
-		8DEC411526F6231B0052A7D2 /* AddMapObject */ = {
+		8DEC411526F6231B0052A7D2 /* AddMapLayer */ = {
 			isa = PBXGroup;
 			children = (
 				8DEC411626F623510052A7D2 /* AddMapLayerView.swift */,
 			);
-			path = AddMapObject;
+			path = AddMapLayer;
 			sourceTree = "<group>";
 		};
 		8DEC412126F63D660052A7D2 /* Repository */ = {
@@ -306,6 +309,14 @@
 				8DEC412526F63DE70052A7D2 /* InternalFileError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		8DEC412726F716300052A7D2 /* MapLayerDetail */ = {
+			isa = PBXGroup;
+			children = (
+				8DEC412826F7164A0052A7D2 /* MapLayerDetail.swift */,
+			);
+			path = MapLayerDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -438,6 +449,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DE5AE5F25D8FD8400726DC1 /* AddInfoView.swift in Sources */,
+				8DEC412926F7164A0052A7D2 /* MapLayerDetail.swift in Sources */,
 				8DEC412626F63DE70052A7D2 /* InternalFileError.swift in Sources */,
 				8DD13F1325E23BA300CEAB3B /* MapObjectListViewOld.swift in Sources */,
 				8DD13F0225E2389E00CEAB3B /* Info.swift in Sources */,

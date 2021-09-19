@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct AddMapLayerView: View {
-    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     @State var layerName: String = ""
     @State var mapLayerType: MapLayerType = .point
     
@@ -49,6 +50,7 @@ struct AddMapLayerView: View {
                         let fileRepository = FileRepository()
                         try! fileRepository.initialize()
                         try! fileRepository.saveMapLayer(mapLayer: newMapLayer)
+                        presentationMode.wrappedValue.dismiss()
                     } label: {
                         Text("追加")
                     }
