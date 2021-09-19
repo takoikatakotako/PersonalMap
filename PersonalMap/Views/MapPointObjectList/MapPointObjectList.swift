@@ -7,7 +7,7 @@ struct MapPointObjectList: View {
     
     var body: some View {
         List(mapPointObjects) { mapPointObject in
-            Text(mapPointObject.id.description)
+            Text(mapPointObject.name)
         }
         .onAppear {
             getMapPointObjects()
