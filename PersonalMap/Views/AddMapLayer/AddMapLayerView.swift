@@ -43,7 +43,6 @@ struct AddMapLayerView: View {
                         }
                     }
                     
-                    
                     Button {
                         let newMapLayer = MapLayer(id: UUID(), layerName: layerName, mapLayerType: mapLayerType, objectIds: [])
 
@@ -54,7 +53,6 @@ struct AddMapLayerView: View {
                     } label: {
                         Text("追加")
                     }
-                    
                 }
             }
             .navigationBarTitleDisplayMode(.inline)

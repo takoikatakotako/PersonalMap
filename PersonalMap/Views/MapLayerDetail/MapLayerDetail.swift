@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MapLayerDetail: View {
     let mapLayer: MapLayer
+    
     var body: some View {
         VStack {
             Text("レイヤー名: \(mapLayer.layerName)")
@@ -9,10 +10,11 @@ struct MapLayerDetail: View {
             Text("オブジェクトの数: \(mapLayer.objectIds.count)")
             
             if mapLayer.mapLayerType == .point {
-                NavigationLink(destination: Text("sss")) {
+                NavigationLink(destination: MapPointObjectList(mapLayerId: mapLayer.id, pointObjectIds: mapLayer.objectIds)) {
                     Text("ポイントの追加、削除")
                 }
-            } else if mapLayer.mapLayerType == .polyLine {
+            }
+            else if mapLayer.mapLayerType == .polyLine {
                 NavigationLink(destination: Text("sss")) {
                     Text("ポリラインの追加、削除")
                 }
