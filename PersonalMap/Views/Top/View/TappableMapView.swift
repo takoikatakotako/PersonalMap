@@ -35,31 +35,63 @@ public class TapplableMapView: UIView, MKMapViewDelegate {
         delegate?.mapViewDidTap(location: location)
     }
     
-    // Anotation
-    func addAnnotation(_ annotation: MKAnnotation) {
+    // Point
+    func addPoint(point: MapPoint) {
+        if point.isHidden {
+            return
+        }
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = point.location
+        annotation.title = point.layerName
         mapView.addAnnotation(annotation)
     }
     
-    func removeAllAnnotations() {
-        mapView.removeAnnotations(mapView.annotations)
-    }
-    
     // PolyLine
-    func addPolyLine(locations: [CLLocationCoordinate2D]) {
-        let polyLine = MKPolyline(coordinates: locations, count: locations.count)
-        mapView.addOverlay(polyLine)
-    }
-    
-    func removeAllPolyLines() {
-        for overlay in mapView.overlays {
-            mapView.removeOverlay(overlay)
+    func addPolyLine(polyLine: MapPolyLine) {
+        if polyLine.isHidden {
+            return
+        }
+        let locations = polyLine.locations
+        let mkPolyLine = MKPolyline(coordinates: locations, count: locations.count)
+        mapView.addOverlay(mkPolyLine)
+        
+        // Anotations
+        for location in locations {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = location
+            annotation.title = polyLine.layerName
+            mapView.addAnnotation(annotation)
         }
     }
     
     // Polygon
-    func addPolygon(locations: [CLLocationCoordinate2D]) {
-        let polygon = MKPolygon(coordinates: locations, count: locations.count)
-        mapView.addOverlay(polygon)
+    func addPolygon(polygon: MapPolygon) {
+        if polygon.isHidden {
+            return
+        }
+        let locations = polygon.locations
+        let mkPolygon = MKPolygon(coordinates: locations, count: locations.count)
+        mapView.addOverlay(mkPolygon)
+        
+        // Anotations
+        for location in locations {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = location
+            annotation.title = polygon.layerName
+            mapView.addAnnotation(annotation)
+        }
+    }
+    
+    // Remove All Annotation
+    func removeAllAnnotations() {
+        mapView.removeAnnotations(mapView.annotations)
+    }
+    
+    // Remove All Overlay
+    func removeAllOverlays() {
+        for overlay in mapView.overlays {
+            mapView.removeOverlay(overlay)
+        }
     }
     
     func changeMapType(mapType: MKMapType) {
@@ -68,6 +100,14 @@ public class TapplableMapView: UIView, MKMapViewDelegate {
     
     // Delegate Methods
     public func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if let circle = overlay as? MKCircle {
+            let circleRenderer = MKCircleRenderer(circle: circle)
+            circleRenderer.strokeColor = .yellow
+            circleRenderer.fillColor = .yellow
+            circleRenderer.lineWidth = 2.0
+            return circleRenderer
+        }
+        
         if let polyline = overlay as? MKPolyline {
             let polylineRenderer = MKPolylineRenderer(polyline: polyline)
             polylineRenderer.strokeColor = .blue
@@ -120,33 +160,19 @@ public struct MapView: UIViewRepresentable {
     public func updateUIView(_ uiView: TapplableMapView, context: Context) {
         // Clear
         uiView.removeAllAnnotations()
-        uiView.removeAllPolyLines()
-        
+        uiView.removeAllOverlays()
+
         // Set
         uiView.changeMapType(mapType: mapType)
         
         for mapObject in mapObjects {
             switch mapObject {
             case let .point(point):
-                if point.isHidden {
-                    continue
-                }
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = point.location
-                annotation.title = point.layerName
-                uiView.addAnnotation(annotation)
-            case let .polyLine(line):
-                if line.isHidden {
-                    continue
-                }
-                uiView.addPolyLine(locations: line.locations)
-                break
+                uiView.addPoint(point: point)
+            case let .polyLine(polyLine):
+                uiView.addPolyLine(polyLine: polyLine)
             case let .polygon(polygon):
-                if polygon.isHidden {
-                    continue
-                }
-                uiView.addPolygon(locations: polygon.locations)
-                break
+                uiView.addPolygon(polygon: polygon)
             }
         }
     }
