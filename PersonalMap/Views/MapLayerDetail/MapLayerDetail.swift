@@ -26,8 +26,9 @@ struct MapLayerDetail: View {
             
             Button {
             } label: {
-                Text("削除")
+                Text("レイヤーの削除")
             }
+            .padding(.top)
         }
     }
 }

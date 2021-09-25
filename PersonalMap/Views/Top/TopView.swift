@@ -1,18 +1,39 @@
 import SwiftUI
 import MapKit
 
+
+enum XXX: Identifiable {
+    var id: UUID {
+        switch self {
+        case let .abc(id):
+            return id
+        }
+    }
+    
+    case abc(UUID)
+}
+
 struct TopView: View {
-    @State var mapObjects: [MapObject] = [MapObject.polyLine(MapPolyLine(isHidden: false, layerName: "s,. 0 llll;pss", locations: [CLLocationCoordinate2D(latitude: 37.79161001928914, longitude: 138.08886667811578), CLLocationCoordinate2D(latitude: 39.095964742457284, longitude: 138.14824213200006)], infos: []))]
-    // MapObject.point(MapPoint(isHidden: false, layerName: "sss", location: CLLocationCoordinate2D(latitude: 37.79161001928914, longitude: 138.08886667811578), infos: []))
+    @State var mapObjects: [MapObject] = [MapObject.point(MapPoint(isHidden: false, layerName: "鉄塔1", location: CLLocationCoordinate2D(latitude: 37.79161001928914, longitude: 138.08886667811578), infos: []))]
     @State var mapType: MKMapType = MKMapType.standard
-        
+    @State var xxx: XXX?
+    
     var body: some View {
         ZStack(alignment: .top) {
-            TapplableMapView(mapObjects: $mapObjects, mapType: $mapType) { location in
-                print(location)
+            MapObjectView(mapObjects: $mapObjects, mapType: $mapType) { mapObjectId in
+                // self.mapObjectId = mapObjectId
+                xxx = XXX.abc(mapObjectId)
             }
             .ignoresSafeArea()
         }
+        .sheet(item: $xxx, onDismiss: {
+            
+        }, content: { item in
+            switch item {
+            case let .abc(id):
+                MapObjectDetailView(mapObjectId: id)
+            }
+        })
         .onAppear {
             print("OnAppear")
         }

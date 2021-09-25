@@ -2,10 +2,6 @@ import SwiftUI
 import MapKit
 import UIKit
 
-public protocol UIMapObjectViewDelegate: AnyObject {
-    func anotationTapped(mapObjectId: UUID)
-}
-
 public class UIMapObjectView: UIView {
     private lazy var mapView = MKMapView()
     weak public var delegate: UIMapObjectViewDelegate?
@@ -17,10 +13,6 @@ public class UIMapObjectView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let tapGestureRecognizer = UITapGestureRecognizer()
-        tapGestureRecognizer.addTarget(self, action: #selector(onTap(sender:)))
-        
-        mapView.addGestureRecognizer(tapGestureRecognizer)
         mapView.delegate = self
         addSubview(mapView)
     }
@@ -29,16 +21,13 @@ public class UIMapObjectView: UIView {
         mapView.frame =  CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
     }
     
-    @objc func onTap(sender: UITapGestureRecognizer) {
-       
-    }
-    
     // Point
     func addPoint(point: MapPoint) {
         if point.isHidden {
             return
         }
-        let annotation = MKPointAnnotation()
+        let annotation = CustomAnnotation()
+        annotation.id = point.id
         annotation.coordinate = point.location
         annotation.title = point.layerName
         mapView.addAnnotation(annotation)
@@ -129,9 +118,9 @@ extension UIMapObjectView: MKMapViewDelegate {
     }
     
     public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
-        if let xxxx = view.annotation as? CustomAnnotation,
-           let mapObjectId = xxxx.id {
-            print(mapObjectId)
+        if let annotation = view.annotation as? CustomAnnotation,
+           let mapObjectId = annotation.id {
+            delegate?.anotationTapped(mapObjectId: mapObjectId)
         }
     }
 }
@@ -140,32 +129,32 @@ public struct MapObjectView: UIViewRepresentable {
     @Binding var mapObjects: [MapObject]
     @Binding var mapType: MKMapType
     
-    let mapViewDidTap: (_ location: CLLocationCoordinate2D) -> Void
-    final public class Coordinator: NSObject, TapplableMapViewDelegate {
+    let anotationTapped: (_ mapObjectId: UUID) -> Void
+    final public class Coordinator: NSObject, UIMapObjectViewDelegate {
         private var mapView: MapObjectView
-        let mapViewDidTap: (_ location: CLLocationCoordinate2D) -> Void
+        let anotationTapped: (_ mapObjectId: UUID) -> Void
         
-        init(_ mapView: MapObjectView, mapViewDidTap: @escaping (_ location: CLLocationCoordinate2D) -> Void) {
+        init(_ mapView: MapObjectView, anotationTapped: @escaping (_ mapObjectId: UUID) -> Void) {
             self.mapView = mapView
-            self.mapViewDidTap = mapViewDidTap
+            self.anotationTapped = anotationTapped
         }
         
-        public func mapViewDidTap(location: CLLocationCoordinate2D) {
-            mapViewDidTap(location)
+        public func anotationTapped(mapObjectId: UUID) {
+            anotationTapped(mapObjectId)
         }
     }
     
     public func makeCoordinator() -> Coordinator {
-        Coordinator(self, mapViewDidTap: mapViewDidTap)
+        Coordinator(self, anotationTapped: anotationTapped)
     }
     
-    public func makeUIView(context: Context) -> UITapplableMapView {
-        let mapView = UITapplableMapView()
+    public func makeUIView(context: Context) -> UIMapObjectView {
+        let mapView = UIMapObjectView()
         mapView.delegate = context.coordinator
         return mapView
     }
     
-    public func updateUIView(_ uiView: UITapplableMapView, context: Context) {
+    public func updateUIView(_ uiView: UIMapObjectView, context: Context) {
         // Clear
         uiView.removeAllAnnotations()
         uiView.removeAllOverlays()
