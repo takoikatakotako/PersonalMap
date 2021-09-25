@@ -6,7 +6,11 @@ public protocol TapplableMapViewDelegate: AnyObject {
     func mapViewDidTap(location: CLLocationCoordinate2D)
 }
 
-public class TapplableMapView: UIView, MKMapViewDelegate {
+class CustomAnnotation: MKPointAnnotation {
+    var id: UUID? = nil
+}
+
+public class UITapplableMapView: UIView {
     private lazy var mapView = MKMapView()
     weak public var delegate: TapplableMapViewDelegate?
     
@@ -57,7 +61,8 @@ public class TapplableMapView: UIView, MKMapViewDelegate {
         
         // Anotations
         for location in locations {
-            let annotation = MKPointAnnotation()
+            let annotation = CustomAnnotation()
+            annotation.id = polyLine.id
             annotation.coordinate = location
             annotation.title = polyLine.layerName
             mapView.addAnnotation(annotation)
@@ -97,7 +102,9 @@ public class TapplableMapView: UIView, MKMapViewDelegate {
     func changeMapType(mapType: MKMapType) {
         mapView.mapType = mapType
     }
-    
+}
+
+extension UITapplableMapView: MKMapViewDelegate {
     // Delegate Methods
     public func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let circle = overlay as? MKCircle {
@@ -126,18 +133,24 @@ public class TapplableMapView: UIView, MKMapViewDelegate {
         
         return MKOverlayRenderer()
     }
+    
+    public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
+        if let xxxx = view.annotation as? CustomAnnotation {
+            print(xxxx.id)
+        }
+    }
 }
 
-public struct MapView: UIViewRepresentable {
+public struct TapplableMapView: UIViewRepresentable {
     @Binding var mapObjects: [MapObject]
     @Binding var mapType: MKMapType
     
     let mapViewDidTap: (_ location: CLLocationCoordinate2D) -> Void
     final public class Coordinator: NSObject, TapplableMapViewDelegate {
-        private var mapView: MapView
+        private var mapView: TapplableMapView
         let mapViewDidTap: (_ location: CLLocationCoordinate2D) -> Void
         
-        init(_ mapView: MapView, mapViewDidTap: @escaping (_ location: CLLocationCoordinate2D) -> Void) {
+        init(_ mapView: TapplableMapView, mapViewDidTap: @escaping (_ location: CLLocationCoordinate2D) -> Void) {
             self.mapView = mapView
             self.mapViewDidTap = mapViewDidTap
         }
@@ -151,13 +164,13 @@ public struct MapView: UIViewRepresentable {
         Coordinator(self, mapViewDidTap: mapViewDidTap)
     }
     
-    public func makeUIView(context: Context) -> TapplableMapView {
-        let mapView = TapplableMapView()
+    public func makeUIView(context: Context) -> UITapplableMapView {
+        let mapView = UITapplableMapView()
         mapView.delegate = context.coordinator
         return mapView
     }
     
-    public func updateUIView(_ uiView: TapplableMapView, context: Context) {
+    public func updateUIView(_ uiView: UITapplableMapView, context: Context) {
         // Clear
         uiView.removeAllAnnotations()
         uiView.removeAllOverlays()

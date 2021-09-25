@@ -13,7 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            MapView(mapObjects: $viewModel.mapObjects, mapType: $viewModel.mapType) { (location: CLLocationCoordinate2D) in
+            TapplableMapView(mapObjects: $viewModel.mapObjects, mapType: $viewModel.mapType) { (location: CLLocationCoordinate2D) in
                 if viewModel.addObjectStatus == .ready {
                     return
                 } else if viewModel.addObjectStatus == .point {

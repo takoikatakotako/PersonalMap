@@ -8,7 +8,7 @@ struct TopView: View {
         
     var body: some View {
         ZStack(alignment: .top) {
-            MapView(mapObjects: $mapObjects, mapType: $mapType) { location in
+            TapplableMapView(mapObjects: $mapObjects, mapType: $mapType) { location in
                 print(location)
             }
             .ignoresSafeArea()
