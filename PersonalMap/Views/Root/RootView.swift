@@ -19,7 +19,6 @@ struct RootView: View {
                     Text("Config")
                 }
         }
-        .font(.headline)
     }
 }
 

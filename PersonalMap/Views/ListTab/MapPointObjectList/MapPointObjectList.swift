@@ -7,7 +7,11 @@ struct MapPointObjectList: View {
     
     var body: some View {
         List(mapPointObjects) { mapPointObject in
-            Text(mapPointObject.name)
+            NavigationLink {
+                MapPointDetail()
+            } label: {
+                Text(mapPointObject.name)
+            }
         }
         .onAppear {
             getMapPointObjects()

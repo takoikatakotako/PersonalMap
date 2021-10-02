@@ -11,16 +11,16 @@ struct MapLayerDetail: View {
             
             if mapLayer.mapLayerType == .point {
                 NavigationLink(destination: MapPointObjectList(mapLayerId: mapLayer.id)) {
-                    Text("ポイントの追加、削除")
+                    Text("ポイント一覧")
                 }
             }
             else if mapLayer.mapLayerType == .polyLine {
                 NavigationLink(destination: Text("sss")) {
-                    Text("ポリラインの追加、削除")
+                    Text("ポリライン一覧")
                 }
             } else if mapLayer.mapLayerType == .polygon {
                 NavigationLink(destination: Text("sss")) {
-                    Text("ポリゴンの追加、削除")
+                    Text("ポリゴン一覧")
                 }
             }
             
