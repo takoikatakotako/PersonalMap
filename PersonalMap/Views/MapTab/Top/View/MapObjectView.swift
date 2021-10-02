@@ -89,16 +89,36 @@ public class UIMapObjectView: UIView {
 
 extension UIMapObjectView: MKMapViewDelegate {
     // Delegate Methods
-    
-//    public func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//        // let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "something")
-//        // let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "test")
-//        let annotationView = MKAnnotationView()
-//        annotationView.annotation = annotation
-//        annotationView.tintColor = .blue
-//        annotationView.image = UIImage(systemName: "pencil.circle.fill")
-//        return annotationView
-//    }
+    public func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if let customAnnotation = annotation as? CustomAnnotation,
+           let mapObjectId = customAnnotation.id {
+            // MKPinAnnotationViewを宣言
+            let annoView = MKMarkerAnnotationView()
+            // MKPinAnnotationViewのannotationにMKAnnotationのAnnotationを追加
+            annoView.annotation = annotation
+            // ピンの画像を変更
+            // annoView.image = UIImage(named: "icon")
+            annoView.glyphImage = UIImage(systemName: "square.and.arrow.up")
+            // 吹き出しを使用
+            annoView.canShowCallout = true
+            
+            
+            // 吹き出しにinfoボタンを表示
+            let button = UIButton()
+            button.addAction(
+                .init{ [weak self] _ in self?.delegate?.anotationTapped(mapObjectId: mapObjectId) }, for: .touchUpInside)
+            button.backgroundColor = .red
+            button.frame.size = CGSize(width: 40, height: 40)
+            
+            annoView.rightCalloutAccessoryView = button
+            
+            return annoView
+        }
+        
+        
+        return nil
+        
+    }
     
     
     public func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -129,12 +149,12 @@ extension UIMapObjectView: MKMapViewDelegate {
         return MKOverlayRenderer()
     }
     
-    public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
-        if let annotation = view.annotation as? CustomAnnotation,
-           let mapObjectId = annotation.id {
-            delegate?.anotationTapped(mapObjectId: mapObjectId)
-        }
-    }
+    //    public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
+    //        if let annotation = view.annotation as? CustomAnnotation,
+    //           let mapObjectId = annotation.id {
+    //            delegate?.anotationTapped(mapObjectId: mapObjectId)
+    //        }
+    //    }
 }
 
 public struct MapObjectView: UIViewRepresentable {
@@ -170,7 +190,7 @@ public struct MapObjectView: UIViewRepresentable {
         // Clear
         uiView.removeAllAnnotations()
         uiView.removeAllOverlays()
-
+        
         // Set
         uiView.changeMapType(mapType: mapType)
         

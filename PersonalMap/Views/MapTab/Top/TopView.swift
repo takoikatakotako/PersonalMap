@@ -14,7 +14,9 @@ enum XXX: Identifiable {
 }
 
 struct TopView: View {
-    @State var mapObjects: [MapObject] = [MapObject.point(MapPoint(isHidden: false, layerName: "鉄塔1", location: CLLocationCoordinate2D(latitude: 37.79161001928914, longitude: 138.08886667811578), infos: []))]
+    @State var mapObjects: [MapObject] = [
+        MapObject.point(MapPoint(isHidden: false, layerName: "鉄塔1", location: CLLocationCoordinate2D(latitude: 37.79161001928914, longitude: 138.08886667811578), infos: [])),
+        MapObject.point(MapPoint(isHidden: false, layerName: "鉄塔2", location: CLLocationCoordinate2D(latitude: 35.79161001928914, longitude: 136.08886667811578), infos: []))]
     @State var mapType: MKMapType = MKMapType.standard
     @State var xxx: XXX?
     
