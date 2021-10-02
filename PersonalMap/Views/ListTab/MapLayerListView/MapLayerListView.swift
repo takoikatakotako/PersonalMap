@@ -19,7 +19,6 @@ struct MapLayerListView: View {
                 try! fileRepository.initialize()
                 let mapLayers = try! fileRepository.getMapLyers()
                 self.mapLayers = mapLayers
-                print("onAppear")
             }
             .sheet(
                 isPresented: $showingSheet, onDismiss: {
