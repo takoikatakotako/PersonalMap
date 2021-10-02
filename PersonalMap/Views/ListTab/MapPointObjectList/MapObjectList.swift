@@ -1,16 +1,16 @@
 import SwiftUI
 
-struct MapPointObjectList: View {
+struct MapObjectList: View {
     let mapLayerId: UUID
-    @State var mapPointObjects: [MapPointObject] = []
+    @State var mapObjects: [MapObject] = []
     @State var showingSheet = false
     
     var body: some View {
-        List(mapPointObjects) { mapPointObject in
+        List(mapObjects) { mapObject in
             NavigationLink {
                 MapPointDetail()
             } label: {
-                Text(mapPointObject.name)
+                Text(mapObject.objectName)
             }
         }
         .onAppear {
@@ -32,12 +32,12 @@ struct MapPointObjectList: View {
     private func getMapPointObjects() {
         let fileRepository = FileRepository()
         let mapLayer = try! fileRepository.getMapLayer(mapLayerId: mapLayerId)
-        mapPointObjects = try! fileRepository.getMapPointObjects(mapPointObjectIds: mapLayer.objectIds)
+        mapObjects = try! fileRepository.getMapPointObjects(mapPointObjectIds: mapLayer.objectIds)
     }
 }
 
 struct MapPointObjectList_Previews: PreviewProvider {
     static var previews: some View {
-        MapPointObjectList(mapLayerId: UUID())
+        MapObjectList(mapLayerId: UUID())
     }
 }

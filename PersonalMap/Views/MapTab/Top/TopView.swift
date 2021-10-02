@@ -14,12 +14,10 @@ enum XXX: Identifiable {
 }
 
 struct TopView: View {
-    @State var mapObjects: [MapObject] = [
-        MapObject.point(MapPoint(isHidden: false, layerName: "鉄塔1", location: CLLocationCoordinate2D(latitude: 37.79161001928914, longitude: 138.08886667811578), infos: [])),
-        MapObject.point(MapPoint(isHidden: false, layerName: "鉄塔2", location: CLLocationCoordinate2D(latitude: 35.79161001928914, longitude: 136.08886667811578), infos: []))]
+    @State var mapObjects: [MapObject] = []
     @State var mapType: MKMapType = MKMapType.standard
     @State var xxx: XXX?
-    
+        
     var body: some View {
         ZStack(alignment: .top) {
             MapObjectView(mapObjects: $mapObjects, mapType: $mapType) { mapObjectId in
@@ -37,7 +35,17 @@ struct TopView: View {
             }
         })
         .onAppear {
-            print("OnAppear")
+            let fileRepository = FileRepository()
+            try! fileRepository.initialize()
+            let mapLayers: [MapLayer] = try! fileRepository.getMapLyers()
+
+//            for mapLayer in mapLayers {
+//                switch mapLayer {
+//                    case .point:
+//                    mapObjects.append(.point(<#T##MapPoint#>))
+//                }
+//            }
+
         }
     }
     

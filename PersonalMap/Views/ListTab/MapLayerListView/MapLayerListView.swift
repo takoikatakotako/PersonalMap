@@ -10,7 +10,7 @@ struct MapLayerListView: View {
                 NavigationLink(destination: MapLayerDetail(mapLayer: mapLayer)) {
                     VStack(alignment: .leading) {
                         Text(mapLayer.layerName)
-                        Text(mapLayer.mapLayerType.rawValue)
+                        Text(mapLayer.mapObjectType.rawValue)
                     }
                 }
             }

@@ -4,7 +4,7 @@ struct AddMapLayerView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     @State var layerName: String = ""
-    @State var mapLayerType: MapLayerType = .point
+    @State var mapLayerType: MapObjectType = .point
     
     var body: some View {
         NavigationView {
@@ -44,7 +44,7 @@ struct AddMapLayerView: View {
                     }
                     
                     Button {
-                        let newMapLayer = MapLayer(id: UUID(), layerName: layerName, mapLayerType: mapLayerType, objectIds: [])
+                        let newMapLayer = MapLayer(id: UUID(), layerName: layerName, mapObjectType: mapLayerType, objectIds: [])
 
                         let fileRepository = FileRepository()
                         try! fileRepository.initialize()

@@ -7,7 +7,7 @@ struct MapObjectListViewOld: View {
         NavigationView {
             List {
                 ForEach(mapObjects) { mapObject in
-                    Text(mapObject.value.layerName)
+                    Text(mapObject.objectName)
                         .contextMenu {
                             Button(action: {
                                 guard let index = mapObjects.firstIndex(where: { $0.id == mapObject.id}) else {
@@ -28,7 +28,9 @@ struct MapObjectListViewOld: View {
                                     break
                                 }
                             }) {
-                                Text(mapObject.value.isHidden ? "表示する" : "非表示にする")
+                                
+                                Text("Todo")
+                                // Text(mapObject.objectName ? "表示する" : "非表示にする")
                             }
 
                             Button(action: {

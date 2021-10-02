@@ -68,7 +68,7 @@ struct AddNewPolyLineView: View {
                             showingAlert = true
                             return
                         }
-                        delegate.addLine(line: MapPolyLine(isHidden: false, layerName: layerName, locations: locations, infos: infos))
+                        delegate.addLine(line: MapPolyLine(isHidden: false, layerName: layerName, coordinates: locations.map { $0.coordinate}, infos: infos))
                         presentationMode.wrappedValue.dismiss()
                     }, label: {
                         Text("保存")

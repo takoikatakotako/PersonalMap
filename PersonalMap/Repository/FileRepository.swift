@@ -62,31 +62,42 @@ struct FileRepository {
         return mapLayers
     }
     
+    // MapObject
+//    func getMapObject(mapObjectId: UUID) throws -> MapObject {
+//        let fileName = mapObjectId.description + ".json"
+//        let objectFileUrl = try getObjectDirectoryUrl().appendingPathComponent(fileName)
+//        let data = try Data(contentsOf: objectFileUrl)
+//        let mapObject = try JSONEncoder().decode(MapObject.self, from: data)
+//        return mapObject
+//    }
+        
     // MapPointObject
-    func saveMapPointObject(mapPointObject: MapPointObject) throws {
-        let fileName = mapPointObject.id.description + ".json"
-        let data = try JSONEncoder().encode(mapPointObject)
+    func saveMapObject(mapObject: MapObject) throws {
+        let fileName = mapObject.id.description + ".json"
+        let data = try JSONEncoder().encode(try mapObject.getValue())
         let fileUrl = try getDocumentsDirectoryUrl().appendingPathComponent(objectDirectoryName, isDirectory: true).appendingPathComponent(fileName)
         try data.write(to: fileUrl, options: .atomic)
     }
     
-    func getMapPointObject(fileName: String) throws -> MapPointObject {
+    func getMapPointObject(fileName: String) throws -> MapObject {
         let fileUrl = try getDocumentsDirectoryUrl().appendingPathComponent(objectDirectoryName, isDirectory: true).appendingPathComponent(fileName)
         let data = try Data(contentsOf: fileUrl)
-        let mapPointObject = try JSONDecoder().decode(MapPointObject.self, from: data)
-        return mapPointObject
+        
+        
+        return MapObject.point(MapPoint(isHidden: false, layerName: "XXX", coordinate: Coordinate(latitude: 34, longitude: 34), infos: []))
     }
     
-    func getMapPointObjects(mapPointObjectIds: [UUID]) throws -> [MapPointObject] {
-        var mapPointObjects: [MapPointObject] = []
+    func getMapPointObjects(mapPointObjectIds: [UUID]) throws -> [MapObject] {
+        var mapObjects: [MapObject] = []
         for mapPointObjectId in mapPointObjectIds {
             let fileName = "\(mapPointObjectId).json"
             let mapPointObject = try! getMapPointObject(fileName: fileName)
-            mapPointObjects.append(mapPointObject)
+            mapObjects.append(mapPointObject)
         }
-        return mapPointObjects
+        return mapObjects
     }
     
+    // Documents の URL
     private func getDocumentsDirectoryUrl() throws -> URL {
         guard let documentDirectoryUrl = FileManager.default.urls( for: .documentDirectory, in: .userDomainMask ).first else {
             throw InternalFileError.documentDirectoryNotFound
@@ -94,11 +105,19 @@ struct FileRepository {
         return documentDirectoryUrl
     }
     
+    // Documents/layer/layers.json の URL
     private func getLayersFileUrl() throws -> URL {
         let layerDirectoryUrl = try getDocumentsDirectoryUrl()
             .appendingPathComponent(layerDirectoryName, isDirectory: true)
             .appendingPathComponent(layersFileName)
         return layerDirectoryUrl
+    }
+    
+    // Documents/object の URL
+    private func getObjectDirectoryUrl() throws -> URL {
+        let objectDirectoryUrl = try getDocumentsDirectoryUrl()
+            .appendingPathComponent(objectDirectoryName, isDirectory: true)
+        return objectDirectoryUrl
     }
     
     private func getMapLayerIds() throws -> [UUID] {
@@ -110,7 +129,8 @@ struct FileRepository {
     }
     
     private func saveMapLayerIds(mapLayerIds: [UUID]) throws {
-        let mapLayersData = try JSONEncoder().encode(mapLayerIds)
+        // 重複して保存することを防ぐために Set にする
+        let mapLayersData = try JSONEncoder().encode(Set(mapLayerIds))
         let layersFileUrl = try getLayersFileUrl()
         try mapLayersData.write(to: layersFileUrl, options: .atomic)
     }

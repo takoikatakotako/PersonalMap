@@ -30,18 +30,18 @@ struct AddMapPointObjectView: View {
             
             Button {
                 // point を保存
-                let mapPointObject = MapPointObject(id: UUID(), name: objectName, latitude: latitude!, longitude: longitude!)
+                let mapObject: MapObject = .point(MapPoint(isHidden: false, layerName: objectName, coordinate: Coordinate(latitude: latitude!, longitude: longitude!), infos: []))
                 let fileRepository = FileRepository()
                 try! fileRepository.initialize()
-                try! fileRepository.saveMapPointObject(mapPointObject: mapPointObject)
+                try! fileRepository.saveMapObject(mapObject: mapObject)
                 
                 // layer に追加
                 let mapLayer = try! fileRepository.getMapLayer(mapLayerId: mapLayerId)
                 let newMapLayer = MapLayer(
                     id: mapLayer.id,
                     layerName: mapLayer.layerName,
-                    mapLayerType: mapLayer.mapLayerType,
-                    objectIds: [mapPointObject.id] + mapLayer.objectIds)
+                    mapObjectType: mapLayer.mapObjectType,
+                    objectIds: [mapObject.id] + mapLayer.objectIds)
                 try! fileRepository.saveMapLayer(mapLayer: newMapLayer)
                 presentationMode.wrappedValue.dismiss()
             } label: {

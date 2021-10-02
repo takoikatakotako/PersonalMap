@@ -28,7 +28,7 @@ public class UIMapObjectView: UIView {
         }
         let annotation = CustomAnnotation()
         annotation.id = point.id
-        annotation.coordinate = point.location
+        annotation.coordinate = point.coordinate.locationCoordinate2D
         annotation.title = point.layerName
         mapView.addAnnotation(annotation)
     }
@@ -38,7 +38,7 @@ public class UIMapObjectView: UIView {
         if polyLine.isHidden {
             return
         }
-        let locations = polyLine.locations
+        let locations = polyLine.locationCoordinate2Ds
         let mkPolyLine = MKPolyline(coordinates: locations, count: locations.count)
         mapView.addOverlay(mkPolyLine)
         
@@ -57,7 +57,7 @@ public class UIMapObjectView: UIView {
         if polygon.isHidden {
             return
         }
-        let locations = polygon.locations
+        let locations = polygon.locationCoordinate2Ds
         let mkPolygon = MKPolygon(coordinates: locations, count: locations.count)
         mapView.addOverlay(mkPolygon)
         

@@ -3,11 +3,11 @@ import Foundation
 struct MapLayer: Codable, Identifiable {
     var id: UUID
     let layerName: String
-    let mapLayerType: MapLayerType
+    let mapObjectType: MapObjectType
     let objectIds: [UUID]
 }
 
-enum MapLayerType: String, Codable {
+enum MapObjectType: String, Codable, Equatable {
     case point
     case polyLine
     case polygon

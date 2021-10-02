@@ -68,7 +68,11 @@ struct AddNewPointView: View {
                             showingAlert = true
                             return
                         }
-                        delegate.addPoint(point: MapPoint(isHidden: false, layerName: layerName, location: location, infos: infos))
+                        
+                        //                         delegate.addPoint(point: MapPoint(isHidden: false, layerName: layerName, coordinate: location, infos: infos))
+
+                        
+                        delegate.addPoint(point: MapPoint(isHidden: false, layerName: layerName, coordinate: location.coordinate, infos: infos))
                         presentationMode.wrappedValue.dismiss()
                     }, label: {
                         Text("保存")

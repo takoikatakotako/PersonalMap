@@ -1,10 +1,11 @@
 import SwiftUI
 import MapKit
 
-struct MapPoint: MapObjectProtcol, Identifiable {
+struct MapPoint: MapObjectProtcol, Identifiable, Codable {
     let id = UUID()
+    let mapObjectType: MapObjectType = .point
     var isHidden: Bool
     let layerName: String
-    let location: CLLocationCoordinate2D
+    let coordinate: Coordinate
     let infos: [Info]
 }

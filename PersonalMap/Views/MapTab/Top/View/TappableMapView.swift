@@ -45,7 +45,7 @@ public class UITapplableMapView: UIView {
             return
         }
         let annotation = MKPointAnnotation()
-        annotation.coordinate = point.location
+        annotation.coordinate = point.coordinate.locationCoordinate2D
         annotation.title = point.layerName
         mapView.addAnnotation(annotation)
     }
@@ -55,7 +55,7 @@ public class UITapplableMapView: UIView {
         if polyLine.isHidden {
             return
         }
-        let locations = polyLine.locations
+        let locations = polyLine.locationCoordinate2Ds
         let mkPolyLine = MKPolyline(coordinates: locations, count: locations.count)
         mapView.addOverlay(mkPolyLine)
         
@@ -74,7 +74,7 @@ public class UITapplableMapView: UIView {
         if polygon.isHidden {
             return
         }
-        let locations = polygon.locations
+        let locations = polygon.locationCoordinate2Ds
         let mkPolygon = MKPolygon(coordinates: locations, count: locations.count)
         mapView.addOverlay(mkPolygon)
         

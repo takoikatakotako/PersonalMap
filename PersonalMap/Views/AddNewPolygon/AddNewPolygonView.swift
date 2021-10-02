@@ -68,7 +68,7 @@ struct AddNewPolygonView: View {
                             showingAlert = true
                             return
                         }
-                        delegate.addPolygon(polygon: MapPolygon(isHidden: false, layerName: layerName, locations: locations, infos: infos))
+                        delegate.addPolygon(polygon: MapPolygon(isHidden: false, layerName: layerName, coordinates: locations.map {$0.coordinate}, infos: infos))
                         presentationMode.wrappedValue.dismiss()
                     }, label: {
                         Text("保存")
