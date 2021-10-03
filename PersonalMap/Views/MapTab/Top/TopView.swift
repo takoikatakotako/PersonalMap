@@ -21,7 +21,6 @@ struct TopView: View {
     var body: some View {
         ZStack(alignment: .top) {
             MapObjectView(mapObjects: $mapObjects, mapType: $mapType) { mapObjectId in
-                // self.mapObjectId = mapObjectId
                 xxx = XXX.abc(mapObjectId)
             }
             .ignoresSafeArea()
@@ -31,8 +30,7 @@ struct TopView: View {
         }, content: { item in
             switch item {
             case let .abc(id):
-                Text("XXXX")
-                // MapObjectDetailView(mapObjectId: id)
+                MapObjectPreview(mapObjectId: id)
             }
         })
         .onAppear {
@@ -40,18 +38,13 @@ struct TopView: View {
             try! fileRepository.initialize()
             let mapLayers: [MapLayer] = try! fileRepository.getMapLyers()
 
-//            for mapLayer in mapLayers {
-//                switch mapLayer {
-//                    case .point:
-//                    mapObjects.append(.point(<#T##MapPoint#>))
-//                }
-//            }
-
+            for mapLayer in mapLayers {
+                for objectId in mapLayer.objectIds {
+                    let mapObject: MapObject = try! fileRepository.getMapObject(mapObjectId: objectId)
+                    mapObjects.append(mapObject)
+                }
+            }
         }
-    }
-    
-    func xxxx() {
-        
     }
 }
 
