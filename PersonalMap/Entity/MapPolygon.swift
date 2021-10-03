@@ -5,7 +5,7 @@ struct MapPolygon: MapObjectProtcol {
     let id: UUID
     var mapObjectType: MapObjectType = .polygon
     var isHidden: Bool
-    let layerName: String
+    let objectName: String
     let coordinates: [Coordinate]
     let infos: [Info]
     

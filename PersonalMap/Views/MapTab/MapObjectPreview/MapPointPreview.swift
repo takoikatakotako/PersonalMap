@@ -4,7 +4,7 @@ struct MapPointPreview: View {
     let point: MapPoint
     var body: some View {
         VStack {
-            Text(point.layerName)
+            Text(point.objectName)
             
             ForEach(point.infos) { info in
                 HStack {

@@ -3,7 +3,7 @@ import Foundation
 protocol MapObjectProtcol: Codable {
     var id: UUID { get }
     var isHidden: Bool { get }
-    var layerName: String { get }
+    var objectName: String { get }
 }
 
 enum MapObject {
@@ -14,11 +14,11 @@ enum MapObject {
     var objectName: String {
         switch self {
         case let .point(point):
-            return point.layerName
+            return point.objectName
         case let .polyLine(line):
-            return line.layerName
+            return line.objectName
         case let .polygon(polygon):
-            return polygon.layerName
+            return polygon.objectName
         }
     }
     

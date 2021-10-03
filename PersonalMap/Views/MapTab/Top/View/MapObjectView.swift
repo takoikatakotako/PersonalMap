@@ -29,7 +29,7 @@ public class UIMapObjectView: UIView {
         let annotation = CustomAnnotation()
         annotation.id = point.id
         annotation.coordinate = point.coordinate.locationCoordinate2D
-        annotation.title = point.layerName
+        annotation.title = point.objectName
         mapView.addAnnotation(annotation)
     }
     
@@ -47,7 +47,7 @@ public class UIMapObjectView: UIView {
             let annotation = CustomAnnotation()
             annotation.id = polyLine.id
             annotation.coordinate = location
-            annotation.title = polyLine.layerName
+            annotation.title = polyLine.objectName
             mapView.addAnnotation(annotation)
         }
     }
@@ -65,7 +65,7 @@ public class UIMapObjectView: UIView {
         for location in locations {
             let annotation = MKPointAnnotation()
             annotation.coordinate = location
-            annotation.title = polygon.layerName
+            annotation.title = polygon.objectName
             mapView.addAnnotation(annotation)
         }
     }

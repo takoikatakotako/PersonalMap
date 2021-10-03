@@ -5,7 +5,7 @@ struct MapPolyLine: MapObjectProtcol, Identifiable, Codable {
     let id: UUID
     var mapObjectType: MapObjectType = .polyLine
     var isHidden: Bool
-    let layerName: String
+    let objectName: String
     let coordinates: [Coordinate]
     let infos: [Info]
     

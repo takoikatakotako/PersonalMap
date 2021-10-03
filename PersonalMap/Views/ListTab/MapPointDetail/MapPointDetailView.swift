@@ -11,7 +11,7 @@ struct MapPointDetailView: View {
     var body: some View {
         ScrollView {
             LazyVStack {
-                TextField("ピン名", text: $point.layerName)
+                TextField("ピン名", text: $point.objectName)
                     .textFieldStyle(.roundedBorder)
 
                 Text("Info")
