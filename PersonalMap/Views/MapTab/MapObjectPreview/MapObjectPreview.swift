@@ -2,28 +2,29 @@ import SwiftUI
 
 struct MapObjectPreview: View {
     let mapObjectId: UUID
-
+    @State var mapObject: MapObject?
+    
     var body: some View {
         VStack {
-            Text("鉄塔１")
-            
-            HStack {
-                Text("管理番号")
-                Text(" : ")
-                Text("43")
+            if let mapObject = mapObject {
+                getPreview(mapObject: mapObject)
+            } else {
+                Text("Loading")
             }
-            
-            HStack {
-                Text("型番")
-                Text(" : ")
-                Text("SET3")
-            }
-            
-            HStack {
-                Text("色")
-                Text(" : ")
-                Text("青色")
-            }
+        }.onAppear {
+            let fileRepository = FileRepository()
+            mapObject = try! fileRepository.getMapObject(mapObjectId: mapObjectId)
+        }
+    }
+    
+    func getPreview(mapObject: MapObject) -> AnyView {
+        switch mapObject {
+        case .point(let point):
+            return AnyView(MapPointPreview(point: point))
+        case .polyLine(let polyLine):
+            return AnyView(MapPolyLinePreview(polyline: polyLine))
+        case .polygon(let polygon):
+            return AnyView(MapPolygonPreview(polygon: polygon))
         }
     }
 }

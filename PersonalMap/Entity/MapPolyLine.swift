@@ -3,7 +3,7 @@ import MapKit
 
 struct MapPolyLine: MapObjectProtcol, Identifiable, Codable {
     let id: UUID
-    let mapObjectType: MapObjectType = .polyLine
+    var mapObjectType: MapObjectType = .polyLine
     var isHidden: Bool
     let layerName: String
     let coordinates: [Coordinate]

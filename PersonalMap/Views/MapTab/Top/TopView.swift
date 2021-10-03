@@ -39,8 +39,8 @@ struct TopView: View {
             let mapLayers: [MapLayer] = try! fileRepository.getMapLyers()
 
             for mapLayer in mapLayers {
-                for objectId in mapLayer.objectIds {
-                    let mapObject: MapObject = try! fileRepository.getMapObject(mapObjectId: objectId)
+                for mapObjectId in mapLayer.objectIds {
+                    let mapObject: MapObject = try! fileRepository.getMapObject(mapObjectId: mapObjectId)
                     mapObjects.append(mapObject)
                 }
             }

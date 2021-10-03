@@ -48,6 +48,9 @@
 		8DFBAE04270986A5005B4611 /* MapPolylineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE03270986A5005B4611 /* MapPolylineDetailView.swift */; };
 		8DFBAE06270986B6005B4611 /* MapPolygonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE05270986B6005B4611 /* MapPolygonDetailView.swift */; };
 		8DFBAE092709E6DE005B4611 /* MapObjectPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE082709E6DE005B4611 /* MapObjectPreview.swift */; };
+		8DFBAE0B2709EA68005B4611 /* MapPointPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE0A2709EA68005B4611 /* MapPointPreview.swift */; };
+		8DFBAE0D2709EB97005B4611 /* MapPolyLinePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE0C2709EB97005B4611 /* MapPolyLinePreview.swift */; };
+		8DFBAE0F2709EBB5005B4611 /* MapPolygonPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE0E2709EBB5005B4611 /* MapPolygonPreview.swift */; };
 		8DFC44DF26FF4C2E00021E45 /* MapObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFC44DE26FF4C2E00021E45 /* MapObjectView.swift */; };
 		8DFC44E126FF7CC400021E45 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFC44E026FF7CC400021E45 /* CustomAnnotation.swift */; };
 /* End PBXBuildFile section */
@@ -117,6 +120,9 @@
 		8DFBAE03270986A5005B4611 /* MapPolylineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPolylineDetailView.swift; sourceTree = "<group>"; };
 		8DFBAE05270986B6005B4611 /* MapPolygonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPolygonDetailView.swift; sourceTree = "<group>"; };
 		8DFBAE082709E6DE005B4611 /* MapObjectPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectPreview.swift; sourceTree = "<group>"; };
+		8DFBAE0A2709EA68005B4611 /* MapPointPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPointPreview.swift; sourceTree = "<group>"; };
+		8DFBAE0C2709EB97005B4611 /* MapPolyLinePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPolyLinePreview.swift; sourceTree = "<group>"; };
+		8DFBAE0E2709EBB5005B4611 /* MapPolygonPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPolygonPreview.swift; sourceTree = "<group>"; };
 		8DFC44DE26FF4C2E00021E45 /* MapObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectView.swift; sourceTree = "<group>"; };
 		8DFC44E026FF7CC400021E45 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -429,6 +435,9 @@
 			isa = PBXGroup;
 			children = (
 				8DFBAE082709E6DE005B4611 /* MapObjectPreview.swift */,
+				8DFBAE0A2709EA68005B4611 /* MapPointPreview.swift */,
+				8DFBAE0C2709EB97005B4611 /* MapPolyLinePreview.swift */,
+				8DFBAE0E2709EBB5005B4611 /* MapPolygonPreview.swift */,
 			);
 			path = MapObjectPreview;
 			sourceTree = "<group>";
@@ -572,6 +581,7 @@
 				8DFBAE092709E6DE005B4611 /* MapObjectPreview.swift in Sources */,
 				8DD13F1325E23BA300CEAB3B /* MapObjectListViewOld.swift in Sources */,
 				8DD13F0225E2389E00CEAB3B /* Info.swift in Sources */,
+				8DFBAE0F2709EBB5005B4611 /* MapPolygonPreview.swift in Sources */,
 				8DEC410A26F609520052A7D2 /* RootView.swift in Sources */,
 				8D7D7C5A25D4F37200BA86BF /* ContentViewModel.swift in Sources */,
 				8DCE59E025EBB38F00D080D2 /* MapObject.swift in Sources */,
@@ -590,12 +600,14 @@
 				8DEC412326F63D950052A7D2 /* FileRepository.swift in Sources */,
 				8D82550A2607272700D73A6D /* MapPolygon.swift in Sources */,
 				8DFBAE06270986B6005B4611 /* MapPolygonDetailView.swift in Sources */,
+				8DFBAE0D2709EB97005B4611 /* MapPolyLinePreview.swift in Sources */,
 				8DFBADF927089F93005B4611 /* Coordinate.swift in Sources */,
 				8DEC413226F734F40052A7D2 /* LocationSelecterView.swift in Sources */,
 				8DFBAE0027098498005B4611 /* MapPointDetailView.swift in Sources */,
 				8D472D5025D8F554004267C1 /* AddNewPointView.swift in Sources */,
 				8DEC412C26F71E4E0052A7D2 /* MapObjectList.swift in Sources */,
 				8DEC411226F60BD50052A7D2 /* ConfigView.swift in Sources */,
+				8DFBAE0B2709EA68005B4611 /* MapPointPreview.swift in Sources */,
 				8DEC411426F61B180052A7D2 /* MapLayerProtcol.swift in Sources */,
 				8DCE59DB25EBB36400D080D2 /* MapPolyLine.swift in Sources */,
 				8DEC410C26F60B9B0052A7D2 /* TopView.swift in Sources */,

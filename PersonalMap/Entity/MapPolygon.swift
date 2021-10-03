@@ -3,7 +3,7 @@ import MapKit
 
 struct MapPolygon: MapObjectProtcol {
     let id: UUID
-    let mapObjectType: MapObjectType = .polygon
+    var mapObjectType: MapObjectType = .polygon
     var isHidden: Bool
     let layerName: String
     let coordinates: [Coordinate]

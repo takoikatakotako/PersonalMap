@@ -102,15 +102,13 @@ extension UIMapObjectView: MKMapViewDelegate {
             // 吹き出しを使用
             annoView.canShowCallout = true
             
-            
             // 吹き出しにinfoボタンを表示
-            let button = UIButton()
-            button.addAction(
+            let infoButton = UIButton()
+            infoButton.addAction(
                 .init{ [weak self] _ in self?.delegate?.anotationTapped(mapObjectId: mapObjectId) }, for: .touchUpInside)
-            button.backgroundColor = .red
-            button.frame.size = CGSize(width: 40, height: 40)
-            
-            annoView.rightCalloutAccessoryView = button
+            infoButton.frame.size = CGSize(width: 32, height: 32)
+            infoButton.setImage(UIImage(systemName: "info.circle"), for: .normal)
+            annoView.rightCalloutAccessoryView = infoButton
             
             return annoView
         }
