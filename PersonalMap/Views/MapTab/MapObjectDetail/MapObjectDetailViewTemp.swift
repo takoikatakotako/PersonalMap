@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct MapObjectDetailView: View {
+struct MapObjectDetailViewTemp: View {
     let mapObjectId: UUID
 
     var body: some View {
@@ -29,8 +29,8 @@ struct MapObjectDetailView: View {
     }
 }
 
-struct MapObjectDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapObjectDetailView(mapObjectId: UUID())
-    }
-}
+//struct MapObjectDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MapObjectDetailView(mapObjectId: UUID())
+//    }
+//}

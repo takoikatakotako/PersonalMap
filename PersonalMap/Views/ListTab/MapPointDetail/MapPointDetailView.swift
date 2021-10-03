@@ -1,35 +1,25 @@
 import SwiftUI
 
-struct MapObjectInfo: Identifiable {
-    let id: UUID
-    let key: String
-    let value: String
-}
-
-struct MapPointDetail: View {
+struct MapPointDetailView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-    @State var name: String = "鉄塔あ"
-    
-    @State var mapObjectInfos: [MapObjectInfo] = [
-        MapObjectInfo(id: UUID(), key: "管理番号", value: "43"),
-        MapObjectInfo(id: UUID(), key: "型番", value: "SET3"),
-    ]
+    @State var point: MapPoint
+
     @State var newKey: String = ""
     @State var newValue: String = ""
         
     var body: some View {
         ScrollView {
             LazyVStack {
-                TextField("ピン名", text: $name)
+                TextField("ピン名", text: $point.layerName)
                     .textFieldStyle(.roundedBorder)
 
                 Text("Info")
-                ForEach(mapObjectInfos) { mapObjectInfo in
+                ForEach(point.infos) { info in
                     HStack {
-                        Text(mapObjectInfo.key)
+                        Text(info.key)
                         Text(" : ")
-                        Text(mapObjectInfo.value)
+                        Text(info.value)
                     }
                 }
                 
@@ -42,7 +32,7 @@ struct MapPointDetail: View {
                 .padding()
                 
                 Button {
-                    mapObjectInfos.append(MapObjectInfo(id: UUID(), key: newKey, value: newValue))
+                    point.infos.append(Info(id: UUID(), key: newKey, value: newValue))
                     newKey = ""
                     newValue = ""
                 } label: {
@@ -50,6 +40,12 @@ struct MapPointDetail: View {
                 }
                 
                 Button {
+                    
+                    print(point.id)
+                    
+                    let fileRepository = FileRepository()
+                    try! fileRepository.saveMapObject(mapObject: .point(point))
+                    
                     presentationMode.wrappedValue.dismiss()
                 } label: {
                     Text("更新")
@@ -59,8 +55,8 @@ struct MapPointDetail: View {
     }
 }
 
-struct MapPointDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        MapPointDetail()
-    }
-}
+//struct MapPointDetail_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MapPointDetail(point: <#T##MapPoint#>)
+//    }
+//}

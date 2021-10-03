@@ -31,7 +31,8 @@ struct TopView: View {
         }, content: { item in
             switch item {
             case let .abc(id):
-                MapObjectDetailView(mapObjectId: id)
+                Text("XXXX")
+                // MapObjectDetailView(mapObjectId: id)
             }
         })
         .onAppear {

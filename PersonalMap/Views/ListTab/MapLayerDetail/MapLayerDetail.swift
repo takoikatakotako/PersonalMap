@@ -1,41 +1,41 @@
 import SwiftUI
 
 struct MapLayerDetail: View {
-    let mapLayer: MapLayer
+    let mapLayerId: UUID
+    @State var mapLayer: MapLayer?
     
     var body: some View {
-        Text("XXXXX")
-//        VStack {
-//            Text("レイヤー名: \(mapLayer.layerName)")
-//            Text("レイヤの種類: \(mapLayer.mapLayerType.rawValue)")
-//            Text("オブジェクトの数: \(mapLayer.objectIds.count)")
-//
-//            if mapLayer.mapLayerType == .point {
-//                NavigationLink(destination: Text("マップオブジェクト")) {
-//                    Text("ポイント一覧")
-//                }
-//            }
-//            else if mapLayer.mapLayerType == .polyLine {
-//                NavigationLink(destination: Text("sss")) {
-//                    Text("ポリライン一覧")
-//                }
-//            } else if mapLayer.mapLayerType == .polygon {
-//                NavigationLink(destination: Text("sss")) {
-//                    Text("ポリゴン一覧")
-//                }
-//            }
-//
-//            Button {
-//            } label: {
-//                Text("レイヤーの削除")
-//            }
-//            .padding(.top)
-//        }
+        VStack {
+            
+            if let mapLayer = mapLayer {
+                Text("レイヤー名: \(mapLayer.layerName)")
+                Text("レイヤの種類: \(mapLayer.mapObjectType.rawValue)")
+                Text("オブジェクトの数: \(mapLayer.objectIds.count)")
+
+                
+                NavigationLink(destination: MapObjectList(mapLayerId: mapLayer.id, mapObjectType: mapLayer.mapObjectType)) {
+                    Text("オブジェクト一覧")
+                }
+
+                Button {
+                } label: {
+                    Text("レイヤーの削除")
+                }
+                .padding(.top)
+            } else {
+                Text("Loading")
+            }
+            
+        }
+        .onAppear {
+            let fileRepository = FileRepository()
+            mapLayer = try? fileRepository.getMapLayer(mapLayerId: mapLayerId)
+        }
     }
 }
 
-struct MapLayerDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        MapLayerDetail(mapLayer: MapLayer(id: UUID(), layerName: "レイヤー名", mapObjectType: .point, objectIds: []))
-    }
-}
+//struct MapLayerDetail_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MapLayerDetail(mapLayer: MapLayer(id: UUID(), layerName: "レイヤー名", mapObjectType: .point, objectIds: []))
+//    }
+//}

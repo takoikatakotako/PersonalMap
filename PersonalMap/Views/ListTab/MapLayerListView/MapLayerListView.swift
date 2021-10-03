@@ -7,7 +7,7 @@ struct MapLayerListView: View {
     var body: some View {
         NavigationView {
             List(mapLayers) { (mapLayer: MapLayer) in
-                NavigationLink(destination: MapLayerDetail(mapLayer: mapLayer)) {
+                NavigationLink(destination: MapLayerDetail(mapLayerId: mapLayer.id)) {
                     VStack(alignment: .leading) {
                         Text(mapLayer.layerName)
                         Text(mapLayer.mapObjectType.rawValue)

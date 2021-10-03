@@ -72,7 +72,7 @@ struct AddNewPointView: View {
                         //                         delegate.addPoint(point: MapPoint(isHidden: false, layerName: layerName, coordinate: location, infos: infos))
 
                         
-                        delegate.addPoint(point: MapPoint(isHidden: false, layerName: layerName, coordinate: location.coordinate, infos: infos))
+                        delegate.addPoint(point: MapPoint(id: UUID(), isHidden: false, layerName: layerName, coordinate: location.coordinate, infos: infos))
                         presentationMode.wrappedValue.dismiss()
                     }, label: {
                         Text("保存")

@@ -47,35 +47,31 @@ extension MapObject: Identifiable {
     }
 }
 
-//extension MapObject: Decodable {
-//    
-//    init(from decoder: Decoder) throws {
-//        let container = try decoder.singleValueContainer()
-//        
-//        struct XYZ: Decodable {
-//            let mapObjectType: MapObjectType
-//        }
-//        
-//        let type = try container.decode(XYZ.self)
-//        switch type.mapObjectType {
-//        case .point:
-//            if let mapPoint = try? container.decode(MapPoint.self) {
-//                self = .point(mapPoint)
-//                return
-//            }
-//        case .polyLine:
-//            if let mapPolyLine = try? container.decode(MapPolyLine.self) {
-//                self = .polyLine(mapPolyLine)
-//                return
-//            }
-//        case .polygon:
-//            if let mapPolygon = try? container.decode(MapPolygon.self) {
-//                self = .polygon(mapPolygon)
-//                return
-//            }
-//        }
-//        
-//        return
-//    }
-//    
-//}
+extension MapObject: Decodable {
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        
+        let mapObjectType = try container.decode(MapObjectTypeDecoder.self)
+        switch mapObjectType.mapObjectType {
+        case .point:
+            if let mapPoint = try? container.decode(MapPoint.self) {
+                self = .point(mapPoint)
+                return
+            }
+        case .polyLine:
+            if let mapPolyLine = try? container.decode(MapPolyLine.self) {
+                self = .polyLine(mapPolyLine)
+                return
+            }
+        case .polygon:
+            if let mapPolygon = try? container.decode(MapPolygon.self) {
+                self = .polygon(mapPolygon)
+                return
+            }
+        }
+        
+        // TODO: ちゃんとエラー作る
+        throw InternalFileError.documentDirectoryNotFound
+    }
+}

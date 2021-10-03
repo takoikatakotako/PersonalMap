@@ -4,7 +4,7 @@ struct FileRepository {
     let layerDirectoryName = "layer"
     let layersFileName = "layers.json"
     let objectDirectoryName = "object"
-
+    
     func initialize() throws {
         let layerDirectoryUrl = try getDocumentsDirectoryUrl().appendingPathComponent(layerDirectoryName)
         if !FileManager.default.fileExists(atPath: layerDirectoryUrl.path) {
@@ -63,39 +63,51 @@ struct FileRepository {
     }
     
     // MapObject
-//    func getMapObject(mapObjectId: UUID) throws -> MapObject {
-//        let fileName = mapObjectId.description + ".json"
-//        let objectFileUrl = try getObjectDirectoryUrl().appendingPathComponent(fileName)
-//        let data = try Data(contentsOf: objectFileUrl)
-//        let mapObject = try JSONEncoder().decode(MapObject.self, from: data)
-//        return mapObject
-//    }
-        
+    //    func getMapObject(mapObjectId: UUID) throws -> MapObject {
+    //        let fileName = mapObjectId.description + ".json"
+    //        let objectFileUrl = try getObjectDirectoryUrl().appendingPathComponent(fileName)
+    //        let data = try Data(contentsOf: objectFileUrl)
+    //        let mapObject = try JSONEncoder().decode(MapObject.self, from: data)
+    //        return mapObject
+    //    }
+    
     // MapPointObject
     func saveMapObject(mapObject: MapObject) throws {
         let fileName = mapObject.id.description + ".json"
-        let data = try JSONEncoder().encode(try mapObject.getValue())
-        let fileUrl = try getDocumentsDirectoryUrl().appendingPathComponent(objectDirectoryName, isDirectory: true).appendingPathComponent(fileName)
+        
+        let data: Data
+        switch mapObject {
+        case let .point(point):
+            data = try JSONEncoder().encode(point)
+        case let .polyLine(polyLine):
+            data = try JSONEncoder().encode(polyLine)
+        case let .polygon(polygon):
+            data = try JSONEncoder().encode(polygon)
+        }
+        
+        let fileUrl = try getObjectDirectoryUrl().appendingPathComponent(fileName)
         try data.write(to: fileUrl, options: .atomic)
     }
     
-    func getMapPointObject(fileName: String) throws -> MapObject {
-        let fileUrl = try getDocumentsDirectoryUrl().appendingPathComponent(objectDirectoryName, isDirectory: true).appendingPathComponent(fileName)
+    func getMapObject(mapObjectId: UUID) throws -> MapObject {
+        let fileName = mapObjectId.description + ".json"
+        let fileUrl = try getObjectDirectoryUrl().appendingPathComponent(fileName)
         let data = try Data(contentsOf: fileUrl)
         
-        
-        return MapObject.point(MapPoint(isHidden: false, layerName: "XXX", coordinate: Coordinate(latitude: 34, longitude: 34), infos: []))
+        let mapObject = try JSONDecoder().decode(MapObject.self, from: data)
+        return mapObject
     }
     
-    func getMapPointObjects(mapPointObjectIds: [UUID]) throws -> [MapObject] {
+    func getMapObjects(mapObjectIds: [UUID]) throws -> [MapObject] {
         var mapObjects: [MapObject] = []
-        for mapPointObjectId in mapPointObjectIds {
-            let fileName = "\(mapPointObjectId).json"
-            let mapPointObject = try! getMapPointObject(fileName: fileName)
-            mapObjects.append(mapPointObject)
+        for mapObjectId in mapObjectIds {
+            let mapObject = try getMapObject(mapObjectId: mapObjectId)
+            mapObjects.append(mapObject)
         }
         return mapObjects
     }
+    
+    /// Private Methods
     
     // Documents の URL
     private func getDocumentsDirectoryUrl() throws -> URL {
