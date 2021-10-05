@@ -51,6 +51,7 @@
 		8DFBAE0B2709EA68005B4611 /* MapPointPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE0A2709EA68005B4611 /* MapPointPreview.swift */; };
 		8DFBAE0D2709EB97005B4611 /* MapPolyLinePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE0C2709EB97005B4611 /* MapPolyLinePreview.swift */; };
 		8DFBAE0F2709EBB5005B4611 /* MapPolygonPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE0E2709EBB5005B4611 /* MapPolygonPreview.swift */; };
+		8DFBAE12270CA2ED005B4611 /* AddMapPolylineObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE11270CA2ED005B4611 /* AddMapPolylineObjectView.swift */; };
 		8DFC44DF26FF4C2E00021E45 /* MapObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFC44DE26FF4C2E00021E45 /* MapObjectView.swift */; };
 		8DFC44E126FF7CC400021E45 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFC44E026FF7CC400021E45 /* CustomAnnotation.swift */; };
 /* End PBXBuildFile section */
@@ -123,6 +124,7 @@
 		8DFBAE0A2709EA68005B4611 /* MapPointPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPointPreview.swift; sourceTree = "<group>"; };
 		8DFBAE0C2709EB97005B4611 /* MapPolyLinePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPolyLinePreview.swift; sourceTree = "<group>"; };
 		8DFBAE0E2709EBB5005B4611 /* MapPolygonPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPolygonPreview.swift; sourceTree = "<group>"; };
+		8DFBAE11270CA2ED005B4611 /* AddMapPolylineObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapPolylineObjectView.swift; sourceTree = "<group>"; };
 		8DFC44DE26FF4C2E00021E45 /* MapObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectView.swift; sourceTree = "<group>"; };
 		8DFC44E026FF7CC400021E45 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -395,6 +397,7 @@
 		8DFBADF32706213F005B4611 /* ListTab */ = {
 			isa = PBXGroup;
 			children = (
+				8DFBAE10270CA2BB005B4611 /* AddMapPolylineObjectView */,
 				8DEC412D26F723EB0052A7D2 /* AddMapPointObject */,
 				8DFBADF527062350005B4611 /* MapPointDetail */,
 				8DEC412A26F71A330052A7D2 /* MapObjectList */,
@@ -440,6 +443,14 @@
 				8DFBAE0E2709EBB5005B4611 /* MapPolygonPreview.swift */,
 			);
 			path = MapObjectPreview;
+			sourceTree = "<group>";
+		};
+		8DFBAE10270CA2BB005B4611 /* AddMapPolylineObjectView */ = {
+			isa = PBXGroup;
+			children = (
+				8DFBAE11270CA2ED005B4611 /* AddMapPolylineObjectView.swift */,
+			);
+			path = AddMapPolylineObjectView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -609,6 +620,7 @@
 				8DEC411226F60BD50052A7D2 /* ConfigView.swift in Sources */,
 				8DFBAE0B2709EA68005B4611 /* MapPointPreview.swift in Sources */,
 				8DEC411426F61B180052A7D2 /* MapLayerProtcol.swift in Sources */,
+				8DFBAE12270CA2ED005B4611 /* AddMapPolylineObjectView.swift in Sources */,
 				8DCE59DB25EBB36400D080D2 /* MapPolyLine.swift in Sources */,
 				8DEC410C26F60B9B0052A7D2 /* TopView.swift in Sources */,
 				8DFC44E126FF7CC400021E45 /* CustomAnnotation.swift in Sources */,
