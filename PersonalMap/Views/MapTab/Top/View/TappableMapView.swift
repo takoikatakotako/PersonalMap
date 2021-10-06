@@ -6,11 +6,7 @@ public protocol TapplableMapViewDelegate: AnyObject {
     func mapViewDidTap(location: CLLocationCoordinate2D)
 }
 
-class CustomAnnotation: MKPointAnnotation {
-    var id: UUID? = nil
-}
-
-public class UITapplableMapView: UIView {
+public class UILocationsSelectView: UIView {
     private lazy var mapView = MKMapView()
     weak public var delegate: TapplableMapViewDelegate?
     
@@ -39,72 +35,12 @@ public class UITapplableMapView: UIView {
         delegate?.mapViewDidTap(location: location)
     }
     
-    // Point
-    func addPoint(point: MapPoint) {
-        if point.isHidden {
-            return
-        }
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = point.coordinate.locationCoordinate2D
-        annotation.title = point.objectName
-        mapView.addAnnotation(annotation)
-    }
-    
-    // PolyLine
-    func addPolyLine(polyLine: MapPolyLine) {
-        if polyLine.isHidden {
-            return
-        }
-        let locations = polyLine.locationCoordinate2Ds
-        let mkPolyLine = MKPolyline(coordinates: locations, count: locations.count)
-        mapView.addOverlay(mkPolyLine)
-        
-        // Anotations
-        for location in locations {
-            let annotation = CustomAnnotation()
-            annotation.id = polyLine.id
-            annotation.coordinate = location
-            annotation.title = polyLine.objectName
-            mapView.addAnnotation(annotation)
-        }
-    }
-    
-    // Polygon
-    func addPolygon(polygon: MapPolygon) {
-        if polygon.isHidden {
-            return
-        }
-        let locations = polygon.locationCoordinate2Ds
-        let mkPolygon = MKPolygon(coordinates: locations, count: locations.count)
-        mapView.addOverlay(mkPolygon)
-        
-        // Anotations
-        for location in locations {
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = location
-            annotation.title = polygon.objectName
-            mapView.addAnnotation(annotation)
-        }
-    }
-    
-    // Remove All Annotation
-    func removeAllAnnotations() {
-        mapView.removeAnnotations(mapView.annotations)
-    }
-    
-    // Remove All Overlay
-    func removeAllOverlays() {
-        for overlay in mapView.overlays {
-            mapView.removeOverlay(overlay)
-        }
-    }
-    
     func changeMapType(mapType: MKMapType) {
         mapView.mapType = mapType
     }
 }
 
-extension UITapplableMapView: MKMapViewDelegate {
+extension UILocationsSelectView: MKMapViewDelegate {
     // Delegate Methods
     public func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let circle = overlay as? MKCircle {
@@ -142,16 +78,15 @@ extension UITapplableMapView: MKMapViewDelegate {
     }
 }
 
-public struct TapplableMapView: UIViewRepresentable {
-    @Binding var mapObjects: [MapObject]
+public struct LocationsSelectView: UIViewRepresentable {
     @Binding var mapType: MKMapType
     
     let mapViewDidTap: (_ location: CLLocationCoordinate2D) -> Void
     final public class Coordinator: NSObject, TapplableMapViewDelegate {
-        private var mapView: TapplableMapView
+        private var mapView: LocationsSelectView
         let mapViewDidTap: (_ location: CLLocationCoordinate2D) -> Void
         
-        init(_ mapView: TapplableMapView, mapViewDidTap: @escaping (_ location: CLLocationCoordinate2D) -> Void) {
+        init(_ mapView: LocationsSelectView, mapViewDidTap: @escaping (_ location: CLLocationCoordinate2D) -> Void) {
             self.mapView = mapView
             self.mapViewDidTap = mapViewDidTap
         }
@@ -165,29 +100,14 @@ public struct TapplableMapView: UIViewRepresentable {
         Coordinator(self, mapViewDidTap: mapViewDidTap)
     }
     
-    public func makeUIView(context: Context) -> UITapplableMapView {
-        let mapView = UITapplableMapView()
+    public func makeUIView(context: Context) -> UILocationsSelectView {
+        let mapView = UILocationsSelectView()
         mapView.delegate = context.coordinator
         return mapView
     }
     
-    public func updateUIView(_ uiView: UITapplableMapView, context: Context) {
-        // Clear
-        uiView.removeAllAnnotations()
-        uiView.removeAllOverlays()
-
+    public func updateUIView(_ uiView: UILocationsSelectView, context: Context) {
         // Set
         uiView.changeMapType(mapType: mapType)
-        
-        for mapObject in mapObjects {
-            switch mapObject {
-            case let .point(point):
-                uiView.addPoint(point: point)
-            case let .polyLine(polyLine):
-                uiView.addPolyLine(polyLine: polyLine)
-            case let .polygon(polygon):
-                uiView.addPolygon(polygon: polygon)
-            }
-        }
     }
 }

@@ -7,14 +7,13 @@ protocol LocationSelecterDelegate {
 
 struct LocationSelecterView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State var mapObjects: [MapObject] = []
     @State var mapType: MKMapType = MKMapType.standard
     
     let delegate: LocationSelecterDelegate?
     
     var body: some View {
         ZStack(alignment: .top) {
-            TapplableMapView(mapObjects: $mapObjects, mapType: $mapType) { location in
+            TapplableMapView(mapType: $mapType) { location in
                 delegate?.getLocation(latitude: location.latitude, longitude: location.longitude)
                 presentationMode.wrappedValue.dismiss()
             }
