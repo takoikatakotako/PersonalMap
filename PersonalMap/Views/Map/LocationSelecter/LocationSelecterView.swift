@@ -13,9 +13,9 @@ struct LocationSelecterView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            TapplableMapView(mapType: $mapType) { location in
-                delegate?.getLocation(latitude: location.latitude, longitude: location.longitude)
-                presentationMode.wrappedValue.dismiss()
+            LocationsSelectView(mapType: $mapType) { locations in
+                // delegate?.getLocation(latitude: location.latitude, longitude: location.longitude)
+                // presentationMode.wrappedValue.dismiss()
             }
             .ignoresSafeArea()
         }

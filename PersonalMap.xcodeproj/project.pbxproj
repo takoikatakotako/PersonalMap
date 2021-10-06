@@ -16,7 +16,7 @@
 		8D7D7C2E25D4F00C00BA86BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D7D7C2D25D4F00C00BA86BF /* Preview Assets.xcassets */; };
 		8D7D7C3925D4F00C00BA86BF /* PersonalMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C3825D4F00C00BA86BF /* PersonalMapTests.swift */; };
 		8D7D7C4425D4F00C00BA86BF /* PersonalMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C4325D4F00C00BA86BF /* PersonalMapUITests.swift */; };
-		8D7D7C5525D4F02600BA86BF /* TappableMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C5425D4F02600BA86BF /* TappableMapView.swift */; };
+		8D7D7C5525D4F02600BA86BF /* LocationsSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C5425D4F02600BA86BF /* LocationsSelectView.swift */; };
 		8D7D7C5A25D4F37200BA86BF /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C5925D4F37200BA86BF /* ContentViewModel.swift */; };
 		8D82550A2607272700D73A6D /* MapPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8255092607272700D73A6D /* MapPolygon.swift */; };
 		8DAFC2E925F4B091005FC550 /* AddNewPolyLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAFC2E825F4B091005FC550 /* AddNewPolyLineView.swift */; };
@@ -90,7 +90,7 @@
 		8D7D7C3F25D4F00C00BA86BF /* PersonalMapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PersonalMapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D7D7C4325D4F00C00BA86BF /* PersonalMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalMapUITests.swift; sourceTree = "<group>"; };
 		8D7D7C4525D4F00C00BA86BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8D7D7C5425D4F02600BA86BF /* TappableMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableMapView.swift; sourceTree = "<group>"; };
+		8D7D7C5425D4F02600BA86BF /* LocationsSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsSelectView.swift; sourceTree = "<group>"; };
 		8D7D7C5925D4F37200BA86BF /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		8D8255092607272700D73A6D /* MapPolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPolygon.swift; sourceTree = "<group>"; };
 		8DAFC2E825F4B091005FC550 /* AddNewPolyLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPolyLineView.swift; sourceTree = "<group>"; };
@@ -302,7 +302,7 @@
 		8DE9F87125FDED6800302D31 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8D7D7C5425D4F02600BA86BF /* TappableMapView.swift */,
+				8D7D7C5425D4F02600BA86BF /* LocationsSelectView.swift */,
 				8DE9F87225FDEDB600302D31 /* TopHeaderButton.swift */,
 				8DFB31B525FDEF200010FCA2 /* TopPlusButton.swift */,
 				8DFC44DE26FF4C2E00021E45 /* MapObjectView.swift */,
@@ -607,7 +607,7 @@
 				8DEC410A26F609520052A7D2 /* RootView.swift in Sources */,
 				8D7D7C5A25D4F37200BA86BF /* ContentViewModel.swift in Sources */,
 				8DCE59E025EBB38F00D080D2 /* MapObject.swift in Sources */,
-				8D7D7C5525D4F02600BA86BF /* TappableMapView.swift in Sources */,
+				8D7D7C5525D4F02600BA86BF /* LocationsSelectView.swift in Sources */,
 				8D7D7C2925D4F00A00BA86BF /* ContentView.swift in Sources */,
 				8DFC44DF26FF4C2E00021E45 /* MapObjectView.swift in Sources */,
 				8DEC411726F623510052A7D2 /* AddMapLayerView.swift in Sources */,

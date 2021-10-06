@@ -2,13 +2,14 @@ import SwiftUI
 import MapKit
 import UIKit
 
-public protocol TapplableMapViewDelegate: AnyObject {
-    func mapViewDidTap(location: CLLocationCoordinate2D)
+public protocol LocationsSelectViewDelegate: AnyObject {
+    func locationDidSet(locations: [CLLocationCoordinate2D])
 }
 
 public class UILocationsSelectView: UIView {
     private lazy var mapView = MKMapView()
-    weak public var delegate: TapplableMapViewDelegate?
+    private lazy var locations: [CLLocationCoordinate2D] = []
+    weak public var delegate: LocationsSelectViewDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -32,7 +33,12 @@ public class UILocationsSelectView: UIView {
     @objc func onTap(sender: UITapGestureRecognizer) {
         let tapPoint = sender.location(in: mapView)
         let location = mapView.convert(tapPoint, toCoordinateFrom: mapView)
-        delegate?.mapViewDidTap(location: location)
+        
+        let circle = MKCircle(center: location, radius: 10000)
+        mapView.addOverlay(circle)
+        
+        locations.append(location)
+        delegate?.locationDidSet(locations: locations)
     }
     
     func changeMapType(mapType: MKMapType) {
@@ -41,63 +47,38 @@ public class UILocationsSelectView: UIView {
 }
 
 extension UILocationsSelectView: MKMapViewDelegate {
-    // Delegate Methods
     public func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let circle = overlay as? MKCircle {
             let circleRenderer = MKCircleRenderer(circle: circle)
-            circleRenderer.strokeColor = .yellow
-            circleRenderer.fillColor = .yellow
+            circleRenderer.strokeColor = .black
+            circleRenderer.fillColor = .black
             circleRenderer.lineWidth = 2.0
             return circleRenderer
         }
-        
-        if let polyline = overlay as? MKPolyline {
-            let polylineRenderer = MKPolylineRenderer(polyline: polyline)
-            polylineRenderer.strokeColor = .blue
-            polylineRenderer.lineWidth = 2.0
-            return polylineRenderer
-        }
-        
-        if let polygone = overlay as? MKPolygon {
-            let polylineRenderer = MKPolygonRenderer(polygon: polygone)
-            polylineRenderer.strokeColor = .orange
-            polylineRenderer.lineWidth = 2.0
-            polylineRenderer.fillColor = .orange
-            polylineRenderer.alpha = 0.2
-            return polylineRenderer
-        }
-        
         return MKOverlayRenderer()
-    }
-    
-    public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
-        if let customAnnotation = view.annotation as? CustomAnnotation,
-           let customAnnotationId = customAnnotation.id {
-            print(customAnnotationId)
-        }
     }
 }
 
 public struct LocationsSelectView: UIViewRepresentable {
     @Binding var mapType: MKMapType
     
-    let mapViewDidTap: (_ location: CLLocationCoordinate2D) -> Void
-    final public class Coordinator: NSObject, TapplableMapViewDelegate {
+    let locationDidSet: (_ locations: [CLLocationCoordinate2D]) -> Void
+    final public class Coordinator: NSObject, LocationsSelectViewDelegate {
         private var mapView: LocationsSelectView
-        let mapViewDidTap: (_ location: CLLocationCoordinate2D) -> Void
+        let locationDidSet: (_ locations: [CLLocationCoordinate2D]) -> Void
         
-        init(_ mapView: LocationsSelectView, mapViewDidTap: @escaping (_ location: CLLocationCoordinate2D) -> Void) {
+        init(_ mapView: LocationsSelectView, locationDidSet: @escaping (_ locations: [CLLocationCoordinate2D]) -> Void) {
             self.mapView = mapView
-            self.mapViewDidTap = mapViewDidTap
+            self.locationDidSet = locationDidSet
         }
         
-        public func mapViewDidTap(location: CLLocationCoordinate2D) {
-            mapViewDidTap(location)
+        public func locationDidSet(locations: [CLLocationCoordinate2D]) {
+            locationDidSet(locations)
         }
     }
     
     public func makeCoordinator() -> Coordinator {
-        Coordinator(self, mapViewDidTap: mapViewDidTap)
+        Coordinator(self, locationDidSet: locationDidSet)
     }
     
     public func makeUIView(context: Context) -> UILocationsSelectView {
