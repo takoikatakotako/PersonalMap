@@ -1,19 +1,19 @@
 import SwiftUI
 import MapKit
 
-protocol LocationSelecterDelegate {
+protocol PointLocationSelecterDelegate {
     func getLocation(latitude: Double, longitude: Double)
 }
 
-struct LocationSelecterView: View {
+struct PointLocationSelecter: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var mapType: MKMapType = MKMapType.standard
     
-    let delegate: LocationSelecterDelegate?
+    let delegate: PointLocationSelecterDelegate?
     
     var body: some View {
         ZStack(alignment: .top) {
-            LocationsSelectView(mapType: $mapType) { locations in
+            MultiLocationSelecterView(mapType: $mapType) { locations in
                 // delegate?.getLocation(latitude: location.latitude, longitude: location.longitude)
                 // presentationMode.wrappedValue.dismiss()
             }
@@ -24,6 +24,6 @@ struct LocationSelecterView: View {
 
 struct LocationSelecterView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationSelecterView(delegate: nil)
+        PointLocationSelecter(delegate: nil)
     }
 }

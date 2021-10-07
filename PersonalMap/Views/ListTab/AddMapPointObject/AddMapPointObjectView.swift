@@ -51,12 +51,12 @@ struct AddMapPointObjectView: View {
         .sheet(isPresented: $showingSheet) {
             // on dissmiss
         } content: {
-            LocationSelecterView(delegate: self)
+            PointLocationSelecter(delegate: self)
         }
     }
 }
 
-extension AddMapPointObjectView: LocationSelecterDelegate {
+extension AddMapPointObjectView: PointLocationSelecterDelegate {
     func getLocation(latitude: Double, longitude: Double) {
         self.latitude = latitude
         self.longitude = longitude

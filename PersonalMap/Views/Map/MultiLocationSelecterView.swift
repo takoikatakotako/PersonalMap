@@ -2,14 +2,15 @@ import SwiftUI
 import MapKit
 import UIKit
 
-public protocol LocationsSelectViewDelegate: AnyObject {
+public protocol MultiLocationSelecterViewDelegate: AnyObject {
     func locationDidSet(locations: [CLLocationCoordinate2D])
 }
 
-public class UILocationsSelectView: UIView {
+public class UIMultiLocationSelecterView: UIView {
+    public var locationLimit: Int?
     private lazy var mapView = MKMapView()
     private lazy var locations: [CLLocationCoordinate2D] = []
-    weak public var delegate: LocationsSelectViewDelegate?
+    weak public var delegate: MultiLocationSelecterViewDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -46,7 +47,7 @@ public class UILocationsSelectView: UIView {
     }
 }
 
-extension UILocationsSelectView: MKMapViewDelegate {
+extension UIMultiLocationSelecterView: MKMapViewDelegate {
     public func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let circle = overlay as? MKCircle {
             let circleRenderer = MKCircleRenderer(circle: circle)
@@ -59,15 +60,15 @@ extension UILocationsSelectView: MKMapViewDelegate {
     }
 }
 
-public struct LocationsSelectView: UIViewRepresentable {
+public struct MultiLocationSelecterView: UIViewRepresentable {
     @Binding var mapType: MKMapType
     
     let locationDidSet: (_ locations: [CLLocationCoordinate2D]) -> Void
-    final public class Coordinator: NSObject, LocationsSelectViewDelegate {
-        private var mapView: LocationsSelectView
+    final public class Coordinator: NSObject, MultiLocationSelecterViewDelegate {
+        private var mapView: MultiLocationSelecterView
         let locationDidSet: (_ locations: [CLLocationCoordinate2D]) -> Void
         
-        init(_ mapView: LocationsSelectView, locationDidSet: @escaping (_ locations: [CLLocationCoordinate2D]) -> Void) {
+        init(_ mapView: MultiLocationSelecterView, locationDidSet: @escaping (_ locations: [CLLocationCoordinate2D]) -> Void) {
             self.mapView = mapView
             self.locationDidSet = locationDidSet
         }
@@ -81,13 +82,13 @@ public struct LocationsSelectView: UIViewRepresentable {
         Coordinator(self, locationDidSet: locationDidSet)
     }
     
-    public func makeUIView(context: Context) -> UILocationsSelectView {
-        let mapView = UILocationsSelectView()
-        mapView.delegate = context.coordinator
-        return mapView
+    public func makeUIView(context: Context) -> UIMultiLocationSelecterView {
+        let locationsSelectView = UIMultiLocationSelecterView()
+        locationsSelectView.delegate = context.coordinator
+        return locationsSelectView
     }
     
-    public func updateUIView(_ uiView: UILocationsSelectView, context: Context) {
+    public func updateUIView(_ uiView: UIMultiLocationSelecterView, context: Context) {
         // Set
         uiView.changeMapType(mapType: mapType)
     }
