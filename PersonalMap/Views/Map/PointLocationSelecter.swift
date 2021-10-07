@@ -13,7 +13,7 @@ struct PointLocationSelecter: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            MultiLocationSelecterView(mapType: $mapType) { locations in
+            LocationS/Users/junpeiono/Desktop/MyProject/PersonalMap/PersonalMap/Views/Map/PointLocationSelecter.swiftelecterView(mapType: $mapType) { locations in
                 // delegate?.getLocation(latitude: location.latitude, longitude: location.longitude)
                 // presentationMode.wrappedValue.dismiss()
             }
@@ -22,7 +22,7 @@ struct PointLocationSelecter: View {
     }
 }
 
-struct LocationSelecterView_Previews: PreviewProvider {
+struct PointLocationSelecter_Previews: PreviewProvider {
     static var previews: some View {
         PointLocationSelecter(delegate: nil)
     }
