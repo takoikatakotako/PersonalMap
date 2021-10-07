@@ -341,14 +341,6 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
-		8DEC411526F6231B0052A7D2 /* AddMapLayer */ = {
-			isa = PBXGroup;
-			children = (
-				8DEC411626F623510052A7D2 /* AddMapLayerView.swift */,
-			);
-			path = AddMapLayer;
-			sourceTree = "<group>";
-		};
 		8DEC412126F63D660052A7D2 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,9 +389,9 @@
 		8DFBADF32706213F005B4611 /* ListTab */ = {
 			isa = PBXGroup;
 			children = (
+				8DEC411626F623510052A7D2 /* AddMapLayerView.swift */,
+				8DFBAE11270CA2ED005B4611 /* AddMapPolylineObjectView.swift */,
 				8DEC412E26F7251D0052A7D2 /* AddMapPointObjectView.swift */,
-				8DEC411526F6231B0052A7D2 /* AddMapLayer */,
-				8DFBAE10270CA2BB005B4611 /* AddMapPolylineObjectView */,
 				8DFBADF527062350005B4611 /* MapPointDetail */,
 				8DEC412A26F71A330052A7D2 /* MapObjectList */,
 				8DEC412726F716300052A7D2 /* MapLayerDetail */,
@@ -444,14 +436,6 @@
 				8DFBAE0E2709EBB5005B4611 /* MapPolygonPreview.swift */,
 			);
 			path = MapObjectPreview;
-			sourceTree = "<group>";
-		};
-		8DFBAE10270CA2BB005B4611 /* AddMapPolylineObjectView */ = {
-			isa = PBXGroup;
-			children = (
-				8DFBAE11270CA2ED005B4611 /* AddMapPolylineObjectView.swift */,
-			);
-			path = AddMapPolylineObjectView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
