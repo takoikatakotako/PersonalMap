@@ -35,7 +35,9 @@ public class UILocationSelecterView: UIView {
         let location = mapView.convert(tapPoint, toCoordinateFrom: mapView)
         
         // remove All
-        mapView.removeOver
+        for overlay in mapView.overlays {
+            mapView.removeOverlay(overlay)
+        }
         
         let circle = MKCircle(center: location, radius: 10000)
         // let circle = MKCircle(mapRect: MKMapRect(origin: MKMapPoint(location), size: MKMapSize(width: 2000, height: 2000)))
