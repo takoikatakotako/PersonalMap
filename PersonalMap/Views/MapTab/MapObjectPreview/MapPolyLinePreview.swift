@@ -3,7 +3,17 @@ import SwiftUI
 struct MapPolyLinePreview: View {
     let polyline: MapPolyLine
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text(polyline.objectName)
+            
+            ForEach(polyline.infos) { info in
+                HStack {
+                    Text(info.key)
+                    Text(": ")
+                    Text(info.value)
+                }
+            }
+        }
     }
 }
 

@@ -32,7 +32,7 @@ struct MapObjectList: View {
             case .polyLine:
                 AddMapPolylineObjectView(mapLayerId: mapLayerId)
             case .polygon:
-                Text("TODO: Polygon追加")
+                AddMapPolygonObjectView(mapLayerId: mapLayerId)
             }
         }
     }

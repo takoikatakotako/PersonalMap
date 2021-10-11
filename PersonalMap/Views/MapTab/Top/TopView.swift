@@ -2,7 +2,7 @@ import SwiftUI
 import MapKit
 
 
-enum XXX: Identifiable {
+enum TopSheetItem: Identifiable {
     var id: UUID {
         switch self {
         case let .abc(id):
@@ -16,12 +16,12 @@ enum XXX: Identifiable {
 struct TopView: View {
     @State var mapObjects: [MapObject] = []
     @State var mapType: MKMapType = MKMapType.standard
-    @State var xxx: XXX?
+    @State var xxx: TopSheetItem?
         
     var body: some View {
         ZStack(alignment: .top) {
             MapObjectView(mapObjects: $mapObjects, mapType: $mapType) { mapObjectId in
-                xxx = XXX.abc(mapObjectId)
+                xxx = TopSheetItem.abc(mapObjectId)
             }
             .ignoresSafeArea()
         }

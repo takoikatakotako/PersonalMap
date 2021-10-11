@@ -1,7 +1,7 @@
 import SwiftUI
-import MapKit
 
-struct AddMapPolylineObjectView: View {
+
+struct AddMapPolygonObjectView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     let mapLayerId: UUID
@@ -11,7 +11,7 @@ struct AddMapPolylineObjectView: View {
     
     var body: some View {
         VStack {
-            Text("PolyLineオブジェクト名")
+            Text("Polygonオブジェクト名")
                 .font(Font.system(size: 20).bold())
                 .padding(.top, 16)
             TextField("オブジェクト名を入力してください", text: $objectName)
@@ -30,9 +30,9 @@ struct AddMapPolylineObjectView: View {
             }
             
             Button {
-                // PolyLine
-                let polyLine: MapPolyLine = MapPolyLine(id: UUID(), mapObjectType: .polyLine, isHidden: false, objectName: objectName, coordinates: coordinates, infos: [])
-                let mapObject: MapObject = .polyLine(polyLine)
+                // Polygon
+                let polygon: MapPolygon = MapPolygon(id: UUID(), mapObjectType: .polygon, isHidden: false, objectName: objectName, coordinates: coordinates, infos: [])
+                let mapObject: MapObject = .polygon(polygon)
                 let fileRepository = FileRepository()
                 try! fileRepository.initialize()
                 try! fileRepository.saveMapObject(mapObject: mapObject)
@@ -47,26 +47,19 @@ struct AddMapPolylineObjectView: View {
                 try! fileRepository.saveMapLayer(mapLayer: newMapLayer)
                 presentationMode.wrappedValue.dismiss()
             } label: {
-                Text("PolyLineを追加")
+                Text("Polygonを追加")
             }
         }
         .sheet(isPresented: $showingSheet) {
             // on dissmiss
         } content: {
-            // LocationSelecterView(delegate: self)
             PolylineAndPolygonLocationSelecter(delegate: self)
         }
     }
 }
 
-extension AddMapPolylineObjectView: PolylineAndPolygonLocationSelecterDelegate {
+extension AddMapPolygonObjectView: PolylineAndPolygonLocationSelecterDelegate {
     func getCoordinates(coordinates: [Coordinate]) {
         self.coordinates = coordinates
-    }
-}
-
-struct AddMapPolylineObjectView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddMapPolylineObjectView(mapLayerId: UUID())
     }
 }

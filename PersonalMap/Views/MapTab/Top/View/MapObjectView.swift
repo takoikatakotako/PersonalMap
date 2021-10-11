@@ -42,8 +42,8 @@ public class UIMapObjectView: UIView {
         let mkPolyLine = MKPolyline(coordinates: locations, count: locations.count)
         mapView.addOverlay(mkPolyLine)
         
-        // Anotations
-        for location in locations {
+        // Anotation
+        if let location = locations.first {
             let annotation = CustomAnnotation()
             annotation.id = polyLine.id
             annotation.coordinate = location
@@ -61,13 +61,22 @@ public class UIMapObjectView: UIView {
         let mkPolygon = MKPolygon(coordinates: locations, count: locations.count)
         mapView.addOverlay(mkPolygon)
         
-        // Anotations
+        // 重心を求める
+        var latitudeAverage: Double = 0
+        var longitudeAverage: Double = 0
         for location in locations {
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = location
-            annotation.title = polygon.objectName
-            mapView.addAnnotation(annotation)
+            latitudeAverage += location.latitude
+            longitudeAverage += location.longitude
         }
+        latitudeAverage /= Double(locations.count)
+        longitudeAverage /= Double(locations.count)
+
+        let polygonCenter = CLLocationCoordinate2D(latitude: latitudeAverage, longitude: longitudeAverage)
+        let annotation = CustomAnnotation()
+        annotation.id = polygon.id
+        annotation.coordinate = polygonCenter
+        annotation.title = polygon.objectName
+        mapView.addAnnotation(annotation)
     }
     
     // Remove All Annotation
@@ -90,8 +99,7 @@ public class UIMapObjectView: UIView {
 extension UIMapObjectView: MKMapViewDelegate {
     // Delegate Methods
     public func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if let customAnnotation = annotation as? CustomAnnotation,
-           let mapObjectId = customAnnotation.id {
+        if let _ = annotation as? CustomAnnotation {
             // MKPinAnnotationViewを宣言
             let annoView = MKMarkerAnnotationView()
             // MKPinAnnotationViewのannotationにMKAnnotationのAnnotationを追加
@@ -99,16 +107,16 @@ extension UIMapObjectView: MKMapViewDelegate {
             // ピンの画像を変更
             // annoView.image = UIImage(named: "icon")
             annoView.glyphImage = UIImage(systemName: "square.and.arrow.up")
-            // 吹き出しを使用
-            annoView.canShowCallout = true
-            
-            // 吹き出しにinfoボタンを表示
-            let infoButton = UIButton()
-            infoButton.addAction(
-                .init{ [weak self] _ in self?.delegate?.anotationTapped(mapObjectId: mapObjectId) }, for: .touchUpInside)
-            infoButton.frame.size = CGSize(width: 32, height: 32)
-            infoButton.setImage(UIImage(systemName: "info.circle"), for: .normal)
-            annoView.rightCalloutAccessoryView = infoButton
+//            // 吹き出しを使用
+//            annoView.canShowCallout = true
+//
+//            // 吹き出しにinfoボタンを表示
+//            let infoButton = UIButton()
+//            infoButton.addAction(
+//                .init{ [weak self] _ in self?.delegate?.anotationTapped(mapObjectId: mapObjectId) }, for: .touchUpInside)
+//            infoButton.frame.size = CGSize(width: 32, height: 32)
+//            infoButton.setImage(UIImage(systemName: "info.circle"), for: .normal)
+//            annoView.rightCalloutAccessoryView = infoButton
             
             return annoView
         }
@@ -147,12 +155,12 @@ extension UIMapObjectView: MKMapViewDelegate {
         return MKOverlayRenderer()
     }
     
-    //    public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
-    //        if let annotation = view.annotation as? CustomAnnotation,
-    //           let mapObjectId = annotation.id {
-    //            delegate?.anotationTapped(mapObjectId: mapObjectId)
-    //        }
-    //    }
+        public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
+            if let annotation = view.annotation as? CustomAnnotation,
+               let mapObjectId = annotation.id {
+                delegate?.anotationTapped(mapObjectId: mapObjectId)
+            }
+        }
 }
 
 public struct MapObjectView: UIViewRepresentable {
