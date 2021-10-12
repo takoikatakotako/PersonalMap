@@ -40,7 +40,6 @@ public class UILocationSelecterView: UIView {
         }
         
         let circle = MKCircle(center: location, radius: 10000)
-        // let circle = MKCircle(mapRect: MKMapRect(origin: MKMapPoint(location), size: MKMapSize(width: 2000, height: 2000)))
         mapView.addOverlay(circle)
         
         delegate?.locationDidSet(location: location)

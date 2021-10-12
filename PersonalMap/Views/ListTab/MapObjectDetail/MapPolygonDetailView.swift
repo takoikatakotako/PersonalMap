@@ -1,21 +1,22 @@
 import SwiftUI
 
-struct MapPolylineDetailView: View {
+struct MapPolygonDetailView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-    @State var polyline: MapPolyLine
-
+    @State var polygon: MapPolygon
     @State var newKey: String = ""
     @State var newValue: String = ""
-        
+    
+    let systemNamesArray: [[String]]
+    
     var body: some View {
         ScrollView {
             LazyVStack {
-                TextField("PolyLine名", text: $polyline.objectName)
+                TextField("Polygon名", text: $polygon.objectName)
                     .textFieldStyle(.roundedBorder)
 
                 Text("Info")
-                ForEach(polyline.infos) { info in
+                ForEach(polygon.infos) { info in
                     HStack {
                         Text(info.key)
                         Text(" : ")
@@ -32,7 +33,7 @@ struct MapPolylineDetailView: View {
                 .padding()
                 
                 Button {
-                    polyline.infos.append(Info(id: UUID(), key: newKey, value: newValue))
+                    polygon.infos.append(Info(id: UUID(), key: newKey, value: newValue))
                     newKey = ""
                     newValue = ""
                 } label: {
@@ -42,18 +43,19 @@ struct MapPolylineDetailView: View {
                 Button {
                                         
                     let fileRepository = FileRepository()
-                    try! fileRepository.saveMapObject(mapObject: .polyLine(polyline))
+                    try! fileRepository.saveMapObject(mapObject: .polygon(polygon))
                     
                     presentationMode.wrappedValue.dismiss()
                 } label: {
                     Text("更新")
                 }
             }
-        }    }
+        }
+    }
 }
 
-//struct MapPolylineDetailView_Previews: PreviewProvider {
+//struct MapPolygonDetailView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        MapPolylineDetailView(polyline: <#MapPolyLine#>)
+//        MapPolygonDetailView()
 //    }
 //}

@@ -31,7 +31,7 @@ struct AddMapPolylineObjectView: View {
             
             Button {
                 // PolyLine
-                let polyLine: MapPolyLine = MapPolyLine(id: UUID(), mapObjectType: .polyLine, isHidden: false, objectName: objectName, coordinates: coordinates, infos: [])
+                let polyLine: MapPolyLine = MapPolyLine(id: UUID(), mapObjectType: .polyLine, imageName: "star.circle", isHidden: false, objectName: objectName, coordinates: coordinates, infos: [])
                 let mapObject: MapObject = .polyLine(polyLine)
                 let fileRepository = FileRepository()
                 try! fileRepository.initialize()

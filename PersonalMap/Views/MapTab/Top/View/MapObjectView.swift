@@ -28,6 +28,7 @@ public class UIMapObjectView: UIView {
         }
         let annotation = CustomAnnotation()
         annotation.id = point.id
+        annotation.imageName = point.imageName
         annotation.coordinate = point.coordinate.locationCoordinate2D
         annotation.title = point.objectName
         mapView.addAnnotation(annotation)
@@ -46,6 +47,7 @@ public class UIMapObjectView: UIView {
         if let location = locations.first {
             let annotation = CustomAnnotation()
             annotation.id = polyLine.id
+            annotation.imageName = polyLine.imageName
             annotation.coordinate = location
             annotation.title = polyLine.objectName
             mapView.addAnnotation(annotation)
@@ -74,6 +76,7 @@ public class UIMapObjectView: UIView {
         let polygonCenter = CLLocationCoordinate2D(latitude: latitudeAverage, longitude: longitudeAverage)
         let annotation = CustomAnnotation()
         annotation.id = polygon.id
+        annotation.imageName = polygon.imageName
         annotation.coordinate = polygonCenter
         annotation.title = polygon.objectName
         mapView.addAnnotation(annotation)
@@ -99,14 +102,16 @@ public class UIMapObjectView: UIView {
 extension UIMapObjectView: MKMapViewDelegate {
     // Delegate Methods
     public func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if let _ = annotation as? CustomAnnotation {
+        if let customAnnotation = annotation as? CustomAnnotation {
             // MKPinAnnotationViewを宣言
             let annoView = MKMarkerAnnotationView()
             // MKPinAnnotationViewのannotationにMKAnnotationのAnnotationを追加
             annoView.annotation = annotation
             // ピンの画像を変更
             // annoView.image = UIImage(named: "icon")
-            annoView.glyphImage = UIImage(systemName: "square.and.arrow.up")
+            if let imageName = customAnnotation.imageName {
+                annoView.glyphImage = UIImage(systemName: imageName)
+            }
 //            // 吹き出しを使用
 //            annoView.canShowCallout = true
 //

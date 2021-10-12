@@ -7,12 +7,35 @@ struct MapPointDetailView: View {
 
     @State var newKey: String = ""
     @State var newValue: String = ""
-        
+    
+    
+    let systemNamesArray: [[String]]
+    
     var body: some View {
         ScrollView {
             LazyVStack {
                 TextField("ピン名", text: $point.objectName)
                     .textFieldStyle(.roundedBorder)
+                
+                
+                Image(systemName: point.imageName)
+                    .frame(width: 40, height: 40)
+                
+                VStack {
+                    ForEach(systemNamesArray, id: \.self) { systemNames in
+                        HStack {
+                            ForEach(systemNames, id: \.self) { imageName in
+                                Button {
+                                    point.imageName = imageName
+                                } label: {
+                                    Image(systemName: imageName)
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+                
 
                 Text("Info")
                 ForEach(point.infos) { info in
