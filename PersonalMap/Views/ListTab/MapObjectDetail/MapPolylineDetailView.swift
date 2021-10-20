@@ -15,6 +15,23 @@ struct MapPolylineDetailView: View {
                 TextField("PolyLine名", text: $polyline.objectName)
                     .textFieldStyle(.roundedBorder)
 
+                Image(systemName: polyline.imageName)
+                    .frame(width: 40, height: 40)
+                
+                VStack {
+                    ForEach(systemNamesArray, id: \.self) { systemNames in
+                        HStack {
+                            ForEach(systemNames, id: \.self) { imageName in
+                                Button {
+                                    polyline.imageName = imageName
+                                } label: {
+                                    Image(systemName: imageName)
+                                }
+                            }
+                        }
+                    }
+                }
+                
                 Text("Info")
                 ForEach(polyline.infos) { info in
                     HStack {

@@ -72,7 +72,7 @@ public class UIMapObjectView: UIView {
         }
         latitudeAverage /= Double(locations.count)
         longitudeAverage /= Double(locations.count)
-
+        
         let polygonCenter = CLLocationCoordinate2D(latitude: latitudeAverage, longitude: longitudeAverage)
         let annotation = CustomAnnotation()
         annotation.id = polygon.id
@@ -102,26 +102,26 @@ public class UIMapObjectView: UIView {
 extension UIMapObjectView: MKMapViewDelegate {
     // Delegate Methods
     public func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if let customAnnotation = annotation as? CustomAnnotation {
+        if let customAnnotation = annotation as? CustomAnnotation,
+           let mapObjectId = customAnnotation.id,
+           let imageName = customAnnotation.imageName {
             // MKPinAnnotationViewを宣言
             let annoView = MKMarkerAnnotationView()
             // MKPinAnnotationViewのannotationにMKAnnotationのAnnotationを追加
             annoView.annotation = annotation
             // ピンの画像を変更
-            // annoView.image = UIImage(named: "icon")
-            if let imageName = customAnnotation.imageName {
-                annoView.glyphImage = UIImage(systemName: imageName)
-            }
-//            // 吹き出しを使用
-//            annoView.canShowCallout = true
-//
-//            // 吹き出しにinfoボタンを表示
-//            let infoButton = UIButton()
-//            infoButton.addAction(
-//                .init{ [weak self] _ in self?.delegate?.anotationTapped(mapObjectId: mapObjectId) }, for: .touchUpInside)
-//            infoButton.frame.size = CGSize(width: 32, height: 32)
-//            infoButton.setImage(UIImage(systemName: "info.circle"), for: .normal)
-//            annoView.rightCalloutAccessoryView = infoButton
+            annoView.glyphImage = UIImage(systemName: imageName)
+
+            // 吹き出しを使用
+            annoView.canShowCallout = true
+            
+            // 吹き出しにinfoボタンを表示
+            let infoButton = UIButton()
+            infoButton.addAction(
+                .init{ [weak self] _ in self?.delegate?.anotationTapped(mapObjectId: mapObjectId) }, for: .touchUpInside)
+            infoButton.frame.size = CGSize(width: 32, height: 32)
+            infoButton.setImage(UIImage(systemName: "info.circle"), for: .normal)
+            annoView.rightCalloutAccessoryView = infoButton
             
             return annoView
         }
@@ -160,12 +160,12 @@ extension UIMapObjectView: MKMapViewDelegate {
         return MKOverlayRenderer()
     }
     
-        public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
-            if let annotation = view.annotation as? CustomAnnotation,
-               let mapObjectId = annotation.id {
-                delegate?.anotationTapped(mapObjectId: mapObjectId)
-            }
-        }
+//    public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
+//        if let annotation = view.annotation as? CustomAnnotation,
+//           let mapObjectId = annotation.id {
+//            delegate?.anotationTapped(mapObjectId: mapObjectId)
+//        }
+//    }
 }
 
 public struct MapObjectView: UIViewRepresentable {

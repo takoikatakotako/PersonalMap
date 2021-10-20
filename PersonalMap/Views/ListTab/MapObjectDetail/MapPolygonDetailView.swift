@@ -15,6 +15,23 @@ struct MapPolygonDetailView: View {
                 TextField("Polygon名", text: $polygon.objectName)
                     .textFieldStyle(.roundedBorder)
 
+                Image(systemName: polygon.imageName)
+                    .frame(width: 40, height: 40)
+                
+                VStack {
+                    ForEach(systemNamesArray, id: \.self) { systemNames in
+                        HStack {
+                            ForEach(systemNames, id: \.self) { imageName in
+                                Button {
+                                    polygon.imageName = imageName
+                                } label: {
+                                    Image(systemName: imageName)
+                                }
+                            }
+                        }
+                    }
+                }
+                
                 Text("Info")
                 ForEach(polygon.infos) { info in
                     HStack {

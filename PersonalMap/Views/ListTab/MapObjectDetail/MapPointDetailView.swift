@@ -33,7 +33,6 @@ struct MapPointDetailView: View {
                             }
                         }
                     }
-                    
                 }
                 
 
