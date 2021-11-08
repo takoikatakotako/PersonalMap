@@ -33,7 +33,6 @@
 		8DEC411726F623510052A7D2 /* AddMapLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC411626F623510052A7D2 /* AddMapLayerView.swift */; };
 		8DEC412326F63D950052A7D2 /* FileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC412226F63D950052A7D2 /* FileRepository.swift */; };
 		8DEC412626F63DE70052A7D2 /* InternalFileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC412526F63DE70052A7D2 /* InternalFileError.swift */; };
-		8DEC412926F7164A0052A7D2 /* MapLayerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC412826F7164A0052A7D2 /* MapLayerDetail.swift */; };
 		8DEC412C26F71E4E0052A7D2 /* MapObjectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC412B26F71E4E0052A7D2 /* MapObjectList.swift */; };
 		8DEC412F26F7251D0052A7D2 /* AddMapPointObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC412E26F7251D0052A7D2 /* AddMapPointObjectView.swift */; };
 		8DEC413226F734F40052A7D2 /* PointLocationSelecter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC413126F734F40052A7D2 /* PointLocationSelecter.swift */; };
@@ -105,7 +104,6 @@
 		8DEC411626F623510052A7D2 /* AddMapLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapLayerView.swift; sourceTree = "<group>"; };
 		8DEC412226F63D950052A7D2 /* FileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRepository.swift; sourceTree = "<group>"; };
 		8DEC412526F63DE70052A7D2 /* InternalFileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalFileError.swift; sourceTree = "<group>"; };
-		8DEC412826F7164A0052A7D2 /* MapLayerDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLayerDetail.swift; sourceTree = "<group>"; };
 		8DEC412B26F71E4E0052A7D2 /* MapObjectList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectList.swift; sourceTree = "<group>"; };
 		8DEC412E26F7251D0052A7D2 /* AddMapPointObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapPointObjectView.swift; sourceTree = "<group>"; };
 		8DEC413126F734F40052A7D2 /* PointLocationSelecter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointLocationSelecter.swift; sourceTree = "<group>"; };
@@ -324,14 +322,6 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
-		8DEC412726F716300052A7D2 /* MapLayerDetail */ = {
-			isa = PBXGroup;
-			children = (
-				8DEC412826F7164A0052A7D2 /* MapLayerDetail.swift */,
-			);
-			path = MapLayerDetail;
-			sourceTree = "<group>";
-		};
 		8DEC412A26F71A330052A7D2 /* MapObjectList */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,7 +348,6 @@
 				8D3ABE242714011300584BDC /* AddMapPolygonObjectView.swift */,
 				8DFBADF527062350005B4611 /* MapObjectDetail */,
 				8DEC412A26F71A330052A7D2 /* MapObjectList */,
-				8DEC412726F716300052A7D2 /* MapLayerDetail */,
 				8DEC410D26F60BAB0052A7D2 /* MapLayerListView */,
 			);
 			path = ListTab;
@@ -532,7 +521,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DE5AE5F25D8FD8400726DC1 /* AddInfoView.swift in Sources */,
-				8DEC412926F7164A0052A7D2 /* MapLayerDetail.swift in Sources */,
 				8DFBADF727062366005B4611 /* MapObjectDetailView.swift in Sources */,
 				8DEC412626F63DE70052A7D2 /* InternalFileError.swift in Sources */,
 				8DFBAE04270986A5005B4611 /* MapPolylineDetailView.swift in Sources */,

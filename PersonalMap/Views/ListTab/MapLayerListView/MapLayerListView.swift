@@ -7,7 +7,7 @@ struct MapLayerListView: View {
     var body: some View {
         NavigationView {
             List(mapLayers) { (mapLayer: MapLayer) in
-                NavigationLink(destination: MapLayerDetail(mapLayerId: mapLayer.id)) {
+                NavigationLink(destination: MapObjectList(mapLayer: mapLayer)) {
                     VStack(alignment: .leading) {
                         Text(mapLayer.layerName)
                         Text(mapLayer.mapObjectType.name)
@@ -32,7 +32,7 @@ struct MapLayerListView: View {
             .navigationBarItems(trailing: Button(action: {
                 showingSheet = true
             }, label: {
-                Text("登録")
+                Image(systemName: "plus")
             }))
         }
     }
