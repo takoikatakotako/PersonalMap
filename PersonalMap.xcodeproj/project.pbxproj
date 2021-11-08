@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D29465D2739655B003F6389 /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D29465C2739655B003F6389 /* CommonButton.swift */; };
 		8D3ABE252714011300584BDC /* AddMapPolygonObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3ABE242714011300584BDC /* AddMapPolygonObjectView.swift */; };
 		8D6FE955270E0F0200FB8D5C /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6FE954270E0F0200FB8D5C /* CustomAnnotation.swift */; };
 		8D6FE959270E1CB000FB8D5C /* PolylineAndPolygonLocationSelecter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6FE958270E1CB000FB8D5C /* PolylineAndPolygonLocationSelecter.swift */; };
@@ -72,6 +73,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8D29465C2739655B003F6389 /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
 		8D3ABE242714011300584BDC /* AddMapPolygonObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapPolygonObjectView.swift; sourceTree = "<group>"; };
 		8D6FE954270E0F0200FB8D5C /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		8D6FE958270E1CB000FB8D5C /* PolylineAndPolygonLocationSelecter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolylineAndPolygonLocationSelecter.swift; sourceTree = "<group>"; };
@@ -150,6 +152,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D29465B2739653A003F6389 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				8D29465C2739655B003F6389 /* CommonButton.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		8D6FE956270E122500FB8D5C /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +254,7 @@
 		8DD13EFB25E230FD00CEAB3B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8D29465B2739653A003F6389 /* Common */,
 				8D6FE956270E122500FB8D5C /* Map */,
 				8DFBADF42706214E005B4611 /* ConfigTab */,
 				8DFBADF32706213F005B4611 /* ListTab */,
@@ -548,6 +559,7 @@
 				8DFBAE06270986B6005B4611 /* MapPolygonDetailView.swift in Sources */,
 				8DFBAE0D2709EB97005B4611 /* MapPolyLinePreview.swift in Sources */,
 				8DFBADF927089F93005B4611 /* Coordinate.swift in Sources */,
+				8D29465D2739655B003F6389 /* CommonButton.swift in Sources */,
 				8DEC413226F734F40052A7D2 /* PointLocationSelecter.swift in Sources */,
 				8DFBAE0027098498005B4611 /* MapPointDetailView.swift in Sources */,
 				8D6FE959270E1CB000FB8D5C /* PolylineAndPolygonLocationSelecter.swift in Sources */,
