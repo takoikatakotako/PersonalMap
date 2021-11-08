@@ -28,11 +28,11 @@ struct MapLayerListView: View {
                     AddMapLayerView()
                 })
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("List")
+            .navigationTitle("レイヤーリスト")
             .navigationBarItems(trailing: Button(action: {
                 showingSheet = true
             }, label: {
-                Text("Add")
+                Text("登録")
             }))
         }
     }
