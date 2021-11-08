@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct MapLayerListView: View {
-    @State var mapLayers: [MapLayer] = []
-    @State var showingSheet = false
+    @State private var mapLayers: [MapLayer] = []
+    @State private var showingSheet = false
     
     var body: some View {
         NavigationView {
@@ -10,7 +10,7 @@ struct MapLayerListView: View {
                 NavigationLink(destination: MapLayerDetail(mapLayerId: mapLayer.id)) {
                     VStack(alignment: .leading) {
                         Text(mapLayer.layerName)
-                        Text(mapLayer.mapObjectType.rawValue)
+                        Text(mapLayer.mapObjectType.name)
                     }
                 }
             }

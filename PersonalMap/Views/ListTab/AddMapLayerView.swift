@@ -41,7 +41,6 @@ struct AddMapLayerView: View {
                     Spacer()
                     Button {
                         let newMapLayer = MapLayer(id: UUID(), layerName: layerName, mapObjectType: layerType, objectIds: [])
-                        
                         let fileRepository = FileRepository()
                         try! fileRepository.initialize()
                         try! fileRepository.saveMapLayer(mapLayer: newMapLayer)
@@ -50,7 +49,7 @@ struct AddMapLayerView: View {
                         Text("追加")
                             .foregroundColor(Color.black)
                             .padding(.horizontal, 64)
-                            .padding(.vertical, 16)
+                            .padding(.vertical, 12)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color.gray, lineWidth: 2)
