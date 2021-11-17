@@ -52,7 +52,7 @@ struct AddMapLayerView: View {
                             .padding(.vertical, 12)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray, lineWidth: 2)
+                                    .stroke(Color.gray, lineWidth: 1)
                             )
                     }
                     Spacer()
