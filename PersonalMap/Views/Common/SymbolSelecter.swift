@@ -46,6 +46,7 @@ struct SymbolSelecter: View {
                             .frame(width: 40, height: 40)
                     }
                 }
+                Spacer()
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("シンボルの選択")

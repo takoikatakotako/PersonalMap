@@ -100,7 +100,7 @@ struct AddMapPointObjectView: View {
                 case .location:
                     PointLocationSelecter(delegate: self)
                 case .item:
-                    Text("item")
+                    InfoListView()
                 }
             })
             .padding(.horizontal, 16)
