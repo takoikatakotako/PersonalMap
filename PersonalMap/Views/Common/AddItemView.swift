@@ -1,11 +1,25 @@
 import SwiftUI
 
 struct AddItemView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var itemType = 0
+    @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
+    @State private var selection = 0
     @State private var key: String = ""
     @State private var value: String = ""
+    
+    @State private var showingAlert = false
+    @State private var message = ""
+
     @Binding var items: [Item]
+    
+    var itemType: ItemType {
+        if selection == 0 {
+            return .text
+        } else if selection == 1 {
+            return .url
+        } else {
+            return .image
+        }
+    }
 
     var body: some View {
         NavigationView {
@@ -14,7 +28,7 @@ struct AddItemView: View {
                     .font(Font.system(size: 20).bold())
                     .padding(.top, 12)
                 
-                Picker("What is your favorite color?", selection: $itemType) {
+                Picker("", selection: $selection) {
                     Text("テキスト").tag(0)
                     Text("URL").tag(1)
                     Text("画像").tag(2)
@@ -32,13 +46,13 @@ struct AddItemView: View {
                     .font(Font.system(size: 20).bold())
                     .padding(.top, 12)
                 
-                if itemType == 0 {
-                    TextField("バリューを入力してください", text: $value)
+                if itemType == .text {
+                    TextField("テキストを入力してください", text: $value)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                } else if itemType == 1 {
+                } else if itemType == .url {
                     TextField("URLを入力してください", text: $value)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                } else if itemType == 2 {
+                } else if itemType == .image {
                     HStack {
                         Image("icon")
                             .resizable()
@@ -54,12 +68,22 @@ struct AddItemView: View {
                 Spacer()
             }
             .padding(.horizontal, 16)
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("項目の追加")
             .navigationBarItems(
                 trailing:
                 Button(action: {
-                    let item = Item(id: UUID(), itemType: .text, key: "TEXT", value: "SDF")
+                    if key.isEmpty {
+                        message = "Keyを入力させてください"
+                        showingAlert = true
+                        return
+                    }
+                    
+                    if value.isEmpty {
+                        message = "Valueを入力させてください"
+                        showingAlert = true
+                        return
+                    }
+                    
+                    let item = Item(id: UUID(), itemType: .text, key: key, value: value)
                     items.append(item)
                     presentationMode.wrappedValue.dismiss()
                 }, label: {
@@ -67,6 +91,11 @@ struct AddItemView: View {
                         .font(Font.system(size: 16).bold())
                 })
             )
+            .alert(isPresented: $showingAlert)  {
+                Alert(title: Text(""), message: Text(message), dismissButton: .default(Text("閉じる")))
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("項目の追加")
         }
     }
 }

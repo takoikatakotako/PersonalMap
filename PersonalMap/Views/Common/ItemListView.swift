@@ -7,7 +7,7 @@ struct ItemListView: View {
     var body: some View {
         NavigationView {
             List(items) { item in
-                Text(item.key)
+                Text("\(item.key): \(item.value)")
             }
             .listStyle(.plain)
             .navigationBarTitleDisplayMode(.inline)

@@ -13,12 +13,15 @@ struct AddMapPointObjectView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     let mapLayerId: UUID
-    @State var objectName: String = ""
+    @State private var objectName: String = ""
     @State private var symbolName: String = "star.circle"
-    @State var sheet: AddMapPointObjectSheet?
-    @State var longitude: Double?
-    @State var latitude: Double?
-    @State var items: [Item] = []
+    @State private var longitude: Double?
+    @State private var latitude: Double?
+    @State private var items: [Item] = []
+    
+    @State private var sheet: AddMapPointObjectSheet?
+    @State private var message: String = ""
+    @State private var showingAlert: Bool = false
     
     var body: some View {
         NavigationView {
@@ -28,7 +31,7 @@ struct AddMapPointObjectView: View {
                     .padding(.top, 12)
                 TextField("ラベル名を入力してください", text: $objectName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-
+                
                 Text("シンボルの選択")
                     .font(Font.system(size: 20).bold())
                     .padding(.top, 12)
@@ -50,7 +53,7 @@ struct AddMapPointObjectView: View {
                         Text("シンボルを設定")
                     }
                 }
-
+                
                 Text("位置情報を選択")
                     .font(Font.system(size: 20).bold())
                     .padding(.top, 12)
@@ -75,7 +78,13 @@ struct AddMapPointObjectView: View {
                 HStack {
                     VStack(alignment: .leading) {
                         ForEach(items) { item in
-                            Text("\(item.key): \(item.value)")
+                            if item.itemType == .text {
+                                Text("\(item.key): \(item.value)")
+                            } else if item.itemType == .url {
+                                Text("\(item.key): \(item.value)")
+                            } else if item.itemType == .image {
+                                Text("\(item.key): \(item.value)")
+                            }
                         }
                     }
                     Spacer()
@@ -100,23 +109,39 @@ struct AddMapPointObjectView: View {
                     ItemListView(items: $items)
                 }
             })
+            .alert(isPresented: $showingAlert)  {
+                Alert(title: Text(""), message: Text(message), dismissButton: .default(Text("閉じる")))
+            }
             .padding(.horizontal, 16)
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("ポイントの新規登録")
             .navigationBarItems(
                 trailing:
-                Button(action: {
-                    savePoint()
-                }, label: {
-                    Text("登録")
-                        .font(Font.system(size: 16).bold())
-                })
+                    Button(action: {
+                        savePoint()
+                    }, label: {
+                        Text("登録")
+                            .font(Font.system(size: 16).bold())
+                    })
             )
         }
     }
     
     private func savePoint() {
-        let mapObject: MapObject = .point(MapPoint(id: UUID(), imageName: "star.circle", isHidden: false, objectName: objectName, coordinate: Coordinate(latitude: latitude!, longitude: longitude!), items: []))
+        if objectName.isEmpty {
+            message = "ラベル名が入力されていません"
+            showingAlert = true
+            return
+        }
+        
+        guard let latitude = latitude,
+              let longitude = longitude else {
+                  message = "緯度、経度が入力されていません"
+                  showingAlert = true
+                  return
+              }
+        
+        let mapObject: MapObject = .point(MapPoint(id: UUID(), imageName: symbolName, isHidden: false, objectName: objectName, coordinate: Coordinate(latitude: latitude, longitude: longitude), items: items))
         let fileRepository = FileRepository()
         try! fileRepository.initialize()
         try! fileRepository.saveMapObject(mapObject: mapObject)
