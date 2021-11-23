@@ -18,6 +18,7 @@ struct AddMapPointObjectView: View {
     @State var sheet: AddMapPointObjectSheet?
     @State var longitude: Double?
     @State var latitude: Double?
+    @State var items: [Item] = []
     
     var body: some View {
         NavigationView {
@@ -100,7 +101,7 @@ struct AddMapPointObjectView: View {
                 case .location:
                     PointLocationSelecter(delegate: self)
                 case .item:
-                    InfoListView()
+                    ItemListView(items: items, delegate: self)
                 }
             })
             .padding(.horizontal, 16)
@@ -148,6 +149,14 @@ extension AddMapPointObjectView: PointLocationSelecterDelegate {
         self.longitude = longitude
     }
 }
+
+extension AddMapPointObjectView: ItemListViewDelegate {
+    func updateItems(items: [Item]) {
+        
+    }
+}
+
+
 
 struct AddMapPointObjectView_Previews: PreviewProvider {
     static var previews: some View {
