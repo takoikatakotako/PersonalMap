@@ -74,13 +74,9 @@ struct AddMapPointObjectView: View {
                 
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("- 綺麗な鉄塔")
-                        Text("- hyyps://swiswiswift.com")
-                            .foregroundColor(Color.blue)
-                        Text("- 写真1.png")
-                            .foregroundColor(Color.blue)
-                        Text("- file.pdf")
-                            .foregroundColor(Color.blue)
+                        ForEach(items) { item in
+                            Text("\(item.key): \(item.value)")
+                        }
                     }
                     Spacer()
                     Button {
@@ -101,7 +97,7 @@ struct AddMapPointObjectView: View {
                 case .location:
                     PointLocationSelecter(delegate: self)
                 case .item:
-                    ItemListView(items: items, delegate: self)
+                    ItemListView(items: $items)
                 }
             })
             .padding(.horizontal, 16)
@@ -149,13 +145,6 @@ extension AddMapPointObjectView: PointLocationSelecterDelegate {
         self.longitude = longitude
     }
 }
-
-extension AddMapPointObjectView: ItemListViewDelegate {
-    func updateItems(items: [Item]) {
-        
-    }
-}
-
 
 
 struct AddMapPointObjectView_Previews: PreviewProvider {

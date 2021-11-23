@@ -1,9 +1,11 @@
 import SwiftUI
 
-struct InfoInputView: View {
+struct AddItemView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var itemType = 0
     @State private var key: String = ""
     @State private var value: String = ""
+    @Binding var items: [Item]
 
     var body: some View {
         NavigationView {
@@ -57,6 +59,9 @@ struct InfoInputView: View {
             .navigationBarItems(
                 trailing:
                 Button(action: {
+                    let item = Item(id: UUID(), itemType: .text, key: "TEXT", value: "SDF")
+                    items.append(item)
+                    presentationMode.wrappedValue.dismiss()
                 }, label: {
                     Text("登録")
                         .font(Font.system(size: 16).bold())
@@ -66,8 +71,8 @@ struct InfoInputView: View {
     }
 }
 
-struct InfoInputView_Previews: PreviewProvider {
-    static var previews: some View {
-        InfoInputView()
-    }
-}
+//struct AddItemView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddItemView(delegate: nil)
+//    }
+//}

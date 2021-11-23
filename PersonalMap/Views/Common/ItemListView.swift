@@ -1,16 +1,10 @@
 import SwiftUI
 
-protocol ItemListViewDelegate {
-    func updateItems(items: [Item])
-}
-
 struct ItemListView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var showingSheet = false
-    let items: [Item]
-    let delegate: ItemListViewDelegate?
+    @Binding var items: [Item]
     var body: some View {
-        
         NavigationView {
             List(items) { item in
                 Text(item.key)
@@ -44,13 +38,7 @@ struct ItemListView: View {
         .sheet(isPresented: $showingSheet) {
             
         } content: {
-            InfoInputView()
+            AddItemView(items: $items)
         }
-    }
-}
-
-struct InputListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ItemListView(items: [], delegate: nil)
     }
 }
