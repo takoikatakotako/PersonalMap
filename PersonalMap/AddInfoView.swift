@@ -1,7 +1,7 @@
 import SwiftUI
 
 protocol AddInfoViewDelegate {
-    func addInfo(info: Info)
+    func addInfo(info: Item)
 }
 
 struct AddInfoView: View {
@@ -27,7 +27,7 @@ struct AddInfoView: View {
                     showingAlert = true
                     return
                 }
-                delegate.addInfo(info: Info(key: key, value: value))
+                delegate.addInfo(info: Item(itemType: .text, key: key, value: value))
                 presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("保存")
@@ -48,7 +48,7 @@ struct AddInfoView_Previews: PreviewProvider {
         var body: some View {
             AddInfoView(delegate: self)
         }
-        func addInfo(info: Info) {}
+        func addInfo(info: Item) {}
     }
     
     static var previews: some View {

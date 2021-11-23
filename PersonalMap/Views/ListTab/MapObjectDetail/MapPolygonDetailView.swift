@@ -33,7 +33,7 @@ struct MapPolygonDetailView: View {
                 }
                 
                 Text("Info")
-                ForEach(polygon.infos) { info in
+                ForEach(polygon.items) { info in
                     HStack {
                         Text(info.key)
                         Text(" : ")
@@ -50,7 +50,7 @@ struct MapPolygonDetailView: View {
                 .padding()
                 
                 Button {
-                    polygon.infos.append(Info(id: UUID(), key: newKey, value: newValue))
+                    polygon.items.append(Item(id: UUID(), itemType: .text, key: newKey, value: newValue))
                     newKey = ""
                     newValue = ""
                 } label: {

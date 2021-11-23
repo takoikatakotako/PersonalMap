@@ -1,7 +1,8 @@
 import Foundation
 
-struct Info: Identifiable, Codable, Equatable {
+struct Item: Identifiable, Codable {
     var id: UUID = UUID()
+    let itemType: ItemType
     let key: String
     let value: String
 }

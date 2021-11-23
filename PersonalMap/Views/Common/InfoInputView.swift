@@ -49,7 +49,6 @@ struct InfoInputView: View {
                     }
                 }
                 
-                
                 Spacer()
             }
             .padding(.horizontal, 16)

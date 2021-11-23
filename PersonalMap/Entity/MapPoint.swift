@@ -8,5 +8,5 @@ struct MapPoint: MapObjectProtcol, Identifiable, Codable {
     var isHidden: Bool
     var objectName: String
     var coordinate: Coordinate
-    var infos: [Info]
+    var items: [Item]
 }

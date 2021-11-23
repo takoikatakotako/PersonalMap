@@ -6,7 +6,7 @@ struct MapPointPreview: View {
         VStack {
             Text(point.objectName)
             
-            ForEach(point.infos) { info in
+            ForEach(point.items) { info in
                 HStack {
                     Text(info.key)
                     Text(": ")

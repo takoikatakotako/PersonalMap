@@ -33,7 +33,7 @@ struct MapPolylineDetailView: View {
                 }
                 
                 Text("Info")
-                ForEach(polyline.infos) { info in
+                ForEach(polyline.items) { info in
                     HStack {
                         Text(info.key)
                         Text(" : ")
@@ -50,7 +50,7 @@ struct MapPolylineDetailView: View {
                 .padding()
                 
                 Button {
-                    polyline.infos.append(Info(id: UUID(), key: newKey, value: newValue))
+                    polyline.items.append(Item(id: UUID(), itemType: .text, key: newKey, value: newValue))
                     newKey = ""
                     newValue = ""
                 } label: {

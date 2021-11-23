@@ -6,7 +6,7 @@ struct MapPolyLinePreview: View {
         VStack {
             Text(polyline.objectName)
             
-            ForEach(polyline.infos) { info in
+            ForEach(polyline.items) { info in
                 HStack {
                     Text(info.key)
                     Text(": ")

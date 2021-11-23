@@ -31,7 +31,7 @@ struct AddMapPolygonObjectView: View {
             
             Button {
                 // Polygon
-                let polygon: MapPolygon = MapPolygon(id: UUID(), mapObjectType: .polygon, imageName: "star.circle", isHidden: false, objectName: objectName, coordinates: coordinates, infos: [])
+                let polygon: MapPolygon = MapPolygon(id: UUID(), mapObjectType: .polygon, imageName: "star.circle", isHidden: false, objectName: objectName, coordinates: coordinates, items: [])
                 let mapObject: MapObject = .polygon(polygon)
                 let fileRepository = FileRepository()
                 try! fileRepository.initialize()

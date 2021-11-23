@@ -37,7 +37,7 @@ struct MapPointDetailView: View {
                 
 
                 Text("Info")
-                ForEach(point.infos) { info in
+                ForEach(point.items) { info in
                     HStack {
                         Text(info.key)
                         Text(" : ")
@@ -54,7 +54,7 @@ struct MapPointDetailView: View {
                 .padding()
                 
                 Button {
-                    point.infos.append(Info(id: UUID(), key: newKey, value: newValue))
+                    point.items.append(Item(id: UUID(), itemType: .text, key: newKey, value: newValue))
                     newKey = ""
                     newValue = ""
                 } label: {
