@@ -81,9 +81,19 @@ struct AddMapPointObjectView: View {
                             if item.itemType == .text {
                                 Text("\(item.key): \(item.value)")
                             } else if item.itemType == .url {
-                                Text("\(item.key): \(item.value)")
+                                Button {
+                                    if let url = URL(string: item.value) {
+                                        UIApplication.shared.open(url, completionHandler: nil)
+                                    }
+                                } label: {
+                                    Text("\(item.key): \(item.value)")
+                                }
                             } else if item.itemType == .image {
-                                Text("\(item.key): \(item.value)")
+                                Button {
+                                    
+                                } label: {
+                                    Text("\(item.key): \(item.value)")
+                                }
                             }
                         }
                     }

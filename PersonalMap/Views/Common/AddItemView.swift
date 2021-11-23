@@ -83,7 +83,13 @@ struct AddItemView: View {
                         return
                     }
                     
-                    let item = Item(id: UUID(), itemType: .text, key: key, value: value)
+                    if itemType == .url && URL(string: value) == nil {
+                        message = "URLが正しくありません"
+                        showingAlert = true
+                        return
+                    }
+                    
+                    let item = Item(id: UUID(), itemType: itemType, key: key, value: value)
                     items.append(item)
                     presentationMode.wrappedValue.dismiss()
                 }, label: {

@@ -6,29 +6,34 @@ struct ItemListView: View {
     @Binding var items: [Item]
     var body: some View {
         NavigationView {
-            List(items) { item in
-                Text("\(item.key): \(item.value)")
+            List {
+                ForEach(items, id: \.self) { item in
+                    Text("\(item.key): \(item.value)")
+                }
+                .onDelete(perform: delete)
             }
             .listStyle(.plain)
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("項目一覧")
             .navigationBarItems(
+                leading:
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Text("とじる")
+                            .font(Font.system(size: 16).bold())
+                    },
                 trailing:
                     Button(action: {
                         
                     }, label: {
                         HStack {
+                            EditButton()
+                            
                             Button {
                                 showingSheet = true
                             } label: {
                                 Text("追加")
-                                    .font(Font.system(size: 16).bold())
-                            }
-                            
-                            Button {
-                                presentationMode.wrappedValue.dismiss()
-                            } label: {
-                                Text("完了")
                                     .font(Font.system(size: 16).bold())
                             }
                         }
@@ -40,5 +45,9 @@ struct ItemListView: View {
         } content: {
             AddItemView(items: $items)
         }
+    }
+    
+    private func delete(at offsets: IndexSet) {
+        items.remove(atOffsets: offsets)
     }
 }

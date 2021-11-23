@@ -1,6 +1,6 @@
 import Foundation
 
-struct Item: Identifiable, Codable {
+struct Item: Identifiable, Hashable, Codable {
     var id: UUID = UUID()
     let itemType: ItemType
     let key: String
