@@ -1,10 +1,12 @@
 import Foundation
+import UIKit
 
 struct FileRepository {
     let layerDirectoryName = "layer"
     let layersFileName = "layers.json"
     let objectDirectoryName = "object"
-    
+    let imageDirectoryName = "image"
+
     func initialize() throws {
         let layerDirectoryUrl = try getDocumentsDirectoryUrl().appendingPathComponent(layerDirectoryName)
         if !FileManager.default.fileExists(atPath: layerDirectoryUrl.path) {
@@ -18,9 +20,14 @@ struct FileRepository {
             try mapLayersData.write(to: layersFileUrl, options: .atomic)
         }
         
-        let pointDirectoryUrl = try getDocumentsDirectoryUrl().appendingPathComponent(objectDirectoryName)
-        if !FileManager.default.fileExists(atPath: pointDirectoryUrl.path) {
-            try FileManager.default.createDirectory(atPath: pointDirectoryUrl.path, withIntermediateDirectories: false, attributes: nil)
+        let objectDirectoryUrl = try getDocumentsDirectoryUrl().appendingPathComponent(objectDirectoryName)
+        if !FileManager.default.fileExists(atPath: objectDirectoryUrl.path) {
+            try FileManager.default.createDirectory(atPath: objectDirectoryUrl.path, withIntermediateDirectories: false, attributes: nil)
+        }
+        
+        let imageDirectoryUrl = try getDocumentsDirectoryUrl().appendingPathComponent(imageDirectoryName)
+        if !FileManager.default.fileExists(atPath: imageDirectoryUrl.path) {
+            try FileManager.default.createDirectory(atPath: imageDirectoryUrl.path, withIntermediateDirectories: false, attributes: nil)
         }
     }
     
@@ -89,6 +96,11 @@ struct FileRepository {
         try data.write(to: fileUrl, options: .atomic)
     }
     
+    func saveImageData(data: Data, fileName: String) throws {
+        let fileUrl = try getObjectDirectoryUrl().appendingPathComponent(fileName)
+        try data.write(to: fileUrl, options: .atomic)
+    }
+        
     func getMapObject(mapObjectId: UUID) throws -> MapObject {
         let fileName = mapObjectId.description + ".json"
         let fileUrl = try getObjectDirectoryUrl().appendingPathComponent(fileName)
@@ -105,6 +117,16 @@ struct FileRepository {
             mapObjects.append(mapObject)
         }
         return mapObjects
+    }
+    
+    func getImageData(fileName: String) -> UIImage? {
+        do {
+            let fileUrl = try getObjectDirectoryUrl().appendingPathComponent(fileName)
+            let data = try Data(contentsOf: fileUrl)
+            return UIImage(data: data)
+        } catch {
+            return nil
+        }
     }
     
     /// Private Methods
@@ -130,6 +152,13 @@ struct FileRepository {
         let objectDirectoryUrl = try getDocumentsDirectoryUrl()
             .appendingPathComponent(objectDirectoryName, isDirectory: true)
         return objectDirectoryUrl
+    }
+    
+    // Documents/image の URL
+    private func getImageDirectoryUrl() throws -> URL {
+        let imageDirectoryUrl = try getDocumentsDirectoryUrl()
+            .appendingPathComponent(imageDirectoryName, isDirectory: true)
+        return imageDirectoryUrl
     }
     
     private func getMapLayerIds() throws -> [UUID] {

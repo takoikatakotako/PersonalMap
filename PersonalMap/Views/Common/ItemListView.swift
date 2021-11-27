@@ -8,7 +8,13 @@ struct ItemListView: View {
         NavigationView {
             List {
                 ForEach(items, id: \.self) { item in
-                    Text("\(item.key): \(item.value)")
+                    if item.itemType == .text {
+                        TextItemRow(item: item)
+                    } else if item.itemType == .url {
+                        URLItemRow(item: item)
+                    } else if item.itemType == .image {
+                        ImageItemRow(item: item)
+                    }
                 }
                 .onDelete(perform: delete)
             }

@@ -6,10 +6,14 @@ struct AddItemView: View {
     @State private var key: String = ""
     @State private var value: String = ""
     
+    @State private var image: UIImage?
     @State private var showingAlert = false
-    @State private var message = ""
+    @State private var alertMessage = ""
+    @State private var showingSheet = false
 
     @Binding var items: [Item]
+    
+    private let fileRepository = FileRepository()
     
     var itemType: ItemType {
         if selection == 0 {
@@ -54,11 +58,21 @@ struct AddItemView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 } else if itemType == .image {
                     HStack {
-                        Image("icon")
-                            .resizable()
-                            .frame(width: 120, height: 120)
+                        if let image = image {
+                            Image(uiImage: image)
+                                .resizable()
+                                .frame(width: 120, height: 120)
+                        } else {
+                            Text("No Image")
+                                .foregroundColor(Color.white)
+                                .font(Font.system(size:20).bold())
+                                .frame(width: 120, height: 120)
+                                .background(Color(UIColor.lightGray))
+                        }
+                        
                         Spacer()
                         Button {
+                            showingSheet = true
                         } label: {
                             Text("画像を設定")
                         }
@@ -72,36 +86,84 @@ struct AddItemView: View {
                 trailing:
                 Button(action: {
                     if key.isEmpty {
-                        message = "Keyを入力させてください"
+                        alertMessage = "Keyを入力させてください"
                         showingAlert = true
                         return
                     }
                     
-                    if value.isEmpty {
-                        message = "Valueを入力させてください"
-                        showingAlert = true
-                        return
+                    switch itemType {
+                    case .text:
+                        saveTextItem()
+                    case .url:
+                        saveUrlItem()
+                    case .image:
+                        saveImageItem()
                     }
-                    
-                    if itemType == .url && URL(string: value) == nil {
-                        message = "URLが正しくありません"
-                        showingAlert = true
-                        return
-                    }
-                    
-                    let item = Item(id: UUID(), itemType: itemType, key: key, value: value)
-                    items.append(item)
-                    presentationMode.wrappedValue.dismiss()
                 }, label: {
                     Text("登録")
                         .font(Font.system(size: 16).bold())
                 })
             )
             .alert(isPresented: $showingAlert)  {
-                Alert(title: Text(""), message: Text(message), dismissButton: .default(Text("閉じる")))
+                Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("閉じる")))
             }
-            .navigationBarTitleDisplayMode(.inline)
+            .sheet(isPresented: $showingSheet) {
+                
+            } content: {
+                ImagePicker(image: $image)
+            }
             .navigationTitle("項目の追加")
+        }
+    }
+    
+    private func saveTextItem() {
+        if value.isEmpty {
+            alertMessage = "Valueを入力させてください"
+            showingAlert = true
+            return
+        }
+        
+        let item = Item(id: UUID(), itemType: .text, key: key, value: value)
+        items.append(item)
+        
+        presentationMode.wrappedValue.dismiss()
+    }
+    
+    private func saveUrlItem() {
+        if URL(string: value) == nil {
+            alertMessage = "URLが正しくありません"
+            showingAlert = true
+            return
+        }
+        
+        let item = Item(id: UUID(), itemType: .url, key: key, value: value)
+        items.append(item)
+        
+        presentationMode.wrappedValue.dismiss()
+    }
+    
+    private func saveImageItem() {
+        guard let image = image else {
+            alertMessage = "画像が選択されていません"
+            showingAlert = true
+            return
+        }
+
+        guard let pngData = image.pngData() else {
+            alertMessage = "画像の保存に失敗しました"
+            showingAlert = true
+            return
+        }
+        
+        do {
+            let fileName = UUID().description + ".png"
+            try fileRepository.saveImageData(data: pngData, fileName: fileName)
+            let item = Item(id: UUID(), itemType: .image, key: key, value: fileName)
+            items.append(item)
+            presentationMode.wrappedValue.dismiss()
+        } catch {
+            alertMessage = "画像の保存に失敗しました"
+            showingAlert = true
         }
     }
 }
