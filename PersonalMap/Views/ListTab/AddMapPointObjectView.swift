@@ -15,8 +15,8 @@ struct AddMapPointObjectView: View {
     let mapLayerId: UUID
     @State private var objectName: String = ""
     @State private var symbolName: String = "star.circle"
-    @State private var longitude: Double?
-    @State private var latitude: Double?
+    @State private var longitude: String = ""
+    @State private var latitude: String = ""
     @State private var items: [Item] = []
     
     @State private var sheet: AddMapPointObjectSheet?
@@ -60,8 +60,11 @@ struct AddMapPointObjectView: View {
                 
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("緯度: \(latitude?.description ?? "???")")
-                        Text("経度: \(longitude?.description ?? "???")")
+                        TextField("緯度を入力してください", text: $latitude)
+                            .keyboardType(.decimalPad)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        TextField("緯度を入力してください", text: $longitude)                            .keyboardType(.decimalPad)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
                     Spacer()
                     Button {
@@ -144,9 +147,17 @@ struct AddMapPointObjectView: View {
             return
         }
         
-        guard let latitude = latitude,
-              let longitude = longitude else {
-                  message = "緯度、経度が入力されていません"
+        if latitude.isEmpty || longitude.isEmpty {
+            message = "緯度、経度が入力されていません"
+            showingAlert = true
+            return
+        }
+        
+        guard let latitude = Double(latitude),
+              let longitude = Double(longitude),
+              0 <= latitude && latitude <= 180,
+              0 <= longitude && longitude <= 180 else {
+                  message = "不正な緯度経度が入力されています"
                   showingAlert = true
                   return
               }
@@ -176,8 +187,8 @@ extension AddMapPointObjectView: SymbolSelecterDelegate {
 
 extension AddMapPointObjectView: PointLocationSelecterDelegate {
     func getLocation(latitude: Double, longitude: Double) {
-        self.latitude = latitude
-        self.longitude = longitude
+        self.latitude = latitude.description
+        self.longitude = longitude.description
     }
 }
 

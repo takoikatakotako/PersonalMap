@@ -8,32 +8,52 @@ protocol PointLocationSelecterDelegate {
 struct PointLocationSelecter: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var mapType: MKMapType = MKMapType.standard
-    @State var location: CLLocationCoordinate2D?
     let delegate: PointLocationSelecterDelegate?
     
+    @State private var latitude: Double?
+    @State private var longitude: Double?
+    
     var body: some View {
-        ZStack(alignment: .bottom) {
-            LocationSelecterView(mapType: $mapType) { location in
-                self.location = location
+        ZStack(alignment: .bottomLeading) {
+            LocationSelecterView() { location in
+                latitude = location.latitude
+                longitude = location.longitude
             }
             .ignoresSafeArea()
+            
             HStack {
-                Button {
-                    presentationMode.wrappedValue.dismiss()
-                } label: {
-                    Text("Cancel")
-                }
-                
-                Button {
-                    guard let location = location else {
-                        return
+                VStack {
+                    if let latitude = latitude,
+                       let longitude = longitude {
+                        Text("緯度: \(latitude)")
+                        Text("経度: \(longitude)")
                     }
-                    delegate?.getLocation(latitude: location.latitude, longitude: location.longitude)
-                    presentationMode.wrappedValue.dismiss()
-                } label: {
-                    Text("OK")
+                }
+                .frame(width: 200, alignment: .leading)
+                
+                Spacer()
+                
+                HStack {
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Text("Cancel")
+                    }
+                    
+                    Button {
+                        guard let latitude = latitude,
+                              let longitude = longitude else {
+                                  return
+                              }
+                        delegate?.getLocation(latitude: latitude, longitude: longitude)
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Text("OK")
+                    }
                 }
             }
+            .padding(.horizontal, 16)
+            .padding(.bottom, 32)
         }
     }
 }

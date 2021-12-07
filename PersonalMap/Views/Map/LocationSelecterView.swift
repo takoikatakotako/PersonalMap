@@ -11,6 +11,10 @@ public class UILocationSelecterView: UIView {
     private lazy var mapView = MKMapView()
     weak public var delegate: LocationSelecterViewDelegate?
     
+    private let verticalLine = CAShapeLayer()
+    private let horizontalLine = CAShapeLayer()
+    
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -18,54 +22,43 @@ public class UILocationSelecterView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let tapGestureRecognizer = UITapGestureRecognizer()
-        tapGestureRecognizer.addTarget(self, action: #selector(onTap(sender:)))
-        
-        mapView.addGestureRecognizer(tapGestureRecognizer)
         mapView.delegate = self
         addSubview(mapView)
+        
+        verticalLine.fillColor = nil
+        verticalLine.opacity = 1.0
+        verticalLine.strokeColor = UIColor.black.cgColor
+        layer.addSublayer(verticalLine)
+        
+        horizontalLine.fillColor = nil
+        horizontalLine.opacity = 1.0
+        horizontalLine.strokeColor = UIColor.black.cgColor
+        layer.addSublayer(horizontalLine)
     }
     
     public override func layoutSubviews() {
         mapView.frame =  CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
-    }
-    
-    @objc func onTap(sender: UITapGestureRecognizer) {
-        let tapPoint = sender.location(in: mapView)
-        let location = mapView.convert(tapPoint, toCoordinateFrom: mapView)
         
-        // remove All
-        for overlay in mapView.overlays {
-            mapView.removeOverlay(overlay)
-        }
+        let verticalLinePath = UIBezierPath()
+        verticalLinePath.move(to: CGPoint(x: (bounds.width / 2) - 50, y: bounds.height / 2))
+        verticalLinePath.addLine(to: CGPoint(x: (bounds.width / 2) + 50, y: bounds.height / 2))
+        verticalLine.path = verticalLinePath.cgPath
         
-        let circle = MKCircle(center: location, radius: 10000)
-        mapView.addOverlay(circle)
-        
-        delegate?.locationDidSet(location: location)
-    }
-    
-    func changeMapType(mapType: MKMapType) {
-        mapView.mapType = mapType
+        let horizontalLinePath = UIBezierPath()
+        horizontalLinePath.move(to: CGPoint(x: bounds.width / 2, y: (bounds.height / 2) - 50))
+        horizontalLinePath.addLine(to: CGPoint(x: bounds.width / 2, y: (bounds.height / 2) + 50))
+        horizontalLine.path = horizontalLinePath.cgPath
     }
 }
 
 extension UILocationSelecterView: MKMapViewDelegate {
-    public func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        if let circle = overlay as? MKCircle {
-            let circleRenderer = MKCircleRenderer(circle: circle)
-            circleRenderer.strokeColor = .black
-            circleRenderer.fillColor = .black
-            circleRenderer.lineWidth = 2.0
-            return circleRenderer
-        }
-        return MKOverlayRenderer()
+    public func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        let location = CLLocationCoordinate2D(latitude: mapView.region.center.latitude, longitude: mapView.region.center.longitude)
+        delegate?.locationDidSet(location: location)
     }
 }
 
 public struct LocationSelecterView: UIViewRepresentable {
-    @Binding var mapType: MKMapType
-    
     let locationDidSet: (_ location: CLLocationCoordinate2D) -> Void
     final public class Coordinator: NSObject, LocationSelecterViewDelegate {
         private var mapView: LocationSelecterView
@@ -91,8 +84,5 @@ public struct LocationSelecterView: UIViewRepresentable {
         return locationsSelectView
     }
     
-    public func updateUIView(_ uiView: UILocationSelecterView, context: Context) {
-        // Set
-        uiView.changeMapType(mapType: mapType)
-    }
+    public func updateUIView(_ uiView: UILocationSelecterView, context: Context) {}
 }
