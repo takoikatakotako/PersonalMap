@@ -129,6 +129,12 @@ struct FileRepository {
         }
     }
     
+    func deleteMapObject(mapObjectId: UUID) throws {
+        let fileUrl = try getObjectDirectoryUrl().appendingPathComponent("\(mapObjectId).json")
+        try FileManager.default.removeItem(at: fileUrl)
+    }
+    
+    
     /// Private Methods
     
     // Documents の URL

@@ -49,6 +49,10 @@ struct TopView: View {
             let fileRepository = FileRepository()
             try! fileRepository.initialize()
             let mapLayers: [MapLayer] = try! fileRepository.getMapLyers()
+            
+            if !mapObjects.isEmpty {
+                mapObjects = []
+            }
 
             for mapLayer in mapLayers {
                 for mapObjectId in mapLayer.objectIds {

@@ -8,12 +8,15 @@ struct MapObjectList: View {
     @State private var showingSheet = false
     
     var body: some View {
-        List(mapObjects) { mapObject in
-            NavigationLink {
-                MapObjectDetailView(mapObject: mapObject)
-            } label: {
-                Text(mapObject.objectName)
+        List {
+            ForEach(mapObjects) { mapObject in
+                NavigationLink {
+                    MapObjectDetailView(mapObject: mapObject)
+                } label: {
+                    Text(mapObject.objectName)
+                }
             }
+            .onDelete(perform: rowRemove)
         }
         .navigationTitle(mapLayer.layerName)
         .onAppear {
@@ -29,10 +32,7 @@ struct MapObjectList: View {
                 }),
             trailing:
                 HStack {
-                    Button(action: {
-                    }, label: {
-                        Image(systemName: "trash")
-                    })
+                    EditButton()
                     
                     Button(action: {
                         showingSheet = true
@@ -56,10 +56,34 @@ struct MapObjectList: View {
         }
     }
     
+    func rowRemove(offsets: IndexSet) {
+        let deletedMapObjectIds: [UUID] = offsets.map { mapObjects[$0].id }
+        try! deleteMapObjects(deletedMapObjectIds: deletedMapObjectIds)
+        mapObjects.remove(atOffsets: offsets)
+    }
+    
     private func getMapPointObjects() throws {
         let fileRepository = FileRepository()
         let mapLayer = try fileRepository.getMapLayer(mapLayerId: mapLayer.id)
         mapObjects = try fileRepository.getMapObjects(mapObjectIds: mapLayer.objectIds)
+    }
+    
+    private func deleteMapObjects(deletedMapObjectIds: [UUID]) throws {
+        let fileRepository = FileRepository()
+        var mapLayer: MapLayer = try fileRepository.getMapLayer(mapLayerId: mapLayer.id)
+        
+        // 削除された MapObjectId を MapLayer から削除
+        for deletedMapObjectId in deletedMapObjectIds {
+            if let index = mapLayer.objectIds.firstIndex(of: deletedMapObjectId) {
+                mapLayer.objectIds.remove(at: index)
+            }
+        }
+        try fileRepository.saveMapLayer(mapLayer: mapLayer)
+        
+        // MapObject を削除
+        for deletedMapObjectId in deletedMapObjectIds {
+            try fileRepository.deleteMapObject(mapObjectId: deletedMapObjectId)
+        }
     }
 }
 
