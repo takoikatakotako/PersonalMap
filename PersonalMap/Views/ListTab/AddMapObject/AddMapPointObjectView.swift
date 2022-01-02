@@ -1,114 +1,87 @@
 import SwiftUI
 
-enum AddMapPointObjectSheet: Identifiable {
-    case symbol
-    case location
-    case item
-    var id: Int {
-        hashValue
-    }
-}
-
 struct AddMapPointObjectView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     let mapLayerId: UUID
-    @State private var objectName: String = ""
+    @State private var labelName: String = ""
     @State private var symbolName: String = "star.circle"
     @State private var longitude: String = ""
     @State private var latitude: String = ""
     @State private var items: [Item] = []
     
-    @State private var sheet: AddMapPointObjectSheet?
+    @State private var sheet: AddMapObjectSheet?
     @State private var message: String = ""
     @State private var showingAlert: Bool = false
     
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading) {
-                Text("ラベル名")
-                    .font(Font.system(size: 20).bold())
-                    .padding(.top, 12)
-                TextField("ラベル名を入力してください", text: $objectName)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                Text("シンボルの選択")
-                    .font(Font.system(size: 20).bold())
-                    .padding(.top, 12)
-                
-                HStack {
-                    Image(systemName: symbolName)
-                        .resizable()
-                        .foregroundColor(Color.blue)
-                        .frame(width: 52, height: 52)
-                        .padding(24)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.gray, lineWidth: 1)
-                        )
-                    Spacer()
-                    Button {
-                        sheet = .symbol
-                    } label: {
-                        Text("シンボルを設定")
-                    }
-                }
-                
-                Text("位置情報を選択")
-                    .font(Font.system(size: 20).bold())
-                    .padding(.top, 12)
-                
-                HStack {
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading) {
+                    
+                    AddMapObjectLabelTextField(labelName: $labelName)
+                    
+                    AddMapObjectSymbolSelecter(symbolName: symbolName, sheet: $sheet)
+                    
+                    
                     VStack(alignment: .leading) {
+                        Text("位置情報を選択")
+                            .font(Font.system(size: 20).bold())
+                            .padding(.top, 12)
+                        
                         TextField("緯度を入力してください", text: $latitude)
                             .keyboardType(.decimalPad)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                         TextField("緯度を入力してください", text: $longitude)                            .keyboardType(.decimalPad)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                    }
-                    Spacer()
-                    Button {
-                        sheet = .location
-                    } label: {
-                        Text("位置情報を設定")
-                    }
-                }
-                
-                Text("項目の作成")
-                    .font(Font.system(size: 20).bold())
-                    .padding(.top, 12)
-                
-                HStack {
-                    VStack(alignment: .leading) {
-                        ForEach(items) { item in
-                            if item.itemType == .text {
-                                Text("\(item.key): \(item.value)")
-                            } else if item.itemType == .url {
-                                Button {
-                                    if let url = URL(string: item.value) {
-                                        UIApplication.shared.open(url, completionHandler: nil)
-                                    }
-                                } label: {
-                                    Text("\(item.key): \(item.value)")
-                                }
-                            } else if item.itemType == .image {
-                                Button {
-                                    
-                                } label: {
-                                    Text("\(item.key): \(item.value)")
-                                }
+                        
+                        HStack {
+                            Spacer()
+                            Button {
+                                sheet = .location
+                            } label: {
+                                Text("位置情報を設定")
                             }
                         }
                     }
-                    Spacer()
-                    Button {
-                        sheet = .item
-                    } label: {
-                        Text("項目を設定")
+                    
+                    
+                    
+                    
+                    Text("項目の作成")
+                        .font(Font.system(size: 20).bold())
+                        .padding(.top, 12)
+                    
+                    HStack {
+                        VStack(alignment: .leading) {
+                            ForEach(items) { item in
+                                if item.itemType == .text {
+                                    Text("\(item.key): \(item.value)")
+                                } else if item.itemType == .url {
+                                    Button {
+                                        if let url = URL(string: item.value) {
+                                            UIApplication.shared.open(url, completionHandler: nil)
+                                        }
+                                    } label: {
+                                        Text("\(item.key): \(item.value)")
+                                    }
+                                } else if item.itemType == .image {
+                                    Button {
+                                        
+                                    } label: {
+                                        Text("\(item.key): \(item.value)")
+                                    }
+                                }
+                            }
+                        }
+                        Spacer()
+                        Button {
+                            sheet = .item
+                        } label: {
+                            Text("項目を設定")
+                        }
                     }
                 }
-                
-                Spacer()
             }
             .sheet(item: $sheet, onDismiss: {
                 
@@ -141,7 +114,7 @@ struct AddMapPointObjectView: View {
     }
     
     private func savePoint() {
-        if objectName.isEmpty {
+        if labelName.isEmpty {
             message = "ラベル名が入力されていません"
             showingAlert = true
             return
@@ -162,7 +135,7 @@ struct AddMapPointObjectView: View {
                   return
               }
         
-        let mapObject: MapObject = .point(MapPoint(id: UUID(), imageName: symbolName, isHidden: false, objectName: objectName, coordinate: Coordinate(latitude: latitude, longitude: longitude), items: items))
+        let mapObject: MapObject = .point(MapPoint(id: UUID(), imageName: symbolName, isHidden: false, objectName: labelName, coordinate: Coordinate(latitude: latitude, longitude: longitude), items: items))
         let fileRepository = FileRepository()
         try! fileRepository.initialize()
         try! fileRepository.saveMapObject(mapObject: mapObject)
