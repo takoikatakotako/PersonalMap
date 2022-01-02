@@ -18,69 +18,13 @@ struct AddMapPointObjectView: View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading) {
-                    
                     AddMapObjectLabelTextField(labelName: $labelName)
                     
                     AddMapObjectSymbolSelecter(symbolName: symbolName, sheet: $sheet)
                     
+                    AddMapObjectSingleLocationSelecter(latitude: $latitude, longitude: $longitude, sheet: $sheet)
                     
-                    VStack(alignment: .leading) {
-                        Text("位置情報を選択")
-                            .font(Font.system(size: 20).bold())
-                            .padding(.top, 12)
-                        
-                        TextField("緯度を入力してください", text: $latitude)
-                            .keyboardType(.decimalPad)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                        TextField("緯度を入力してください", text: $longitude)                            .keyboardType(.decimalPad)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                        
-                        HStack {
-                            Spacer()
-                            Button {
-                                sheet = .location
-                            } label: {
-                                Text("位置情報を設定")
-                            }
-                        }
-                    }
-                    
-                    
-                    
-                    
-                    Text("項目の作成")
-                        .font(Font.system(size: 20).bold())
-                        .padding(.top, 12)
-                    
-                    HStack {
-                        VStack(alignment: .leading) {
-                            ForEach(items) { item in
-                                if item.itemType == .text {
-                                    Text("\(item.key): \(item.value)")
-                                } else if item.itemType == .url {
-                                    Button {
-                                        if let url = URL(string: item.value) {
-                                            UIApplication.shared.open(url, completionHandler: nil)
-                                        }
-                                    } label: {
-                                        Text("\(item.key): \(item.value)")
-                                    }
-                                } else if item.itemType == .image {
-                                    Button {
-                                        
-                                    } label: {
-                                        Text("\(item.key): \(item.value)")
-                                    }
-                                }
-                            }
-                        }
-                        Spacer()
-                        Button {
-                            sheet = .item
-                        } label: {
-                            Text("項目を設定")
-                        }
-                    }
+                    AddMapObjectItems(items: items, sheet: $sheet)
                 }
             }
             .sheet(item: $sheet, onDismiss: {

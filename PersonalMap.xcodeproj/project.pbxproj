@@ -26,6 +26,8 @@
 		8DB57DA1278157A200CF6938 /* AddMapObjectLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB57DA0278157A200CF6938 /* AddMapObjectLabelTextField.swift */; };
 		8DB57DA327815BAA00CF6938 /* AddMapObjectSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB57DA227815BAA00CF6938 /* AddMapObjectSheet.swift */; };
 		8DB57DA527815D8D00CF6938 /* AddMapObjectSymbolSelecter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB57DA427815D8D00CF6938 /* AddMapObjectSymbolSelecter.swift */; };
+		8DB57DA7278169BD00CF6938 /* AddMapObjectSingleLocationSelecter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB57DA6278169BD00CF6938 /* AddMapObjectSingleLocationSelecter.swift */; };
+		8DB57DA927816AE000CF6938 /* AddMapObjectItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB57DA827816AE000CF6938 /* AddMapObjectItems.swift */; };
 		8DCE59DB25EBB36400D080D2 /* MapPolyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE59DA25EBB36400D080D2 /* MapPolyLine.swift */; };
 		8DCE59E025EBB38F00D080D2 /* MapObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE59DF25EBB38F00D080D2 /* MapObject.swift */; };
 		8DD13EF425E2308C00CEAB3B /* MapPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD13EF325E2308C00CEAB3B /* MapPoint.swift */; };
@@ -108,6 +110,8 @@
 		8DB57DA0278157A200CF6938 /* AddMapObjectLabelTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapObjectLabelTextField.swift; sourceTree = "<group>"; };
 		8DB57DA227815BAA00CF6938 /* AddMapObjectSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapObjectSheet.swift; sourceTree = "<group>"; };
 		8DB57DA427815D8D00CF6938 /* AddMapObjectSymbolSelecter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapObjectSymbolSelecter.swift; sourceTree = "<group>"; };
+		8DB57DA6278169BD00CF6938 /* AddMapObjectSingleLocationSelecter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapObjectSingleLocationSelecter.swift; sourceTree = "<group>"; };
+		8DB57DA827816AE000CF6938 /* AddMapObjectItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapObjectItems.swift; sourceTree = "<group>"; };
 		8DCE59DA25EBB36400D080D2 /* MapPolyLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPolyLine.swift; sourceTree = "<group>"; };
 		8DCE59DF25EBB38F00D080D2 /* MapObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObject.swift; sourceTree = "<group>"; };
 		8DD13EF325E2308C00CEAB3B /* MapPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPoint.swift; sourceTree = "<group>"; };
@@ -271,6 +275,8 @@
 				8DB57DA0278157A200CF6938 /* AddMapObjectLabelTextField.swift */,
 				8DB57DA227815BAA00CF6938 /* AddMapObjectSheet.swift */,
 				8DB57DA427815D8D00CF6938 /* AddMapObjectSymbolSelecter.swift */,
+				8DB57DA6278169BD00CF6938 /* AddMapObjectSingleLocationSelecter.swift */,
+				8DB57DA827816AE000CF6938 /* AddMapObjectItems.swift */,
 			);
 			path = AddMapObject;
 			sourceTree = "<group>";
@@ -592,6 +598,7 @@
 				8DEC410F26F60BC20052A7D2 /* MapLayerListView.swift in Sources */,
 				8DD51D9C274A8D34009269F1 /* AddItemView.swift in Sources */,
 				8DEC412326F63D950052A7D2 /* FileRepository.swift in Sources */,
+				8DB57DA7278169BD00CF6938 /* AddMapObjectSingleLocationSelecter.swift in Sources */,
 				8D82550A2607272700D73A6D /* MapPolygon.swift in Sources */,
 				8DFBAE06270986B6005B4611 /* MapPolygonDetailView.swift in Sources */,
 				8DFBAE0D2709EB97005B4611 /* MapPolyLinePreview.swift in Sources */,
@@ -612,6 +619,7 @@
 				8DCE59DB25EBB36400D080D2 /* MapPolyLine.swift in Sources */,
 				8DEC410C26F60B9B0052A7D2 /* TopView.swift in Sources */,
 				8DFC44E126FF7CC400021E45 /* UIMapObjectViewDelegate.swift in Sources */,
+				8DB57DA927816AE000CF6938 /* AddMapObjectItems.swift in Sources */,
 				8DFB31B625FDEF200010FCA2 /* TopPlusButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
