@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct AddMapPointObjectView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
     let mapLayerId: UUID
     @State private var labelName: String = ""
     @State private var symbolName: String = "star.circle"
@@ -13,6 +11,8 @@ struct AddMapPointObjectView: View {
     @State private var sheet: AddMapObjectSheet?
     @State private var message: String = ""
     @State private var showingAlert: Bool = false
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         NavigationView {
@@ -35,8 +35,12 @@ struct AddMapPointObjectView: View {
                     SymbolSelecter(delegate: self)
                 case .location:
                     PointLocationSelecter(delegate: self)
+                case .locations:
+                    Text("Error")
                 case .item:
                     ItemListView(items: $items)
+                case .editLocations(_):
+                    Text("Error")
                 }
             })
             .alert(isPresented: $showingAlert)  {
