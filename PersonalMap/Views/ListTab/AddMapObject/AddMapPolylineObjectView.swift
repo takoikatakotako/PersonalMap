@@ -99,35 +99,27 @@ struct AddMapPolylineObjectView: View {
             return
         }
         
-//        if coordinates.isEmpty {
-//            message = "緯度、経度が入力されていません"
-//            showingAlert = true
-//            return
-//        }
-//
-//        guard let latitude = Double(latitude),
-//              let longitude = Double(longitude),
-//              0 <= latitude && latitude <= 180,
-//              0 <= longitude && longitude <= 180 else {
-//                  message = "不正な緯度経度が入力されています"
-//                  showingAlert = true
-//                  return
-//              }
+        if coordinates.count > 1 {
+            message = "緯度、経度が入力されていません"
+            showingAlert = true
+            return
+        }
         
-//        let mapObject: MapObject = .point(MapPoint(id: UUID(), imageName: symbolName, isHidden: false, objectName: labelName, coordinate: Coordinate(latitude: latitude, longitude: longitude), items: items))
-//        let fileRepository = FileRepository()
-//        try! fileRepository.initialize()
-//        try! fileRepository.saveMapObject(mapObject: mapObject)
-//
-//        // layer に追加
-//        let mapLayer = try! fileRepository.getMapLayer(mapLayerId: mapLayerId)
-//        let newMapLayer = MapLayer(
-//            id: mapLayer.id,
-//            layerName: mapLayer.layerName,
-//            mapObjectType: mapLayer.mapObjectType,
-//            objectIds: [mapObject.id] + mapLayer.objectIds)
-//        try! fileRepository.saveMapLayer(mapLayer: newMapLayer)
-//        presentationMode.wrappedValue.dismiss()
+        let mapObject: MapObject = .polyLine(MapPolyLine(id: UUID(), imageName: symbolName, isHidden: false, objectName: labelName, coordinates: coordinates, items: items))
+        
+        let fileRepository = FileRepository()
+        try! fileRepository.initialize()
+        try! fileRepository.saveMapObject(mapObject: mapObject)
+
+        // layer に追加
+        let mapLayer = try! fileRepository.getMapLayer(mapLayerId: mapLayerId)
+        let newMapLayer = MapLayer(
+            id: mapLayer.id,
+            layerName: mapLayer.layerName,
+            mapObjectType: mapLayer.mapObjectType,
+            objectIds: [mapObject.id] + mapLayer.objectIds)
+        try! fileRepository.saveMapLayer(mapLayer: newMapLayer)
+        presentationMode.wrappedValue.dismiss()
     }
 }
 
