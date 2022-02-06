@@ -14,6 +14,8 @@ public class UIMapObjectView: UIView {
         super.init(frame: frame)
         
         mapView.delegate = self
+        mapView.userTrackingMode = MKUserTrackingMode.follow
+        mapView.userTrackingMode = MKUserTrackingMode.followWithHeading
         addSubview(mapView)
     }
     

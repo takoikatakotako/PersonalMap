@@ -15,7 +15,8 @@ struct TopView: View {
     @State var mapObjects: [MapObject] = []
     @State var mapType: MKMapType = .standard
     @State var sheet: TopSheetItem?
-        
+    let locationFetcher = LocationFetcher()
+    
     var body: some View {
         ZStack(alignment: .top) {
             MapObjectView(mapObjects: $mapObjects, mapType: $mapType) { mapObjectId in
@@ -60,6 +61,8 @@ struct TopView: View {
                     mapObjects.append(mapObject)
                 }
             }
+            
+            locationFetcher.start()
         }
     }
 }
