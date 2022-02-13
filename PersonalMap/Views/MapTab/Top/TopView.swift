@@ -11,15 +11,22 @@ enum TopSheetItem: Identifiable {
     case showMapObject(UUID)
 }
 
+
+struct Route {
+    let source: CLLocationCoordinate2D
+    let destination: CLLocationCoordinate2D
+}
+
 struct TopView: View {
     @State var mapObjects: [MapObject] = []
     @State var mapType: MKMapType = .standard
+    @State var route: Route?
     @State var sheet: TopSheetItem?
     let locationFetcher = LocationFetcher()
     
     var body: some View {
         ZStack(alignment: .top) {
-            MapObjectView(mapObjects: $mapObjects, mapType: $mapType) { mapObjectId in
+            MapObjectView(mapObjects: $mapObjects, mapType: $mapType, route: $route) { mapObjectId in
                 sheet = TopSheetItem.showMapObject(mapObjectId)
             }
             .ignoresSafeArea()
@@ -43,7 +50,7 @@ struct TopView: View {
         }, content: { item in
             switch item {
             case let .showMapObject(id):
-                MapObjectPreview(mapObjectId: id)
+                MapObjectPreview(mapObjectId: id, delegate: self)
             }
         })
         .onAppear {
@@ -66,6 +73,15 @@ struct TopView: View {
         }
     }
 }
+
+
+extension TopView: MapObjectPreviewDelegate {
+    func xxx() {
+        print("XXXX")
+        route = Route(source: CLLocationCoordinate2D(latitude: 35.6896, longitude: 139.7006), destination: CLLocationCoordinate2D(latitude: 35.6984, longitude: 139.7731))
+    }
+}
+
 
 struct TopView_Previews: PreviewProvider {
     static var previews: some View {

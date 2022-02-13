@@ -1,7 +1,13 @@
 import SwiftUI
 
+
+protocol MapObjectPreviewDelegate {
+    func xxx()
+}
+
 struct MapObjectPreview: View {
     let mapObjectId: UUID
+    let delegate: MapObjectPreviewDelegate?
     @State var mapObject: MapObject?
     
     var body: some View {
@@ -20,7 +26,7 @@ struct MapObjectPreview: View {
     func getPreview(mapObject: MapObject) -> AnyView {
         switch mapObject {
         case .point(let point):
-            return AnyView(MapPointPreview(point: point))
+            return AnyView(MapPointPreview(point: point, delegate: delegate))
         case .polyLine(let polyLine):
             return AnyView(MapPolyLinePreview(polyline: polyLine))
         case .polygon(let polygon):
@@ -31,6 +37,6 @@ struct MapObjectPreview: View {
 
 struct MapObjectPreviewView_Previews: PreviewProvider {
     static var previews: some View {
-        MapObjectPreview(mapObjectId: UUID())
+        MapObjectPreview(mapObjectId: UUID(), delegate: nil)
     }
 }

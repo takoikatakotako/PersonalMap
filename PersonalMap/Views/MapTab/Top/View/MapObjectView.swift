@@ -99,6 +99,43 @@ public class UIMapObjectView: UIView {
     func changeMapType(mapType: MKMapType) {
         mapView.mapType = mapType
     }
+    
+    
+    func temp() {
+        
+        // Shinjuku Station
+        let sourceLocation = CLLocationCoordinate2D(latitude: 34.7025, longitude: 135.4960)
+        
+        // Akihabara Station
+        let destinationLocation = CLLocationCoordinate2D(latitude: 35.6984, longitude: 139.7731)
+        
+        // set rigion
+//        let coordinate = CLLocationCoordinate2DMake((sourceLocation.latitude + destinationLocation.latitude) / 2, (sourceLocation.longitude + destinationLocation.longitude) / 2)
+//        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+//        let region = MKCoordinateRegion(center: coordinate, span: span)
+//        mapView.setRegion(region, animated: true)
+        
+        // calc direction
+        let sourcePlacemark = MKPlacemark(coordinate: sourceLocation, addressDictionary: nil)
+        let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
+        
+        let destinationPlacemark = MKPlacemark(coordinate: destinationLocation, addressDictionary: nil)
+        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+        
+        let directionsRequest = MKDirections.Request()
+        directionsRequest.transportType = .walking
+        directionsRequest.source = sourceMapItem
+        directionsRequest.destination = destinationMapItem
+        let direction = MKDirections(request: directionsRequest)
+        direction.calculate { [weak self] response, error in
+            guard let response = response, let route = response.routes.first else {
+                return
+            }
+            
+            self?.mapView.addOverlay(route.polyline, level: .aboveRoads)
+        }
+    }
+    
 }
 
 extension UIMapObjectView: MKMapViewDelegate {
@@ -113,7 +150,7 @@ extension UIMapObjectView: MKMapViewDelegate {
             annoView.annotation = annotation
             // ピンの画像を変更
             annoView.glyphImage = UIImage(systemName: imageName)
-
+            
             // 吹き出しを使用
             annoView.canShowCallout = true
             
@@ -162,17 +199,22 @@ extension UIMapObjectView: MKMapViewDelegate {
         return MKOverlayRenderer()
     }
     
-//    public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
-//        if let annotation = view.annotation as? CustomAnnotation,
-//           let mapObjectId = annotation.id {
-//            delegate?.anotationTapped(mapObjectId: mapObjectId)
-//        }
-//    }
+    //    public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
+    //        if let annotation = view.annotation as? CustomAnnotation,
+    //           let mapObjectId = annotation.id {
+    //            delegate?.anotationTapped(mapObjectId: mapObjectId)
+    //        }
+    //    }
+    
+    
+
 }
 
 public struct MapObjectView: UIViewRepresentable {
     @Binding var mapObjects: [MapObject]
     @Binding var mapType: MKMapType
+    @Binding var route: Route?
+    
     
     let anotationTapped: (_ mapObjectId: UUID) -> Void
     final public class Coordinator: NSObject, UIMapObjectViewDelegate {
@@ -217,5 +259,10 @@ public struct MapObjectView: UIViewRepresentable {
                 uiView.addPolygon(polygon: polygon)
             }
         }
+        
+        if route != nil {
+            uiView.temp()
+        }
+        
     }
 }
