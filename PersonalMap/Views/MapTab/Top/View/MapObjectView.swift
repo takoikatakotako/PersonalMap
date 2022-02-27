@@ -17,6 +17,19 @@ public class UIMapObjectView: UIView {
         mapView.userTrackingMode = MKUserTrackingMode.follow
         mapView.userTrackingMode = MKUserTrackingMode.followWithHeading
         addSubview(mapView)
+        
+                
+        let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(xxxx))
+        mapView.addGestureRecognizer(longTapGesture)
+
+    }
+
+    @objc func xxxx(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .ended {
+            let tapPoint = sender.location(in: self)
+            let location = mapView.convert(tapPoint, toCoordinateFrom: mapView)
+            delegate?.xxxxxx(location: location)
+        }
     }
     
     public override func layoutSubviews() {
@@ -135,7 +148,6 @@ public class UIMapObjectView: UIView {
             self?.mapView.addOverlay(route.polyline, level: .aboveRoads)
         }
     }
-    
 }
 
 extension UIMapObjectView: MKMapViewDelegate {
@@ -165,9 +177,7 @@ extension UIMapObjectView: MKMapViewDelegate {
             return annoView
         }
         
-        
         return nil
-        
     }
     
     
@@ -205,9 +215,6 @@ extension UIMapObjectView: MKMapViewDelegate {
     //            delegate?.anotationTapped(mapObjectId: mapObjectId)
     //        }
     //    }
-    
-    
-
 }
 
 public struct MapObjectView: UIViewRepresentable {
@@ -217,22 +224,30 @@ public struct MapObjectView: UIViewRepresentable {
     
     
     let anotationTapped: (_ mapObjectId: UUID) -> Void
+    let xyz: (_ location: CLLocationCoordinate2D) -> Void
     final public class Coordinator: NSObject, UIMapObjectViewDelegate {
         private var mapView: MapObjectView
         let anotationTapped: (_ mapObjectId: UUID) -> Void
+        let xyz: (_ location: CLLocationCoordinate2D) -> Void
+
         
-        init(_ mapView: MapObjectView, anotationTapped: @escaping (_ mapObjectId: UUID) -> Void) {
+        init(_ mapView: MapObjectView, anotationTapped: @escaping (_ mapObjectId: UUID) -> Void, xyz: @escaping (_ location: CLLocationCoordinate2D) -> Void) {
             self.mapView = mapView
             self.anotationTapped = anotationTapped
+            self.xyz = xyz
         }
         
         public func anotationTapped(mapObjectId: UUID) {
             anotationTapped(mapObjectId)
         }
+        
+        public func xxxxxx(location: CLLocationCoordinate2D) {
+            xyz(location)
+        }
     }
     
     public func makeCoordinator() -> Coordinator {
-        Coordinator(self, anotationTapped: anotationTapped)
+        Coordinator(self, anotationTapped: anotationTapped, xyz: xyz)
     }
     
     public func makeUIView(context: Context) -> UIMapObjectView {

@@ -12,6 +12,19 @@ enum TopSheetItem: Identifiable {
 }
 
 
+enum TopAlertItem: Identifiable {
+    var id: UUID {
+        switch self {
+        case let .routeConfirmAlert(id, _):
+            return id
+        }
+    }
+    
+    case routeConfirmAlert(UUID, CLLocationCoordinate2D)
+}
+
+
+
 struct Route {
     let source: CLLocationCoordinate2D
     let destination: CLLocationCoordinate2D
@@ -22,12 +35,17 @@ struct TopView: View {
     @State var mapType: MKMapType = .standard
     @State var route: Route?
     @State var sheet: TopSheetItem?
+    @State var alert: TopAlertItem?
     let locationFetcher = LocationFetcher()
     
     var body: some View {
         ZStack(alignment: .top) {
             MapObjectView(mapObjects: $mapObjects, mapType: $mapType, route: $route) { mapObjectId in
                 sheet = TopSheetItem.showMapObject(mapObjectId)
+            } xyz: { location in
+                // long press
+                print(location)
+                alert = .routeConfirmAlert(UUID(), location)
             }
             .ignoresSafeArea()
             
@@ -37,7 +55,7 @@ struct TopView: View {
                 } label: {
                     CommonButton(systemName: "car", active: mapType == .standard)
                 }
-
+                
                 Button {
                     mapType = .satellite
                 } label: {
@@ -53,6 +71,19 @@ struct TopView: View {
                 MapObjectPreview(mapObjectId: id, delegate: self)
             }
         })
+        .alert(item: $alert) { item in
+            switch item {
+            case let .routeConfirmAlert(_, location):
+                return Alert(
+                    title: Text(""),
+                    message: Text("現在地から\(location.latitude), \(location.longitude)へのアクセスを表示しますか？"),
+                    primaryButton: .default(Text("キャンセル")),
+                    secondaryButton: .default(Text("はい"), action: {
+                        route = Route(source: CLLocationCoordinate2D(latitude: 35.6896, longitude: 139.7006), destination: CLLocationCoordinate2D(latitude: 35.6984, longitude: 139.7731))
+                    })
+                )
+            }
+        }
         .onAppear {
             let fileRepository = FileRepository()
             try! fileRepository.initialize()
@@ -61,7 +92,7 @@ struct TopView: View {
             if !mapObjects.isEmpty {
                 mapObjects = []
             }
-
+            
             for mapLayer in mapLayers {
                 for mapObjectId in mapLayer.objectIds {
                     let mapObject: MapObject = try! fileRepository.getMapObject(mapObjectId: mapObjectId)
