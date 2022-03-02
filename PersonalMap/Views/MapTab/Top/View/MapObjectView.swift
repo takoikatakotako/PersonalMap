@@ -221,16 +221,25 @@ public struct MapObjectView: UIViewRepresentable {
     
     let anotationTapped: (_ mapObjectId: UUID) -> Void
     let longPressEnded: (_ location: CLLocationCoordinate2D) -> Void
+    let xxxxx: () -> Void
+    
+    
     final public class Coordinator: NSObject, UIMapObjectViewDelegate {
         private var mapView: MapObjectView
         let anotationTapped: (_ mapObjectId: UUID) -> Void
         let longPressEnded: (_ location: CLLocationCoordinate2D) -> Void
-
+        let xxxxx: () -> Void
         
-        init(_ mapView: MapObjectView, anotationTapped: @escaping (_ mapObjectId: UUID) -> Void, longPressEnded: @escaping (_ location: CLLocationCoordinate2D) -> Void) {
+        init(
+            _ mapView: MapObjectView,
+            anotationTapped: @escaping (_ mapObjectId: UUID) -> Void,
+            longPressEnded: @escaping (_ location: CLLocationCoordinate2D) -> Void,
+            xxxxx: @escaping () -> Void
+        ) {
             self.mapView = mapView
             self.anotationTapped = anotationTapped
             self.longPressEnded = longPressEnded
+            self.xxxxx = xxxxx
         }
         
         public func anotationTapped(mapObjectId: UUID) {
@@ -242,12 +251,12 @@ public struct MapObjectView: UIViewRepresentable {
         }
         
         public func xxx() {
-            
+            xxxxx()
         }
     }
     
     public func makeCoordinator() -> Coordinator {
-        Coordinator(self, anotationTapped: anotationTapped, longPressEnded: longPressEnded)
+        Coordinator(self, anotationTapped: anotationTapped, longPressEnded: longPressEnded, xxxxx: xxxxx)
     }
     
     public func makeUIView(context: Context) -> UIMapObjectView {

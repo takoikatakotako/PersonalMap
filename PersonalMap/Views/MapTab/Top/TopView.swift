@@ -29,15 +29,23 @@ struct TopView: View {
     @State var route: Route?
     @State var sheet: TopSheetItem?
     @State var alert: TopAlertItem?
+    @State var xxx: Bool = false
     
     var body: some View {
         ZStack(alignment: .top) {
             MapObjectView(mapObjects: $mapObjects, mapType: $mapType, route: $route) { mapObjectId in
-                sheet = TopSheetItem.showMapObject(mapObjectId)
+                sheet = .showMapObject(mapObjectId)
+                
             } longPressEnded: { location in
                 // long press
                 print(location)
                 alert = .routeConfirmAlert(UUID(), location)
+                
+            } xxxxx: {
+                // ここで
+                xxx = true
+                
+                print("xxx")
             }
             .ignoresSafeArea()
             
@@ -52,6 +60,15 @@ struct TopView: View {
                     mapType = .satellite
                 } label: {
                     CommonButton(systemName: "airplane", active: mapType == .satellite)
+                }
+            }
+            
+            
+            if xxx {
+                VStack {
+                    Spacer()
+                    Text("ルートが見つかりませんでした。")
+                    Spacer()
                 }
             }
         }
@@ -94,6 +111,21 @@ struct TopView: View {
             
             LocationManager.shared.start()
         }
+    }
+    
+    
+    private func xxx2() {
+        DispatchQueue.main.async {
+            xxx = true
+            print("xxx = true")
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                xxx = false
+                print("xxx = false")
+            }
+        }
+        
+
     }
 }
 

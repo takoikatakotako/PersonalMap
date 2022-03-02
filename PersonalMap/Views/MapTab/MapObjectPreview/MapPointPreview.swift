@@ -3,6 +3,7 @@ import SwiftUI
 struct MapPointPreview: View {
     let point: MapPoint
     let delegate: MapObjectPreviewViewDelegate?
+    @Environment(\.presentationMode) var presentationMode
     
     @State var showingAlert = false
     var body: some View {
@@ -10,10 +11,9 @@ struct MapPointPreview: View {
             Text(point.objectName)
             
             Button {
-                // showingAlert = true
-
                 if let coordinate = LocationManager.shared.lastKnownLocation?.coordinate {
                     delegate?.showRoute(source: coordinate, destination: point.coordinate)
+                    presentationMode.wrappedValue.dismiss()
                 } else {
                     showingAlert = true
                 }
@@ -32,9 +32,9 @@ struct MapPointPreview: View {
             }
         }
         .alert(isPresented: $showingAlert) {
-            Alert(title: Text("タイトル"),
-                  message: Text("詳細メッセージです"),
-                  dismissButton: .default(Text("了解")))  // ボタンの変更
+            Alert(title: Text("エラー"),
+                  message: Text("現在の座標を取得できませんでした。権限を確認してください"),
+                  dismissButton: .default(Text("閉じる")))  // ボタンの変更
         }
     }
 }
