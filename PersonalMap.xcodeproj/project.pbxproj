@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D250E5A27CF54AB000FDD70 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D250E5927CF54AB000FDD70 /* Route.swift */; };
 		8D29465D2739655B003F6389 /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D29465C2739655B003F6389 /* CommonButton.swift */; };
 		8D2B8F8327521B180071E571 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2B8F8227521B180071E571 /* ImagePicker.swift */; };
 		8D2B8F85275228F70071E571 /* TextItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2B8F84275228F70071E571 /* TextItemRow.swift */; };
@@ -88,6 +89,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8D250E5927CF54AB000FDD70 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		8D29465C2739655B003F6389 /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
 		8D2B8F8227521B180071E571 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		8D2B8F84275228F70071E571 /* TextItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextItemRow.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				8DFBADFA2708AE03005B4611 /* MapObjectTypeDecoder.swift */,
 				8DFBAE012709854F005B4611 /* MapObjectInfo.swift */,
 				8DD51DB6274C9FC0009269F1 /* ItemType.swift */,
+				8D250E5927CF54AB000FDD70 /* Route.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				8DEC410F26F60BC20052A7D2 /* MapLayerListView.swift in Sources */,
 				8DD51D9C274A8D34009269F1 /* AddItemView.swift in Sources */,
 				8DEC412326F63D950052A7D2 /* FileRepository.swift in Sources */,
+				8D250E5A27CF54AB000FDD70 /* Route.swift in Sources */,
 				8DB57DA7278169BD00CF6938 /* AddMapObjectSingleLocationSelecter.swift in Sources */,
 				8D82550A2607272700D73A6D /* MapPolygon.swift in Sources */,
 				8DFBAE06270986B6005B4611 /* MapPolygonDetailView.swift in Sources */,

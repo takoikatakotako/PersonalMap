@@ -23,13 +23,6 @@ enum TopAlertItem: Identifiable {
     case routeConfirmAlert(UUID, CLLocationCoordinate2D)
 }
 
-
-
-struct Route {
-    let source: CLLocationCoordinate2D
-    let destination: CLLocationCoordinate2D
-}
-
 struct TopView: View {
     @State var mapObjects: [MapObject] = []
     @State var mapType: MKMapType = .standard
@@ -42,7 +35,7 @@ struct TopView: View {
         ZStack(alignment: .top) {
             MapObjectView(mapObjects: $mapObjects, mapType: $mapType, route: $route) { mapObjectId in
                 sheet = TopSheetItem.showMapObject(mapObjectId)
-            } xyz: { location in
+            } longPressEnded: { location in
                 // long press
                 print(location)
                 alert = .routeConfirmAlert(UUID(), location)
