@@ -25,7 +25,7 @@
 		8D7D7C5525D4F02600BA86BF /* MultiLocationSelecterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C5425D4F02600BA86BF /* MultiLocationSelecterView.swift */; };
 		8D82550A2607272700D73A6D /* MapPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8255092607272700D73A6D /* MapPolygon.swift */; };
 		8DB0353A27AF9EC0004B800F /* TopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0353927AF9EC0004B800F /* TopViewModel.swift */; };
-		8DB0353C27AFB865004B800F /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0353B27AFB865004B800F /* LocationFetcher.swift */; };
+		8DB0353C27AFB865004B800F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0353B27AFB865004B800F /* LocationManager.swift */; };
 		8DB57DA1278157A200CF6938 /* AddMapObjectLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB57DA0278157A200CF6938 /* AddMapObjectLabelTextField.swift */; };
 		8DB57DA327815BAA00CF6938 /* AddMapObjectSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB57DA227815BAA00CF6938 /* AddMapObjectSheet.swift */; };
 		8DB57DA527815D8D00CF6938 /* AddMapObjectSymbolSelecter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB57DA427815D8D00CF6938 /* AddMapObjectSymbolSelecter.swift */; };
@@ -113,7 +113,7 @@
 		8D7D7C5425D4F02600BA86BF /* MultiLocationSelecterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLocationSelecterView.swift; sourceTree = "<group>"; };
 		8D8255092607272700D73A6D /* MapPolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPolygon.swift; sourceTree = "<group>"; };
 		8DB0353927AF9EC0004B800F /* TopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewModel.swift; sourceTree = "<group>"; };
-		8DB0353B27AFB865004B800F /* LocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFetcher.swift; sourceTree = "<group>"; };
+		8DB0353B27AFB865004B800F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		8DB57DA0278157A200CF6938 /* AddMapObjectLabelTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapObjectLabelTextField.swift; sourceTree = "<group>"; };
 		8DB57DA227815BAA00CF6938 /* AddMapObjectSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapObjectSheet.swift; sourceTree = "<group>"; };
 		8DB57DA427815D8D00CF6938 /* AddMapObjectSymbolSelecter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapObjectSymbolSelecter.swift; sourceTree = "<group>"; };
@@ -184,6 +184,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D250E5B27CF6318000FDD70 /* Singleton */ = {
+			isa = PBXGroup;
+			children = (
+				8DB0353B27AFB865004B800F /* LocationManager.swift */,
+			);
+			path = Singleton;
+			sourceTree = "<group>";
+		};
 		8D29465B2739653A003F6389 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +242,7 @@
 		8D7D7C2525D4F00A00BA86BF /* PersonalMap */ = {
 			isa = PBXGroup;
 			children = (
+				8D250E5B27CF6318000FDD70 /* Singleton */,
 				8DFBADFC2708AE95005B4611 /* Extension */,
 				8DEC412426F63DC60052A7D2 /* Error */,
 				8DEC412126F63D660052A7D2 /* Repository */,
@@ -327,7 +336,6 @@
 				8DE9F87125FDED6800302D31 /* View */,
 				8DEC410B26F60B9B0052A7D2 /* TopView.swift */,
 				8DB0353927AF9EC0004B800F /* TopViewModel.swift */,
-				8DB0353B27AFB865004B800F /* LocationFetcher.swift */,
 			);
 			path = Top;
 			sourceTree = "<group>";
@@ -627,7 +635,7 @@
 				8D2B8F8727522A000071E571 /* URLItemRow.swift in Sources */,
 				8DEC412C26F71E4E0052A7D2 /* MapObjectList.swift in Sources */,
 				8DEC411226F60BD50052A7D2 /* ConfigView.swift in Sources */,
-				8DB0353C27AFB865004B800F /* LocationFetcher.swift in Sources */,
+				8DB0353C27AFB865004B800F /* LocationManager.swift in Sources */,
 				8DFBAE0B2709EA68005B4611 /* MapPointPreview.swift in Sources */,
 				8DEC411426F61B180052A7D2 /* MapLayerProtcol.swift in Sources */,
 				8DFBAE12270CA2ED005B4611 /* AddMapPolylineObjectView.swift in Sources */,

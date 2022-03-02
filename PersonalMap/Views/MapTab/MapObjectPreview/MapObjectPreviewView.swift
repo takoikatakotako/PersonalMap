@@ -2,7 +2,7 @@ import SwiftUI
 
 
 protocol MapObjectPreviewViewDelegate {
-    func showRoute(destination: Coordinate)
+    func showRoute(source: Coordinate, destination: Coordinate)
 }
 
 struct MapObjectPreviewView: View {

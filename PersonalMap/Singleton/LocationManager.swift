@@ -1,15 +1,16 @@
+import Foundation
 import CoreLocation
 
-// TODO: push するようにしたい
-class LocationFetcher: NSObject, CLLocationManagerDelegate {
-    let manager = CLLocationManager()
-    var lastKnownLocation: CLLocationCoordinate2D?
-
-    override init() {
+class LocationManager: NSObject, CLLocationManagerDelegate {
+    static let shared = LocationManager()
+    private let manager = CLLocationManager()
+    public var lastKnownLocation: CLLocationCoordinate2D?
+    
+    private override init() {
         super.init()
         manager.delegate = self
     }
-
+    
     func start() {
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
@@ -19,4 +20,3 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate {
         lastKnownLocation = locations.first?.coordinate
     }
 }
-

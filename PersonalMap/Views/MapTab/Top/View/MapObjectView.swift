@@ -28,7 +28,7 @@ public class UIMapObjectView: UIView {
         if sender.state == .ended {
             let tapPoint = sender.location(in: self)
             let location = mapView.convert(tapPoint, toCoordinateFrom: mapView)
-            delegate?.xxxxxx(location: location)
+            delegate?.longPressEnded(location: location)
         }
     }
     
@@ -114,13 +114,9 @@ public class UIMapObjectView: UIView {
     }
     
     
-    func temp() {
-        
-        // Shinjuku Station
-        let sourceLocation = CLLocationCoordinate2D(latitude: 34.7025, longitude: 135.4960)
-        
-        // Akihabara Station
-        let destinationLocation = CLLocationCoordinate2D(latitude: 35.6984, longitude: 139.7731)
+    func temp(route: Route) {
+        let sourceLocation = route.source
+        let destinationLocation = route.destination
         
         // set rigion
 //        let coordinate = CLLocationCoordinate2DMake((sourceLocation.latitude + destinationLocation.latitude) / 2, (sourceLocation.longitude + destinationLocation.longitude) / 2)
@@ -142,6 +138,7 @@ public class UIMapObjectView: UIView {
         let direction = MKDirections(request: directionsRequest)
         direction.calculate { [weak self] response, error in
             guard let response = response, let route = response.routes.first else {
+                self?.delegate?.xxx()
                 return
             }
             
@@ -222,7 +219,6 @@ public struct MapObjectView: UIViewRepresentable {
     @Binding var mapType: MKMapType
     @Binding var route: Route?
     
-    
     let anotationTapped: (_ mapObjectId: UUID) -> Void
     let longPressEnded: (_ location: CLLocationCoordinate2D) -> Void
     final public class Coordinator: NSObject, UIMapObjectViewDelegate {
@@ -241,8 +237,12 @@ public struct MapObjectView: UIViewRepresentable {
             anotationTapped(mapObjectId)
         }
         
-        public func xxxxxx(location: CLLocationCoordinate2D) {
+        public func longPressEnded(location: CLLocationCoordinate2D) {
             longPressEnded(location)
+        }
+        
+        public func xxx() {
+            
         }
     }
     
@@ -275,9 +275,8 @@ public struct MapObjectView: UIViewRepresentable {
             }
         }
         
-        if route != nil {
-            uiView.temp()
+        if let route = route {
+            uiView.temp(route: route)
         }
-        
     }
 }

@@ -29,7 +29,6 @@ struct TopView: View {
     @State var route: Route?
     @State var sheet: TopSheetItem?
     @State var alert: TopAlertItem?
-    let locationFetcher = LocationFetcher()
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -93,16 +92,18 @@ struct TopView: View {
                 }
             }
             
-            locationFetcher.start()
+            LocationManager.shared.start()
         }
     }
 }
 
 
 extension TopView: MapObjectPreviewViewDelegate {
-    func showRoute(destination: Coordinate) {
-        print("XXXX")
-        route = Route(source: CLLocationCoordinate2D(latitude: 35.6896, longitude: 139.7006), destination: CLLocationCoordinate2D(latitude: 35.6984, longitude: 139.7731))
+    func showRoute(source: Coordinate, destination: Coordinate) {
+        print(source)
+        print(destination)
+        
+        route = Route(source: source.locationCoordinate2D, destination: destination.locationCoordinate2D)
     }
 }
 
