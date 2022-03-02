@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MapPointPreview: View {
     let point: MapPoint
-    let delegate: MapObjectPreviewDelegate?
+    let delegate: MapObjectPreviewViewDelegate?
     var body: some View {
         VStack {
             Text(point.objectName)
@@ -11,7 +11,7 @@ struct MapPointPreview: View {
 
             
             Button {
-                delegate?.xxx()
+                delegate?.showRoute(destination: point.coordinate)
             } label: {
                 Text("ここにアクセス")
             }

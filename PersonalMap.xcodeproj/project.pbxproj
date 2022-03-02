@@ -62,7 +62,7 @@
 		8DFBAE022709854F005B4611 /* MapObjectInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE012709854F005B4611 /* MapObjectInfo.swift */; };
 		8DFBAE04270986A5005B4611 /* MapPolylineDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE03270986A5005B4611 /* MapPolylineDetailView.swift */; };
 		8DFBAE06270986B6005B4611 /* MapPolygonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE05270986B6005B4611 /* MapPolygonDetailView.swift */; };
-		8DFBAE092709E6DE005B4611 /* MapObjectPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE082709E6DE005B4611 /* MapObjectPreview.swift */; };
+		8DFBAE092709E6DE005B4611 /* MapObjectPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE082709E6DE005B4611 /* MapObjectPreviewView.swift */; };
 		8DFBAE0B2709EA68005B4611 /* MapPointPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE0A2709EA68005B4611 /* MapPointPreview.swift */; };
 		8DFBAE0D2709EB97005B4611 /* MapPolyLinePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE0C2709EB97005B4611 /* MapPolyLinePreview.swift */; };
 		8DFBAE0F2709EBB5005B4611 /* MapPolygonPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE0E2709EBB5005B4611 /* MapPolygonPreview.swift */; };
@@ -150,7 +150,7 @@
 		8DFBAE012709854F005B4611 /* MapObjectInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectInfo.swift; sourceTree = "<group>"; };
 		8DFBAE03270986A5005B4611 /* MapPolylineDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPolylineDetailView.swift; sourceTree = "<group>"; };
 		8DFBAE05270986B6005B4611 /* MapPolygonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPolygonDetailView.swift; sourceTree = "<group>"; };
-		8DFBAE082709E6DE005B4611 /* MapObjectPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectPreview.swift; sourceTree = "<group>"; };
+		8DFBAE082709E6DE005B4611 /* MapObjectPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectPreviewView.swift; sourceTree = "<group>"; };
 		8DFBAE0A2709EA68005B4611 /* MapPointPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPointPreview.swift; sourceTree = "<group>"; };
 		8DFBAE0C2709EB97005B4611 /* MapPolyLinePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPolyLinePreview.swift; sourceTree = "<group>"; };
 		8DFBAE0E2709EBB5005B4611 /* MapPolygonPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPolygonPreview.swift; sourceTree = "<group>"; };
@@ -442,7 +442,7 @@
 		8DFBAE072709E6C5005B4611 /* MapObjectPreview */ = {
 			isa = PBXGroup;
 			children = (
-				8DFBAE082709E6DE005B4611 /* MapObjectPreview.swift */,
+				8DFBAE082709E6DE005B4611 /* MapObjectPreviewView.swift */,
 				8DFBAE0A2709EA68005B4611 /* MapPointPreview.swift */,
 				8DFBAE0C2709EB97005B4611 /* MapPolyLinePreview.swift */,
 				8DFBAE0E2709EBB5005B4611 /* MapPolygonPreview.swift */,
@@ -589,7 +589,7 @@
 				8DEC412F26F7251D0052A7D2 /* AddMapPointObjectView.swift in Sources */,
 				8DFBADFB2708AE03005B4611 /* MapObjectTypeDecoder.swift in Sources */,
 				8DB57DA327815BAA00CF6938 /* AddMapObjectSheet.swift in Sources */,
-				8DFBAE092709E6DE005B4611 /* MapObjectPreview.swift in Sources */,
+				8DFBAE092709E6DE005B4611 /* MapObjectPreviewView.swift in Sources */,
 				8DD13F0225E2389E00CEAB3B /* Item.swift in Sources */,
 				8D6FE95B270E9DEC00FB8D5C /* LocationSelecterView.swift in Sources */,
 				8DD51D9E274A975C009269F1 /* ItemListView.swift in Sources */,

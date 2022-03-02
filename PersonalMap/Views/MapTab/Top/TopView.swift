@@ -61,7 +61,7 @@ struct TopView: View {
         }, content: { item in
             switch item {
             case let .showMapObject(id):
-                MapObjectPreview(mapObjectId: id, delegate: self)
+                MapObjectPreviewView(mapObjectId: id, delegate: self)
             }
         })
         .alert(item: $alert) { item in
@@ -99,8 +99,8 @@ struct TopView: View {
 }
 
 
-extension TopView: MapObjectPreviewDelegate {
-    func xxx() {
+extension TopView: MapObjectPreviewViewDelegate {
+    func showRoute(destination: Coordinate) {
         print("XXXX")
         route = Route(source: CLLocationCoordinate2D(latitude: 35.6896, longitude: 139.7006), destination: CLLocationCoordinate2D(latitude: 35.6984, longitude: 139.7731))
     }

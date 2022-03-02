@@ -1,13 +1,13 @@
 import SwiftUI
 
 
-protocol MapObjectPreviewDelegate {
-    func xxx()
+protocol MapObjectPreviewViewDelegate {
+    func showRoute(destination: Coordinate)
 }
 
-struct MapObjectPreview: View {
+struct MapObjectPreviewView: View {
     let mapObjectId: UUID
-    let delegate: MapObjectPreviewDelegate?
+    let delegate: MapObjectPreviewViewDelegate?
     @State var mapObject: MapObject?
     
     var body: some View {
@@ -37,6 +37,6 @@ struct MapObjectPreview: View {
 
 struct MapObjectPreviewView_Previews: PreviewProvider {
     static var previews: some View {
-        MapObjectPreview(mapObjectId: UUID(), delegate: nil)
+        MapObjectPreviewView(mapObjectId: UUID(), delegate: nil)
     }
 }
