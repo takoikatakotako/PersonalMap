@@ -114,15 +114,9 @@ public class UIMapObjectView: UIView {
     }
     
     
-    func temp(route: Route) {
+    func drawRoute(route: Route) {
         let sourceLocation = route.source
         let destinationLocation = route.destination
-        
-        // set rigion
-//        let coordinate = CLLocationCoordinate2DMake((sourceLocation.latitude + destinationLocation.latitude) / 2, (sourceLocation.longitude + destinationLocation.longitude) / 2)
-//        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-//        let region = MKCoordinateRegion(center: coordinate, span: span)
-//        mapView.setRegion(region, animated: true)
         
         // calc direction
         let sourcePlacemark = MKPlacemark(coordinate: sourceLocation, addressDictionary: nil)
@@ -266,6 +260,9 @@ public struct MapObjectView: UIViewRepresentable {
     }
     
     public func updateUIView(_ uiView: UIMapObjectView, context: Context) {
+        
+        print("Update")
+        
         // Clear
         uiView.removeAllAnnotations()
         uiView.removeAllOverlays()
@@ -285,7 +282,7 @@ public struct MapObjectView: UIViewRepresentable {
         }
         
         if let route = route {
-            uiView.temp(route: route)
+            uiView.drawRoute(route: route)
         }
     }
 }

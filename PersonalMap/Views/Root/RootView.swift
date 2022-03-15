@@ -11,6 +11,7 @@ struct RootView: View {
             MapLayerListView()
                 .tabItem {
                     Image(systemName: "list.dash")
+                        .foregroundColor(Color.red)
                     Text("List")
                 }
             ConfigView()

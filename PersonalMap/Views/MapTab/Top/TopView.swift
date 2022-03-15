@@ -17,10 +17,13 @@ enum TopAlertItem: Identifiable {
         switch self {
         case let .routeConfirmAlert(id, _):
             return id
+        case let .messageAlert(id, _):
+            return id
         }
     }
     
     case routeConfirmAlert(UUID, CLLocationCoordinate2D)
+    case messageAlert(UUID, String)
 }
 
 struct TopView: View {
@@ -29,25 +32,23 @@ struct TopView: View {
     @State var route: Route?
     @State var sheet: TopSheetItem?
     @State var alert: TopAlertItem?
-    @State var xxx: Bool = false
     
     var body: some View {
         ZStack(alignment: .top) {
             MapObjectView(mapObjects: $mapObjects, mapType: $mapType, route: $route) { mapObjectId in
                 sheet = .showMapObject(mapObjectId)
-                
             } longPressEnded: { location in
                 // long press
                 print(location)
+
                 alert = .routeConfirmAlert(UUID(), location)
                 
             } xxxxx: {
-                // ここで
-                xxx = true
-                
-                print("xxx")
+                // 見つからなかった
+                route = nil
+                alert = .messageAlert(UUID(), "ルートが見つかりませんでした")
             }
-            .ignoresSafeArea()
+            .ignoresSafeArea(.all, edges: .top)
             
             HStack {
                 Button {
@@ -60,15 +61,6 @@ struct TopView: View {
                     mapType = .satellite
                 } label: {
                     CommonButton(systemName: "airplane", active: mapType == .satellite)
-                }
-            }
-            
-            
-            if xxx {
-                VStack {
-                    Spacer()
-                    Text("ルートが見つかりませんでした。")
-                    Spacer()
                 }
             }
         }
@@ -88,9 +80,16 @@ struct TopView: View {
                     message: Text("現在地から\(location.latitude), \(location.longitude)へのアクセスを表示しますか？"),
                     primaryButton: .default(Text("キャンセル")),
                     secondaryButton: .default(Text("はい"), action: {
-                        route = Route(source: CLLocationCoordinate2D(latitude: 35.6896, longitude: 139.7006), destination: CLLocationCoordinate2D(latitude: 35.6984, longitude: 139.7731))
+                        
+                        guard let lastKnownLocation: CLLocationCoordinate2D = LocationManager.shared.lastKnownLocation else {
+                            return
+                        }
+                                                
+                        route = Route(source: lastKnownLocation, destination: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
                     })
                 )
+            case let .messageAlert(_, message):
+                return Alert(title: Text(""), message: Text(message), dismissButton: .default(Text("閉じる")))
             }
         }
         .onAppear {
@@ -111,21 +110,6 @@ struct TopView: View {
             
             LocationManager.shared.start()
         }
-    }
-    
-    
-    private func xxx2() {
-        DispatchQueue.main.async {
-            xxx = true
-            print("xxx = true")
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                xxx = false
-                print("xxx = false")
-            }
-        }
-        
-
     }
 }
 
