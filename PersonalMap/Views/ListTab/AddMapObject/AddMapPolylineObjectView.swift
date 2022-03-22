@@ -99,8 +99,10 @@ struct AddMapPolylineObjectView: View {
             return
         }
         
-        if coordinates.count > 1 {
-            message = "緯度、経度が入力されていません"
+        print(coordinates)
+        
+        if coordinates.count < 2 {
+            message = "位置情報を二点以上入力してください"
             showingAlert = true
             return
         }

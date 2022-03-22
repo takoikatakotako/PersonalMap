@@ -8,32 +8,51 @@ protocol PolylineAndPolygonLocationSelecterDelegate {
 struct PolylineAndPolygonLocationSelecter: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var mapType: MKMapType = MKMapType.standard
-    @State var coordinates: [Coordinate]?
+    
+    @State private var location: CLLocationCoordinate2D?
+    @State private var locations: [CLLocationCoordinate2D] = []
     let delegate: PolylineAndPolygonLocationSelecterDelegate?
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            MultiLocationSelecterView(mapType: $mapType) { locations in
-                self.coordinates = locations.map { $0.coordinate }
-            }
+            LocationsSelecterView(locations: locations) { location in
+                 self.location = location
+             }
             .ignoresSafeArea()
+
             HStack {
+                  VStack(alignment: .leading) {
+                      if let location = location {
+                          Text("latitude: \(location.latitude)")
+                          Text("longitude: \(location.longitude)")
+                      }
+                  }
+                  
+                  Spacer()
+                                  
                 Button {
                     presentationMode.wrappedValue.dismiss()
                 } label: {
                     Text("Cancel")
                 }
+                  
+                  Button {
+                      if let location = location {
+                          locations.append(location)
+                      }
+                  } label: {
+                      Text("Add")
+                  }
                 
                 Button {
-                    guard let coordinates = coordinates else {
-                        return
-                    }
-                    delegate?.getCoordinates(coordinates: coordinates)
+                    delegate?.getCoordinates(coordinates: locations.map { $0.coordinate })
                     presentationMode.wrappedValue.dismiss()
                 } label: {
                     Text("OK")
                 }
-            }
+              }
+              .padding(.horizontal, 16)
+              .padding(.bottom, 60)
         }
     }
 }
