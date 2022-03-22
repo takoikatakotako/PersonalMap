@@ -28,7 +28,7 @@ struct MapObjectPreviewView: View {
         case .point(let point):
             return AnyView(MapPointPreview(point: point, delegate: delegate))
         case .polyLine(let polyLine):
-            return AnyView(MapPolyLinePreview(polyline: polyLine))
+            return AnyView(MapPolyLinePreview(polyline: polyLine, delegate: delegate))
         case .polygon(let polygon):
             return AnyView(MapPolygonPreview(polygon: polygon))
         }

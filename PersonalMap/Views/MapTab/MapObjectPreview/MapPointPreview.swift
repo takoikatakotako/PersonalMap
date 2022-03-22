@@ -4,8 +4,8 @@ struct MapPointPreview: View {
     let point: MapPoint
     let delegate: MapObjectPreviewViewDelegate?
     @Environment(\.presentationMode) var presentationMode
-    
     @State var showingAlert = false
+
     var body: some View {
         VStack {
             Text(point.objectName)
