@@ -27,8 +27,6 @@ struct MapPolyLinePreview: View {
                         Text("ここへの経路を調べる")
                     }
                 }
-
-                
             }
             
             ForEach(polyline.items) { info in

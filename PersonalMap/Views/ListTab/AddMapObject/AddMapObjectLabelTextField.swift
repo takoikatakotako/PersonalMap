@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 struct AddMapObjectLabelTextField: View {
     @Binding var labelName: String
     var body: some View {

@@ -98,7 +98,7 @@ struct AddMapPolygonObjectView: View {
             return
         }
         
-        if coordinates.count > 2 {
+        if coordinates.count < 2 {
             message = "緯度、経度が入力されていません"
             showingAlert = true
             return
