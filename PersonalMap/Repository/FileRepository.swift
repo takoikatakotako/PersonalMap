@@ -135,7 +135,7 @@ struct FileRepository {
     }
     
     func deleteMapLayer(mapLayerId: UUID) throws {
-        let fileUrl = try getObjectDirectoryUrl().appendingPathComponent("\(mapLayerId).json")
+        let fileUrl = try getLayerDirectoryUrl().appendingPathComponent("\(mapLayerId).json")
         try FileManager.default.removeItem(at: fileUrl)
     }
     
@@ -155,6 +155,13 @@ struct FileRepository {
         let layerDirectoryUrl = try getDocumentsDirectoryUrl()
             .appendingPathComponent(layerDirectoryName, isDirectory: true)
             .appendingPathComponent(layersFileName)
+        return layerDirectoryUrl
+    }
+    
+    // Documents/layer の URL
+    private func getLayerDirectoryUrl() throws -> URL {
+        let layerDirectoryUrl = try getDocumentsDirectoryUrl()
+            .appendingPathComponent(layerDirectoryName, isDirectory: true)
         return layerDirectoryUrl
     }
     

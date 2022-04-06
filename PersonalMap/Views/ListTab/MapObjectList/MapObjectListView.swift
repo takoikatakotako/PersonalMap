@@ -18,11 +18,11 @@ struct MapObjectListView: View {
                     Text(mapObject.objectName)
                 }
             }
-            .onDelete(perform: rowRemove)
+            .onDelete(perform: viewState.rowRemove)
         }
         .navigationTitle(viewState.mapLayer.layerName)
         .onAppear {
-            try? getMapPointObjects()
+            viewState.onAppear()
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(
@@ -37,7 +37,7 @@ struct MapObjectListView: View {
                     EditButton()
                     
                     Button(action: {
-                        viewState.showingSheet = true
+                        viewState.plusTapped()
                     }, label: {
                         Image(systemName: "plus")
                     })
@@ -45,7 +45,7 @@ struct MapObjectListView: View {
         )
         .sheet(isPresented: $viewState.showingSheet) {
             // on dissmiss
-            try? getMapPointObjects()
+            viewState.sheetDissmiss()
         } content: {
             switch viewState.mapLayer.mapObjectType {
             case .point:
@@ -55,36 +55,6 @@ struct MapObjectListView: View {
             case .polygon:
                 AddMapPolygonObjectView(mapLayerId: viewState.mapLayer.id)
             }
-        }
-    }
-    
-    private func rowRemove(offsets: IndexSet) {
-        let deletedMapObjectIds: [UUID] = offsets.map { viewState.mapObjects[$0].id }
-        try! deleteMapObjects(deletedMapObjectIds: deletedMapObjectIds)
-        viewState.mapObjects.remove(atOffsets: offsets)
-    }
-    
-    private func getMapPointObjects() throws {
-        let fileRepository = FileRepository()
-        let mapLayer = try fileRepository.getMapLayer(mapLayerId: viewState.mapLayer.id)
-        viewState.mapObjects = try fileRepository.getMapObjects(mapObjectIds: mapLayer.objectIds)
-    }
-    
-    private func deleteMapObjects(deletedMapObjectIds: [UUID]) throws {
-        let fileRepository = FileRepository()
-        var mapLayer: MapLayer = try fileRepository.getMapLayer(mapLayerId: viewState.mapLayer.id)
-        
-        // 削除された MapObjectId を MapLayer から削除
-        for deletedMapObjectId in deletedMapObjectIds {
-            if let index = mapLayer.objectIds.firstIndex(of: deletedMapObjectId) {
-                mapLayer.objectIds.remove(at: index)
-            }
-        }
-        try fileRepository.saveMapLayer(mapLayer: mapLayer)
-        
-        // MapObject を削除
-        for deletedMapObjectId in deletedMapObjectIds {
-            try fileRepository.deleteMapObject(mapObjectId: deletedMapObjectId)
         }
     }
 }
