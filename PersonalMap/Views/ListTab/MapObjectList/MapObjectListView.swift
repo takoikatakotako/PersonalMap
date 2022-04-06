@@ -1,11 +1,9 @@
 import SwiftUI
 
 struct MapObjectListView: View {
-    let viewState: MapObjectListViewState
+    @ObservedObject var  viewState: MapObjectListViewState
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var mapObjects: [MapObject] = []
-    @State private var showingSheet = false
     
     init(mapLayer: MapLayer) {
         viewState = MapObjectListViewState(mapLayer: mapLayer)
@@ -13,7 +11,7 @@ struct MapObjectListView: View {
     
     var body: some View {
         List {
-            ForEach(mapObjects) { (mapObject: MapObject) in
+            ForEach(viewState.mapObjects) { (mapObject: MapObject) in
                 NavigationLink {
                     MapObjectDetailView(mapObject: mapObject)
                 } label: {
@@ -39,13 +37,13 @@ struct MapObjectListView: View {
                     EditButton()
                     
                     Button(action: {
-                        showingSheet = true
+                        viewState.showingSheet = true
                     }, label: {
                         Image(systemName: "plus")
                     })
                 }
         )
-        .sheet(isPresented: $showingSheet) {
+        .sheet(isPresented: $viewState.showingSheet) {
             // on dissmiss
             try? getMapPointObjects()
         } content: {
@@ -61,15 +59,15 @@ struct MapObjectListView: View {
     }
     
     private func rowRemove(offsets: IndexSet) {
-        let deletedMapObjectIds: [UUID] = offsets.map { mapObjects[$0].id }
+        let deletedMapObjectIds: [UUID] = offsets.map { viewState.mapObjects[$0].id }
         try! deleteMapObjects(deletedMapObjectIds: deletedMapObjectIds)
-        mapObjects.remove(atOffsets: offsets)
+        viewState.mapObjects.remove(atOffsets: offsets)
     }
     
     private func getMapPointObjects() throws {
         let fileRepository = FileRepository()
         let mapLayer = try fileRepository.getMapLayer(mapLayerId: viewState.mapLayer.id)
-        mapObjects = try fileRepository.getMapObjects(mapObjectIds: mapLayer.objectIds)
+        viewState.mapObjects = try fileRepository.getMapObjects(mapObjectIds: mapLayer.objectIds)
     }
     
     private func deleteMapObjects(deletedMapObjectIds: [UUID]) throws {

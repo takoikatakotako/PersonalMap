@@ -1,13 +1,12 @@
 import SwiftUI
 
 struct MapLayerListView: View {
-    @State private var mapLayers: [MapLayer] = []
-    @State private var showingSheet = false
+    @ObservedObject var  viewState: MapLayerListViewState = MapLayerListViewState()
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(mapLayers) { (mapLayer: MapLayer) in
+                ForEach(viewState.mapLayers) { (mapLayer: MapLayer) in
                     NavigationLink(destination: MapObjectListView(mapLayer: mapLayer)) {
                         VStack(alignment: .leading) {
                             Text(mapLayer.layerName)
@@ -21,25 +20,25 @@ struct MapLayerListView: View {
                 let fileRepository = FileRepository()
                 try! fileRepository.initialize()
                 let mapLayers = try! fileRepository.getMapLyers()
-                self.mapLayers = mapLayers
+                viewState.mapLayers = mapLayers
             }
             .sheet(
-                isPresented: $showingSheet, onDismiss: {
+                isPresented: $viewState.showingSheet, onDismiss: {
                     let mapLayers = try! FileRepository().getMapLyers()
-                    self.mapLayers = mapLayers
+                    viewState.mapLayers = mapLayers
                 }, content: {
                     AddMapLayerView()
                 })
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("レイヤーリスト")
             .navigationBarItems(trailing: Button(action: {
-                showingSheet = true
+                viewState.showingSheet = true
             }, label: {
                 HStack {
                     EditButton()
                     
                     Button(action: {
-                        showingSheet = true
+                        viewState.showingSheet = true
                     }, label: {
                         Image(systemName: "plus")
                     })
@@ -49,7 +48,7 @@ struct MapLayerListView: View {
     }
     
     func rowRemove(offsets: IndexSet) {
-        let deleteLayerIds: [UUID] = offsets.map { mapLayers[$0].id }
+        let deleteLayerIds: [UUID] = offsets.map { viewState.mapLayers[$0].id }
         for deleteLayerId in deleteLayerIds {
             try! deleteMapLayer(deleteLayerId: deleteLayerId)
         }
