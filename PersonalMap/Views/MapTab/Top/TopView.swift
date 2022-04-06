@@ -1,70 +1,41 @@
 import SwiftUI
 import MapKit
 
-enum TopSheetItem: Identifiable {
-    var id: UUID {
-        switch self {
-        case let .showMapObject(id):
-            return id
-        }
-    }
-    case showMapObject(UUID)
-}
-
-
-enum TopAlertItem: Identifiable {
-    var id: UUID {
-        switch self {
-        case let .routeConfirmAlert(id, _):
-            return id
-        case let .messageAlert(id, _):
-            return id
-        }
-    }
-    
-    case routeConfirmAlert(UUID, CLLocationCoordinate2D)
-    case messageAlert(UUID, String)
-}
-
 struct TopView: View {
-    @State var mapObjects: [MapObject] = []
-    @State var mapType: MKMapType = .standard
-    @State var route: Route?
-    @State var sheet: TopSheetItem?
-    @State var alert: TopAlertItem?
+    @ObservedObject var viewState = TopViewState()
     
     var body: some View {
         ZStack(alignment: .top) {
-            MapObjectView(mapObjects: $mapObjects, mapType: $mapType, route: $route) { mapObjectId in
-                sheet = .showMapObject(mapObjectId)
+            MapObjectView(mapObjects: $viewState.mapObjects, mapType: $viewState.mapType, route: $viewState.route) { mapObjectId in
+                viewState.sheet = .showMapObject(mapObjectId)
             } longPressEnded: { location in
                 // long press
                 print(location)
 
-                alert = .routeConfirmAlert(UUID(), location)
+                viewState.alert = .routeConfirmAlert(UUID(), location)
                 
             } xxxxx: {
                 // 見つからなかった
-                route = nil
-                alert = .messageAlert(UUID(), "ルートが見つかりませんでした")
+                viewState.route = nil
+                viewState.alert = .messageAlert(UUID(), "ルートが見つかりませんでした")
             }
             .ignoresSafeArea(.all, edges: .top)
             
             HStack {
                 Button {
-                    mapType = .standard
+                    viewState.mapType = .standard
                 } label: {
-                    CommonButton(systemName: "car", active: mapType == .standard)
+                    CommonButton(systemName: "car", active: viewState.mapType == .standard)
                 }
                 
                 Button {
-                    mapType = .satellite
+                    viewState.mapType = .satellite
                 } label: {
-                    CommonButton(systemName: "airplane", active: mapType == .satellite)
+                    CommonButton(systemName: "airplane", active: viewState.mapType == .satellite)
                 }
             }
         }
-        .sheet(item: $sheet, onDismiss: {
+        .sheet(item: $viewState.sheet, onDismiss: {
             
         }, content: { item in
             switch item {
@@ -72,7 +43,7 @@ struct TopView: View {
                 MapObjectPreviewView(mapObjectId: id, delegate: self)
             }
         })
-        .alert(item: $alert) { item in
+        .alert(item: $viewState.alert) { item in
             switch item {
             case let .routeConfirmAlert(_, location):
                 return Alert(
@@ -85,7 +56,7 @@ struct TopView: View {
                             return
                         }
                                                 
-                        route = Route(source: lastKnownLocation, destination: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+                        viewState.route = Route(source: lastKnownLocation, destination: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
                     })
                 )
             case let .messageAlert(_, message):
@@ -93,22 +64,7 @@ struct TopView: View {
             }
         }
         .onAppear {
-            let fileRepository = FileRepository()
-            try! fileRepository.initialize()
-            let mapLayers: [MapLayer] = try! fileRepository.getMapLyers()
-            
-            if !mapObjects.isEmpty {
-                mapObjects = []
-            }
-            
-            for mapLayer in mapLayers {
-                for mapObjectId in mapLayer.objectIds {
-                    let mapObject: MapObject = try! fileRepository.getMapObject(mapObjectId: mapObjectId)
-                    mapObjects.append(mapObject)
-                }
-            }
-            
-            LocationManager.shared.start()
+            viewState.onAppear()
         }
     }
 }
@@ -119,7 +75,7 @@ extension TopView: MapObjectPreviewViewDelegate {
         print(source)
         print(destination)
         
-        route = Route(source: source.locationCoordinate2D, destination: destination.locationCoordinate2D)
+        viewState.route = Route(source: source.locationCoordinate2D, destination: destination.locationCoordinate2D)
     }
 }
 

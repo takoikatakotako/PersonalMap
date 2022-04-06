@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MapLayerListView: View {
-    @ObservedObject var  viewState: MapLayerListViewState = MapLayerListViewState()
+    @ObservedObject var viewState: MapLayerListViewState = MapLayerListViewState()
     
     var body: some View {
         NavigationView {
