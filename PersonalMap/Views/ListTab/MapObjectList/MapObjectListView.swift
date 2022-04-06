@@ -1,15 +1,19 @@
 import SwiftUI
 
-struct MapObjectList: View {
-    let mapLayer: MapLayer
+struct MapObjectListView: View {
+    let viewState: MapObjectListViewState
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var mapObjects: [MapObject] = []
     @State private var showingSheet = false
     
+    init(mapLayer: MapLayer) {
+        viewState = MapObjectListViewState(mapLayer: mapLayer)
+    }
+    
     var body: some View {
         List {
-            ForEach(mapObjects) { mapObject in
+            ForEach(mapObjects) { (mapObject: MapObject) in
                 NavigationLink {
                     MapObjectDetailView(mapObject: mapObject)
                 } label: {
@@ -18,7 +22,7 @@ struct MapObjectList: View {
             }
             .onDelete(perform: rowRemove)
         }
-        .navigationTitle(mapLayer.layerName)
+        .navigationTitle(viewState.mapLayer.layerName)
         .onAppear {
             try? getMapPointObjects()
         }
@@ -45,18 +49,18 @@ struct MapObjectList: View {
             // on dissmiss
             try? getMapPointObjects()
         } content: {
-            switch mapLayer.mapObjectType {
+            switch viewState.mapLayer.mapObjectType {
             case .point:
-                AddMapPointObjectView(mapLayerId: mapLayer.id)
+                AddMapPointObjectView(mapLayerId: viewState.mapLayer.id)
             case .polyLine:
-                AddMapPolylineObjectView(mapLayerId: mapLayer.id)
+                AddMapPolylineObjectView(mapLayerId: viewState.mapLayer.id)
             case .polygon:
-                AddMapPolygonObjectView(mapLayerId: mapLayer.id)
+                AddMapPolygonObjectView(mapLayerId: viewState.mapLayer.id)
             }
         }
     }
     
-    func rowRemove(offsets: IndexSet) {
+    private func rowRemove(offsets: IndexSet) {
         let deletedMapObjectIds: [UUID] = offsets.map { mapObjects[$0].id }
         try! deleteMapObjects(deletedMapObjectIds: deletedMapObjectIds)
         mapObjects.remove(atOffsets: offsets)
@@ -64,13 +68,13 @@ struct MapObjectList: View {
     
     private func getMapPointObjects() throws {
         let fileRepository = FileRepository()
-        let mapLayer = try fileRepository.getMapLayer(mapLayerId: mapLayer.id)
+        let mapLayer = try fileRepository.getMapLayer(mapLayerId: viewState.mapLayer.id)
         mapObjects = try fileRepository.getMapObjects(mapObjectIds: mapLayer.objectIds)
     }
     
     private func deleteMapObjects(deletedMapObjectIds: [UUID]) throws {
         let fileRepository = FileRepository()
-        var mapLayer: MapLayer = try fileRepository.getMapLayer(mapLayerId: mapLayer.id)
+        var mapLayer: MapLayer = try fileRepository.getMapLayer(mapLayerId: viewState.mapLayer.id)
         
         // 削除された MapObjectId を MapLayer から削除
         for deletedMapObjectId in deletedMapObjectIds {

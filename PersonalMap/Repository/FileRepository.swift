@@ -134,6 +134,11 @@ struct FileRepository {
         try FileManager.default.removeItem(at: fileUrl)
     }
     
+    func deleteMapLayer(mapLayerId: UUID) throws {
+        let fileUrl = try getObjectDirectoryUrl().appendingPathComponent("\(mapLayerId).json")
+        try FileManager.default.removeItem(at: fileUrl)
+    }
+    
     
     /// Private Methods
     

@@ -6,13 +6,16 @@ struct MapLayerListView: View {
     
     var body: some View {
         NavigationView {
-            List(mapLayers) { (mapLayer: MapLayer) in
-                NavigationLink(destination: MapObjectList(mapLayer: mapLayer)) {
-                    VStack(alignment: .leading) {
-                        Text(mapLayer.layerName)
-                        Text(mapLayer.mapObjectType.name)
+            List {
+                ForEach(mapLayers) { (mapLayer: MapLayer) in
+                    NavigationLink(destination: MapObjectListView(mapLayer: mapLayer)) {
+                        VStack(alignment: .leading) {
+                            Text(mapLayer.layerName)
+                            Text(mapLayer.mapObjectType.name)
+                        }
                     }
                 }
+                .onDelete(perform: rowRemove)
             }
             .onAppear {
                 let fileRepository = FileRepository()
@@ -32,10 +35,53 @@ struct MapLayerListView: View {
             .navigationBarItems(trailing: Button(action: {
                 showingSheet = true
             }, label: {
-                Image(systemName: "plus")
+                HStack {
+                    EditButton()
+                    
+                    Button(action: {
+                        showingSheet = true
+                    }, label: {
+                        Image(systemName: "plus")
+                    })
+                }
             }))
         }
     }
+    
+    func rowRemove(offsets: IndexSet) {
+        let deleteLayerIds: [UUID] = offsets.map { mapLayers[$0].id }
+        for deleteLayerId in deleteLayerIds {
+            try! deleteMapLayer(deleteLayerId: deleteLayerId)
+        }
+//        try! deleteMapObjects(deletedMapObjectIds: deletedMapObjectIds)
+//        mapObjects.remove(atOffsets: offsets)
+    }
+    
+    
+    private func deleteMapLayer(deleteLayerId: UUID) throws {
+        let fileRepository = FileRepository()
+        
+    }
+    
+    
+    private func deleteMapObjects(deletedMapObjectIds: [UUID]) throws {
+//        let fileRepository = FileRepository()
+//        var mapLayer: MapLayer = try fileRepository.getMapLayer(mapLayerId: mapLayer.id)
+//
+//        // 削除された MapObjectId を MapLayer から削除
+//        for deletedMapObjectId in deletedMapObjectIds {
+//            if let index = mapLayer.objectIds.firstIndex(of: deletedMapObjectId) {
+//                mapLayer.objectIds.remove(at: index)
+//            }
+//        }
+//        try fileRepository.saveMapLayer(mapLayer: mapLayer)
+//
+//        // MapObject を削除
+//        for deletedMapObjectId in deletedMapObjectIds {
+//            try fileRepository.deleteMapObject(mapObjectId: deletedMapObjectId)
+//        }
+    }
+    
 }
 
 struct LayerListView_Previews: PreviewProvider {
