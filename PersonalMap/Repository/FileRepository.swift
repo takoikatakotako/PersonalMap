@@ -6,6 +6,10 @@ struct FileRepository {
     let layersFileName = "layers.json"
     let objectDirectoryName = "object"
     let imageDirectoryName = "image"
+    
+    init() {
+        try! initialize()
+    }
 
     func initialize() throws {
         let layerDirectoryUrl = try getDocumentsDirectoryUrl().appendingPathComponent(layerDirectoryName)

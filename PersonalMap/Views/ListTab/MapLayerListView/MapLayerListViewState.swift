@@ -12,7 +12,7 @@ class MapLayerListViewState: ObservableObject {
     }
     
     func sheetDissmiss() {
-        
+        try! getMapLayers()
     }
     
     func rowRemove(offsets: IndexSet) {
@@ -24,7 +24,10 @@ class MapLayerListViewState: ObservableObject {
     }
     
     func onAppear() {
-        try! fileRepository.initialize()
+        try! getMapLayers()
+    }
+    
+    private func getMapLayers() throws {
         let mapLayers = try! fileRepository.getMapLyers()
         self.mapLayers = mapLayers
     }
