@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 protocol MapObjectPreviewViewDelegate {
     func showRoute(source: Coordinate, destination: Coordinate)
 }
@@ -11,12 +10,12 @@ struct MapObjectPreviewView: View {
     @State var mapObject: MapObject?
     
     var body: some View {
-        VStack {
-            if let mapObject = mapObject {
-                getPreview(mapObject: mapObject)
-            } else {
-                Text("Loading")
-            }
+        NavigationView {
+                if let mapObject = mapObject {
+                    getPreview(mapObject: mapObject)
+                } else {
+                    Text("Loading")
+                }
         }.onAppear {
             let fileRepository = FileRepository()
             mapObject = try! fileRepository.getMapObject(mapObjectId: mapObjectId)
