@@ -13,6 +13,7 @@
 		8D2B8F85275228F70071E571 /* TextItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2B8F84275228F70071E571 /* TextItemRow.swift */; };
 		8D2B8F8727522A000071E571 /* URLItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2B8F8627522A000071E571 /* URLItemRow.swift */; };
 		8D2B8F8927522A800071E571 /* ImageItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2B8F8827522A800071E571 /* ImageItemRow.swift */; };
+		8D34681E2809BDA300822803 /* ConfigViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D34681D2809BDA300822803 /* ConfigViewState.swift */; };
 		8D3ABE252714011300584BDC /* AddMapPolygonObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3ABE242714011300584BDC /* AddMapPolygonObjectView.swift */; };
 		8D6FE955270E0F0200FB8D5C /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6FE954270E0F0200FB8D5C /* CustomAnnotation.swift */; };
 		8D6FE959270E1CB000FB8D5C /* PolylineAndPolygonLocationSelecter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6FE958270E1CB000FB8D5C /* PolylineAndPolygonLocationSelecter.swift */; };
@@ -100,6 +101,7 @@
 		8D2B8F84275228F70071E571 /* TextItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextItemRow.swift; sourceTree = "<group>"; };
 		8D2B8F8627522A000071E571 /* URLItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLItemRow.swift; sourceTree = "<group>"; };
 		8D2B8F8827522A800071E571 /* ImageItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageItemRow.swift; sourceTree = "<group>"; };
+		8D34681D2809BDA300822803 /* ConfigViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewState.swift; sourceTree = "<group>"; };
 		8D3ABE242714011300584BDC /* AddMapPolygonObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapPolygonObjectView.swift; sourceTree = "<group>"; };
 		8D6FE954270E0F0200FB8D5C /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		8D6FE958270E1CB000FB8D5C /* PolylineAndPolygonLocationSelecter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolylineAndPolygonLocationSelecter.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				8DEC411126F60BD50052A7D2 /* ConfigView.swift */,
+				8D34681D2809BDA300822803 /* ConfigViewState.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -636,6 +639,7 @@
 				8DFBAE022709854F005B4611 /* MapObjectInfo.swift in Sources */,
 				8DEC410F26F60BC20052A7D2 /* MapLayerListView.swift in Sources */,
 				8DD51D9C274A8D34009269F1 /* AddItemView.swift in Sources */,
+				8D34681E2809BDA300822803 /* ConfigViewState.swift in Sources */,
 				8DEC412326F63D950052A7D2 /* FileRepository.swift in Sources */,
 				8D250E5A27CF54AB000FDD70 /* Route.swift in Sources */,
 				8DB57DA7278169BD00CF6938 /* AddMapObjectSingleLocationSelecter.swift in Sources */,
@@ -831,6 +835,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.swiswiswift.todo.PersonalMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -853,6 +858,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.swiswiswift.todo.PersonalMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ConfigView: View {
+    @ObservedObject var viewState: ConfigViewState = ConfigViewState()
+
     var body: some View {
         NavigationView {
             List {
@@ -33,16 +35,18 @@ struct ConfigView: View {
                 }
                 
                 Section {
-                    NavigationLink {
-                        Text("レビューで応援する")
+                    Button {
+                        viewState.review()
                     } label: {
                         Text("レビューで応援する")
+                            .foregroundColor(Color.black)
                     }
-                    
-                    NavigationLink {
-                        Text("アプリをシェアする")
+
+                    Button {
+                        viewState.share()
                     } label: {
                         Text("アプリをシェアする")
+                            .foregroundColor(Color.black)
                     }
                     
                     NavigationLink {
@@ -60,9 +64,8 @@ struct ConfigView: View {
                     HStack {
                         Text("バージョン")
                         Spacer()
-                        if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String,
-                           let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String {
-                            Text("\(version)(\(build))")
+                        if let versionAndBuild = viewState.versionAndBuild {
+                            Text(versionAndBuild)
                         }
                     }
                 } header: {
@@ -70,7 +73,7 @@ struct ConfigView: View {
                 }
                 
                 Button {
-                    
+                    viewState.showResetAlert()
                 } label: {
                     HStack {
                         Spacer()
@@ -79,6 +82,14 @@ struct ConfigView: View {
                         Spacer()
                     }
                 }
+            }
+            .alert(isPresented: $viewState.showingAlert){
+                Alert(
+                    title: Text("リセット"),
+                    message: Text("データを削除し、初期設定に戻しますがよろしいですか？"),
+                    primaryButton: .cancel(Text("キャンセル")),
+                    secondaryButton: .destructive(Text("削除"))
+                )
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("設定")
