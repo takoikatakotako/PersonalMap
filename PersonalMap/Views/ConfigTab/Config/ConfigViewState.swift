@@ -5,6 +5,8 @@ class ConfigViewState: ObservableObject {
     @Published var showingAlert: Bool = false
     @Published var showingActivityIndicator: Bool = false
 
+    let fileRepository = FileRepository()
+    
     var versionAndBuild: String? {
         if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String,
            let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String {
@@ -28,6 +30,7 @@ class ConfigViewState: ObservableObject {
     }
     
     func reset() {
-        
+        // TODO: リセット機能を実装する
+        fileRepository.reset()
     }
 }

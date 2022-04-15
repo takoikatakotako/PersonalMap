@@ -144,6 +144,10 @@ struct FileRepository {
     }
     
     
+    func reset() {
+        fatalError("TODO")
+    }
+    
     /// Private Methods
     
     // Documents の URL
