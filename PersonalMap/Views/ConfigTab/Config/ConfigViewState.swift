@@ -1,8 +1,10 @@
 import SwiftUI
+import StoreKit
 
 class ConfigViewState: ObservableObject {
     @Published var showingAlert: Bool = false
-    
+    @Published var showingActivityIndicator: Bool = false
+
     var versionAndBuild: String? {
         if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String,
            let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String {
@@ -12,11 +14,13 @@ class ConfigViewState: ObservableObject {
     }
     
     func review() {
-        
+        if let windowScene = UIApplication.shared.windows.first?.windowScene {
+             SKStoreReviewController.requestReview(in: windowScene)
+        }
     }
     
     func share() {
-        
+        showingActivityIndicator = true
     }
     
     func showResetAlert() {

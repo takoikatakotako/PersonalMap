@@ -2,31 +2,43 @@ import SwiftUI
 
 struct ConfigView: View {
     @ObservedObject var viewState: ConfigViewState = ConfigViewState()
+    
+    let APP_USAGE_URL_STRING: String = "https://swiswiswift.com"
+    let FAQ_URL_STRING: String = "https://swiswiswift.com"
+    let FEED_BACK_URL_STRING: String = "https://swiswiswift.com"
+    let CONTACT_URL_STRING: String = "https://swiswiswift.com"
+    let SHARE_URL_STRING: String = "https://swiswiswift.com"
+    let PRIVACY_POLICY_URL_STRING: String = "https://swiswiswift.com"
+    let TOS_URL_STRING: String = "https://swiswiswift.com"
 
     var body: some View {
         NavigationView {
             List {
                 Section {
                     NavigationLink {
-                        Text("ここでアプリの使い方を表示します。")
+                        MyWebView(urlString: APP_USAGE_URL_STRING)
+                            .navigationTitle("アプリの使い方")
                     } label: {
                         Text("アプリの使い方")
                     }
 
                     NavigationLink {
-                        Text("よくある質問・ヘルプセンターを表示します。")
+                        MyWebView(urlString: FAQ_URL_STRING)
+                            .navigationTitle("よくある質問・ヘルプセンター")
                     } label: {
                         Text("よくある質問・ヘルプセンター")
                     }
                 
                     NavigationLink {
-                        Text("アプリのフィードバックを送る")
+                        MyWebView(urlString: FEED_BACK_URL_STRING)
+                            .navigationTitle("アプリのフィードバックを送る")
                     } label: {
                         Text("アプリのフィードバックを送る")
                     }
                     
                     NavigationLink {
-                        Text("よくある質問・ヘルプセンターを表示します。")
+                        MyWebView(urlString: CONTACT_URL_STRING)
+                            .navigationTitle("お問い合わせ・不具合のご報告")
                     } label: {
                         Text("お問い合わせ・不具合のご報告")
                     }
@@ -50,13 +62,15 @@ struct ConfigView: View {
                     }
                     
                     NavigationLink {
-                        Text("プライバシーポリシー")
+                        MyWebView(urlString: PRIVACY_POLICY_URL_STRING)
+                            .navigationTitle("プライバシーポリシー")
                     } label: {
                         Text("プライバシーポリシー")
                     }
                     
                     NavigationLink {
-                        Text("利用規約")
+                        MyWebView(urlString: TOS_URL_STRING)
+                            .navigationTitle("利用規約")
                     } label: {
                         Text("利用規約")
                     }
@@ -91,6 +105,9 @@ struct ConfigView: View {
                     secondaryButton: .destructive(Text("削除"))
                 )
             }
+            .sheet(isPresented: $viewState.showingActivityIndicator, content: {
+                ActivityViewController(activityItems: [URL(string: SHARE_URL_STRING)!])
+            })
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("設定")
         }

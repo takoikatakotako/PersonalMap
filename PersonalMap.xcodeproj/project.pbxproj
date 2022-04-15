@@ -14,6 +14,8 @@
 		8D2B8F8727522A000071E571 /* URLItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2B8F8627522A000071E571 /* URLItemRow.swift */; };
 		8D2B8F8927522A800071E571 /* ImageItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2B8F8827522A800071E571 /* ImageItemRow.swift */; };
 		8D34681E2809BDA300822803 /* ConfigViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D34681D2809BDA300822803 /* ConfigViewState.swift */; };
+		8D3468202809C56400822803 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D34681F2809C56400822803 /* ActivityViewController.swift */; };
+		8D3468222809C68A00822803 /* MyWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3468212809C68A00822803 /* MyWebView.swift */; };
 		8D3ABE252714011300584BDC /* AddMapPolygonObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3ABE242714011300584BDC /* AddMapPolygonObjectView.swift */; };
 		8D6FE955270E0F0200FB8D5C /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6FE954270E0F0200FB8D5C /* CustomAnnotation.swift */; };
 		8D6FE959270E1CB000FB8D5C /* PolylineAndPolygonLocationSelecter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6FE958270E1CB000FB8D5C /* PolylineAndPolygonLocationSelecter.swift */; };
@@ -102,6 +104,8 @@
 		8D2B8F8627522A000071E571 /* URLItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLItemRow.swift; sourceTree = "<group>"; };
 		8D2B8F8827522A800071E571 /* ImageItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageItemRow.swift; sourceTree = "<group>"; };
 		8D34681D2809BDA300822803 /* ConfigViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewState.swift; sourceTree = "<group>"; };
+		8D34681F2809C56400822803 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		8D3468212809C68A00822803 /* MyWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWebView.swift; sourceTree = "<group>"; };
 		8D3ABE242714011300584BDC /* AddMapPolygonObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapPolygonObjectView.swift; sourceTree = "<group>"; };
 		8D6FE954270E0F0200FB8D5C /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		8D6FE958270E1CB000FB8D5C /* PolylineAndPolygonLocationSelecter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolylineAndPolygonLocationSelecter.swift; sourceTree = "<group>"; };
@@ -388,6 +392,8 @@
 			children = (
 				8DEC411126F60BD50052A7D2 /* ConfigView.swift */,
 				8D34681D2809BDA300822803 /* ConfigViewState.swift */,
+				8D34681F2809C56400822803 /* ActivityViewController.swift */,
+				8D3468212809C68A00822803 /* MyWebView.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -613,6 +619,7 @@
 				8DFBAE04270986A5005B4611 /* MapPolylineDetailView.swift in Sources */,
 				8DA5CD8927FDEB08006B8FB4 /* TopAlertItem.swift in Sources */,
 				8DB57DAB2782914D00CF6938 /* AddMapObjectEditLocation.swift in Sources */,
+				8D3468202809C56400822803 /* ActivityViewController.swift in Sources */,
 				8DEC412F26F7251D0052A7D2 /* AddMapPointObjectView.swift in Sources */,
 				8DFBADFB2708AE03005B4611 /* MapObjectTypeDecoder.swift in Sources */,
 				8DB57DA327815BAA00CF6938 /* AddMapObjectSheet.swift in Sources */,
@@ -641,6 +648,7 @@
 				8DD51D9C274A8D34009269F1 /* AddItemView.swift in Sources */,
 				8D34681E2809BDA300822803 /* ConfigViewState.swift in Sources */,
 				8DEC412326F63D950052A7D2 /* FileRepository.swift in Sources */,
+				8D3468222809C68A00822803 /* MyWebView.swift in Sources */,
 				8D250E5A27CF54AB000FDD70 /* Route.swift in Sources */,
 				8DB57DA7278169BD00CF6938 /* AddMapObjectSingleLocationSelecter.swift in Sources */,
 				8D82550A2607272700D73A6D /* MapPolygon.swift in Sources */,
