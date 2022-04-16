@@ -141,11 +141,25 @@ struct FileRepository {
     func deleteMapLayer(mapLayerId: UUID) throws {
         let fileUrl = try getLayerDirectoryUrl().appendingPathComponent("\(mapLayerId).json")
         try FileManager.default.removeItem(at: fileUrl)
+        
+        var mapLayersIds = try getMapLayerIds()
+        if let index = mapLayersIds.firstIndex(of: mapLayerId) {
+            mapLayersIds.remove(at: index)
+            try saveMapLayerIds(mapLayerIds: mapLayersIds)
+        }
     }
     
-    
-    func reset() {
-        fatalError("TODO")
+    func reset() throws {
+        let layerDirectoryUrl = try getDocumentsDirectoryUrl().appendingPathComponent(layerDirectoryName)
+        try FileManager.default.removeItem(at: layerDirectoryUrl)
+
+        let objectDirectoryUrl = try getDocumentsDirectoryUrl().appendingPathComponent(objectDirectoryName)
+        try FileManager.default.removeItem(at: objectDirectoryUrl)
+
+        let imageDirectoryUrl = try getDocumentsDirectoryUrl().appendingPathComponent(imageDirectoryName)
+        try FileManager.default.removeItem(at: imageDirectoryUrl)
+
+        try initialize()
     }
     
     /// Private Methods

@@ -39,14 +39,14 @@ struct AddItemView: View {
                 }
                 .pickerStyle(.segmented)
                 
-                Text("キー")
+                Text("項目名")
                     .font(Font.system(size: 20).bold())
                     .padding(.top, 12)
                 
-                TextField("キーを入力してください", text: $key)
+                TextField("項目名を入力してください", text: $key)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
-                Text("バリュー")
+                Text("内容")
                     .font(Font.system(size: 20).bold())
                     .padding(.top, 12)
                 

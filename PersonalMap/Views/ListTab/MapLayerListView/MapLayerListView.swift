@@ -14,7 +14,7 @@ struct MapLayerListView: View {
                         }
                     }
                 }
-                .onDelete(perform: rowRemove)
+                .onDelete(perform: viewState.rowRemove)
             }
             .onAppear {
                 viewState.onAppear()
@@ -27,21 +27,18 @@ struct MapLayerListView: View {
                 })
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("レイヤーリスト")
-            .navigationBarItems(trailing:
-                                    HStack {
-                EditButton()
-                
-                Button(action: {
-                    viewState.plusTapped()
-                }, label: {
-                    Image(systemName: "plus")
-                })
-            })
+            .navigationBarItems(
+                trailing:
+                    HStack {
+                        EditButton()
+                        
+                        Button(action: {
+                            viewState.plusTapped()
+                        }, label: {
+                            Image(systemName: "plus")
+                        })
+                    })
         }
-    }
-    
-    func rowRemove(offsets: IndexSet) {
-        viewState.rowRemove(offsets: offsets)
     }
 }
 

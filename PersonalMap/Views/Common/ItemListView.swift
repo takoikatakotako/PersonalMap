@@ -26,7 +26,7 @@ struct ItemListView: View {
                     Button {
                         presentationMode.wrappedValue.dismiss()
                     } label: {
-                        Text("とじる")
+                        Text("閉じる")
                             .font(Font.system(size: 16).bold())
                     },
                 trailing:

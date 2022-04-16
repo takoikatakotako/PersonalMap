@@ -30,7 +30,6 @@ class ConfigViewState: ObservableObject {
     }
     
     func reset() {
-        // TODO: リセット機能を実装する
-        fileRepository.reset()
+        try! fileRepository.reset()
     }
 }

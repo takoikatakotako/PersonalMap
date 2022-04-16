@@ -10,7 +10,7 @@ struct ConfigView: View {
     let SHARE_URL_STRING: String = "https://swiswiswift.com"
     let PRIVACY_POLICY_URL_STRING: String = "https://swiswiswift.com"
     let TOS_URL_STRING: String = "https://swiswiswift.com"
-
+    
     var body: some View {
         NavigationView {
             List {
@@ -21,14 +21,14 @@ struct ConfigView: View {
                     } label: {
                         Text("アプリの使い方")
                     }
-
+                    
                     NavigationLink {
                         MyWebView(urlString: FAQ_URL_STRING)
                             .navigationTitle("よくある質問・ヘルプセンター")
                     } label: {
                         Text("よくある質問・ヘルプセンター")
                     }
-                
+                    
                     NavigationLink {
                         MyWebView(urlString: FEED_BACK_URL_STRING)
                             .navigationTitle("アプリのフィードバックを送る")
@@ -53,7 +53,7 @@ struct ConfigView: View {
                         Text("レビューで応援する")
                             .foregroundColor(Color.black)
                     }
-
+                    
                     Button {
                         viewState.share()
                     } label: {
@@ -102,7 +102,9 @@ struct ConfigView: View {
                     title: Text("リセット"),
                     message: Text("データを削除し、初期設定に戻しますがよろしいですか？"),
                     primaryButton: .cancel(Text("キャンセル")),
-                    secondaryButton: .destructive(Text("削除"))
+                    secondaryButton: .destructive(Text("削除"), action: {
+                        viewState.reset()
+                    })
                 )
             }
             .sheet(isPresented: $viewState.showingActivityIndicator, content: {
