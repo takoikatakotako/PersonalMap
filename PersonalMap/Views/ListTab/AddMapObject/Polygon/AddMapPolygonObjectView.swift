@@ -115,9 +115,3 @@ struct AddMapPolygonObjectView: View {
         presentationMode.wrappedValue.dismiss()
     }
 }
-
-extension AddMapPolygonObjectView: PolylineAndPolygonLocationSelecterDelegate {
-    func getCoordinates(coordinates: [Coordinate]) {
-        self.coordinates = coordinates
-    }
-}

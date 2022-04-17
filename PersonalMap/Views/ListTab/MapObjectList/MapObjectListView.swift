@@ -51,7 +51,7 @@ struct MapObjectListView: View {
             case .point:
                 AddMapPointView(mapLayerId: viewState.mapLayer.id)
             case .polyLine:
-                AddMapPolylineObjectView(mapLayerId: viewState.mapLayer.id)
+                AddMapPolylineView(mapLayerId: viewState.mapLayer.id)
             case .polygon:
                 AddMapPolygonObjectView(mapLayerId: viewState.mapLayer.id)
             }

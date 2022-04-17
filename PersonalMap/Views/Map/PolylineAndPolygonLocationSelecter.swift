@@ -1,17 +1,14 @@
 import SwiftUI
 import MapKit
 
-protocol PolylineAndPolygonLocationSelecterDelegate {
-    func getCoordinates(coordinates: [Coordinate])
-}
-
 struct PolylineAndPolygonLocationSelecter: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State var mapType: MKMapType = MKMapType.standard
+    @Binding var coordinates: [Coordinate]
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    @State private var mapType: MKMapType = MKMapType.standard
     @State private var location: CLLocationCoordinate2D?
     @State private var locations: [CLLocationCoordinate2D] = []
-    let delegate: PolylineAndPolygonLocationSelecterDelegate?
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -45,7 +42,7 @@ struct PolylineAndPolygonLocationSelecter: View {
                   }
                 
                 Button {
-                    delegate?.getCoordinates(coordinates: locations.map { $0.coordinate })
+                    coordinates = locations.map { $0.coordinate }
                     presentationMode.wrappedValue.dismiss()
                 } label: {
                     Text("OK")
@@ -57,8 +54,8 @@ struct PolylineAndPolygonLocationSelecter: View {
     }
 }
 
-struct LocationsSelecterView_Previews: PreviewProvider {
-    static var previews: some View {
-        PolylineAndPolygonLocationSelecter(delegate: nil)
-    }
-}
+//struct LocationsSelecterView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PolylineAndPolygonLocationSelecter(delegate: nil)
+//    }
+//}
