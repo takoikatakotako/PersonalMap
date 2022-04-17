@@ -1,9 +1,8 @@
 import SwiftUI
 
-struct AddMapPointObjectView: View {
+struct AddMapPointView: View {
     let mapLayerId: UUID
     @State private var labelName: String = ""
-    @State private var symbolName: String = "star.circle"
     @State private var longitude: String = ""
     @State private var latitude: String = ""
     @State private var items: [Item] = []
@@ -14,13 +13,16 @@ struct AddMapPointObjectView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    
+    @State var viewState: AddMapPointViewState = AddMapPointViewState()
+    
     var body: some View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading) {
                     MapObjectLabelTextField(labelName: $labelName)
                     
-                    MapObjectSymbolSelecter(symbolName: $symbolName)
+                    MapObjectSymbolSelecter(symbolName: $viewState.symbolName)
                     
                     AddMapObjectSingleLocationSelecter(latitude: $latitude, longitude: $longitude, sheet: $sheet)
                     
@@ -81,7 +83,7 @@ struct AddMapPointObjectView: View {
                   return
               }
         
-        let mapObject: MapObject = .point(MapPoint(id: UUID(), imageName: symbolName, isHidden: false, objectName: labelName, coordinate: Coordinate(latitude: latitude, longitude: longitude), items: items))
+        let mapObject: MapObject = .point(MapPoint(id: UUID(), imageName: viewState.symbolName, isHidden: false, objectName: labelName, coordinate: Coordinate(latitude: latitude, longitude: longitude), items: items))
         let fileRepository = FileRepository()
         try! fileRepository.initialize()
         try! fileRepository.saveMapObject(mapObject: mapObject)
@@ -98,7 +100,7 @@ struct AddMapPointObjectView: View {
     }
 }
 
-extension AddMapPointObjectView: PointLocationSelecterDelegate {
+extension AddMapPointView: PointLocationSelecterDelegate {
     func getLocation(latitude: Double, longitude: Double) {
         self.latitude = latitude.description
         self.longitude = longitude.description
@@ -108,6 +110,6 @@ extension AddMapPointObjectView: PointLocationSelecterDelegate {
 
 struct AddMapPointObjectView_Previews: PreviewProvider {
     static var previews: some View {
-        AddMapPointObjectView(mapLayerId: UUID())
+        AddMapPointView(mapLayerId: UUID())
     }
 }

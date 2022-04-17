@@ -20,7 +20,7 @@ struct MapObjectDetailView: View {
     var body: some View {
         switch viewState.mapObject {
         case .point(let point):
-            return AnyView(MapPointDetailView(point: point))
+            return AnyView(EditMapPointDetailView(point: point))
         case .polyLine(let polyLine):
             return AnyView(MapPolylineDetailView(polyline: polyLine, systemNamesArray: systemNamesArray))
         case .polygon(let polygon):

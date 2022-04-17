@@ -1,31 +1,21 @@
 import SwiftUI
 
-struct MapPointDetailView: View {
+struct EditMapPointDetailView: View {
     // @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-//    @State var point: MapPoint
-
-//    @State var newKey: String = ""
-//    @State var newValue: String = ""
-//
-//
-//    let systemNamesArray: [[String]]
-    
-    @State var viewState: MapPointDetailViewState
+    @State var viewState: EditMapPointDetailViewState
     
     init(point: MapPoint) {
-        viewState = MapPointDetailViewState(point: point)
+        viewState = EditMapPointDetailViewState(point: point)
     }
     
 //
     var body: some View {
-        
-        
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading) {
                 MapObjectLabelTextField(labelName: $viewState.point.objectName)
                 
-//                AddMapObjectSymbolSelecter(symbolName: viewState.point.imageName, sheet: $viewState.sheet)
+                MapObjectSymbolSelecter(symbolName: $viewState.point.imageName)
                 
                 // AddMapObjectSingleLocationSelecter(latitude: $latitude, longitude: $longitude, sheet: $sheet)
                 

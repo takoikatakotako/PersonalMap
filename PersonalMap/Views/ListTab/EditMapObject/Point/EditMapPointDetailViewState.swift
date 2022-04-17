@@ -1,6 +1,6 @@
 import SwiftUI
 
-class MapPointDetailViewState: ObservableObject {
+class EditMapPointDetailViewState: ObservableObject {
     @Published var point: MapPoint
     @Published var sheet: EditMapPointSheet?
 
