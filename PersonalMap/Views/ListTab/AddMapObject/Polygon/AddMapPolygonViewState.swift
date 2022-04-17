@@ -1,8 +1,7 @@
 import SwiftUI
 
-class AddMapPolylineViewState: ObservableObject {
+class AddMapPolygonViewState: ObservableObject {
     let mapLayerId: UUID
-    
     @Published var labelName: String = ""
     @Published var symbolName: String = "star.circle"
     @Published var coordinates: [Coordinate] = []
@@ -15,23 +14,23 @@ class AddMapPolylineViewState: ObservableObject {
         self.mapLayerId = mapLayerId
     }
     
-    func savePolyLine() {
+    func savePolygon() {
         if labelName.isEmpty {
             message = "ラベル名が入力されていません"
             showingAlert = true
             return
         }
         
-        print(coordinates)
-        
         if coordinates.count < 2 {
-            message = "位置情報を二点以上入力してください"
+            message = "緯度、経度が入力されていません"
             showingAlert = true
             return
         }
         
-        let mapObject: MapObject = .polyLine(MapPolyLine(id: UUID(), imageName: symbolName, isHidden: false, objectName: labelName, coordinates: coordinates, items: items))
         
+        // Polygon
+        let polygon: MapPolygon = MapPolygon(id: UUID(), mapObjectType: .polygon, imageName: symbolName, isHidden: false, objectName: labelName, coordinates: coordinates, items: [])
+        let mapObject: MapObject = .polygon(polygon)
         let fileRepository = FileRepository()
         try! fileRepository.initialize()
         try! fileRepository.saveMapObject(mapObject: mapObject)
