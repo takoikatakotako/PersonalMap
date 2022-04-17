@@ -14,7 +14,7 @@ struct AddMapPointView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     
-    @State var viewState: AddMapPointViewState = AddMapPointViewState()
+    @StateObject var viewState: AddMapPointViewState = AddMapPointViewState()
     
     var body: some View {
         NavigationView {

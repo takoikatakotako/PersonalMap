@@ -1,9 +1,5 @@
 import SwiftUI
 
-protocol MapObjectSymbolSelecterDelegate {
-    func symbolNameSelected(symbolName: String)
-}
-
 struct MapObjectSymbolSelecter: View {
     @Binding var symbolName: String
     @State private var showingSheet: Bool = false
@@ -33,13 +29,7 @@ struct MapObjectSymbolSelecter: View {
             }
         }
         .sheet(isPresented: $showingSheet) {
-            SymbolSelecter(delegate: self)
+            SymbolSelecter(symbolName: $symbolName)
         }
-    }
-}
-
-extension MapObjectSymbolSelecter: MapObjectSymbolSelecterDelegate {
-    func symbolNameSelected(symbolName: String) {
-        self.symbolName = symbolName
     }
 }

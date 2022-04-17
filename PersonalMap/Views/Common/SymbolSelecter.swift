@@ -1,12 +1,11 @@
 import SwiftUI
 
 struct SymbolSelecter: View {
+    @Binding var symbolName: String
+    
     @Environment(\.presentationMode) var presentationMode
-    
-    let delegate: MapObjectSymbolSelecterDelegate?
-    
+
     private let columns: Int = 5
-    
     private let systemNames: [[String]] = [
         ["star.circle", "parkingsign.circle", "checkmark.circle", "hand.point.up.left", "photo.circle"],
         ["fork.knife.circle", "takeoutbag.and.cup.and.straw", "car.circle","building.2.crop.circle", "location.north.line"],
@@ -24,7 +23,7 @@ struct SymbolSelecter: View {
                     HStack {
                         ForEach(0..<5) { j in
                             Button {
-                                delegate?.symbolNameSelected(symbolName: systemNames[i][j])
+                                symbolName = systemNames[i][j]
                                 presentationMode.wrappedValue.dismiss()
                             } label: {
                                 Image(systemName: systemNames[i][j])
@@ -36,7 +35,7 @@ struct SymbolSelecter: View {
                 }
                 HStack(spacing: 12) {
                     Button {
-                        delegate?.symbolNameSelected(symbolName: systemNames[6][0])
+                        symbolName = systemNames[6][0]
                         presentationMode.wrappedValue.dismiss()
                     } label: {
                         Image(systemName: systemNames[6][0])
