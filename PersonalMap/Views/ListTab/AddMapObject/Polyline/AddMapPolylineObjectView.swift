@@ -62,8 +62,6 @@ struct AddMapPolylineObjectView: View {
                 
             }, content: { item in
                 switch item {
-                case .location:
-                    Text("Must not call")
                 case .locations:
                     PolylineAndPolygonLocationSelecter(delegate: self)
                 case .item:

@@ -2,7 +2,7 @@ import SwiftUI
 import MapKit
 
 struct TopView: View {
-    @ObservedObject var viewState = TopViewState()
+    @StateObject var viewState = TopViewState()
     
     var body: some View {
         ZStack(alignment: .top) {

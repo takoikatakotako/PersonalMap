@@ -17,7 +17,7 @@ struct EditMapPointDetailView: View {
                 
                 MapObjectSymbolSelecter(symbolName: $viewState.point.imageName)
                 
-                // AddMapObjectSingleLocationSelecter(latitude: $latitude, longitude: $longitude, sheet: $sheet)
+                // MapObjectSingleLocationSelecter(latitude: $viewState.point.coordinate.longitude, longitude: $viewState.point.coordinate.longitude)
                 
                 // AddMapObjectItems(items: items, sheet: $sheet)
             }

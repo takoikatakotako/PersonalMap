@@ -1,15 +1,12 @@
 import SwiftUI
 import MapKit
 
-protocol PointLocationSelecterDelegate {
-    func getLocation(latitude: Double, longitude: Double)
-}
-
 struct PointLocationSelecter: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State var mapType: MKMapType = MKMapType.standard
-    let delegate: PointLocationSelecterDelegate?
+    @Binding var latitudeString: String
+    @Binding var longitudeString: String
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State private var mapType: MKMapType = MKMapType.standard
     @State private var latitude: Double?
     @State private var longitude: Double?
     
@@ -41,11 +38,11 @@ struct PointLocationSelecter: View {
                     }
                     
                     Button {
-                        guard let latitude = latitude,
-                              let longitude = longitude else {
-                                  return
-                              }
-                        delegate?.getLocation(latitude: latitude, longitude: longitude)
+                        guard let latitude = latitude, let longitude = longitude else {
+                            return
+                        }
+                        latitudeString = latitude.description
+                        longitudeString = longitude.description
                         presentationMode.wrappedValue.dismiss()
                     } label: {
                         Text("OK")
@@ -58,8 +55,8 @@ struct PointLocationSelecter: View {
     }
 }
 
-struct PointLocationSelecter_Previews: PreviewProvider {
-    static var previews: some View {
-        PointLocationSelecter(delegate: nil)
-    }
-}
+//struct PointLocationSelecter_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PointLocationSelecter(delegate: nil)
+//    }
+//}

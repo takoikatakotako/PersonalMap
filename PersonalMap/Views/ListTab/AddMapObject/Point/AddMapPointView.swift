@@ -2,9 +2,6 @@ import SwiftUI
 
 struct AddMapPointView: View {
     let mapLayerId: UUID
-    @State private var labelName: String = ""
-    @State private var longitude: String = ""
-    @State private var latitude: String = ""
     @State private var items: [Item] = []
     
     @State private var sheet: AddMapObjectSheet?
@@ -20,11 +17,11 @@ struct AddMapPointView: View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading) {
-                    MapObjectLabelTextField(labelName: $labelName)
+                    MapObjectLabelTextField(labelName: $viewState.labelName)
                     
                     MapObjectSymbolSelecter(symbolName: $viewState.symbolName)
                     
-                    AddMapObjectSingleLocationSelecter(latitude: $latitude, longitude: $longitude, sheet: $sheet)
+                    MapObjectSingleLocationSelecter(latitude: $viewState.latitude, longitude: $viewState.longitude)
                     
                     AddMapObjectItems(items: items, sheet: $sheet)
                 }
@@ -33,8 +30,8 @@ struct AddMapPointView: View {
                 
             }, content: { item in
                 switch item {
-                case .location:
-                    PointLocationSelecter(delegate: self)
+//                case .location:
+//                    PointLocationSelecter(delegate: self)
                 case .locations:
                     Text("Error")
                 case .item:
@@ -62,20 +59,20 @@ struct AddMapPointView: View {
     }
     
     private func savePoint() {
-        if labelName.isEmpty {
+        if viewState.labelName.isEmpty {
             message = "ラベル名が入力されていません"
             showingAlert = true
             return
         }
         
-        if latitude.isEmpty || longitude.isEmpty {
+        if viewState.latitude.isEmpty || viewState.longitude.isEmpty {
             message = "緯度、経度が入力されていません"
             showingAlert = true
             return
         }
         
-        guard let latitude = Double(latitude),
-              let longitude = Double(longitude),
+        guard let latitude = Double(viewState.latitude),
+              let longitude = Double(viewState.longitude),
               0 <= latitude && latitude <= 180,
               0 <= longitude && longitude <= 180 else {
                   message = "不正な緯度経度が入力されています"
@@ -83,7 +80,7 @@ struct AddMapPointView: View {
                   return
               }
         
-        let mapObject: MapObject = .point(MapPoint(id: UUID(), imageName: viewState.symbolName, isHidden: false, objectName: labelName, coordinate: Coordinate(latitude: latitude, longitude: longitude), items: items))
+        let mapObject: MapObject = .point(MapPoint(id: UUID(), imageName: viewState.symbolName, isHidden: false, objectName: viewState.labelName, coordinate: Coordinate(latitude: latitude, longitude: longitude), items: items))
         let fileRepository = FileRepository()
         try! fileRepository.initialize()
         try! fileRepository.saveMapObject(mapObject: mapObject)
@@ -100,12 +97,12 @@ struct AddMapPointView: View {
     }
 }
 
-extension AddMapPointView: PointLocationSelecterDelegate {
-    func getLocation(latitude: Double, longitude: Double) {
-        self.latitude = latitude.description
-        self.longitude = longitude.description
-    }
-}
+//extension AddMapPointView: PointLocationSelecterDelegate {
+//    func getLocation(latitude: Double, longitude: Double) {
+//        viewState.latitude = latitude.description
+//        viewState.longitude = longitude.description
+//    }
+//}
 
 
 struct AddMapPointObjectView_Previews: PreviewProvider {

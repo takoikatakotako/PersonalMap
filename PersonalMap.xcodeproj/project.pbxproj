@@ -41,7 +41,7 @@
 		8DB57DA1278157A200CF6938 /* MapObjectLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB57DA0278157A200CF6938 /* MapObjectLabelTextField.swift */; };
 		8DB57DA327815BAA00CF6938 /* AddMapObjectSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB57DA227815BAA00CF6938 /* AddMapObjectSheet.swift */; };
 		8DB57DA527815D8D00CF6938 /* MapObjectSymbolSelecter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB57DA427815D8D00CF6938 /* MapObjectSymbolSelecter.swift */; };
-		8DB57DA7278169BD00CF6938 /* AddMapObjectSingleLocationSelecter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB57DA6278169BD00CF6938 /* AddMapObjectSingleLocationSelecter.swift */; };
+		8DB57DA7278169BD00CF6938 /* MapObjectSingleLocationSelecter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB57DA6278169BD00CF6938 /* MapObjectSingleLocationSelecter.swift */; };
 		8DB57DA927816AE000CF6938 /* AddMapObjectItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB57DA827816AE000CF6938 /* AddMapObjectItems.swift */; };
 		8DB57DAB2782914D00CF6938 /* AddMapObjectEditLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB57DAA2782914D00CF6938 /* AddMapObjectEditLocation.swift */; };
 		8DCE59DB25EBB36400D080D2 /* MapPolyLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE59DA25EBB36400D080D2 /* MapPolyLine.swift */; };
@@ -141,7 +141,7 @@
 		8DB57DA0278157A200CF6938 /* MapObjectLabelTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectLabelTextField.swift; sourceTree = "<group>"; };
 		8DB57DA227815BAA00CF6938 /* AddMapObjectSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapObjectSheet.swift; sourceTree = "<group>"; };
 		8DB57DA427815D8D00CF6938 /* MapObjectSymbolSelecter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectSymbolSelecter.swift; sourceTree = "<group>"; };
-		8DB57DA6278169BD00CF6938 /* AddMapObjectSingleLocationSelecter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapObjectSingleLocationSelecter.swift; sourceTree = "<group>"; };
+		8DB57DA6278169BD00CF6938 /* MapObjectSingleLocationSelecter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectSingleLocationSelecter.swift; sourceTree = "<group>"; };
 		8DB57DA827816AE000CF6938 /* AddMapObjectItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapObjectItems.swift; sourceTree = "<group>"; };
 		8DB57DAA2782914D00CF6938 /* AddMapObjectEditLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapObjectEditLocation.swift; sourceTree = "<group>"; };
 		8DCE59DA25EBB36400D080D2 /* MapPolyLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPolyLine.swift; sourceTree = "<group>"; };
@@ -269,6 +269,7 @@
 		8D34682D280C0FA900822803 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				8DB57DA6278169BD00CF6938 /* MapObjectSingleLocationSelecter.swift */,
 				8DB57DA0278157A200CF6938 /* MapObjectLabelTextField.swift */,
 				8DB57DA427815D8D00CF6938 /* MapObjectSymbolSelecter.swift */,
 			);
@@ -359,7 +360,6 @@
 				8D34682B280C0F3800822803 /* Polyline */,
 				8D346826280C0C2100822803 /* Point */,
 				8DB57DA227815BAA00CF6938 /* AddMapObjectSheet.swift */,
-				8DB57DA6278169BD00CF6938 /* AddMapObjectSingleLocationSelecter.swift */,
 				8DB57DA827816AE000CF6938 /* AddMapObjectItems.swift */,
 				8DB57DAA2782914D00CF6938 /* AddMapObjectEditLocation.swift */,
 			);
@@ -705,7 +705,7 @@
 				8DEC412326F63D950052A7D2 /* FileRepository.swift in Sources */,
 				8D3468222809C68A00822803 /* MyWebView.swift in Sources */,
 				8D250E5A27CF54AB000FDD70 /* Route.swift in Sources */,
-				8DB57DA7278169BD00CF6938 /* AddMapObjectSingleLocationSelecter.swift in Sources */,
+				8DB57DA7278169BD00CF6938 /* MapObjectSingleLocationSelecter.swift in Sources */,
 				8D82550A2607272700D73A6D /* MapPolygon.swift in Sources */,
 				8DFBAE06270986B6005B4611 /* MapPolygonDetailView.swift in Sources */,
 				8DFBAE0D2709EB97005B4611 /* MapPolyLinePreview.swift in Sources */,

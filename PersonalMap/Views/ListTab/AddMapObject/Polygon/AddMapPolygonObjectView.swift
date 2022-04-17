@@ -61,10 +61,6 @@ struct AddMapPolygonObjectView: View {
                 
             }, content: { item in
                 switch item {
-//                case .symbol:
-//                    SymbolSelecter(delegate: self)
-                case .location:
-                    Text("Must not call")
                 case .locations:
                     PolylineAndPolygonLocationSelecter(delegate: self)
                 case .item:

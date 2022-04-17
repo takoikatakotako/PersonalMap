@@ -43,7 +43,8 @@ struct AddMapObjectEditLocation: View {
             .sheet(isPresented: $showingSheet, onDismiss: {
                 
             }, content: {
-                PointLocationSelecter(delegate: self)
+                // PointLocationSelecter(delegate: self)
+                Text("この画面もしかして使ってない？")
             })
             .onAppear {
                 latitudeString = coordinates[index].latitude.description
@@ -75,13 +76,6 @@ struct AddMapObjectEditLocation: View {
         }
         
         coordinates[index] = Coordinate(latitude: latitude, longitude: longitude)
-    }
-}
-
-extension AddMapObjectEditLocation: PointLocationSelecterDelegate {
-    func getLocation(latitude: Double, longitude: Double) {
-        latitudeString = latitude.description
-        longitudeString = longitude.description
     }
 }
 

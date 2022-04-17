@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct AddMapObjectSingleLocationSelecter: View {
+struct MapObjectSingleLocationSelecter: View {
     @Binding var latitude: String
     @Binding var longitude: String
-    @Binding var sheet: AddMapObjectSheet?
+    @State private var showingSheet: Bool = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -21,11 +21,13 @@ struct AddMapObjectSingleLocationSelecter: View {
             HStack {
                 Spacer()
                 Button {
-                    sheet = .location
+                    showingSheet = true
                 } label: {
                     Text("位置情報を設定")
                 }
             }
+        }.sheet(isPresented: $showingSheet) {
+            PointLocationSelecter(latitudeString: $latitude, longitudeString: $longitude)
         }
     }
 }
