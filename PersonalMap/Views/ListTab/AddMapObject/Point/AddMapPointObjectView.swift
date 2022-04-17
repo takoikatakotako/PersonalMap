@@ -1,11 +1,11 @@
 import SwiftUI
-import MapKit
 
-struct AddMapPolylineObjectView: View {
+struct AddMapPointObjectView: View {
     let mapLayerId: UUID
     @State private var labelName: String = ""
     @State private var symbolName: String = "star.circle"
-    @State private var coordinates: [Coordinate] = []
+    @State private var longitude: String = ""
+    @State private var latitude: String = ""
     @State private var items: [Item] = []
     
     @State private var sheet: AddMapObjectSheet?
@@ -18,42 +18,11 @@ struct AddMapPolylineObjectView: View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading) {
-                    AddMapObjectLabelTextField(labelName: $labelName)
+                    MapObjectLabelTextField(labelName: $labelName)
                     
                     AddMapObjectSymbolSelecter(symbolName: symbolName, sheet: $sheet)
-
-                    VStack(alignment: .leading) {
-                        Text("位置情報を選択")
-                            .font(Font.system(size: 20).bold())
-                            .padding(.top, 12)
-                                                
-                        ForEach(coordinates.indices, id: \.self) { index in
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text("latitude: \(coordinates[index].latitude.description)")
-                                    Text("latitude: \(coordinates[index].longitude.description)")
-                                }
-                                Spacer()
-                                
-                                Button {
-                                    sheet = .editLocations(index: index)
-                                } label: {
-                                    Text("編集")
-                                }
-                            }
-                            Divider()
-                         }
-                        
-                        HStack {
-                            Spacer()
-                            Button {
-                                sheet = .locations
-                            } label: {
-                                Text("位置情報を設定")
-                            }
-                        }
-                    }
                     
+                    AddMapObjectSingleLocationSelecter(latitude: $latitude, longitude: $longitude, sheet: $sheet)
                     
                     AddMapObjectItems(items: items, sheet: $sheet)
                 }
@@ -65,13 +34,13 @@ struct AddMapPolylineObjectView: View {
                 case .symbol:
                     SymbolSelecter(delegate: self)
                 case .location:
-                    Text("Must not call")
+                    PointLocationSelecter(delegate: self)
                 case .locations:
-                    PolylineAndPolygonLocationSelecter(delegate: self)
+                    Text("Error")
                 case .item:
                     ItemListView(items: $items)
-                case .editLocations(let index):
-                    AddMapObjectEditLocation(coordinates: $coordinates, index: index)
+                case .editLocations(_):
+                    Text("Error")
                 }
             })
             .alert(isPresented: $showingAlert)  {
@@ -79,11 +48,11 @@ struct AddMapPolylineObjectView: View {
             }
             .padding(.horizontal, 16)
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("ラインの新規登録")
+            .navigationTitle("ポイントの新規登録")
             .navigationBarItems(
                 trailing:
                     Button(action: {
-                        savePolyLine()
+                        savePoint()
                     }, label: {
                         Text("登録")
                             .font(Font.system(size: 16).bold())
@@ -92,27 +61,33 @@ struct AddMapPolylineObjectView: View {
         }
     }
     
-    private func savePolyLine() {
+    private func savePoint() {
         if labelName.isEmpty {
             message = "ラベル名が入力されていません"
             showingAlert = true
             return
         }
         
-        print(coordinates)
-        
-        if coordinates.count < 2 {
-            message = "位置情報を二点以上入力してください"
+        if latitude.isEmpty || longitude.isEmpty {
+            message = "緯度、経度が入力されていません"
             showingAlert = true
             return
         }
         
-        let mapObject: MapObject = .polyLine(MapPolyLine(id: UUID(), imageName: symbolName, isHidden: false, objectName: labelName, coordinates: coordinates, items: items))
+        guard let latitude = Double(latitude),
+              let longitude = Double(longitude),
+              0 <= latitude && latitude <= 180,
+              0 <= longitude && longitude <= 180 else {
+                  message = "不正な緯度経度が入力されています"
+                  showingAlert = true
+                  return
+              }
         
+        let mapObject: MapObject = .point(MapPoint(id: UUID(), imageName: symbolName, isHidden: false, objectName: labelName, coordinate: Coordinate(latitude: latitude, longitude: longitude), items: items))
         let fileRepository = FileRepository()
         try! fileRepository.initialize()
         try! fileRepository.saveMapObject(mapObject: mapObject)
-
+        
         // layer に追加
         let mapLayer = try! fileRepository.getMapLayer(mapLayerId: mapLayerId)
         let newMapLayer = MapLayer(
@@ -125,21 +100,22 @@ struct AddMapPolylineObjectView: View {
     }
 }
 
-extension AddMapPolylineObjectView: SymbolSelecterDelegate {
+extension AddMapPointObjectView: SymbolSelecterDelegate {
     func symbolSelected(symbolName: String) {
         self.symbolName = symbolName
     }
 }
 
-
-extension AddMapPolylineObjectView: PolylineAndPolygonLocationSelecterDelegate {
-    func getCoordinates(coordinates: [Coordinate]) {
-        self.coordinates = coordinates
+extension AddMapPointObjectView: PointLocationSelecterDelegate {
+    func getLocation(latitude: Double, longitude: Double) {
+        self.latitude = latitude.description
+        self.longitude = longitude.description
     }
 }
 
-struct AddMapPolylineObjectView_Previews: PreviewProvider {
+
+struct AddMapPointObjectView_Previews: PreviewProvider {
     static var previews: some View {
-        AddMapPolylineObjectView(mapLayerId: UUID())
+        AddMapPointObjectView(mapLayerId: UUID())
     }
 }

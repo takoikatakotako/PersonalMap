@@ -1,6 +1,7 @@
 import SwiftUI
+import MapKit
 
-struct AddMapPolygonObjectView: View {
+struct AddMapPolylineObjectView: View {
     let mapLayerId: UUID
     @State private var labelName: String = ""
     @State private var symbolName: String = "star.circle"
@@ -17,7 +18,7 @@ struct AddMapPolygonObjectView: View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading) {
-                    AddMapObjectLabelTextField(labelName: $labelName)
+                    MapObjectLabelTextField(labelName: $labelName)
                     
                     AddMapObjectSymbolSelecter(symbolName: symbolName, sheet: $sheet)
 
@@ -78,11 +79,11 @@ struct AddMapPolygonObjectView: View {
             }
             .padding(.horizontal, 16)
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("エリアの新規登録")
+            .navigationTitle("ラインの新規登録")
             .navigationBarItems(
                 trailing:
                     Button(action: {
-                        savePolygon()
+                        savePolyLine()
                     }, label: {
                         Text("登録")
                             .font(Font.system(size: 16).bold())
@@ -91,23 +92,23 @@ struct AddMapPolygonObjectView: View {
         }
     }
     
-    private func savePolygon() {
+    private func savePolyLine() {
         if labelName.isEmpty {
             message = "ラベル名が入力されていません"
             showingAlert = true
             return
         }
         
+        print(coordinates)
+        
         if coordinates.count < 2 {
-            message = "緯度、経度が入力されていません"
+            message = "位置情報を二点以上入力してください"
             showingAlert = true
             return
         }
         
+        let mapObject: MapObject = .polyLine(MapPolyLine(id: UUID(), imageName: symbolName, isHidden: false, objectName: labelName, coordinates: coordinates, items: items))
         
-        // Polygon
-        let polygon: MapPolygon = MapPolygon(id: UUID(), mapObjectType: .polygon, imageName: symbolName, isHidden: false, objectName: labelName, coordinates: coordinates, items: [])
-        let mapObject: MapObject = .polygon(polygon)
         let fileRepository = FileRepository()
         try! fileRepository.initialize()
         try! fileRepository.saveMapObject(mapObject: mapObject)
@@ -124,15 +125,21 @@ struct AddMapPolygonObjectView: View {
     }
 }
 
-extension AddMapPolygonObjectView: SymbolSelecterDelegate {
+extension AddMapPolylineObjectView: SymbolSelecterDelegate {
     func symbolSelected(symbolName: String) {
         self.symbolName = symbolName
     }
 }
 
 
-extension AddMapPolygonObjectView: PolylineAndPolygonLocationSelecterDelegate {
+extension AddMapPolylineObjectView: PolylineAndPolygonLocationSelecterDelegate {
     func getCoordinates(coordinates: [Coordinate]) {
         self.coordinates = coordinates
+    }
+}
+
+struct AddMapPolylineObjectView_Previews: PreviewProvider {
+    static var previews: some View {
+        AddMapPolylineObjectView(mapLayerId: UUID())
     }
 }

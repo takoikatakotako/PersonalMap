@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct AddMapObjectLabelTextField: View {
+struct MapObjectLabelTextField: View {
     @Binding var labelName: String
     var body: some View {
         VStack(alignment: .leading) {

@@ -1,8 +1,15 @@
 import SwiftUI
 
 struct MapObjectDetailView: View {
-
-    @State var mapObject: MapObject
+    
+    // @State var mapObject: MapObject
+    
+    
+    @State var viewState: MapObjectDetailViewState
+    
+    init (mapObject: MapObject) {
+        viewState = MapObjectDetailViewState(mapObject: mapObject)
+    }
     
     let systemNamesArray: [[String]] = [
         ["star.circle", "parkingsign.circle", "checkmark.circle", "hand.point.up.left", "photo.circle", "fork.knife.circle", "takeoutbag.and.cup.and.straw", "car.circle", "building.2.crop.circle", "location.north.line"],
@@ -11,13 +18,9 @@ struct MapObjectDetailView: View {
     ]
     
     var body: some View {
-        getAnyMapObjectDetailView()
-    }
-    
-    func getAnyMapObjectDetailView() -> AnyView {
-        switch mapObject {
+        switch viewState.mapObject {
         case .point(let point):
-            return AnyView(MapPointDetailView(point: point, systemNamesArray: systemNamesArray))
+            return AnyView(MapPointDetailView(point: point))
         case .polyLine(let polyLine):
             return AnyView(MapPolylineDetailView(polyline: polyLine, systemNamesArray: systemNamesArray))
         case .polygon(let polygon):
