@@ -15,6 +15,11 @@ class MapLayerListViewState: ObservableObject {
         try! getMapLayers()
     }
     
+    func rowMove(fromOffsets: IndexSet, toOffset: Int) {
+        mapLayers.move(fromOffsets: fromOffsets, toOffset: toOffset)
+        try! fileRepository.moveMapLayer(fromOffsets: fromOffsets, toOffset: toOffset)
+    }
+    
     func rowRemove(offsets: IndexSet) {
         let deleteLayerIds: [UUID] = offsets.map { mapLayers[$0].id }
         for deleteLayerId in deleteLayerIds {

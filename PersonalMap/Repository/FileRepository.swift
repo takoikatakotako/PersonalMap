@@ -138,6 +138,12 @@ struct FileRepository {
         try FileManager.default.removeItem(at: fileUrl)
     }
     
+    func moveMapLayer(fromOffsets: IndexSet, toOffset: Int) throws {
+        var mapLayersIds = try getMapLayerIds()
+        mapLayersIds.move(fromOffsets: fromOffsets, toOffset: toOffset)
+        try saveMapLayerIds(mapLayerIds: mapLayersIds)
+    }
+    
     func deleteMapLayer(mapLayerId: UUID) throws {
         let fileUrl = try getLayerDirectoryUrl().appendingPathComponent("\(mapLayerId).json")
         try FileManager.default.removeItem(at: fileUrl)

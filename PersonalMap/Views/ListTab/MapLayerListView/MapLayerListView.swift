@@ -14,6 +14,7 @@ struct MapLayerListView: View {
                         }
                     }
                 }
+                .onMove(perform: viewState.rowMove)
                 .onDelete(perform: viewState.rowRemove)
             }
             .onAppear {
