@@ -19,7 +19,7 @@ struct AddMapPolygonObjectView: View {
                 VStack(alignment: .leading) {
                     MapObjectLabelTextField(labelName: $labelName)
                     
-                    AddMapObjectSymbolSelecter(symbolName: symbolName, sheet: $sheet)
+                    MapObjectSymbolSelecter(symbolName: $symbolName)
 
                     VStack(alignment: .leading) {
                         Text("位置情報を選択")
@@ -61,8 +61,8 @@ struct AddMapPolygonObjectView: View {
                 
             }, content: { item in
                 switch item {
-                case .symbol:
-                    SymbolSelecter(delegate: self)
+//                case .symbol:
+//                    SymbolSelecter(delegate: self)
                 case .location:
                     Text("Must not call")
                 case .locations:
@@ -123,13 +123,6 @@ struct AddMapPolygonObjectView: View {
         presentationMode.wrappedValue.dismiss()
     }
 }
-
-extension AddMapPolygonObjectView: SymbolSelecterDelegate {
-    func symbolSelected(symbolName: String) {
-        self.symbolName = symbolName
-    }
-}
-
 
 extension AddMapPolygonObjectView: PolylineAndPolygonLocationSelecterDelegate {
     func getCoordinates(coordinates: [Coordinate]) {

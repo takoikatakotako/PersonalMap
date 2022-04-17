@@ -1,13 +1,11 @@
 import SwiftUI
 
-protocol SymbolSelecterDelegate {
-    func symbolSelected(symbolName: String)
-}
-
 struct SymbolSelecter: View {
     @Environment(\.presentationMode) var presentationMode
+    
+    @Binding var symbolName: String
+    
     let columns: Int = 5
-    let delegate: SymbolSelecterDelegate?
     
     let systemNames: [[String]] = [
         ["star.circle", "parkingsign.circle", "checkmark.circle", "hand.point.up.left", "photo.circle"],
@@ -26,7 +24,7 @@ struct SymbolSelecter: View {
                     HStack {
                         ForEach(0..<5) { j in
                             Button {
-                                delegate?.symbolSelected(symbolName: systemNames[i][j])
+                                self.symbolName = systemNames[i][j]
                                 presentationMode.wrappedValue.dismiss()
                             } label: {
                                 Image(systemName: systemNames[i][j])
@@ -38,7 +36,7 @@ struct SymbolSelecter: View {
                 }
                 HStack(spacing: 12) {
                     Button {
-                        delegate?.symbolSelected(symbolName: systemNames[6][0])
+                        self.symbolName = systemNames[6][0]
                         presentationMode.wrappedValue.dismiss()
                     } label: {
                         Image(systemName: systemNames[6][0])
@@ -54,8 +52,8 @@ struct SymbolSelecter: View {
     }
 }
 
-struct SymbolSelecter_Previews: PreviewProvider {
-    static var previews: some View {
-        SymbolSelecter(delegate: nil)
-    }
-}
+//struct SymbolSelecter_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SymbolSelecter()
+//    }
+//}

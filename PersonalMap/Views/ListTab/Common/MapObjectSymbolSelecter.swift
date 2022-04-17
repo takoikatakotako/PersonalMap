@@ -1,8 +1,8 @@
 import SwiftUI
 
-struct AddMapObjectSymbolSelecter: View {
-    let symbolName: String
-    @Binding var sheet: AddMapObjectSheet?
+struct MapObjectSymbolSelecter: View {
+    @Binding var symbolName: String
+    @State private var showingSheet: Bool = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,11 +22,14 @@ struct AddMapObjectSymbolSelecter: View {
                     )
                 Spacer()
                 Button {
-                    sheet = .symbol
+                    showingSheet = true
                 } label: {
                     Text("シンボルを設定")
                 }
             }
+        }
+        .sheet(isPresented: $showingSheet) {
+            SymbolSelecter(symbolName: $symbolName)
         }
     }
 }

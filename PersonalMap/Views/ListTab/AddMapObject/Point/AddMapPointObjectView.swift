@@ -20,7 +20,7 @@ struct AddMapPointObjectView: View {
                 VStack(alignment: .leading) {
                     MapObjectLabelTextField(labelName: $labelName)
                     
-                    AddMapObjectSymbolSelecter(symbolName: symbolName, sheet: $sheet)
+                    MapObjectSymbolSelecter(symbolName: $symbolName)
                     
                     AddMapObjectSingleLocationSelecter(latitude: $latitude, longitude: $longitude, sheet: $sheet)
                     
@@ -31,8 +31,6 @@ struct AddMapPointObjectView: View {
                 
             }, content: { item in
                 switch item {
-                case .symbol:
-                    SymbolSelecter(delegate: self)
                 case .location:
                     PointLocationSelecter(delegate: self)
                 case .locations:
@@ -97,12 +95,6 @@ struct AddMapPointObjectView: View {
             objectIds: [mapObject.id] + mapLayer.objectIds)
         try! fileRepository.saveMapLayer(mapLayer: newMapLayer)
         presentationMode.wrappedValue.dismiss()
-    }
-}
-
-extension AddMapPointObjectView: SymbolSelecterDelegate {
-    func symbolSelected(symbolName: String) {
-        self.symbolName = symbolName
     }
 }
 
