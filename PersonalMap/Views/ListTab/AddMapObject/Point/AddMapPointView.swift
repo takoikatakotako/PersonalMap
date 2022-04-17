@@ -4,7 +4,6 @@ struct AddMapPointView: View {
     let mapLayerId: UUID
     @State private var items: [Item] = []
     
-    @State private var sheet: AddMapObjectSheet?
     @State private var message: String = ""
     @State private var showingAlert: Bool = false
     
@@ -23,23 +22,9 @@ struct AddMapPointView: View {
                     
                     MapObjectSingleLocationSelecter(latitude: $viewState.latitude, longitude: $viewState.longitude)
                     
-                    AddMapObjectItems(items: items, sheet: $sheet)
+                    MapObjectItems(items: $items)
                 }
             }
-            .sheet(item: $sheet, onDismiss: {
-                
-            }, content: { item in
-                switch item {
-//                case .location:
-//                    PointLocationSelecter(delegate: self)
-                case .locations:
-                    Text("Error")
-                case .item:
-                    ItemListView(items: $items)
-                case .editLocations(_):
-                    Text("Error")
-                }
-            })
             .alert(isPresented: $showingAlert)  {
                 Alert(title: Text(""), message: Text(message), dismissButton: .default(Text("閉じる")))
             }

@@ -6,8 +6,6 @@ struct AddMapPolygonObjectView: View {
     @State private var symbolName: String = "star.circle"
     @State private var coordinates: [Coordinate] = []
     @State private var items: [Item] = []
-    
-    @State private var sheet: AddMapObjectSheet?
     @State private var message: String = ""
     @State private var showingAlert: Bool = false
     
@@ -35,7 +33,7 @@ struct AddMapPolygonObjectView: View {
                                 Spacer()
                                 
                                 Button {
-                                    sheet = .editLocations(index: index)
+                                    // sheet = .editLocations(index: index)
                                 } label: {
                                     Text("編集")
                                 }
@@ -46,7 +44,7 @@ struct AddMapPolygonObjectView: View {
                         HStack {
                             Spacer()
                             Button {
-                                sheet = .locations
+                                // sheet = .locations
                             } label: {
                                 Text("位置情報を設定")
                             }
@@ -54,21 +52,19 @@ struct AddMapPolygonObjectView: View {
                     }
                     
                     
-                    AddMapObjectItems(items: items, sheet: $sheet)
+                    MapObjectItems(items: $items)
                 }
             }
-            .sheet(item: $sheet, onDismiss: {
-                
-            }, content: { item in
-                switch item {
-                case .locations:
-                    PolylineAndPolygonLocationSelecter(delegate: self)
-                case .item:
-                    ItemListView(items: $items)
-                case .editLocations(let index):
-                    AddMapObjectEditLocation(coordinates: $coordinates, index: index)
-                }
-            })
+//            .sheet(item: $sheet, onDismiss: {
+//
+//            }, content: { item in
+//                switch item {
+//                case .locations:
+//                    PolylineAndPolygonLocationSelecter(delegate: self)
+//                case .editLocations(let index):
+//                    AddMapObjectEditLocation(coordinates: $coordinates, index: index)
+//                }
+//            })
             .alert(isPresented: $showingAlert)  {
                 Alert(title: Text(""), message: Text(message), dismissButton: .default(Text("閉じる")))
             }

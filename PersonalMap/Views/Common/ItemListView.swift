@@ -1,9 +1,11 @@
 import SwiftUI
 
 struct ItemListView: View {
+    @Binding var items: [Item]
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var showingSheet = false
-    @Binding var items: [Item]
+    
     var body: some View {
         NavigationView {
             List {

@@ -1,8 +1,8 @@
 import SwiftUI
 
-struct AddMapObjectItems: View {
-    let items: [Item]
-    @Binding var sheet: AddMapObjectSheet?
+struct MapObjectItems: View {
+    @Binding var items: [Item]
+    @State private var showingSheet: Bool = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -34,11 +34,13 @@ struct AddMapObjectItems: View {
                 }
                 Spacer()
                 Button {
-                    sheet = .item
+                    showingSheet = true
                 } label: {
                     Text("項目を設定")
                 }
             }
+        }.sheet(isPresented: $showingSheet) {
+            ItemListView(items: $items)
         }
     }
 }
