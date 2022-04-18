@@ -1,14 +1,14 @@
 import SwiftUI
 
 class EditMapPolylineViewState: ObservableObject {
-    @Published var polyline: MapPolyLine
+    @Published var polyline: MapPolyline
     @Published var showingAlert: Bool = false
     @Published var message: String = ""
     @Published var dismiss: Bool = false
     
     private let fileRepository = FileRepository()
     
-    init(polyLine: MapPolyLine) {
+    init(polyLine: MapPolyline) {
         self.polyline = polyLine
     }
     

@@ -30,7 +30,7 @@ class AddMapPolylineViewState: ObservableObject {
             return
         }
         
-        let mapObject: MapObject = .polyLine(MapPolyLine(id: UUID(), imageName: symbolName, isHidden: false, objectName: labelName, coordinates: coordinates, items: items))
+        let mapObject: MapObject = .polyLine(MapPolyline(id: UUID(), imageName: symbolName, isHidden: false, objectName: labelName, coordinates: coordinates, items: items))
         
         let fileRepository = FileRepository()
         try! fileRepository.initialize()

@@ -4,8 +4,8 @@ struct TextItemRow: View {
     let item: Item
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Key: \(item.key)")
-            Text("Value: \(item.value)")
+            Text("項目名: \(item.key)")
+            Text("内容: \(item.value)")
         }
         .frame(height: 60)
     }

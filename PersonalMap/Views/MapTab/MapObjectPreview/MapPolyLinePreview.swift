@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MapPolyLinePreview: View {
-    let polyline: MapPolyLine
+    let polyline: MapPolyline
     let delegate: MapObjectPreviewViewDelegate?
 
     @Environment(\.presentationMode) var presentationMode

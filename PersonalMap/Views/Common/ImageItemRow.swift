@@ -12,7 +12,7 @@ struct ImageItemRow: View {
     
     var body: some View {
         HStack {
-            Text("Key: \(item.key)")
+            Text("項目名: \(item.key)")
             Spacer()
             if let image = image {
                 Image(uiImage: image)

@@ -50,7 +50,7 @@ public class UIMapObjectView: UIView {
     }
     
     // PolyLine
-    func addPolyLine(polyLine: MapPolyLine) {
+    func addPolyLine(polyLine: MapPolyline) {
         if polyLine.isHidden {
             return
         }

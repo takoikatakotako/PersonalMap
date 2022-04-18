@@ -15,5 +15,7 @@ class EditMapPolygonViewState: ObservableObject {
     func savePolygon() {
         let fileRepository = FileRepository()
         try! fileRepository.saveMapObject(mapObject: .polygon(polygon))
+        
+        dismiss = true
     }
 }

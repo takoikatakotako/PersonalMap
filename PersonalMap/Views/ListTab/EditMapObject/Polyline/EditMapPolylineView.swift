@@ -5,7 +5,7 @@ struct EditMapPolylineView: View {
     
     @StateObject var viewState: EditMapPolylineViewState
     
-    init(polyLine: MapPolyLine) {
+    init(polyLine: MapPolyline) {
         _viewState = StateObject(wrappedValue: EditMapPolylineViewState(polyLine: polyLine))
     }
     
@@ -26,7 +26,7 @@ struct EditMapPolylineView: View {
                 Button(action: {
                     viewState.savePolyline()
                 }, label: {
-                    Text("登録")
+                    Text("更新")
                         .font(Font.system(size: 16).bold())
                 })
         )

@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct MapObjectEditLocation: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @Binding var coordinates: [Coordinate]
     let index: Int
     
@@ -43,7 +45,7 @@ struct MapObjectEditLocation: View {
             .sheet(isPresented: $showingSheet, onDismiss: {
                 
             }, content: {
-                LocationSelecterBindingCoordinate(coordinate: $coordinates[index])
+                LocationSelecter(latitudeString: $latitudeString, longitudeString: $longitudeString)
             })
             .onAppear {
                 latitudeString = coordinates[index].latitude.description
@@ -52,9 +54,6 @@ struct MapObjectEditLocation: View {
             .alert(isPresented: $showingAlert)  {
                 Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("閉じる")))
             }
-            .padding()
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("座標の編集")
             .navigationBarItems(
                 trailing:
                     Button(action: {
@@ -62,20 +61,23 @@ struct MapObjectEditLocation: View {
                     }, label: {
                         Text("更新")
                             .font(Font.system(size: 16).bold())
-                    }
-                          )
+                    })
             )
+            .padding(16)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("座標の編集")
         }
     }
     
     private func updateCoordinate() {
         guard let latitude = Double(latitudeString), let longitude = Double(longitudeString) else {
-            alertMessage = "kabigon"
+            alertMessage = "正しい緯度と軽度を入力してください。"
             showingAlert = true
             return
         }
         
         coordinates[index] = Coordinate(latitude: latitude, longitude: longitude)
+        presentationMode.wrappedValue.dismiss()
     }
 }
 

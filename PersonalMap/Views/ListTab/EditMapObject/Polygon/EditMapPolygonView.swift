@@ -26,7 +26,7 @@ struct EditMapPolygonView: View {
                 Button(action: {
                     viewState.savePolygon()
                 }, label: {
-                    Text("登録")
+                    Text("更新")
                         .font(Font.system(size: 16).bold())
                 })
         )

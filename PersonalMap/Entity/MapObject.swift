@@ -8,7 +8,7 @@ protocol MapObjectProtcol: Codable {
 
 enum MapObject {
     case point(MapPoint)
-    case polyLine(MapPolyLine)
+    case polyLine(MapPolyline)
     case polygon(MapPolygon)
     
     var objectName: String {
@@ -60,7 +60,7 @@ extension MapObject: Decodable {
                 return
             }
         case .polyLine:
-            if let mapPolyLine = try? container.decode(MapPolyLine.self) {
+            if let mapPolyLine = try? container.decode(MapPolyline.self) {
                 self = .polyLine(mapPolyLine)
                 return
             }
