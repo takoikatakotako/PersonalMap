@@ -12,8 +12,15 @@ struct MapObjectListView: View {
     var body: some View {
         List {
             ForEach(viewState.mapObjects) { (mapObject: MapObject) in
-                NavigationLink {
-                    EditMapObjectView(mapObject: mapObject)
+                NavigationLink {                    
+                    switch mapObject {
+                    case .point(let point):
+                        EditMapPointView(point: point)
+                    case .polyLine(let polyLine):
+                        EditMapPolylineView(polyLine: polyLine)
+                    case .polygon(let polygon):
+                        EditMapPolygonView(polygon: polygon)
+                    }
                 } label: {
                     Text(mapObject.objectName)
                 }
