@@ -1,6 +1,6 @@
 import SwiftUI
 
-class MapObjectDetailViewState: ObservableObject {
+class EditMapObjectViewState: ObservableObject {
     @Published var mapObject: MapObject
 
     init(mapObject: MapObject) {

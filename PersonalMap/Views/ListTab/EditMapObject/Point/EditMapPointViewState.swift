@@ -1,6 +1,6 @@
 import SwiftUI
 
-class EditMapPointDetailViewState: ObservableObject {
+class EditMapPointViewState: ObservableObject {
     @Published var point: MapPoint
     @Published var latitudeString: String
     @Published var longnitudeString: String

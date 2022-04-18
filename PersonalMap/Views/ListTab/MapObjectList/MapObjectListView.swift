@@ -13,7 +13,7 @@ struct MapObjectListView: View {
         List {
             ForEach(viewState.mapObjects) { (mapObject: MapObject) in
                 NavigationLink {
-                    MapObjectDetailView(mapObject: mapObject)
+                    EditMapObjectView(mapObject: mapObject)
                 } label: {
                     Text(mapObject.objectName)
                 }

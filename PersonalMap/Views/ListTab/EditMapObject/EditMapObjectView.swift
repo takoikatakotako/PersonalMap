@@ -1,14 +1,14 @@
 import SwiftUI
 
-struct MapObjectDetailView: View {
+struct EditMapObjectView: View {
     
     // @State var mapObject: MapObject
     
     
-    @State var viewState: MapObjectDetailViewState
+    @State var viewState: EditMapObjectViewState
     
     init (mapObject: MapObject) {
-        viewState = MapObjectDetailViewState(mapObject: mapObject)
+        viewState = EditMapObjectViewState(mapObject: mapObject)
     }
     
     let systemNamesArray: [[String]] = [
@@ -20,11 +20,11 @@ struct MapObjectDetailView: View {
     var body: some View {
         switch viewState.mapObject {
         case .point(let point):
-            return AnyView(EditMapPointDetailView(point: point))
+            return AnyView(EditMapPointView(point: point))
         case .polyLine(let polyLine):
-            return AnyView(MapPolylineDetailView(polyline: polyLine, systemNamesArray: systemNamesArray))
+            return AnyView(EditMapPolylineView(polyLine: polyLine))
         case .polygon(let polygon):
-            return AnyView(MapPolygonDetailView(polygon: polygon, systemNamesArray: systemNamesArray))
+            return AnyView(EditMapPolygonView(polygon: polygon, systemNamesArray: systemNamesArray))
         }
     }
 }

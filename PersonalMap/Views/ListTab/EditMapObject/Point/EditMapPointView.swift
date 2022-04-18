@@ -1,12 +1,12 @@
 import SwiftUI
 
-struct EditMapPointDetailView: View {
+struct EditMapPointView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @StateObject var viewState: EditMapPointDetailViewState
+    @StateObject var viewState: EditMapPointViewState
     
     init(point: MapPoint) {
-        _viewState = StateObject(wrappedValue: EditMapPointDetailViewState(point: point))
+        _viewState = StateObject(wrappedValue: EditMapPointViewState(point: point))
     }
     
     var body: some View {

@@ -1,21 +1,21 @@
 import SwiftUI
 
-struct MapPolylineDetailView: View {
+struct EditMapPolygonView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-    @State var polyline: MapPolyLine
+    @State var polygon: MapPolygon
     @State var newKey: String = ""
     @State var newValue: String = ""
-        
+    
     let systemNamesArray: [[String]]
     
     var body: some View {
         ScrollView {
             LazyVStack {
-                TextField("PolyLine名", text: $polyline.objectName)
+                TextField("Polygon名", text: $polygon.objectName)
                     .textFieldStyle(.roundedBorder)
 
-                Image(systemName: polyline.imageName)
+                Image(systemName: polygon.imageName)
                     .frame(width: 40, height: 40)
                 
                 VStack {
@@ -23,7 +23,7 @@ struct MapPolylineDetailView: View {
                         HStack {
                             ForEach(systemNames, id: \.self) { imageName in
                                 Button {
-                                    polyline.imageName = imageName
+                                    polygon.imageName = imageName
                                 } label: {
                                     Image(systemName: imageName)
                                 }
@@ -33,7 +33,7 @@ struct MapPolylineDetailView: View {
                 }
                 
                 Text("Info")
-                ForEach(polyline.items) { info in
+                ForEach(polygon.items) { info in
                     HStack {
                         Text(info.key)
                         Text(" : ")
@@ -50,7 +50,7 @@ struct MapPolylineDetailView: View {
                 .padding()
                 
                 Button {
-                    polyline.items.append(Item(id: UUID(), itemType: .text, key: newKey, value: newValue))
+                    polygon.items.append(Item(id: UUID(), itemType: .text, key: newKey, value: newValue))
                     newKey = ""
                     newValue = ""
                 } label: {
@@ -60,7 +60,7 @@ struct MapPolylineDetailView: View {
                 Button {
                                         
                     let fileRepository = FileRepository()
-                    try! fileRepository.saveMapObject(mapObject: .polyLine(polyline))
+                    try! fileRepository.saveMapObject(mapObject: .polygon(polygon))
                     
                     presentationMode.wrappedValue.dismiss()
                 } label: {
@@ -71,8 +71,8 @@ struct MapPolylineDetailView: View {
     }
 }
 
-//struct MapPolylineDetailView_Previews: PreviewProvider {
+//struct MapPolygonDetailView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        MapPolylineDetailView(polyline: <#MapPolyLine#>)
+//        MapPolygonDetailView()
 //    }
 //}
