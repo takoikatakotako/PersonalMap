@@ -1,11 +1,10 @@
 import SwiftUI
 
 class MapObjectListViewState: ObservableObject {
- 
+    let mapLayer: MapLayer
+
     @Published var showingSheet = false
     @Published var mapObjects: [MapObject] = []
-
-    let mapLayer: MapLayer
     
     private let fileRepository = FileRepository()
 

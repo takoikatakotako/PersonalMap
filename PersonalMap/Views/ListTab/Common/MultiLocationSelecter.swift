@@ -1,7 +1,7 @@
 import SwiftUI
 import MapKit
 
-struct PolylineAndPolygonLocationSelecter: View {
+struct MultiLocationSelecter: View {
     @Binding var coordinates: [Coordinate]
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>

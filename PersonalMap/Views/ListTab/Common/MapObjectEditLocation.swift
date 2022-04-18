@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct AddMapObjectEditLocation: View {
+struct MapObjectEditLocation: View {
     @Binding var coordinates: [Coordinate]
     let index: Int
     
@@ -43,8 +43,7 @@ struct AddMapObjectEditLocation: View {
             .sheet(isPresented: $showingSheet, onDismiss: {
                 
             }, content: {
-                // PointLocationSelecter(delegate: self)
-                Text("この画面もしかして使ってない？")
+                LocationSelecterBindingCoordinate(coordinate: $coordinates[index])
             })
             .onAppear {
                 latitudeString = coordinates[index].latitude.description
@@ -52,19 +51,20 @@ struct AddMapObjectEditLocation: View {
             }
             .alert(isPresented: $showingAlert)  {
                 Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("閉じる")))
-            }            .padding()
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationTitle("座標の編集")
-                .navigationBarItems(
-                    trailing:
-                        Button(action: {
-                            updateCoordinate()
-                        }, label: {
-                            Text("更新")
-                                .font(Font.system(size: 16).bold())
-                        }
-                              )
-                )
+            }
+            .padding()
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("座標の編集")
+            .navigationBarItems(
+                trailing:
+                    Button(action: {
+                        updateCoordinate()
+                    }, label: {
+                        Text("更新")
+                            .font(Font.system(size: 16).bold())
+                    }
+                          )
+            )
         }
     }
     

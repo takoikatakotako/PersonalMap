@@ -43,9 +43,9 @@ struct MapObjectMultiLocationSelecter: View {
         }, content: { item in
             switch item {
             case .locations:
-                PolylineAndPolygonLocationSelecter(coordinates: $coordinates)
+                MultiLocationSelecter(coordinates: $coordinates)
             case .editLocations(let index):
-                AddMapObjectEditLocation(coordinates: $coordinates, index: index)
+                MapObjectEditLocation(coordinates: $coordinates, index: index)
             }
         })
     }

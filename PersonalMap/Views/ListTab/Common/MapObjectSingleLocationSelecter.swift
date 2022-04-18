@@ -27,7 +27,7 @@ struct MapObjectSingleLocationSelecter: View {
                 }
             }
         }.sheet(isPresented: $showingSheet) {
-            PointLocationSelecter(latitudeString: $latitude, longitudeString: $longitude)
+            LocationSelecterBindingStrings(latitudeString: $latitude, longitudeString: $longitude)
         }
     }
 }

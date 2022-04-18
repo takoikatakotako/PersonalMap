@@ -1,7 +1,7 @@
 import SwiftUI
 import MapKit
 
-struct PointLocationSelecter: View {
+struct LocationSelecterBindingStrings: View {
     @Binding var latitudeString: String
     @Binding var longitudeString: String
     
