@@ -27,7 +27,7 @@ struct AddMapPolylineView: View {
             .navigationBarItems(
                 trailing:
                     Button(action: {
-                        viewState.savePolyLine()
+                        viewState.savePolyline()
                     }, label: {
                         Text("登録")
                             .font(Font.system(size: 16).bold())

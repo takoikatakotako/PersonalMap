@@ -15,7 +15,7 @@ class AddMapPolylineViewState: ObservableObject {
         self.mapLayerId = mapLayerId
     }
     
-    func savePolyLine() {
+    func savePolyline() {
         if labelName.isEmpty {
             message = "ラベル名が入力されていません"
             showingAlert = true

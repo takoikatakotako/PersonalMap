@@ -3,71 +3,44 @@ import SwiftUI
 struct EditMapPolygonView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-    @State var polygon: MapPolygon
-    @State var newKey: String = ""
-    @State var newValue: String = ""
+    @StateObject var viewState: EditMapPolygonViewState
     
-    let systemNamesArray: [[String]]
+    init(polygon: MapPolygon) {
+        _viewState = StateObject(wrappedValue: EditMapPolygonViewState(polygon: polygon))
+    }
     
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                TextField("Polygon名", text: $polygon.objectName)
-                    .textFieldStyle(.roundedBorder)
+        ScrollView(showsIndicators: false) {
+            VStack(alignment: .leading) {
+                MapObjectLabelTextField(labelName: $viewState.polygon.objectName)
+                
+                MapObjectSymbolSelecter(symbolName: $viewState.polygon.imageName)
 
-                Image(systemName: polygon.imageName)
-                    .frame(width: 40, height: 40)
+                MapObjectMultiLocationSelecter(coordinates: $viewState.polygon.coordinates)
                 
-                VStack {
-                    ForEach(systemNamesArray, id: \.self) { systemNames in
-                        HStack {
-                            ForEach(systemNames, id: \.self) { imageName in
-                                Button {
-                                    polygon.imageName = imageName
-                                } label: {
-                                    Image(systemName: imageName)
-                                }
-                            }
-                        }
-                    }
-                }
-                
-                Text("Info")
-                ForEach(polygon.items) { info in
-                    HStack {
-                        Text(info.key)
-                        Text(" : ")
-                        Text(info.value)
-                    }
-                }
-                
-                HStack {
-                    TextField("Key", text: $newKey)
-                        .textFieldStyle(.roundedBorder)
-                    TextField("Value", text: $newValue)
-                        .textFieldStyle(.roundedBorder)
-                }
-                .padding()
-                
-                Button {
-                    polygon.items.append(Item(id: UUID(), itemType: .text, key: newKey, value: newValue))
-                    newKey = ""
-                    newValue = ""
-                } label: {
-                    Text("Info追加")
-                }
-                
-                Button {
-                                        
-                    let fileRepository = FileRepository()
-                    try! fileRepository.saveMapObject(mapObject: .polygon(polygon))
-                    
-                    presentationMode.wrappedValue.dismiss()
-                } label: {
-                    Text("更新")
-                }
+                MapObjectItems(items: $viewState.polygon.items)
             }
         }
+        .navigationBarItems(
+            trailing:
+                Button(action: {
+                    viewState.savePolygon()
+                }, label: {
+                    Text("登録")
+                        .font(Font.system(size: 16).bold())
+                })
+        )
+        .alert(isPresented: $viewState.showingAlert)  {
+            Alert(title: Text(""), message: Text(viewState.message), dismissButton: .default(Text("閉じる")))
+        }
+        .onReceive(viewState.$dismiss, perform: { dismiss in
+            if dismiss {
+                presentationMode.wrappedValue.dismiss()
+            }
+        })
+        .padding(.horizontal, 16)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("ポリゴンの編集")
     }
 }
 
