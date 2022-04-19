@@ -8,40 +8,33 @@ struct MapPolygonPreview: View {
     @State var showingAlert = false
 
     var body: some View {
-        VStack {
-            Text(polygon.objectName)
-            
-            ForEach(polygon.coordinates, id: \.self) { coordinate in
-                Text("lat: \(coordinate.latitude), lon: \(coordinate.longitude)にアクセス")
-
-                Button {
-                    if let myCoordinate = LocationManager.shared.lastKnownLocation?.coordinate {
-                        delegate?.showRoute(source: myCoordinate, destination: coordinate)
-                        presentationMode.wrappedValue.dismiss()
-                    } else {
-                        showingAlert = true
-                    }
-
-                } label: {
-                    VStack {
-                        Text("ここへの経路を調べる")
-                    }
+        NavigationView {
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading) {
+                    ObjectNamePreview(objectName: polygon.objectName)
+                    
+                    ObjectLocationsPreview(coordinates: polygon.coordinates, routeButtonTapped: { coordinate in
+                        if let myCoordinate = LocationManager.shared.lastKnownLocation?.coordinate {
+                            delegate?.showRoute(source: myCoordinate, destination: coordinate)
+                            presentationMode.wrappedValue.dismiss()
+                        } else {
+                            showingAlert = true
+                        }
+                    })
+                    
+                    ObjectItemsPreview(items: polygon.items)
                 }
             }
-            
-            ForEach(polygon.items) { info in
-                HStack {
-                    Text(info.key)
-                    Text(": ")
-                    Text(info.value)
-                }
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text("エラー"),
+                      message: Text("現在の座標を取得できませんでした。権限を確認してください"),
+                      dismissButton: .default(Text("閉じる")))
             }
+            .padding(.horizontal, 16)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("エリア詳細")
         }
-        .alert(isPresented: $showingAlert) {
-            Alert(title: Text("エラー"),
-                  message: Text("現在の座標を取得できませんでした。権限を確認してください"),
-                  dismissButton: .default(Text("閉じる")))  // ボタンの変更
-        }
+        
     }
 }
 //

@@ -8,7 +8,6 @@ struct MapPolyLinePreview: View {
     @State var showingAlert = false
     
     var body: some View {
-        
         NavigationView {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading) {
