@@ -3,18 +3,7 @@ import SwiftUI
 struct AddMapLayerView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State private var layerName: String = ""
-    @State private var layerTypeIndex = 0
-    
-    private var layerType: MapObjectType {
-        if layerTypeIndex == 0 {
-            return .point
-        } else if layerTypeIndex == 1 {
-            return .polyLine
-        } else {
-            return .polygon
-        }
-    }
+    @StateObject var viewState = AddMapLayerViewState()
     
     var body: some View {
         NavigationView {
@@ -22,28 +11,24 @@ struct AddMapLayerView: View {
                 Text("レイヤー名")
                     .font(Font.system(size: 20).bold())
                     .padding(.top, 12)
-                TextField("レイヤー名を入力してください", text: $layerName)
+                TextField("レイヤー名を入力してください", text: $viewState.layerName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
                 Text("レイヤーの種類")
                     .font(Font.system(size: 20).bold())
                     .padding(.top, 12)
                 
-                Picker("", selection: $layerTypeIndex) {
+                Picker("", selection: $viewState.layerTypeIndex) {
                     Text("ポイント").tag(0)
                     Text("ライン").tag(1)
                     Text("エリア").tag(2)
                 }
                 .pickerStyle(.segmented)
 
-                
                 HStack {
                     Spacer()
                     Button {
-                        let newMapLayer = MapLayer(id: UUID(), layerName: layerName, mapObjectType: layerType, objectIds: [])
-                        let fileRepository = FileRepository()
-                        try! fileRepository.initialize()
-                        try! fileRepository.saveMapLayer(mapLayer: newMapLayer)
+                        viewState.save()
                         presentationMode.wrappedValue.dismiss()
                     } label: {
                         Text("追加")
@@ -61,6 +46,11 @@ struct AddMapLayerView: View {
                 
                 Spacer()
             }
+            .onReceive(viewState.$dismiss, perform: { dismiss in
+                if dismiss {
+                    presentationMode.wrappedValue.dismiss()
+                }
+            })
             .padding(.horizontal, 16)
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("レイヤーの新規登録")

@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct MapObjectListView: View {
-    @ObservedObject var  viewState: MapObjectListViewState
+    @StateObject var  viewState: MapObjectListViewState
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     init(mapLayer: MapLayer) {
-        viewState = MapObjectListViewState(mapLayer: mapLayer)
+        _viewState = StateObject(wrappedValue: MapObjectListViewState(mapLayer: mapLayer))
     }
     
     var body: some View {
@@ -25,6 +25,7 @@ struct MapObjectListView: View {
                     Text(mapObject.objectName)
                 }
             }
+            .onMove(perform: viewState.rowMove)
             .onDelete(perform: viewState.rowRemove)
         }
         .navigationTitle(viewState.mapLayer.layerName)

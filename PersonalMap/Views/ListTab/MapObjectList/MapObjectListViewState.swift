@@ -1,7 +1,7 @@
 import SwiftUI
 
 class MapObjectListViewState: ObservableObject {
-    let mapLayer: MapLayer
+    var mapLayer: MapLayer
 
     @Published var showingSheet = false
     @Published var mapObjects: [MapObject] = []
@@ -14,6 +14,12 @@ class MapObjectListViewState: ObservableObject {
     
     func onAppear() {
         try? getMapPointObjects()
+    }
+    
+    func rowMove(fromOffsets: IndexSet, toOffset: Int) {
+        mapObjects.move(fromOffsets: fromOffsets, toOffset: toOffset)
+        mapLayer.objectIds = mapObjects.map { $0.id }
+        try! fileRepository.saveMapLayer(mapLayer: mapLayer)
     }
     
     func rowRemove(offsets: IndexSet) {
