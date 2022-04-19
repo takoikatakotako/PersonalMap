@@ -31,6 +31,7 @@
 		8D346850280F1F9000822803 /* ObjectLocationPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D34684F280F1F9000822803 /* ObjectLocationPreview.swift */; };
 		8D346852280F207A00822803 /* ObjectItemsPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D346851280F207A00822803 /* ObjectItemsPreview.swift */; };
 		8D346854280F218F00822803 /* ObjectItemsPreviewSheetItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D346853280F218F00822803 /* ObjectItemsPreviewSheetItem.swift */; };
+		8D346856280F263700822803 /* ObjectLocationsPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D346855280F263700822803 /* ObjectLocationsPreview.swift */; };
 		8D3ABE252714011300584BDC /* AddMapPolygonObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3ABE242714011300584BDC /* AddMapPolygonObjectView.swift */; };
 		8D6FE955270E0F0200FB8D5C /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6FE954270E0F0200FB8D5C /* CustomAnnotation.swift */; };
 		8D6FE959270E1CB000FB8D5C /* MultiLocationSelecter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6FE958270E1CB000FB8D5C /* MultiLocationSelecter.swift */; };
@@ -133,6 +134,7 @@
 		8D34684F280F1F9000822803 /* ObjectLocationPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectLocationPreview.swift; sourceTree = "<group>"; };
 		8D346851280F207A00822803 /* ObjectItemsPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectItemsPreview.swift; sourceTree = "<group>"; };
 		8D346853280F218F00822803 /* ObjectItemsPreviewSheetItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectItemsPreviewSheetItem.swift; sourceTree = "<group>"; };
+		8D346855280F263700822803 /* ObjectLocationsPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectLocationsPreview.swift; sourceTree = "<group>"; };
 		8D3ABE242714011300584BDC /* AddMapPolygonObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapPolygonObjectView.swift; sourceTree = "<group>"; };
 		8D6FE954270E0F0200FB8D5C /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		8D6FE958270E1CB000FB8D5C /* MultiLocationSelecter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLocationSelecter.swift; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 			children = (
 				8D34684C280F175E00822803 /* ObjectNamePreview.swift */,
 				8D34684F280F1F9000822803 /* ObjectLocationPreview.swift */,
+				8D346855280F263700822803 /* ObjectLocationsPreview.swift */,
 				8D346851280F207A00822803 /* ObjectItemsPreview.swift */,
 				8D346853280F218F00822803 /* ObjectItemsPreviewSheetItem.swift */,
 			);
@@ -767,6 +770,7 @@
 				8D346848280F0E4700822803 /* ImageViewerView.swift in Sources */,
 				8DFBAE092709E6DE005B4611 /* MapObjectPreviewViewDelegate.swift in Sources */,
 				8DD13F0225E2389E00CEAB3B /* Item.swift in Sources */,
+				8D346856280F263700822803 /* ObjectLocationsPreview.swift in Sources */,
 				8D6FE95B270E9DEC00FB8D5C /* LocationSelecterView.swift in Sources */,
 				8D34684D280F175E00822803 /* ObjectNamePreview.swift in Sources */,
 				8DAE528B27E9B2FB00C5DF22 /* LocationsSelecterView.swift in Sources */,
