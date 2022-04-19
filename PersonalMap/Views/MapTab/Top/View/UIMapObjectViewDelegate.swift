@@ -4,5 +4,5 @@ import MapKit
 public protocol UIMapObjectViewDelegate: AnyObject {
     func anotationTapped(mapObjectId: UUID)
     func longPressEnded(location: CLLocationCoordinate2D)
-    func xxx()
+    func routeNotFound()
 }

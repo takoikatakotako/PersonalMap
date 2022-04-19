@@ -14,7 +14,7 @@ struct TopView: View {
 
                 viewState.alert = .routeConfirmAlert(UUID(), location)
                 
-            } xxxxx: {
+            } routeNotFound2: {
                 // 見つからなかった
                 viewState.route = nil
                 viewState.alert = .messageAlert(UUID(), "ルートが見つかりませんでした")

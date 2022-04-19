@@ -18,13 +18,11 @@ public class UIMapObjectView: UIView {
         mapView.userTrackingMode = MKUserTrackingMode.followWithHeading
         addSubview(mapView)
         
-                
-        let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(xxxx))
+        let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressEnded))
         mapView.addGestureRecognizer(longTapGesture)
-
     }
 
-    @objc func xxxx(_ sender: UILongPressGestureRecognizer) {
+    @objc func longPressEnded(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .ended {
             let tapPoint = sender.location(in: self)
             let location = mapView.convert(tapPoint, toCoordinateFrom: mapView)
@@ -132,7 +130,7 @@ public class UIMapObjectView: UIView {
         let direction = MKDirections(request: directionsRequest)
         direction.calculate { [weak self] response, error in
             guard let response = response, let route = response.routes.first else {
-                self?.delegate?.xxx()
+                self?.delegate?.routeNotFound()
                 return
             }
             
@@ -215,14 +213,13 @@ public struct MapObjectView: UIViewRepresentable {
     
     let anotationTapped: (_ mapObjectId: UUID) -> Void
     let longPressEnded: (_ location: CLLocationCoordinate2D) -> Void
-    let xxxxx: () -> Void
-    
+    let routeNotFound2: () -> Void
     
     final public class Coordinator: NSObject, UIMapObjectViewDelegate {
         private var mapView: MapObjectView
         let anotationTapped: (_ mapObjectId: UUID) -> Void
         let longPressEnded: (_ location: CLLocationCoordinate2D) -> Void
-        let xxxxx: () -> Void
+        let routeNotFound3: () -> Void
         
         init(
             _ mapView: MapObjectView,
@@ -233,7 +230,7 @@ public struct MapObjectView: UIViewRepresentable {
             self.mapView = mapView
             self.anotationTapped = anotationTapped
             self.longPressEnded = longPressEnded
-            self.xxxxx = xxxxx
+            self.routeNotFound3 = xxxxx
         }
         
         public func anotationTapped(mapObjectId: UUID) {
@@ -244,13 +241,13 @@ public struct MapObjectView: UIViewRepresentable {
             longPressEnded(location)
         }
         
-        public func xxx() {
-            xxxxx()
+        public func routeNotFound() {
+            routeNotFound3()
         }
     }
     
     public func makeCoordinator() -> Coordinator {
-        Coordinator(self, anotationTapped: anotationTapped, longPressEnded: longPressEnded, xxxxx: xxxxx)
+        Coordinator(self, anotationTapped: anotationTapped, longPressEnded: longPressEnded, xxxxx: routeNotFound2)
     }
     
     public func makeUIView(context: Context) -> UIMapObjectView {
