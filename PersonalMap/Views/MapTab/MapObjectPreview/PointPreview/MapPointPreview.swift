@@ -7,52 +7,32 @@ struct MapPointPreview: View {
     @State var showingAlert = false
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("オブジェクト名")
-                .font(Font.system(size: 20).bold())
-                .padding(.top, 12)
-            Text(point.objectName)
-            
-            
-            HStack {
-                VStack {
-                    Text("緯度: \(point.coordinate.latitude)")
-                    Text("経度: \(point.coordinate.longitude)")
-                }
-                Spacer()
-                Button {
-                    if let coordinate = LocationManager.shared.lastKnownLocation?.coordinate {
-                        delegate?.showRoute(source: coordinate, destination: point.coordinate)
-                        presentationMode.wrappedValue.dismiss()
-                    } else {
-                        showingAlert = true
-                    }
-                } label: {
-                    Text("ここにアクセス")
+        NavigationView {
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading) {
+                    ObjectNamePreview(objectName: point.objectName)
+                    
+                    ObjectLocationPreview(latitude: point.coordinate.latitude, longitude: point.coordinate.longitude, routeButtonTapped: {
+                        if let coordinate = LocationManager.shared.lastKnownLocation?.coordinate {
+                            delegate?.showRoute(source: coordinate, destination: point.coordinate)
+                            presentationMode.wrappedValue.dismiss()
+                        } else {
+                            showingAlert = true
+                        }
+                    })
+                    
+                    ObjectItemsPreview(items: point.items)
                 }
             }
-            
-            
-            
-            
-            ForEach(point.items) { info in
-                HStack {
-                    Text(info.key)
-                    Text(": ")
-                    Text(info.value)
-                }
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text("エラー"),
+                      message: Text("現在の座標を取得できませんでした。権限を確認してください"),
+                      dismissButton: .default(Text("閉じる")))
             }
-            
-            Spacer()
+            .padding(.horizontal, 16)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("ポイント詳細")
         }
-        .padding(.horizontal, 16)
-        .alert(isPresented: $showingAlert) {
-            Alert(title: Text("エラー"),
-                  message: Text("現在の座標を取得できませんでした。権限を確認してください"),
-                  dismissButton: .default(Text("閉じる")))  // ボタンの変更
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("ポイント詳細")
     }
 }
 
