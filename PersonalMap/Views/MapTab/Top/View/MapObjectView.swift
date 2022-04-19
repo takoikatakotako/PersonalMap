@@ -225,29 +225,29 @@ public struct MapObjectView: UIViewRepresentable {
             _ mapView: MapObjectView,
             anotationTapped: @escaping (_ mapObjectId: UUID) -> Void,
             longPressEnded: @escaping (_ location: CLLocationCoordinate2D) -> Void,
-            xxxxx: @escaping () -> Void
+            routeNotFound3: @escaping () -> Void
         ) {
             self.mapView = mapView
             self.anotationTapped = anotationTapped
             self.longPressEnded = longPressEnded
-            self.routeNotFound3 = xxxxx
+            self.routeNotFound3 = routeNotFound3
         }
         
         public func anotationTapped(mapObjectId: UUID) {
-            anotationTapped(mapObjectId)
+            self.anotationTapped(mapObjectId)
         }
         
         public func longPressEnded(location: CLLocationCoordinate2D) {
-            longPressEnded(location)
+            self.longPressEnded(location)
         }
         
         public func routeNotFound() {
-            routeNotFound3()
+            self.routeNotFound3()
         }
     }
     
     public func makeCoordinator() -> Coordinator {
-        Coordinator(self, anotationTapped: anotationTapped, longPressEnded: longPressEnded, xxxxx: routeNotFound2)
+        Coordinator(self, anotationTapped: anotationTapped, longPressEnded: longPressEnded, routeNotFound3: routeNotFound2)
     }
     
     public func makeUIView(context: Context) -> UIMapObjectView {
@@ -257,9 +257,6 @@ public struct MapObjectView: UIViewRepresentable {
     }
     
     public func updateUIView(_ uiView: UIMapObjectView, context: Context) {
-        
-        print("Update")
-        
         // Clear
         uiView.removeAllAnnotations()
         uiView.removeAllOverlays()
