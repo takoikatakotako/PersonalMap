@@ -4,10 +4,11 @@ struct URLItemRow: View {
     let item: Item
     var body: some View {
         VStack(alignment: .leading) {
-            Text("項目名: \(item.key)")
-            Text("内容: \(item.value)")
+            Text("\(item.key)")
+                .bold()
+            Text("\(item.value)")
         }
-        .frame(height: 60)
+        .frame(minHeight: 60)
     }
 }
 

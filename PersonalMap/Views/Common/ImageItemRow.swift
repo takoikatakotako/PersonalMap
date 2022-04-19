@@ -12,7 +12,8 @@ struct ImageItemRow: View {
     
     var body: some View {
         HStack {
-            Text("項目名: \(item.key)")
+            Text("\(item.key)")
+                .bold()
             Spacer()
             if let image = image {
                 Image(uiImage: image)
@@ -22,6 +23,7 @@ struct ImageItemRow: View {
                 Text("イメージ")
             }
         }
+        .frame(minHeight: 60)
     }
 }
 
