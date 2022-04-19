@@ -339,6 +339,30 @@
 			path = ImageViewerView;
 			sourceTree = "<group>";
 		};
+		8D346849280F131C00822803 /* PointPreview */ = {
+			isa = PBXGroup;
+			children = (
+				8DFBAE0A2709EA68005B4611 /* MapPointPreview.swift */,
+			);
+			path = PointPreview;
+			sourceTree = "<group>";
+		};
+		8D34684A280F132700822803 /* PolylinePreview */ = {
+			isa = PBXGroup;
+			children = (
+				8DFBAE0C2709EB97005B4611 /* MapPolyLinePreview.swift */,
+			);
+			path = PolylinePreview;
+			sourceTree = "<group>";
+		};
+		8D34684B280F133500822803 /* PolygonPreview */ = {
+			isa = PBXGroup;
+			children = (
+				8DFBAE0E2709EBB5005B4611 /* MapPolygonPreview.swift */,
+			);
+			path = PolygonPreview;
+			sourceTree = "<group>";
+		};
 		8D7D7C1A25D4F00A00BA86BF = {
 			isa = PBXGroup;
 			children = (
@@ -570,10 +594,10 @@
 		8DFBAE072709E6C5005B4611 /* MapObjectPreview */ = {
 			isa = PBXGroup;
 			children = (
+				8D34684B280F133500822803 /* PolygonPreview */,
+				8D34684A280F132700822803 /* PolylinePreview */,
+				8D346849280F131C00822803 /* PointPreview */,
 				8DFBAE082709E6DE005B4611 /* MapObjectPreviewView.swift */,
-				8DFBAE0A2709EA68005B4611 /* MapPointPreview.swift */,
-				8DFBAE0C2709EB97005B4611 /* MapPolyLinePreview.swift */,
-				8DFBAE0E2709EBB5005B4611 /* MapPolygonPreview.swift */,
 			);
 			path = MapObjectPreview;
 			sourceTree = "<group>";

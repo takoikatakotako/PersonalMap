@@ -40,7 +40,19 @@ struct TopView: View {
         }, content: { item in
             switch item {
             case let .showMapObject(id):
-                MapObjectPreviewView(mapObjectId: id, delegate: self)
+                let fileRepository = FileRepository()
+                let mapObject = try! fileRepository.getMapObject(mapObjectId: id)
+                
+                switch mapObject {
+                case .point(let point):
+                    MapPointPreview(point: point, delegate: self)
+                case .polyLine(let polyline):
+                    MapPolyLinePreview(polyline: polyline, delegate: self)
+                case .polygon(let polygon):
+                    MapPolygonPreview(polygon: polygon, delegate: self)
+                }
+                
+                // MapObjectPreviewView(mapObjectId: id, delegate: self)
             }
         })
         .alert(item: $viewState.alert) { item in
