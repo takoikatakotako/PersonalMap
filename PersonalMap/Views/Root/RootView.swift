@@ -20,6 +20,9 @@ struct RootView: View {
                     Text("Config")
                 }
         }
+        .onAppear {
+            LocationManager.shared.start()
+        }
     }
 }
 

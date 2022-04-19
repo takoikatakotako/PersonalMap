@@ -2,7 +2,8 @@ import SwiftUI
 
 struct MapPointPreview: View {
     let point: MapPoint
-    let delegate: MapObjectPreviewViewDelegate?
+    @Binding var route: Route?
+    
     @Environment(\.presentationMode) var presentationMode
     @State var showingAlert = false
     
@@ -14,7 +15,7 @@ struct MapPointPreview: View {
                     
                     ObjectLocationPreview(latitude: point.coordinate.latitude, longitude: point.coordinate.longitude, routeButtonTapped: {
                         if let coordinate = LocationManager.shared.lastKnownLocation?.coordinate {
-                            delegate?.showRoute(source: coordinate, destination: point.coordinate)
+                            route = Route(source: coordinate.locationCoordinate2D, destination: point.coordinate.locationCoordinate2D)
                             presentationMode.wrappedValue.dismiss()
                         } else {
                             showingAlert = true

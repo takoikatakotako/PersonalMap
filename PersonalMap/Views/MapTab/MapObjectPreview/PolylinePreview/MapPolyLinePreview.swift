@@ -2,8 +2,8 @@ import SwiftUI
 
 struct MapPolyLinePreview: View {
     let polyline: MapPolyline
-    let delegate: MapObjectPreviewViewDelegate?
-    
+    @Binding var route: Route?
+
     @Environment(\.presentationMode) var presentationMode
     @State var showingAlert = false
     
@@ -15,7 +15,7 @@ struct MapPolyLinePreview: View {
                     
                     ObjectLocationsPreview(coordinates: polyline.coordinates, routeButtonTapped: { coordinate in
                         if let myCoordinate = LocationManager.shared.lastKnownLocation?.coordinate {
-                            delegate?.showRoute(source: myCoordinate, destination: coordinate)
+                            route = Route(source: myCoordinate.locationCoordinate2D, destination: coordinate.locationCoordinate2D)
                             presentationMode.wrappedValue.dismiss()
                         } else {
                             showingAlert = true

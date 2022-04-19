@@ -257,6 +257,8 @@ public struct MapObjectView: UIViewRepresentable {
     }
     
     public func updateUIView(_ uiView: UIMapObjectView, context: Context) {
+        print("update")
+        
         // Clear
         uiView.removeAllAnnotations()
         uiView.removeAllOverlays()

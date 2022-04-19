@@ -11,20 +11,18 @@ class TopViewState: ObservableObject {
     private let fileRepository = FileRepository()
     
     func onAppear() {
+        var updatedMapObjects: [MapObject] = []
         let mapLayers: [MapLayer] = try! fileRepository.getMapLyers()
-        
-        if !mapObjects.isEmpty {
-            mapObjects = []
-        }
-        
         for mapLayer in mapLayers {
             for mapObjectId in mapLayer.objectIds {
                 let mapObject: MapObject = try! fileRepository.getMapObject(mapObjectId: mapObjectId)
-                mapObjects.append(mapObject)
+                updatedMapObjects.append(mapObject)
             }
         }
         
-        LocationManager.shared.start()
+        if mapObjects != updatedMapObjects {
+            mapObjects = updatedMapObjects
+        }
     }
 }
 

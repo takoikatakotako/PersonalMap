@@ -9,13 +9,8 @@ struct TopView: View {
             MapObjectView(mapObjects: $viewState.mapObjects, mapType: $viewState.mapType, route: $viewState.route) { mapObjectId in
                 viewState.sheet = .showMapObject(mapObjectId)
             } longPressEnded: { location in
-                // long press
-                print(location)
-
                 viewState.alert = .routeConfirmAlert(UUID(), location)
-                
             } routeNotFound2: {
-                // 見つからなかった
                 viewState.route = nil
                 viewState.alert = .messageAlert(UUID(), "ルートが見つかりませんでした")
             }
@@ -45,14 +40,12 @@ struct TopView: View {
                 
                 switch mapObject {
                 case .point(let point):
-                    MapPointPreview(point: point, delegate: self)
+                    MapPointPreview(point: point, route: $viewState.route)
                 case .polyLine(let polyline):
-                    MapPolyLinePreview(polyline: polyline, delegate: self)
+                    MapPolyLinePreview(polyline: polyline, route: $viewState.route)
                 case .polygon(let polygon):
-                    MapPolygonPreview(polygon: polygon, delegate: self)
+                    MapPolygonPreview(polygon: polygon, route: $viewState.route)
                 }
-                
-                // MapObjectPreviewView(mapObjectId: id, delegate: self)
             }
         })
         .alert(item: $viewState.alert) { item in
@@ -80,17 +73,6 @@ struct TopView: View {
         }
     }
 }
-
-
-extension TopView: MapObjectPreviewViewDelegate {
-    func showRoute(source: Coordinate, destination: Coordinate) {
-        print(source)
-        print(destination)
-        
-        viewState.route = Route(source: source.locationCoordinate2D, destination: destination.locationCoordinate2D)
-    }
-}
-
 
 struct TopView_Previews: PreviewProvider {
     static var previews: some View {
