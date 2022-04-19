@@ -1,7 +1,7 @@
 import SwiftUI
 import MapKit
 
-struct MapPolygon: MapObjectProtcol, Equatable {
+struct MapPolygon: MapObjectProtcol, Equatable, Hashable {
     let id: UUID
     var mapObjectType: MapObjectType = .polygon
     var imageName: String

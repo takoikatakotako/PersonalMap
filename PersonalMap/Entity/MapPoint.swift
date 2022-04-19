@@ -1,7 +1,7 @@
 import SwiftUI
 import MapKit
 
-struct MapPoint: MapObjectProtcol, Equatable, Identifiable, Codable {
+struct MapPoint: MapObjectProtcol, Equatable, Identifiable, Codable, Hashable {
     let id: UUID
     var mapObjectType: MapObjectType = .point
     var imageName: String

@@ -1,16 +1,11 @@
 import SwiftUI
 import MapKit
 
-enum TopAlertItem: Identifiable {
-    var id: UUID {
-        switch self {
-        case let .routeConfirmAlert(id, _):
-            return id
-        case let .messageAlert(id, _):
-            return id
-        }
+enum TopAlertItem: Identifiable, Hashable {
+    var id: Self {
+        return self
     }
     
-    case routeConfirmAlert(UUID, CLLocationCoordinate2D)
-    case messageAlert(UUID, String)
+    case routeConfirmAlert(Coordinate)
+    case messageAlert(String)
 }

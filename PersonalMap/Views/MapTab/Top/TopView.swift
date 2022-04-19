@@ -7,26 +7,31 @@ struct TopView: View {
     var body: some View {
         ZStack(alignment: .top) {
             MapObjectView(mapObjects: $viewState.mapObjects, mapType: $viewState.mapType, route: $viewState.route) { mapObjectId in
-                viewState.sheet = .showMapObject(mapObjectId)
+                viewState.anotationTapped(mapObjectId: mapObjectId)
             } longPressEnded: { location in
-                viewState.alert = .routeConfirmAlert(UUID(), location)
+                viewState.longPressEnded(location: location)
             } routeNotFound2: {
-                viewState.route = nil
-                viewState.alert = .messageAlert(UUID(), "ルートが見つかりませんでした")
+                viewState.routeNotFound()
             }
             .ignoresSafeArea(.all, edges: .top)
             
             HStack {
                 Button {
-                    viewState.mapType = .standard
+                    viewState.carButtonTapped()
                 } label: {
                     CommonButton(systemName: "car", active: viewState.mapType == .standard)
                 }
                 
                 Button {
-                    viewState.mapType = .satellite
+                    viewState.airplaneButtonTapped()
                 } label: {
                     CommonButton(systemName: "airplane", active: viewState.mapType == .satellite)
+                }
+                
+                Button {
+                    viewState.minusButtonTapped()
+                } label: {
+                    CommonButton(systemName: "minus.circle", active: true)
                 }
             }
         }
@@ -34,10 +39,7 @@ struct TopView: View {
             
         }, content: { item in
             switch item {
-            case let .showMapObject(id):
-                let fileRepository = FileRepository()
-                let mapObject = try! fileRepository.getMapObject(mapObjectId: id)
-                
+            case let .showMapObject(mapObject):
                 switch mapObject {
                 case .point(let point):
                     MapPointPreview(point: point, route: $viewState.route)
@@ -50,21 +52,16 @@ struct TopView: View {
         })
         .alert(item: $viewState.alert) { item in
             switch item {
-            case let .routeConfirmAlert(_, location):
+            case .routeConfirmAlert(let location):
                 return Alert(
                     title: Text(""),
                     message: Text("現在地から\(location.latitude), \(location.longitude)へのアクセスを表示しますか？"),
                     primaryButton: .default(Text("キャンセル")),
                     secondaryButton: .default(Text("はい"), action: {
-                        
-                        guard let lastKnownLocation: CLLocationCoordinate2D = LocationManager.shared.lastKnownLocation else {
-                            return
-                        }
-                                                
-                        viewState.route = Route(source: lastKnownLocation, destination: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+                        viewState.showRoute(destination: location)
                     })
                 )
-            case let .messageAlert(_, message):
+            case .messageAlert(let message):
                 return Alert(title: Text(""), message: Text(message), dismissButton: .default(Text("閉じる")))
             }
         }

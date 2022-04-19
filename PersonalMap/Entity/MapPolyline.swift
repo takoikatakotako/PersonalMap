@@ -1,7 +1,7 @@
 import SwiftUI
 import MapKit
 
-struct MapPolyline: MapObjectProtcol, Equatable, Identifiable, Codable {
+struct MapPolyline: MapObjectProtcol, Equatable, Identifiable, Codable, Hashable {
     let id: UUID
     var mapObjectType: MapObjectType = .polyLine
     var imageName: String

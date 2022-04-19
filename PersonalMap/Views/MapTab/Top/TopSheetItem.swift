@@ -1,11 +1,8 @@
 import SwiftUI
 
-enum TopSheetItem: Identifiable {
-    var id: UUID {
-        switch self {
-        case let .showMapObject(id):
-            return id
-        }
+enum TopSheetItem: Identifiable, Hashable {
+    var id: Self {
+        return self
     }
-    case showMapObject(UUID)
+    case showMapObject(mapObject: MapObject)
 }

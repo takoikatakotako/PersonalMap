@@ -20,9 +20,45 @@ class TopViewState: ObservableObject {
             }
         }
         
+        // 差分がある場合は更新する
         if mapObjects != updatedMapObjects {
             mapObjects = updatedMapObjects
         }
+    }
+    
+    func anotationTapped(mapObjectId: UUID) {
+        let mapObject = try! fileRepository.getMapObject(mapObjectId: mapObjectId)
+        sheet = .showMapObject(mapObject: mapObject)
+    }
+    
+    func longPressEnded(location: CLLocationCoordinate2D) {
+        alert = .routeConfirmAlert(location.coordinate)
+    }
+    
+    func routeNotFound() {
+        route = nil
+        alert = .messageAlert("ルートが見つかりませんでした")
+    }
+    
+    func carButtonTapped() {
+        mapType = .standard
+    }
+    
+    func airplaneButtonTapped() {
+        mapType = .satellite
+    }
+    
+    func minusButtonTapped() {
+        route = nil
+    }
+    
+    func showRoute(destination: Coordinate) {
+        guard let lastKnownLocation: CLLocationCoordinate2D = LocationManager.shared.lastKnownLocation else {
+            alert = .messageAlert("現在地が取得できませんでした。")
+            return
+        }
+                                
+        route = Route(source: lastKnownLocation, destination: destination.locationCoordinate2D)
     }
 }
 

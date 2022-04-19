@@ -6,7 +6,7 @@ protocol MapObjectProtcol: Codable {
     var objectName: String { get }
 }
 
-enum MapObject: Equatable {
+enum MapObject: Equatable, Hashable {
     case point(MapPoint)
     case polyLine(MapPolyline)
     case polygon(MapPolygon)
