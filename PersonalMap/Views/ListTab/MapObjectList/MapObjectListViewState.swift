@@ -2,12 +2,26 @@ import SwiftUI
 
 class MapObjectListViewState: ObservableObject {
     var mapLayer: MapLayer
-
+    
     @Published var showingSheet = false
     @Published var mapObjects: [MapObject] = []
     
     private let fileRepository = FileRepository()
-
+    
+    var navigationTitle: String {
+        let objectType: String
+        switch mapLayer.mapObjectType {
+        case .point:
+            objectType = "ポイント"
+        case .polyLine:
+            objectType = "ライン"
+        case .polygon:
+            objectType = "エリア"
+        }
+        return "(\(objectType))\(mapLayer.layerName)"
+    }
+    
+    
     init(mapLayer: MapLayer) {
         self.mapLayer = mapLayer
     }

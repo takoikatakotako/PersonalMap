@@ -28,7 +28,7 @@ struct MapObjectListView: View {
             .onMove(perform: viewState.rowMove)
             .onDelete(perform: viewState.rowRemove)
         }
-        .navigationTitle(viewState.mapLayer.layerName)
+        .navigationTitle(viewState.navigationTitle)
         .onAppear {
             viewState.onAppear()
         }
