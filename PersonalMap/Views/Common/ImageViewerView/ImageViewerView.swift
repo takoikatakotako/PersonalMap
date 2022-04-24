@@ -10,7 +10,8 @@ struct ImageViewerView: View {
     
     var body: some View {
         if let image = image {
-            Image(uiImage: image)
+            ImageViewer(uiImage: image)
+                .ignoresSafeArea(.all, edges: .all)
         } else {
             Text("イメージ")
         }

@@ -13,6 +13,8 @@
 		8D2B8F85275228F70071E571 /* TextItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2B8F84275228F70071E571 /* TextItemRow.swift */; };
 		8D2B8F8727522A000071E571 /* URLItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2B8F8627522A000071E571 /* URLItemRow.swift */; };
 		8D2B8F8927522A800071E571 /* ImageItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2B8F8827522A800071E571 /* ImageItemRow.swift */; };
+		8D2BF2DD2815BE1800FC976A /* UIImageViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2BF2DC2815BE1800FC976A /* UIImageViewerView.swift */; };
+		8D2BF2DF2815BE3B00FC976A /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2BF2DE2815BE3B00FC976A /* ImageViewer.swift */; };
 		8D34681E2809BDA300822803 /* ConfigViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D34681D2809BDA300822803 /* ConfigViewState.swift */; };
 		8D3468202809C56400822803 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D34681F2809C56400822803 /* ActivityViewController.swift */; };
 		8D3468222809C68A00822803 /* MyWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3468212809C68A00822803 /* MyWebView.swift */; };
@@ -114,6 +116,8 @@
 		8D2B8F84275228F70071E571 /* TextItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextItemRow.swift; sourceTree = "<group>"; };
 		8D2B8F8627522A000071E571 /* URLItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLItemRow.swift; sourceTree = "<group>"; };
 		8D2B8F8827522A800071E571 /* ImageItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageItemRow.swift; sourceTree = "<group>"; };
+		8D2BF2DC2815BE1800FC976A /* UIImageViewerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewerView.swift; sourceTree = "<group>"; };
+		8D2BF2DE2815BE3B00FC976A /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		8D34681D2809BDA300822803 /* ConfigViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewState.swift; sourceTree = "<group>"; };
 		8D34681F2809C56400822803 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		8D3468212809C68A00822803 /* MyWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWebView.swift; sourceTree = "<group>"; };
@@ -341,6 +345,8 @@
 			isa = PBXGroup;
 			children = (
 				8D346847280F0E4700822803 /* ImageViewerView.swift */,
+				8D2BF2DC2815BE1800FC976A /* UIImageViewerView.swift */,
+				8D2BF2DE2815BE3B00FC976A /* ImageViewer.swift */,
 			);
 			path = ImageViewerView;
 			sourceTree = "<group>";
@@ -772,6 +778,7 @@
 				8D34683D280C7E4A00822803 /* EditMapPolylineViewState.swift in Sources */,
 				8DFBAE0F2709EBB5005B4611 /* MapPolygonPreview.swift in Sources */,
 				8DEC410A26F609520052A7D2 /* RootView.swift in Sources */,
+				8D2BF2DF2815BE3B00FC976A /* ImageViewer.swift in Sources */,
 				8D2B8F8327521B180071E571 /* ImagePicker.swift in Sources */,
 				8DCE59E025EBB38F00D080D2 /* MapObject.swift in Sources */,
 				8D3ABE252714011300584BDC /* AddMapPolygonObjectView.swift in Sources */,
@@ -798,6 +805,7 @@
 				8DFBAE0D2709EB97005B4611 /* MapPolyLinePreview.swift in Sources */,
 				8DFBADF927089F93005B4611 /* Coordinate.swift in Sources */,
 				8D346842280EB2B300822803 /* AddMapLayerViewState.swift in Sources */,
+				8D2BF2DD2815BE1800FC976A /* UIImageViewerView.swift in Sources */,
 				8D29465D2739655B003F6389 /* CommonButton.swift in Sources */,
 				8DEC413226F734F40052A7D2 /* LocationSelecter.swift in Sources */,
 				8D346833280C75A700822803 /* MapObjectMultiLocationSelecter.swift in Sources */,
