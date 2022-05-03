@@ -31,5 +31,6 @@ class ConfigViewState: ObservableObject {
     
     func reset() {
         try! fileRepository.reset()
+        NotificationCenter.default.post(name: .reset, object: nil)
     }
 }

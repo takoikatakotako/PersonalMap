@@ -10,6 +10,10 @@ class TopViewState: ObservableObject {
 
     private let fileRepository = FileRepository()
     
+    init() {
+        NotificationCenter.default.addObserver(self, selector: #selector(resetReceived(notification:)), name: .reset, object: nil)
+    }
+    
     func onAppear() {
         var updatedMapObjects: [MapObject] = []
         let mapLayers: [MapLayer] = try! fileRepository.getMapLyers()
@@ -59,6 +63,16 @@ class TopViewState: ObservableObject {
         }
                                 
         route = Route(source: lastKnownLocation, destination: destination.locationCoordinate2D)
+    }
+    
+    @objc func resetReceived(notification: NSNotification) {
+        DispatchQueue.main.async {
+            self.mapObjects = []
+            self.mapType = .standard
+            self.route = nil
+            self.sheet = nil
+            self.alert = nil
+        }
     }
 }
 
