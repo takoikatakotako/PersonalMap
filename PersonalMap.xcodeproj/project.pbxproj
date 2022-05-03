@@ -290,11 +290,9 @@
 		8D34682D280C0FA900822803 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				8DF609D028218AFE005C384E /* LocationsSelecter */,
+				8DF609CF28218A24005C384E /* LocationSelecter */,
 				8D346843280EBAE300822803 /* MapObjectItems */,
-				8D6FE958270E1CB000FB8D5C /* MultiLocationSelecter.swift */,
-				8DEC413126F734F40052A7D2 /* LocationSelecter.swift */,
-				8D6FE95A270E9DEC00FB8D5C /* LocationSelecterView.swift */,
-				8DAE528A27E9B2FB00C5DF22 /* LocationsSelecterView.swift */,
 				8D346832280C75A700822803 /* MapObjectMultiLocationSelecter.swift */,
 				8D346834280C78BA00822803 /* MapObjectMultiLocationSelecterSheet.swift */,
 				8DB57DA6278169BD00CF6938 /* MapObjectSingleLocationSelecter.swift */,
@@ -563,6 +561,24 @@
 				8DEC412B26F71E4E0052A7D2 /* MapObjectListView.swift */,
 			);
 			path = MapObjectList;
+			sourceTree = "<group>";
+		};
+		8DF609CF28218A24005C384E /* LocationSelecter */ = {
+			isa = PBXGroup;
+			children = (
+				8DEC413126F734F40052A7D2 /* LocationSelecter.swift */,
+				8D6FE95A270E9DEC00FB8D5C /* LocationSelecterView.swift */,
+			);
+			path = LocationSelecter;
+			sourceTree = "<group>";
+		};
+		8DF609D028218AFE005C384E /* LocationsSelecter */ = {
+			isa = PBXGroup;
+			children = (
+				8D6FE958270E1CB000FB8D5C /* MultiLocationSelecter.swift */,
+				8DAE528A27E9B2FB00C5DF22 /* LocationsSelecterView.swift */,
+			);
+			path = LocationsSelecter;
 			sourceTree = "<group>";
 		};
 		8DFBADF227062139005B4611 /* MapTab */ = {

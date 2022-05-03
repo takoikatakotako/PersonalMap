@@ -23,7 +23,14 @@ public class UILocationSelecterView: UIView {
 
         mapView.delegate = self
         addSubview(mapView)
-
+        
+        // 位置情報が取得できる場合は設定する
+        if let location = LocationManager.shared.lastKnownLocation {
+            let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+            let region = MKCoordinateRegion(center: location, span: span)
+            mapView.setRegion(region, animated: true)
+        }
+        
         verticalLine.fillColor = nil
         verticalLine.opacity = 1.0
         verticalLine.strokeColor = UIColor.black.cgColor

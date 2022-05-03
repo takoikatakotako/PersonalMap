@@ -19,7 +19,7 @@ struct LocationSelecter: View {
             .ignoresSafeArea()
             
             HStack {
-                VStack {
+                VStack(alignment: .leading) {
                     if let latitude = latitude,
                        let longitude = longitude {
                         Text("緯度: \(latitude)")
