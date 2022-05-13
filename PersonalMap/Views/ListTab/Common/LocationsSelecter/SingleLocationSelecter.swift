@@ -1,7 +1,7 @@
 import SwiftUI
 import MapKit
 
-struct LocationSelecter: View {
+struct SingleLocationSelecter: View {
     @Binding var latitudeString: String
     @Binding var longitudeString: String
     
@@ -13,7 +13,7 @@ struct LocationSelecter: View {
     
     var body: some View {
         ZStack(alignment: .bottomLeading) {
-            LocationSelecterView(mapObjects: $mapObjects) { location in
+            LocationSelecterView(locations: [], mapObjects: $mapObjects) { location in
                 latitude = location.latitude
                 longitude = location.longitude
             }

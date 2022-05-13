@@ -13,7 +13,7 @@ struct MultiLocationSelecter: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            MultiLocationSelecterView(locations: locations, mapObjects: $mapObjects) { location in
+            LocationSelecterView(locations: locations, mapObjects: $mapObjects) { location in
                  self.location = location
              }
             .ignoresSafeArea()

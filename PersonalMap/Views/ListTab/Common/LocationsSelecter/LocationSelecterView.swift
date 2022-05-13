@@ -1,14 +1,14 @@
 import SwiftUI
 import MapKit
 
-public protocol MultiLocationsSelecterViewDelegate: AnyObject {
+public protocol LocationsSelecterViewDelegate: AnyObject {
     func locationDidSet(location: CLLocationCoordinate2D)
 }
 
-public class UIMultiLocationsSelecterView: UIView {
+public class UILocationsSelecterView: UIView {
     public var locationLimit: Int?
     private lazy var mapView = MKMapView()
-    weak public var delegate: MultiLocationsSelecterViewDelegate?
+    weak public var delegate: LocationsSelecterViewDelegate?
 
     private let verticalLine = CAShapeLayer()
     private let horizontalLine = CAShapeLayer()
@@ -138,23 +138,23 @@ public class UIMultiLocationsSelecterView: UIView {
     }
 }
 
-extension UIMultiLocationsSelecterView: MKMapViewDelegate {
+extension UILocationsSelecterView: MKMapViewDelegate {
     public func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         let location = CLLocationCoordinate2D(latitude: mapView.region.center.latitude, longitude: mapView.region.center.longitude)
         delegate?.locationDidSet(location: location)
     }
 }
 
-public struct MultiLocationSelecterView: UIViewRepresentable {
+public struct LocationSelecterView: UIViewRepresentable {
     let locations: [CLLocationCoordinate2D]
     @Binding var mapObjects: [MapObject]
 
     let locationDidSet: (_ location: CLLocationCoordinate2D) -> Void
-    final public class Coordinator: NSObject, MultiLocationsSelecterViewDelegate {
-        private var mapView: MultiLocationSelecterView
+    final public class Coordinator: NSObject, LocationsSelecterViewDelegate {
+        private var mapView: LocationSelecterView
         let locationDidSet: (_ location: CLLocationCoordinate2D) -> Void
 
-        init(_ mapView: MultiLocationSelecterView, locationDidSet: @escaping (_ location: CLLocationCoordinate2D) -> Void) {
+        init(_ mapView: LocationSelecterView, locationDidSet: @escaping (_ location: CLLocationCoordinate2D) -> Void) {
             self.mapView = mapView
             self.locationDidSet = locationDidSet
         }
@@ -168,13 +168,13 @@ public struct MultiLocationSelecterView: UIViewRepresentable {
         Coordinator(self, locationDidSet: locationDidSet)
     }
 
-    public func makeUIView(context: Context) -> UIMultiLocationsSelecterView {
-        let locationsSelectView = UIMultiLocationsSelecterView()
+    public func makeUIView(context: Context) -> UILocationsSelecterView {
+        let locationsSelectView = UILocationsSelecterView()
         locationsSelectView.delegate = context.coordinator
         return locationsSelectView
     }
 
-    public func updateUIView(_ uiView: UIMultiLocationsSelecterView, context: Context) {
+    public func updateUIView(_ uiView: UILocationsSelecterView, context: Context) {
         // clear
         uiView.removeAllAnnotations()
         uiView.removeAllOverlays()

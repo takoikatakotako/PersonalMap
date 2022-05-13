@@ -45,7 +45,7 @@ struct MapObjectEditLocation: View {
             .sheet(isPresented: $showingSheet, onDismiss: {
                 
             }, content: {
-                LocationSelecter(latitudeString: $latitudeString, longitudeString: $longitudeString)
+                SingleLocationSelecter(latitudeString: $latitudeString, longitudeString: $longitudeString)
             })
             .onAppear {
                 latitudeString = coordinates[index].latitude.description
