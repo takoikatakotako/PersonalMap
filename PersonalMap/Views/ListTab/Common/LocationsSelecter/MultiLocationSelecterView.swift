@@ -1,18 +1,18 @@
 import SwiftUI
 import MapKit
-import UIKit
 
-public protocol LocationSelecterViewDelegate: AnyObject {
+public protocol MultiLocationsSelecterViewDelegate: AnyObject {
     func locationDidSet(location: CLLocationCoordinate2D)
 }
 
-public class UILocationSelecterView: UIView {
+public class UIMultiLocationsSelecterView: UIView {
     public var locationLimit: Int?
     private lazy var mapView = MKMapView()
-    weak public var delegate: LocationSelecterViewDelegate?
+    weak public var delegate: MultiLocationsSelecterViewDelegate?
 
     private let verticalLine = CAShapeLayer()
     private let horizontalLine = CAShapeLayer()
+
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -30,7 +30,7 @@ public class UILocationSelecterView: UIView {
             let region = MKCoordinateRegion(center: location, span: span)
             mapView.setRegion(region, animated: true)
         }
-        
+
         verticalLine.fillColor = nil
         verticalLine.opacity = 1.0
         verticalLine.strokeColor = UIColor.black.cgColor
@@ -117,6 +117,14 @@ public class UILocationSelecterView: UIView {
         mapView.addAnnotation(annotation)
     }
     
+    // Anotation
+    func addAnotation(location: CLLocationCoordinate2D) {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location
+        annotation.title = "lat: \(location.latitude), lon: \(location.longitude)"
+        mapView.addAnnotation(annotation)
+    }
+    
     // Remove All Annotation
     func removeAllAnnotations() {
         mapView.removeAnnotations(mapView.annotations)
@@ -130,22 +138,23 @@ public class UILocationSelecterView: UIView {
     }
 }
 
-extension UILocationSelecterView: MKMapViewDelegate {
+extension UIMultiLocationsSelecterView: MKMapViewDelegate {
     public func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         let location = CLLocationCoordinate2D(latitude: mapView.region.center.latitude, longitude: mapView.region.center.longitude)
         delegate?.locationDidSet(location: location)
     }
 }
 
-public struct LocationSelecterView: UIViewRepresentable {
+public struct MultiLocationSelecterView: UIViewRepresentable {
+    let locations: [CLLocationCoordinate2D]
     @Binding var mapObjects: [MapObject]
-    
+
     let locationDidSet: (_ location: CLLocationCoordinate2D) -> Void
-    final public class Coordinator: NSObject, LocationSelecterViewDelegate {
-        private var mapView: LocationSelecterView
+    final public class Coordinator: NSObject, MultiLocationsSelecterViewDelegate {
+        private var mapView: MultiLocationSelecterView
         let locationDidSet: (_ location: CLLocationCoordinate2D) -> Void
 
-        init(_ mapView: LocationSelecterView, locationDidSet: @escaping (_ location: CLLocationCoordinate2D) -> Void) {
+        init(_ mapView: MultiLocationSelecterView, locationDidSet: @escaping (_ location: CLLocationCoordinate2D) -> Void) {
             self.mapView = mapView
             self.locationDidSet = locationDidSet
         }
@@ -159,20 +168,22 @@ public struct LocationSelecterView: UIViewRepresentable {
         Coordinator(self, locationDidSet: locationDidSet)
     }
 
-    public func makeUIView(context: Context) -> UILocationSelecterView {
-        let locationsSelectView = UILocationSelecterView()
+    public func makeUIView(context: Context) -> UIMultiLocationsSelecterView {
+        let locationsSelectView = UIMultiLocationsSelecterView()
         locationsSelectView.delegate = context.coordinator
         return locationsSelectView
     }
 
-    public func updateUIView(_ uiView: UILocationSelecterView, context: Context) {
-        // Clear
+    public func updateUIView(_ uiView: UIMultiLocationsSelecterView, context: Context) {
+        // clear
         uiView.removeAllAnnotations()
         uiView.removeAllOverlays()
         
-//        // Set
-//        uiView.changeMapType(mapType: mapType)
-//
+        // add
+        for location in locations {
+            uiView.addAnotation(location: location)
+        }
+        
         for mapObject in mapObjects {
             switch mapObject {
             case let .point(point):
@@ -183,9 +194,5 @@ public struct LocationSelecterView: UIViewRepresentable {
                 uiView.addPolygon(polygon: polygon)
             }
         }
-//
-//        if let route = route {
-//            uiView.drawRoute(route: route)
-//        }
     }
 }

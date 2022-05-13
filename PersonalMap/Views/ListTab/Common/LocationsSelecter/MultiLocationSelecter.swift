@@ -9,10 +9,11 @@ struct MultiLocationSelecter: View {
     @State private var mapType: MKMapType = MKMapType.standard
     @State private var location: CLLocationCoordinate2D?
     @State private var locations: [CLLocationCoordinate2D] = []
+    @State private var mapObjects: [MapObject] = []
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            LocationsSelecterView(locations: locations) { location in
+            MultiLocationSelecterView(locations: locations, mapObjects: $mapObjects) { location in
                  self.location = location
              }
             .ignoresSafeArea()
@@ -50,6 +51,23 @@ struct MultiLocationSelecter: View {
               }
               .padding(.horizontal, 16)
               .padding(.bottom, 60)
+        }
+        .onAppear {
+            var updatedMapObjects: [MapObject] = []
+
+            let fileRepository = FileRepository()
+            let mapLayers: [MapLayer] = try! fileRepository.getMapLyers()
+            for mapLayer in mapLayers {
+                for mapObjectId in mapLayer.objectIds {
+                    let mapObject: MapObject = try! fileRepository.getMapObject(mapObjectId: mapObjectId)
+                    updatedMapObjects.append(mapObject)
+                }
+            }
+            
+            // 差分がある場合は更新する
+            if mapObjects != updatedMapObjects {
+                mapObjects = updatedMapObjects
+            }
         }
     }
 }
