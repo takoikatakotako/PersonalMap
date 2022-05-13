@@ -34,13 +34,15 @@ struct MapObjectItems: View {
                         }
                     case .image:
                         Button {
-                            sheet = .shoeImage(imageName: item.value)
+                            sheet = .showImage(imageName: item.value)
                         } label: {
                             VStack(alignment: .leading) {
                                 Text(item.key)
                                     .bold()
-                                Text(item.value)
-                                    .multilineTextAlignment(.leading)
+                                Image(uiImage: imageNameToUIImage(imageName: item.value))
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 60, height: 60)
                             }
                         }
                     }
@@ -61,7 +63,7 @@ struct MapObjectItems: View {
             switch item {
             case .showItemList:
                 ItemListView(items: $items)
-            case let .shoeImage(imageName: imageName):
+            case let .showImage(imageName: imageName):
                 ImageViewerView(imageName: imageName)
             }
         }
@@ -71,6 +73,11 @@ struct MapObjectItems: View {
         if let url = URL(string: urlString) {
             UIApplication.shared.open(url, completionHandler: nil)
         }
+    }
+    
+    private func imageNameToUIImage(imageName: String) -> UIImage {
+        let fileRepository = FileRepository()
+        return fileRepository.getImageData(fileName: imageName) ?? UIImage()
     }
 }
 

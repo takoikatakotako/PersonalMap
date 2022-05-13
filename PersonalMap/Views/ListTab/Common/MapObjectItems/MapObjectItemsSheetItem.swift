@@ -5,5 +5,5 @@ enum MapObjectItemsSheetItem: Hashable, Identifiable {
         return self
     }
     case showItemList
-    case shoeImage(imageName: String)
+    case showImage(imageName: String)
 }
