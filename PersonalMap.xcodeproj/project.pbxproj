@@ -458,6 +458,15 @@
 			path = AddMapObject;
 			sourceTree = "<group>";
 		};
+		8DBFEA7F282FF0AA00B55C95 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8D34681F2809C56400822803 /* ActivityViewController.swift */,
+				8D3468212809C68A00822803 /* MyWebView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		8DD13EF225E2307F00CEAB3B /* Entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -529,10 +538,9 @@
 		8DEC411026F60BC90052A7D2 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				8DBFEA7F282FF0AA00B55C95 /* View */,
 				8DEC411126F60BD50052A7D2 /* ConfigView.swift */,
 				8D34681D2809BDA300822803 /* ConfigViewState.swift */,
-				8D34681F2809C56400822803 /* ActivityViewController.swift */,
-				8D3468212809C68A00822803 /* MyWebView.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
