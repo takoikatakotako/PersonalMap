@@ -4,6 +4,7 @@ class AddMapPointViewState: ObservableObject {
     let mapLayerId: UUID
     
     @Published var labelName: String = ""
+    @Published var hidden: Bool = false
     @Published var symbolName: String = "star.circle"
     @Published var longitude: String = ""
     @Published var latitude: String = ""
@@ -38,7 +39,7 @@ class AddMapPointViewState: ObservableObject {
             return
         }
         
-        let mapObject: MapObject = .point(MapPoint(id: UUID(), imageName: symbolName, isHidden: false, objectName: labelName, coordinate: Coordinate(latitude: latitude, longitude: longitude), items: items))
+        let mapObject: MapObject = .point(MapPoint(id: UUID(), imageName: symbolName, isHidden: hidden, objectName: labelName, coordinate: Coordinate(latitude: latitude, longitude: longitude), items: items))
         let fileRepository = FileRepository()
         try! fileRepository.initialize()
         try! fileRepository.saveMapObject(mapObject: mapObject)

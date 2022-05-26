@@ -17,6 +17,8 @@ struct AddMapPolylineView: View {
                 VStack(alignment: .leading) {
                     MapObjectLabelTextField(labelName: $viewState.labelName)
                     
+                    MapObjectHiddenSelecter(hidden: $viewState.hidden)
+                    
                     MapObjectSymbolSelecter(symbolName: $viewState.symbolName)
 
                     MapObjectMultiLocationSelecter(coordinates: $viewState.coordinates)

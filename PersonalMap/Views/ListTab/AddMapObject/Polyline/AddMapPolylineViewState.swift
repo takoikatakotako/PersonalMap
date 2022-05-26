@@ -4,6 +4,7 @@ class AddMapPolylineViewState: ObservableObject {
     let mapLayerId: UUID
     
     @Published var labelName: String = ""
+    @Published var hidden: Bool = false
     @Published var symbolName: String = "star.circle"
     @Published var coordinates: [Coordinate] = []
     @Published var items: [Item] = []
@@ -30,7 +31,7 @@ class AddMapPolylineViewState: ObservableObject {
             return
         }
         
-        let mapObject: MapObject = .polyLine(MapPolyline(id: UUID(), imageName: symbolName, isHidden: false, objectName: labelName, coordinates: coordinates, items: items))
+        let mapObject: MapObject = .polyLine(MapPolyline(id: UUID(), imageName: symbolName, isHidden: hidden, objectName: labelName, coordinates: coordinates, items: items))
         
         let fileRepository = FileRepository()
         try! fileRepository.initialize()

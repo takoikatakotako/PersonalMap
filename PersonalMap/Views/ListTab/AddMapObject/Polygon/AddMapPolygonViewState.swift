@@ -3,6 +3,7 @@ import SwiftUI
 class AddMapPolygonViewState: ObservableObject {
     let mapLayerId: UUID
     @Published var labelName: String = ""
+    @Published var hidden: Bool = false
     @Published var symbolName: String = "star.circle"
     @Published var coordinates: [Coordinate] = []
     @Published var items: [Item] = []
@@ -29,7 +30,7 @@ class AddMapPolygonViewState: ObservableObject {
         
         
         // Polygon
-        let polygon: MapPolygon = MapPolygon(id: UUID(), mapObjectType: .polygon, imageName: symbolName, isHidden: false, objectName: labelName, coordinates: coordinates, items: [])
+        let polygon: MapPolygon = MapPolygon(id: UUID(), mapObjectType: .polygon, imageName: symbolName, isHidden: hidden, objectName: labelName, coordinates: coordinates, items: [])
         let mapObject: MapObject = .polygon(polygon)
         let fileRepository = FileRepository()
         try! fileRepository.initialize()
