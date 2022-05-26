@@ -267,6 +267,10 @@ public struct MapObjectView: UIViewRepresentable {
         uiView.changeMapType(mapType: mapType)
         
         for mapObject in mapObjects {
+            if mapObject.isHidden {
+                continue
+            }
+            
             switch mapObject {
             case let .point(point):
                 uiView.addPoint(point: point)

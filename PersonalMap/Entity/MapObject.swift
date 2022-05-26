@@ -22,6 +22,17 @@ enum MapObject: Equatable, Hashable {
         }
     }
     
+    var isHidden: Bool {
+        switch self {
+        case let .point(point):
+            return point.isHidden
+        case let .polyLine(line):
+            return line.isHidden
+        case let .polygon(polygon):
+            return polygon.isHidden
+        }
+    }
+    
     func getValue() throws -> Data {
         switch self {
         case let .point(point):

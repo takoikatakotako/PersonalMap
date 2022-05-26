@@ -14,6 +14,8 @@ struct EditMapPolylineView: View {
             VStack(alignment: .leading) {
                 MapObjectLabelTextField(labelName: $viewState.polyline.objectName)
                 
+                MapObjectHiddenSelecter(hidden: $viewState.polyline.isHidden)
+                
                 MapObjectSymbolSelecter(symbolName: $viewState.polyline.imageName)
                 
                 MapObjectMultiLocationSelecter(coordinates: $viewState.polyline.coordinates)

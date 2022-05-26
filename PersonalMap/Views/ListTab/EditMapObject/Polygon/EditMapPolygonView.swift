@@ -14,6 +14,8 @@ struct EditMapPolygonView: View {
             VStack(alignment: .leading) {
                 MapObjectLabelTextField(labelName: $viewState.polygon.objectName)
                 
+                MapObjectHiddenSelecter(hidden: $viewState.polygon.isHidden)
+                
                 MapObjectSymbolSelecter(symbolName: $viewState.polygon.imageName)
 
                 MapObjectMultiLocationSelecter(coordinates: $viewState.polygon.coordinates)

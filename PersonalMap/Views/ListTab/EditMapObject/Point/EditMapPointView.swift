@@ -14,6 +14,8 @@ struct EditMapPointView: View {
             VStack(alignment: .leading) {
                 MapObjectLabelTextField(labelName: $viewState.point.objectName)
                 
+                MapObjectHiddenSelecter(hidden: $viewState.point.isHidden)
+                
                 MapObjectSymbolSelecter(symbolName: $viewState.point.imageName)
                 
                 MapObjectSingleLocationSelecter(latitude: $viewState.latitudeString, longitude: $viewState.longnitudeString)
