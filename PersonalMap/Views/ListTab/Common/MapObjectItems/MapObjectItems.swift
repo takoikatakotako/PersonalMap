@@ -45,6 +45,19 @@ struct MapObjectItems: View {
                                     .frame(width: 60, height: 60)
                             }
                         }
+                    case .pdf:
+                        Button {
+                            
+                        } label: {
+                            VStack(alignment: .leading) {
+                                Text(item.key)
+                                    .bold()
+                                Image(uiImage: imageNameToUIImage(imageName: item.value))
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 60, height: 60)
+                            }
+                        }
                     }
                 }
             }

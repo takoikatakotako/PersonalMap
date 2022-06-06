@@ -41,6 +41,17 @@ struct ObjectItemsPreview: View {
                                 .multilineTextAlignment(.leading)
                         }
                     }
+                case .pdf:
+                    Button {
+                        // sheet = .shoeImage(imageName: item.value)
+                    } label: {
+                        VStack(alignment: .leading) {
+                            Text(item.key)
+                                .bold()
+                            Text(item.value)
+                                .multilineTextAlignment(.leading)
+                        }
+                    }
                 }
             }
         }

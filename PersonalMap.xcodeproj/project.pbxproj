@@ -35,6 +35,11 @@
 		8D346854280F218F00822803 /* ObjectItemsPreviewSheetItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D346853280F218F00822803 /* ObjectItemsPreviewSheetItem.swift */; };
 		8D346856280F263700822803 /* ObjectLocationsPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D346855280F263700822803 /* ObjectLocationsPreview.swift */; };
 		8D3ABE252714011300584BDC /* AddMapPolygonObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3ABE242714011300584BDC /* AddMapPolygonObjectView.swift */; };
+		8D5280F6284E422F003875A0 /* AddItemTextContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5280F5284E422F003875A0 /* AddItemTextContent.swift */; };
+		8D5280F8284E42A9003875A0 /* AddItemUrlContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5280F7284E42A9003875A0 /* AddItemUrlContent.swift */; };
+		8D5280FA284E4312003875A0 /* AddItemImageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5280F9284E4312003875A0 /* AddItemImageContent.swift */; };
+		8D5280FC284E4413003875A0 /* AddItemPDFContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5280FB284E4413003875A0 /* AddItemPDFContent.swift */; };
+		8D5280FE284E45AB003875A0 /* AddItemViewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5280FD284E45AB003875A0 /* AddItemViewSheet.swift */; };
 		8D6FE955270E0F0200FB8D5C /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6FE954270E0F0200FB8D5C /* CustomAnnotation.swift */; };
 		8D6FE959270E1CB000FB8D5C /* MultiLocationSelecter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6FE958270E1CB000FB8D5C /* MultiLocationSelecter.swift */; };
 		8D7D7C2725D4F00A00BA86BF /* PersonalMapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D7C2625D4F00A00BA86BF /* PersonalMapApp.swift */; };
@@ -139,6 +144,11 @@
 		8D346853280F218F00822803 /* ObjectItemsPreviewSheetItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectItemsPreviewSheetItem.swift; sourceTree = "<group>"; };
 		8D346855280F263700822803 /* ObjectLocationsPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectLocationsPreview.swift; sourceTree = "<group>"; };
 		8D3ABE242714011300584BDC /* AddMapPolygonObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapPolygonObjectView.swift; sourceTree = "<group>"; };
+		8D5280F5284E422F003875A0 /* AddItemTextContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemTextContent.swift; sourceTree = "<group>"; };
+		8D5280F7284E42A9003875A0 /* AddItemUrlContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemUrlContent.swift; sourceTree = "<group>"; };
+		8D5280F9284E4312003875A0 /* AddItemImageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemImageContent.swift; sourceTree = "<group>"; };
+		8D5280FB284E4413003875A0 /* AddItemPDFContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemPDFContent.swift; sourceTree = "<group>"; };
+		8D5280FD284E45AB003875A0 /* AddItemViewSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewSheet.swift; sourceTree = "<group>"; };
 		8D6FE954270E0F0200FB8D5C /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		8D6FE958270E1CB000FB8D5C /* MultiLocationSelecter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLocationSelecter.swift; sourceTree = "<group>"; };
 		8D7D7C2325D4F00A00BA86BF /* PersonalMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PersonalMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,10 +249,10 @@
 		8D29465B2739653A003F6389 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				8D5280F4284E41A1003875A0 /* AddItemView */,
 				8D346846280F0E3400822803 /* ImageViewerView */,
 				8D29465C2739655B003F6389 /* CommonButton.swift */,
 				8DD51D9927462929009269F1 /* SymbolSelecter.swift */,
-				8DD51D9B274A8D34009269F1 /* AddItemView.swift */,
 				8DD51D9D274A975C009269F1 /* ItemListView.swift */,
 				8D2B8F8227521B180071E571 /* ImagePicker.swift */,
 				8D2B8F84275228F70071E571 /* TextItemRow.swift */,
@@ -385,6 +395,19 @@
 				8D346853280F218F00822803 /* ObjectItemsPreviewSheetItem.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		8D5280F4284E41A1003875A0 /* AddItemView */ = {
+			isa = PBXGroup;
+			children = (
+				8DD51D9B274A8D34009269F1 /* AddItemView.swift */,
+				8D5280F5284E422F003875A0 /* AddItemTextContent.swift */,
+				8D5280F7284E42A9003875A0 /* AddItemUrlContent.swift */,
+				8D5280F9284E4312003875A0 /* AddItemImageContent.swift */,
+				8D5280FB284E4413003875A0 /* AddItemPDFContent.swift */,
+				8D5280FD284E45AB003875A0 /* AddItemViewSheet.swift */,
+			);
+			path = AddItemView;
 			sourceTree = "<group>";
 		};
 		8D7D7C1A25D4F00A00BA86BF = {
@@ -776,6 +799,7 @@
 				8DBE18D7283F51CA000AA794 /* MapObjectHiddenSelecter.swift in Sources */,
 				8DE5AE5F25D8FD8400726DC1 /* AddInfoView.swift in Sources */,
 				8DD51DB7274C9FC0009269F1 /* ItemType.swift in Sources */,
+				8D5280FC284E4413003875A0 /* AddItemPDFContent.swift in Sources */,
 				8DEC412626F63DE70052A7D2 /* InternalFileError.swift in Sources */,
 				8DB0353A27AF9EC0004B800F /* TopViewState.swift in Sources */,
 				8D346850280F1F9000822803 /* ObjectLocationPreview.swift in Sources */,
@@ -791,6 +815,7 @@
 				8DFBAE092709E6DE005B4611 /* MapObjectPreviewViewDelegate.swift in Sources */,
 				8DD13F0225E2389E00CEAB3B /* Item.swift in Sources */,
 				8D346856280F263700822803 /* ObjectLocationsPreview.swift in Sources */,
+				8D5280FA284E4312003875A0 /* AddItemImageContent.swift in Sources */,
 				8D34684D280F175E00822803 /* ObjectNamePreview.swift in Sources */,
 				8DAE528B27E9B2FB00C5DF22 /* LocationSelecterView.swift in Sources */,
 				8DD51D9E274A975C009269F1 /* ItemListView.swift in Sources */,
@@ -828,8 +853,10 @@
 				8D29465D2739655B003F6389 /* CommonButton.swift in Sources */,
 				8DEC413226F734F40052A7D2 /* SingleLocationSelecter.swift in Sources */,
 				8D346833280C75A700822803 /* MapObjectMultiLocationSelecter.swift in Sources */,
+				8D5280F6284E422F003875A0 /* AddItemTextContent.swift in Sources */,
 				8D346854280F218F00822803 /* ObjectItemsPreviewSheetItem.swift in Sources */,
 				8DFBAE0027098498005B4611 /* EditMapPointView.swift in Sources */,
+				8D5280FE284E45AB003875A0 /* AddItemViewSheet.swift in Sources */,
 				8DD51D9A27462929009269F1 /* SymbolSelecter.swift in Sources */,
 				8DA5CD8727FDEAE9006B8FB4 /* TopSheetItem.swift in Sources */,
 				8D6FE959270E1CB000FB8D5C /* MultiLocationSelecter.swift in Sources */,
@@ -852,6 +879,7 @@
 				8DCE59DB25EBB36400D080D2 /* MapPolyline.swift in Sources */,
 				8DEC410C26F60B9B0052A7D2 /* TopView.swift in Sources */,
 				8DFC44E126FF7CC400021E45 /* UIMapObjectViewDelegate.swift in Sources */,
+				8D5280F8284E42A9003875A0 /* AddItemUrlContent.swift in Sources */,
 				8DB57DA927816AE000CF6938 /* MapObjectItems.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

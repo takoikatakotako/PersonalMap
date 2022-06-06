@@ -9,7 +9,7 @@ struct AddItemView: View {
     @State private var image: UIImage?
     @State private var showingAlert = false
     @State private var alertMessage = ""
-    @State private var showingSheet = false
+    @State private var showingSheet: AddItemViewSheet?
 
     @Binding var items: [Item]
     
@@ -20,8 +20,10 @@ struct AddItemView: View {
             return .text
         } else if selection == 1 {
             return .url
-        } else {
+        } else if selection == 2 {
             return .image
+        } else {
+            return .pdf
         }
     }
 
@@ -36,6 +38,7 @@ struct AddItemView: View {
                     Text("テキスト").tag(0)
                     Text("URL").tag(1)
                     Text("画像").tag(2)
+                    Text("PDF").tag(3)
                 }
                 .pickerStyle(.segmented)
                 
@@ -51,32 +54,13 @@ struct AddItemView: View {
                     .padding(.top, 12)
                 
                 if itemType == .text {
-                    TextField("テキストを入力してください", text: $value)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    AddItemTextContent(value: $value)
                 } else if itemType == .url {
-                    TextField("URLを入力してください", text: $value)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    AddItemUrlContent(value: $value)
                 } else if itemType == .image {
-                    HStack {
-                        if let image = image {
-                            Image(uiImage: image)
-                                .resizable()
-                                .frame(width: 120, height: 120)
-                        } else {
-                            Text("No Image")
-                                .foregroundColor(Color.white)
-                                .font(Font.system(size:20).bold())
-                                .frame(width: 120, height: 120)
-                                .background(Color(UIColor.lightGray))
-                        }
-                        
-                        Spacer()
-                        Button {
-                            showingSheet = true
-                        } label: {
-                            Text("画像を設定")
-                        }
-                    }
+                    AddItemImageContent(image: $image, showingSheet: $showingSheet)
+                } else if itemType == .pdf {
+                    AddItemPDFContent(image: $image, showingSheet: $showingSheet)
                 }
                 
                 Spacer()
@@ -98,6 +82,8 @@ struct AddItemView: View {
                         saveUrlItem()
                     case .image:
                         saveImageItem()
+                    case .pdf:
+                        print("sss")
                     }
                 }, label: {
                     Text("登録")
@@ -107,9 +93,7 @@ struct AddItemView: View {
             .alert(isPresented: $showingAlert)  {
                 Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("閉じる")))
             }
-            .sheet(isPresented: $showingSheet) {
-                
-            } content: {
+            .sheet(item: $showingSheet) { item in
                 ImagePicker(image: $image)
             }
             .navigationTitle("項目の追加")
