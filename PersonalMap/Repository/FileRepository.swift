@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import PDFKit
 
 struct FileRepository {
     let layerDirectoryName = "layer"
@@ -107,8 +108,13 @@ struct FileRepository {
     }
     
     func saveImageData(data: Data, fileName: String) throws {
-        let fileUrl = try getObjectDirectoryUrl().appendingPathComponent(fileName)
+        let fileUrl = try getImageDirectoryUrl().appendingPathComponent(fileName)
         try data.write(to: fileUrl, options: .atomic)
+    }
+    
+    func savePDFDocument(document: PDFDocument, fileName: String) throws {
+        let fileUrl = try getPDFDirectoryUrl().appendingPathComponent(fileName)
+        document.write(to: fileUrl)
     }
         
     func getMapObject(mapObjectId: UUID) throws -> MapObject {
@@ -131,9 +137,19 @@ struct FileRepository {
     
     func getImageData(fileName: String) -> UIImage? {
         do {
-            let fileUrl = try getObjectDirectoryUrl().appendingPathComponent(fileName)
+            let fileUrl = try getImageDirectoryUrl().appendingPathComponent(fileName)
             let data = try Data(contentsOf: fileUrl)
             return UIImage(data: data)
+        } catch {
+            return nil
+        }
+    }
+    
+    func getPDFDocument(fileName: String) -> PDFDocument? {
+        do {
+            let fileUrl = try getPDFDirectoryUrl().appendingPathComponent(fileName)
+            let pdfDocument = PDFDocument(url: fileUrl)
+            return pdfDocument
         } catch {
             return nil
         }
@@ -176,14 +192,6 @@ struct FileRepository {
         
         try initialize()
     }
-    
-    
-    func copyToPDFFolder(sourceUrl: URL) throws {
-        let url = try getLayerDirectoryUrl().appendingPathComponent("xxx.pdf")
-        try FileManager.default.copyItem(at: sourceUrl, to: url)
-        
-    }
-    
     
     /// Private Methods
     

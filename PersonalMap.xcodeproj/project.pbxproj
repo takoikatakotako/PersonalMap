@@ -50,6 +50,7 @@
 		8D82550A2607272700D73A6D /* MapPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8255092607272700D73A6D /* MapPolygon.swift */; };
 		8DA485552857202F00C32F3D /* AddItemViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA485542857202F00C32F3D /* AddItemViewState.swift */; };
 		8DA4855728586D1F00C32F3D /* PDFPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA4855628586D1F00C32F3D /* PDFPickerView.swift */; };
+		8DA4855C2858CA3900C32F3D /* PDFItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA4855B2858CA3800C32F3D /* PDFItemRow.swift */; };
 		8DA5CD8327FD8A97006B8FB4 /* MapObjectListViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5CD8227FD8A97006B8FB4 /* MapObjectListViewState.swift */; };
 		8DA5CD8527FD8B00006B8FB4 /* MapLayerListViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5CD8427FD8B00006B8FB4 /* MapLayerListViewState.swift */; };
 		8DA5CD8727FDEAE9006B8FB4 /* TopSheetItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5CD8627FDEAE9006B8FB4 /* TopSheetItem.swift */; };
@@ -167,6 +168,7 @@
 		8D8255092607272700D73A6D /* MapPolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPolygon.swift; sourceTree = "<group>"; };
 		8DA485542857202F00C32F3D /* AddItemViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewState.swift; sourceTree = "<group>"; };
 		8DA4855628586D1F00C32F3D /* PDFPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFPickerView.swift; sourceTree = "<group>"; };
+		8DA4855B2858CA3800C32F3D /* PDFItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFItemRow.swift; sourceTree = "<group>"; };
 		8DA5CD8227FD8A97006B8FB4 /* MapObjectListViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectListViewState.swift; sourceTree = "<group>"; };
 		8DA5CD8427FD8B00006B8FB4 /* MapLayerListViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLayerListViewState.swift; sourceTree = "<group>"; };
 		8DA5CD8627FDEAE9006B8FB4 /* TopSheetItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSheetItem.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				8D2B8F8827522A800071E571 /* ImageItemRow.swift */,
 				8D6FE954270E0F0200FB8D5C /* CustomAnnotation.swift */,
 				8DA4855628586D1F00C32F3D /* PDFPickerView.swift */,
+				8DA4855B2858CA3800C32F3D /* PDFItemRow.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -862,6 +865,7 @@
 				8DEC413226F734F40052A7D2 /* SingleLocationSelecter.swift in Sources */,
 				8D346833280C75A700822803 /* MapObjectMultiLocationSelecter.swift in Sources */,
 				8D5280F6284E422F003875A0 /* AddItemTextContent.swift in Sources */,
+				8DA4855C2858CA3900C32F3D /* PDFItemRow.swift in Sources */,
 				8D346854280F218F00822803 /* ObjectItemsPreviewSheetItem.swift in Sources */,
 				8DFBAE0027098498005B4611 /* EditMapPointView.swift in Sources */,
 				8D5280FE284E45AB003875A0 /* AddItemViewSheet.swift in Sources */,

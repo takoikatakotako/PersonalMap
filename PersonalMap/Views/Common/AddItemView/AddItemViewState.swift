@@ -82,6 +82,22 @@ class AddItemViewState: ObservableObject {
     }
     
     func savePDFItem() {
+        guard let pdfDocument = pdfDocument else {
+            alertMessage = "画像が選択されていません"
+            showingAlert = true
+            return
+        }
         
+        do {
+            let fileName = UUID().description + ".pdf"
+            try fileRepository.savePDFDocument(document: pdfDocument, fileName: fileName)
+            let item = Item(id: UUID(), itemType: .pdf, key: key, value: fileName)
+            items.append(item)
+            
+            dismiss = true
+        } catch {
+            alertMessage = "画像の保存に失敗しました"
+            showingAlert = true
+        }
     }
 }

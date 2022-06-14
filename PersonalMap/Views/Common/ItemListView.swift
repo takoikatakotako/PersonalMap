@@ -16,6 +16,10 @@ struct ItemListView: View {
                         URLItemRow(item: item)
                     } else if item.itemType == .image {
                         ImageItemRow(item: item)
+                    } else if item.itemType == .pdf {
+                        PDFItemRow(item: item)
+                    } else {
+                        Text("Not Found")
                     }
                 }
                 .onDelete(perform: delete)
