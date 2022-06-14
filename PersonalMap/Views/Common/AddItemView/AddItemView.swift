@@ -2,31 +2,25 @@ import SwiftUI
 
 struct AddItemView: View {
     @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
-    @State private var selection = 0
-    @State private var key: String = ""
-    @State private var value: String = ""
     
-    @State private var image: UIImage?
-    @State private var showingAlert = false
-    @State private var alertMessage = ""
-    @State private var showingSheet: AddItemViewSheet?
-
-    @Binding var items: [Item]
+    @StateObject var viewState: AddItemViewState
     
-    private let fileRepository = FileRepository()
+    init(items: Binding<[Item]>) {
+        _viewState = StateObject(wrappedValue: AddItemViewState(items: items))
+    }
     
     var itemType: ItemType {
-        if selection == 0 {
+        if viewState.selection == 0 {
             return .text
-        } else if selection == 1 {
+        } else if viewState.selection == 1 {
             return .url
-        } else if selection == 2 {
+        } else if viewState.selection == 2 {
             return .image
         } else {
             return .pdf
         }
     }
-
+    
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
@@ -34,7 +28,7 @@ struct AddItemView: View {
                     .font(Font.system(size: 20).bold())
                     .padding(.top, 12)
                 
-                Picker("", selection: $selection) {
+                Picker("", selection: $viewState.selection) {
                     Text("テキスト").tag(0)
                     Text("URL").tag(1)
                     Text("画像").tag(2)
@@ -46,7 +40,7 @@ struct AddItemView: View {
                     .font(Font.system(size: 20).bold())
                     .padding(.top, 12)
                 
-                TextField("項目名を入力してください", text: $key)
+                TextField("項目名を入力してください", text: $viewState.key)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
                 Text("内容")
@@ -54,13 +48,13 @@ struct AddItemView: View {
                     .padding(.top, 12)
                 
                 if itemType == .text {
-                    AddItemTextContent(value: $value)
+                    AddItemTextContent(value: $viewState.value)
                 } else if itemType == .url {
-                    AddItemUrlContent(value: $value)
+                    AddItemUrlContent(value: $viewState.value)
                 } else if itemType == .image {
-                    AddItemImageContent(image: $image, showingSheet: $showingSheet)
+                    AddItemImageContent(image: $viewState.image, showingSheet: $viewState.showingSheet)
                 } else if itemType == .pdf {
-                    AddItemPDFContent(image: $image, showingSheet: $showingSheet)
+                    AddItemPDFContent(pdfDocument: $viewState.pdfDocument, showingSheet: $viewState.showingSheet)
                 }
                 
                 Spacer()
@@ -68,86 +62,45 @@ struct AddItemView: View {
             .padding(.horizontal, 16)
             .navigationBarItems(
                 trailing:
-                Button(action: {
-                    if key.isEmpty {
-                        alertMessage = "Keyを入力させてください"
-                        showingAlert = true
-                        return
-                    }
-                    
-                    switch itemType {
-                    case .text:
-                        saveTextItem()
-                    case .url:
-                        saveUrlItem()
-                    case .image:
-                        saveImageItem()
-                    case .pdf:
-                        print("sss")
-                    }
-                }, label: {
-                    Text("登録")
-                        .font(Font.system(size: 16).bold())
-                })
+                    Button(action: {
+                        if viewState.key.isEmpty {
+                            viewState.alertMessage = "Keyを入力させてください"
+                            viewState.showingAlert = true
+                            return
+                        }
+                        
+                        switch itemType {
+                        case .text:
+                            viewState.saveTextItem()
+                        case .url:
+                            viewState.saveUrlItem()
+                        case .image:
+                            viewState.saveImageItem()
+                        case .pdf:
+                            viewState.savePDFItem()
+                        }
+                    }, label: {
+                        Text("登録")
+                            .font(Font.system(size: 16).bold())
+                    })
             )
-            .alert(isPresented: $showingAlert)  {
-                Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("閉じる")))
+            .alert(isPresented: $viewState.showingAlert)  {
+                Alert(title: Text(""), message: Text(viewState.alertMessage), dismissButton: .default(Text("閉じる")))
             }
-            .sheet(item: $showingSheet) { item in
-                ImagePicker(image: $image)
+            .sheet(item: $viewState.showingSheet) { item in
+                switch item {
+                case .image:
+                    ImagePicker(image: $viewState.image)
+                case .pdf:
+                    PDFPickerView(document: $viewState.pdfDocument)
+                }
             }
+            .onReceive(viewState.$dismiss, perform: { dismiss in
+                if dismiss {
+                    presentationMode.wrappedValue.dismiss()
+                }
+            })
             .navigationTitle("項目の追加")
-        }
-    }
-    
-    private func saveTextItem() {
-        if value.isEmpty {
-            alertMessage = "Valueを入力させてください"
-            showingAlert = true
-            return
-        }
-        
-        let item = Item(id: UUID(), itemType: .text, key: key, value: value)
-        items.append(item)
-        
-        presentationMode.wrappedValue.dismiss()
-    }
-    
-    private func saveUrlItem() {
-        if URL(string: value) == nil {
-            alertMessage = "URLが正しくありません"
-            showingAlert = true
-            return
-        }
-        
-        let item = Item(id: UUID(), itemType: .url, key: key, value: value)
-        items.append(item)
-        
-        presentationMode.wrappedValue.dismiss()
-    }
-    
-    private func saveImageItem() {
-        guard let image = image else {
-            alertMessage = "画像が選択されていません"
-            showingAlert = true
-            return
-        }
-
-        guard let pngData = image.pngData() else {
-            alertMessage = "画像の保存に失敗しました"
-            showingAlert = true
-            return
-        }
-        
-        do {
-            let fileName = UUID().description + ".png"
-            try fileRepository.saveImageData(data: pngData, fileName: fileName)
-            let item = Item(id: UUID(), itemType: .image, key: key, value: fileName)
-            items.append(item)
-            presentationMode.wrappedValue.dismiss()
-        } catch {
-            alertMessage = "画像の保存に失敗しました"
-            showingAlert = true
         }
     }
 }

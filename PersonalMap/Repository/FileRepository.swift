@@ -6,7 +6,8 @@ struct FileRepository {
     let layersFileName = "layers.json"
     let objectDirectoryName = "object"
     let imageDirectoryName = "image"
-    
+    let pdfDirectoryName = "pdf"
+
     init() {
         try! initialize()
     }
@@ -32,6 +33,11 @@ struct FileRepository {
         let imageDirectoryUrl = try getDocumentsDirectoryUrl().appendingPathComponent(imageDirectoryName)
         if !FileManager.default.fileExists(atPath: imageDirectoryUrl.path) {
             try FileManager.default.createDirectory(atPath: imageDirectoryUrl.path, withIntermediateDirectories: false, attributes: nil)
+        }
+        
+        let pdfDirectoryUrl = try getDocumentsDirectoryUrl().appendingPathComponent(pdfDirectoryName)
+        if !FileManager.default.fileExists(atPath: pdfDirectoryUrl.path) {
+            try FileManager.default.createDirectory(atPath: pdfDirectoryUrl.path, withIntermediateDirectories: false, attributes: nil)
         }
     }
     
@@ -165,8 +171,19 @@ struct FileRepository {
         let imageDirectoryUrl = try getDocumentsDirectoryUrl().appendingPathComponent(imageDirectoryName)
         try FileManager.default.removeItem(at: imageDirectoryUrl)
 
+        let pdfDirectoryUrl = try getDocumentsDirectoryUrl().appendingPathComponent(pdfDirectoryName)
+        try FileManager.default.removeItem(at: pdfDirectoryUrl)
+        
         try initialize()
     }
+    
+    
+    func copyToPDFFolder(sourceUrl: URL) throws {
+        let url = try getLayerDirectoryUrl().appendingPathComponent("xxx.pdf")
+        try FileManager.default.copyItem(at: sourceUrl, to: url)
+        
+    }
+    
     
     /// Private Methods
     
@@ -206,6 +223,14 @@ struct FileRepository {
             .appendingPathComponent(imageDirectoryName, isDirectory: true)
         return imageDirectoryUrl
     }
+    
+    // Documents/pdf の URL
+    private func getPDFDirectoryUrl() throws -> URL {
+        let pdfDirectoryUrl = try getDocumentsDirectoryUrl()
+            .appendingPathComponent(pdfDirectoryName, isDirectory: true)
+        return pdfDirectoryUrl
+    }
+    
     
     private func getMapLayerIds() throws -> [UUID] {
         // layers.json を読み込む
