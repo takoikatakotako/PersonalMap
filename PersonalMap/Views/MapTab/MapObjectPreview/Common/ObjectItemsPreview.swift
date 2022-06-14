@@ -32,7 +32,7 @@ struct ObjectItemsPreview: View {
                     }
                 case .image:
                     Button {
-                        sheet = .shoeImage(imageName: item.value)
+                        sheet = .showImage(imageName: item.value)
                     } label: {
                         VStack(alignment: .leading) {
                             Text(item.key)
@@ -43,7 +43,7 @@ struct ObjectItemsPreview: View {
                     }
                 case .pdf:
                     Button {
-                        // sheet = .shoeImage(imageName: item.value)
+                        sheet = .showPDF(fileName: item.value)
                     } label: {
                         VStack(alignment: .leading) {
                             Text(item.key)
@@ -57,8 +57,10 @@ struct ObjectItemsPreview: View {
         }
         .sheet(item: $sheet) { item in
             switch item {
-            case let .shoeImage(imageName: imageName):
+            case let .showImage(imageName: imageName):
                 ImageViewerView(imageName: imageName)
+            case let .showPDF(fileName: fileName):
+                PDFViewerView(fileName: fileName)
             }
         }
         .padding(.top, 16)

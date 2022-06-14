@@ -4,5 +4,6 @@ enum ObjectItemsPreviewSheetItem: Hashable, Identifiable {
     var id: Self {
         return self
     }
-    case shoeImage(imageName: String)
+    case showImage(imageName: String)
+    case showPDF(fileName: String)
 }
