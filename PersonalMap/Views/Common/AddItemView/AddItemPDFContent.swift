@@ -6,9 +6,8 @@ struct AddItemPDFContent: View {
     @Binding var showingSheet: AddItemViewSheet?
     var body: some View {
         HStack {
-            if let document = pdfDocument, let page = document.page(at: 0),
-               let image = page.thumbnail(of: CGSize(width: 120, height: 120), for: PDFDisplayBox.trimBox) {
-                Image(uiImage: image)
+            if let document = pdfDocument, let page = document.page(at: 0) {
+                Image(uiImage: page.thumbnail(of: CGSize(width: 120, height: 120), for: PDFDisplayBox.trimBox))
                     .resizable()
                     .frame(width: 120, height: 120)
             } else {
