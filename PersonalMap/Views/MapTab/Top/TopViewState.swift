@@ -52,6 +52,14 @@ class TopViewState: ObservableObject {
         mapType = .satellite
     }
     
+    func busButtonTapped() {
+        mapType = .hybrid
+    }
+    
+    func bycycleButtonTapped() {
+        mapType = .mutedStandard
+    }
+    
     func minusButtonTapped() {
         route = nil
     }

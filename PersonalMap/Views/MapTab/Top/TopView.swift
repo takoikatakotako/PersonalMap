@@ -27,6 +27,18 @@ struct TopView: View {
                 } label: {
                     CommonButton(systemName: "airplane", active: viewState.mapType == .satellite)
                 }
+
+                Button {
+                    viewState.busButtonTapped()
+                } label: {
+                    CommonButton(systemName: "bus", active: viewState.mapType == .hybrid)
+                }
+                
+                Button {
+                    viewState.bycycleButtonTapped()
+                } label: {
+                    CommonButton(systemName: "bicycle", active: viewState.mapType == .mutedStandard)
+                }
                 
                 Button {
                     viewState.minusButtonTapped()
