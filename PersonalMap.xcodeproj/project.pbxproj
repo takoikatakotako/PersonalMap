@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17ECD6022D2A5FC4002EEDA1 /* MapTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECD6012D2A5FC0002EEDA1 /* MapTile.swift */; };
 		8D250E5A27CF54AB000FDD70 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D250E5927CF54AB000FDD70 /* Route.swift */; };
 		8D29465D2739655B003F6389 /* CommonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D29465C2739655B003F6389 /* CommonButton.swift */; };
 		8D2B8F8327521B180071E571 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2B8F8227521B180071E571 /* ImagePicker.swift */; };
@@ -120,6 +121,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17ECD6012D2A5FC0002EEDA1 /* MapTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTile.swift; sourceTree = "<group>"; };
 		8D250E5927CF54AB000FDD70 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		8D29465C2739655B003F6389 /* CommonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonButton.swift; sourceTree = "<group>"; };
 		8D2B8F8227521B180071E571 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -516,6 +518,7 @@
 		8DD13EF225E2307F00CEAB3B /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				17ECD6012D2A5FC0002EEDA1 /* MapTile.swift */,
 				8DD13EF325E2308C00CEAB3B /* MapPoint.swift */,
 				8DD13F0125E2389E00CEAB3B /* Item.swift */,
 				8DCE59DA25EBB36400D080D2 /* MapPolyline.swift */,
@@ -900,6 +903,7 @@
 				8DA5CD8327FD8A97006B8FB4 /* MapObjectListViewState.swift in Sources */,
 				8DFBAE12270CA2ED005B4611 /* AddMapPolylineObjectView.swift in Sources */,
 				8D6FE955270E0F0200FB8D5C /* CustomAnnotation.swift in Sources */,
+				17ECD6022D2A5FC4002EEDA1 /* MapTile.swift in Sources */,
 				8DCE59DB25EBB36400D080D2 /* MapPolyline.swift in Sources */,
 				8DEC410C26F60B9B0052A7D2 /* TopView.swift in Sources */,
 				8DFC44E126FF7CC400021E45 /* UIMapObjectViewDelegate.swift in Sources */,
@@ -1066,7 +1070,7 @@
 				DEVELOPMENT_TEAM = 5RH346BQ66;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = PersonalMap/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1089,7 +1093,7 @@
 				DEVELOPMENT_TEAM = 5RH346BQ66;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = PersonalMap/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -6,7 +6,7 @@ struct TopView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            MapObjectView(mapObjects: $viewState.mapObjects, mapType: $viewState.mapType, route: $viewState.route) { mapObjectId in
+            MapObjectView(mapObjects: $viewState.mapObjects, mapType: $viewState.mapType, mapTileType: $viewState.mapTileType, route: $viewState.route) { mapObjectId in
                 viewState.anotationTapped(mapObjectId: mapObjectId)
             } longPressEnded: { location in
                 viewState.longPressEnded(location: location)
@@ -45,6 +45,13 @@ struct TopView: View {
                 } label: {
                     CommonButton(systemName: "minus.circle", active: true)
                 }
+                
+                
+                Button {
+                    viewState.mapTileButtonTapped()
+                } label: {
+                    CommonButton(systemName: "map", active: true)
+                }
             }
         }
         .sheet(item: $viewState.sheet, onDismiss: {
@@ -61,6 +68,23 @@ struct TopView: View {
                     MapPolygonPreview(polygon: polygon, route: $viewState.route)
                 }
             }
+        })
+        .alert("マップタイル選択", isPresented: $viewState.showingMapTileAlert, actions: {
+            Button("タイルなし", role: .none) {
+                viewState.selectMapTile(mapTile: .none)
+            }
+            
+            Button("標準地図", role: .none) {
+                viewState.selectMapTile(mapTile: .standard)
+            }
+            
+            Button("淡色地図", role: .none) {
+                viewState.selectMapTile(mapTile: .pale)
+            }
+            
+            Button("とじる", role: .none) {}
+        }, message: {
+            Text("マップタイルを選択してください。")
         })
         .alert(item: $viewState.alert) { item in
             switch item {

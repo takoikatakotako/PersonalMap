@@ -4,9 +4,13 @@ import MapKit
 class TopViewState: ObservableObject {
     @Published var mapObjects: [MapObject] = []
     @Published var mapType: MKMapType = .standard
+    @Published var mapTileType: MapTileType = .none
     @Published var route: Route?
     @Published var sheet: TopSheetItem?
+    
+    // Alert
     @Published var alert: TopAlertItem?
+    @Published var showingMapTileAlert: Bool = false
 
     private let fileRepository = FileRepository()
     
@@ -62,6 +66,14 @@ class TopViewState: ObservableObject {
     
     func minusButtonTapped() {
         route = nil
+    }
+    
+    func mapTileButtonTapped() {
+        showingMapTileAlert = true
+    }
+    
+    func selectMapTile(mapTile: MapTileType) {
+        self.mapTileType = mapTile
     }
     
     func showRoute(destination: Coordinate) {

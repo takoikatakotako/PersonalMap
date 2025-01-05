@@ -111,6 +111,19 @@ public class UIMapObjectView: UIView {
         mapView.mapType = mapType
     }
     
+    // MapTile
+    func changeMapTile(mapTile: MapTileType) {
+        switch mapTile {
+        case .none:
+            break
+        case .standard:
+            let overlay = MKTileOverlay.init(urlTemplate:"https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png")
+            mapView.addOverlay(overlay)
+        case .pale:
+            let overlay = MKTileOverlay.init(urlTemplate:"https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png")
+            mapView.addOverlay(overlay)
+        }
+    }
     
     func drawRoute(route: Route) {
         let sourceLocation = route.source
@@ -195,6 +208,10 @@ extension UIMapObjectView: MKMapViewDelegate {
             return polylineRenderer
         }
         
+        if let tile = overlay as? MKTileOverlay {
+            return MKTileOverlayRenderer.init(overlay: tile)
+        }
+        
         return MKOverlayRenderer()
     }
     
@@ -209,6 +226,7 @@ extension UIMapObjectView: MKMapViewDelegate {
 public struct MapObjectView: UIViewRepresentable {
     @Binding var mapObjects: [MapObject]
     @Binding var mapType: MKMapType
+    @Binding var mapTileType: MapTileType
     @Binding var route: Route?
     
     let anotationTapped: (_ mapObjectId: UUID) -> Void
@@ -257,14 +275,13 @@ public struct MapObjectView: UIViewRepresentable {
     }
     
     public func updateUIView(_ uiView: UIMapObjectView, context: Context) {
-        print("update")
-        
         // Clear
         uiView.removeAllAnnotations()
         uiView.removeAllOverlays()
         
         // Set
         uiView.changeMapType(mapType: mapType)
+        uiView.changeMapTile(mapTile: mapTileType)
         
         for mapObject in mapObjects {
             if mapObject.isHidden {
