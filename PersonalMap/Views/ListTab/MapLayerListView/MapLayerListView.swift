@@ -26,6 +26,14 @@ struct MapLayerListView: View {
                 }, content: {
                     AddMapLayerView()
                 })
+            .alert("エラー", isPresented: Binding(
+                get: { viewState.errorMessage != nil },
+                set: { if !$0 { viewState.errorMessage = nil } }
+            )) {
+                Button("閉じる", role: .cancel) { viewState.errorMessage = nil }
+            } message: {
+                if let message = viewState.errorMessage { Text(message) }
+            }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("レイヤーリスト")
             .navigationBarItems(

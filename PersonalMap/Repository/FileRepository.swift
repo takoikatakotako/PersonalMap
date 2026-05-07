@@ -10,7 +10,7 @@ struct FileRepository {
     let pdfDirectoryName = "pdf"
 
     init() {
-        try! initialize()
+        try? initialize()
     }
 
     func initialize() throws {
@@ -76,7 +76,7 @@ struct FileRepository {
         // MapLayerのID達を取得
         let mapLayersIds = try getMapLayerIds()
         for mapLayersId in mapLayersIds {
-            let mapLayer = try! getMapLayer(mapLayerId: mapLayersId)
+            let mapLayer = try getMapLayer(mapLayerId: mapLayersId)
             mapLayers.append(mapLayer)
         }
         return mapLayers

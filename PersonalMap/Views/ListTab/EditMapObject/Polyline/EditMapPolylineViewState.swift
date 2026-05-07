@@ -25,8 +25,12 @@ class EditMapPolylineViewState: ObservableObject {
             return
         }
         
-        try! fileRepository.saveMapObject(mapObject: MapObject.polyLine(polyline))
-
-        dismiss = true
+        do {
+            try fileRepository.saveMapObject(mapObject: MapObject.polyLine(polyline))
+            dismiss = true
+        } catch {
+            message = "保存に失敗しました"
+            showingAlert = true
+        }
     }
 }

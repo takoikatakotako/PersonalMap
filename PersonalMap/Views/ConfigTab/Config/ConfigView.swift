@@ -105,6 +105,14 @@ struct ConfigView: View {
             } message: {
                 Text("データを削除し、初期設定に戻しますがよろしいですか？")
             }
+            .alert("エラー", isPresented: Binding(
+                get: { viewState.errorMessage != nil },
+                set: { if !$0 { viewState.errorMessage = nil } }
+            )) {
+                Button("閉じる", role: .cancel) { viewState.errorMessage = nil }
+            } message: {
+                if let message = viewState.errorMessage { Text(message) }
+            }
             .sheet(isPresented: $viewState.showingActivityIndicator, content: {
                 ActivityViewController(activityItems: [URL(string: SHARE_URL_STRING)!])
             })

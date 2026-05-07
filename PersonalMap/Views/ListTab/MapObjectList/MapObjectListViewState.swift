@@ -5,6 +5,7 @@ class MapObjectListViewState: ObservableObject {
     
     @Published var showingSheet = false
     @Published var mapObjects: [MapObject] = []
+    @Published var errorMessage: String?
     
     private let fileRepository = FileRepository()
     
@@ -33,13 +34,18 @@ class MapObjectListViewState: ObservableObject {
     func rowMove(fromOffsets: IndexSet, toOffset: Int) {
         mapObjects.move(fromOffsets: fromOffsets, toOffset: toOffset)
         mapLayer.objectIds = mapObjects.map { $0.id }
-        try! fileRepository.saveMapLayer(mapLayer: mapLayer)
+        do { try fileRepository.saveMapLayer(mapLayer: mapLayer) }
+        catch { errorMessage = "保存に失敗しました" }
     }
-    
+
     func rowRemove(offsets: IndexSet) {
         let deletedMapObjectIds: [UUID] = offsets.map { mapObjects[$0].id }
-        try! deleteMapObjects(deletedMapObjectIds: deletedMapObjectIds)
-        mapObjects.remove(atOffsets: offsets)
+        do {
+            try deleteMapObjects(deletedMapObjectIds: deletedMapObjectIds)
+            mapObjects.remove(atOffsets: offsets)
+        } catch {
+            errorMessage = "削除に失敗しました"
+        }
     }
     
     func sheetDissmiss() {

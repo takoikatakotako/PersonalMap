@@ -10,6 +10,7 @@ struct MultiLocationSelecter: View {
     @State private var location: CLLocationCoordinate2D?
     @State private var locations: [CLLocationCoordinate2D] = []
     @State private var mapObjects: [MapObject] = []
+    @State private var errorMessage: String?
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -53,21 +54,32 @@ struct MultiLocationSelecter: View {
               .padding(.bottom, 60)
         }
         .onAppear {
-            var updatedMapObjects: [MapObject] = []
-
-            let fileRepository = FileRepository()
-            let mapLayers: [MapLayer] = try! fileRepository.getMapLyers()
-            for mapLayer in mapLayers {
-                for mapObjectId in mapLayer.objectIds {
-                    let mapObject: MapObject = try! fileRepository.getMapObject(mapObjectId: mapObjectId)
-                    updatedMapObjects.append(mapObject)
+            do {
+                var updatedMapObjects: [MapObject] = []
+                let fileRepository = FileRepository()
+                let mapLayers = try fileRepository.getMapLyers()
+                for mapLayer in mapLayers {
+                    for mapObjectId in mapLayer.objectIds {
+                        let mapObject = try fileRepository.getMapObject(mapObjectId: mapObjectId)
+                        updatedMapObjects.append(mapObject)
+                    }
                 }
+
+                // 差分がある場合は更新する
+                if mapObjects != updatedMapObjects {
+                    mapObjects = updatedMapObjects
+                }
+            } catch {
+                errorMessage = "データの読み込みに失敗しました"
             }
-            
-            // 差分がある場合は更新する
-            if mapObjects != updatedMapObjects {
-                mapObjects = updatedMapObjects
-            }
+        }
+        .alert("エラー", isPresented: Binding(
+            get: { errorMessage != nil },
+            set: { if !$0 { errorMessage = nil } }
+        )) {
+            Button("閉じる", role: .cancel) { errorMessage = nil }
+        } message: {
+            if let message = errorMessage { Text(message) }
         }
     }
 }

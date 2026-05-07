@@ -32,6 +32,14 @@ struct MapObjectListView: View {
         .onAppear {
             viewState.onAppear()
         }
+        .alert("エラー", isPresented: Binding(
+            get: { viewState.errorMessage != nil },
+            set: { if !$0 { viewState.errorMessage = nil } }
+        )) {
+            Button("閉じる", role: .cancel) { viewState.errorMessage = nil }
+        } message: {
+            if let message = viewState.errorMessage { Text(message) }
+        }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(
             leading:

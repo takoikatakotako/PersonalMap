@@ -2,6 +2,7 @@ import SwiftUI
 
 class AddMapPolygonViewState: ObservableObject {
     let mapLayerId: UUID
+
     @Published var labelName: String = ""
     @Published var hidden: Bool = false
     @Published var symbolName: String = "star.circle"
@@ -10,7 +11,9 @@ class AddMapPolygonViewState: ObservableObject {
     @Published var message: String = ""
     @Published var showingAlert: Bool = false
     @Published var dismiss: Bool = false
-    
+
+    private let fileRepository = FileRepository()
+
     init(mapLayerId: UUID) {
         self.mapLayerId = mapLayerId
     }
@@ -32,19 +35,22 @@ class AddMapPolygonViewState: ObservableObject {
         // Polygon
         let polygon: MapPolygon = MapPolygon(id: UUID(), mapObjectType: .polygon, imageName: symbolName, isHidden: hidden, objectName: labelName, coordinates: coordinates, items: [])
         let mapObject: MapObject = .polygon(polygon)
-        let fileRepository = FileRepository()
-        try! fileRepository.initialize()
-        try! fileRepository.saveMapObject(mapObject: mapObject)
+        do {
+            try fileRepository.saveMapObject(mapObject: mapObject)
 
-        // layer に追加
-        let mapLayer = try! fileRepository.getMapLayer(mapLayerId: mapLayerId)
-        let newMapLayer = MapLayer(
-            id: mapLayer.id,
-            layerName: mapLayer.layerName,
-            mapObjectType: mapLayer.mapObjectType,
-            objectIds: [mapObject.id] + mapLayer.objectIds)
-        try! fileRepository.saveMapLayer(mapLayer: newMapLayer)
-        
-        dismiss = true
+            // layer に追加
+            let mapLayer = try fileRepository.getMapLayer(mapLayerId: mapLayerId)
+            let newMapLayer = MapLayer(
+                id: mapLayer.id,
+                layerName: mapLayer.layerName,
+                mapObjectType: mapLayer.mapObjectType,
+                objectIds: [mapObject.id] + mapLayer.objectIds)
+            try fileRepository.saveMapLayer(mapLayer: newMapLayer)
+
+            dismiss = true
+        } catch {
+            message = "保存に失敗しました"
+            showingAlert = true
+        }
     }
 }

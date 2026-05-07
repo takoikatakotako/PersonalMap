@@ -29,7 +29,6 @@ struct AddMapLayerView: View {
                     Spacer()
                     Button {
                         viewState.save()
-                        dismiss()
                     } label: {
                         Text("追加")
                             .foregroundColor(Color.black)
@@ -51,6 +50,14 @@ struct AddMapLayerView: View {
                     dismiss()
                 }
             })
+            .alert("エラー", isPresented: Binding(
+                get: { viewState.errorMessage != nil },
+                set: { if !$0 { viewState.errorMessage = nil } }
+            )) {
+                Button("閉じる", role: .cancel) { viewState.errorMessage = nil }
+            } message: {
+                if let message = viewState.errorMessage { Text(message) }
+            }
             .padding(.horizontal, 16)
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("レイヤーの新規登録")

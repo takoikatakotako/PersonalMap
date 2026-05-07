@@ -13,9 +13,12 @@ class EditMapPolygonViewState: ObservableObject {
     }
         
     func savePolygon() {
-        let fileRepository = FileRepository()
-        try! fileRepository.saveMapObject(mapObject: .polygon(polygon))
-        
-        dismiss = true
+        do {
+            try fileRepository.saveMapObject(mapObject: .polygon(polygon))
+            dismiss = true
+        } catch {
+            message = "保存に失敗しました"
+            showingAlert = true
+        }
     }
 }
