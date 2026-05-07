@@ -82,7 +82,6 @@ extension MapObject: Decodable {
             }
         }
         
-        // TODO: ちゃんとエラー作る
-        throw InternalFileError.documentDirectoryNotFound
+        throw InternalFileError.decodeFailed
     }
 }

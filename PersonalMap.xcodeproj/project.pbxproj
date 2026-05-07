@@ -56,7 +56,6 @@
 		8DA5CD8327FD8A97006B8FB4 /* MapObjectListViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5CD8227FD8A97006B8FB4 /* MapObjectListViewState.swift */; };
 		8DA5CD8527FD8B00006B8FB4 /* MapLayerListViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5CD8427FD8B00006B8FB4 /* MapLayerListViewState.swift */; };
 		8DA5CD8727FDEAE9006B8FB4 /* TopSheetItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5CD8627FDEAE9006B8FB4 /* TopSheetItem.swift */; };
-		8DA5CD8927FDEB08006B8FB4 /* TopAlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5CD8827FDEB08006B8FB4 /* TopAlertItem.swift */; };
 		8DAE528B27E9B2FB00C5DF22 /* LocationSelecterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAE528A27E9B2FB00C5DF22 /* LocationSelecterView.swift */; };
 		8DB0353A27AF9EC0004B800F /* TopViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0353927AF9EC0004B800F /* TopViewState.swift */; };
 		8DB0353C27AFB865004B800F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0353B27AFB865004B800F /* LocationManager.swift */; };
@@ -176,7 +175,6 @@
 		8DA5CD8227FD8A97006B8FB4 /* MapObjectListViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectListViewState.swift; sourceTree = "<group>"; };
 		8DA5CD8427FD8B00006B8FB4 /* MapLayerListViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLayerListViewState.swift; sourceTree = "<group>"; };
 		8DA5CD8627FDEAE9006B8FB4 /* TopSheetItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSheetItem.swift; sourceTree = "<group>"; };
-		8DA5CD8827FDEB08006B8FB4 /* TopAlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAlertItem.swift; sourceTree = "<group>"; };
 		8DAE528A27E9B2FB00C5DF22 /* LocationSelecterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelecterView.swift; sourceTree = "<group>"; };
 		8DB0353927AF9EC0004B800F /* TopViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewState.swift; sourceTree = "<group>"; };
 		8DB0353B27AFB865004B800F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -553,7 +551,6 @@
 				8DB0353927AF9EC0004B800F /* TopViewState.swift */,
 				8DEC410B26F60B9B0052A7D2 /* TopView.swift */,
 				8DA5CD8627FDEAE9006B8FB4 /* TopSheetItem.swift */,
-				8DA5CD8827FDEB08006B8FB4 /* TopAlertItem.swift */,
 			);
 			path = Top;
 			sourceTree = "<group>";
@@ -828,7 +825,6 @@
 				8D346850280F1F9000822803 /* ObjectLocationPreview.swift in Sources */,
 				8DFBAE04270986A5005B4611 /* EditMapPolylineView.swift in Sources */,
 				8D346828280C0CD000822803 /* EditMapPointViewState.swift in Sources */,
-				8DA5CD8927FDEB08006B8FB4 /* TopAlertItem.swift in Sources */,
 				8DB57DAB2782914D00CF6938 /* MapObjectEditLocation.swift in Sources */,
 				8D3468202809C56400822803 /* ActivityViewController.swift in Sources */,
 				8DEC412F26F7251D0052A7D2 /* AddMapPointView.swift in Sources */,

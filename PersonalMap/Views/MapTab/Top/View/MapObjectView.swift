@@ -214,12 +214,6 @@ extension UIMapObjectView: MKMapViewDelegate {
         return MKOverlayRenderer()
     }
     
-    //    public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
-    //        if let annotation = view.annotation as? CustomAnnotation,
-    //           let mapObjectId = annotation.id {
-    //            delegate?.annotationTapped(mapObjectId: mapObjectId)
-    //        }
-    //    }
 }
 
 public struct MapObjectView: UIViewRepresentable {

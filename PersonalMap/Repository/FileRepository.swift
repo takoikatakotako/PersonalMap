@@ -82,15 +82,6 @@ struct FileRepository {
         return mapLayers
     }
     
-    // MapObject
-    //    func getMapObject(mapObjectId: UUID) throws -> MapObject {
-    //        let fileName = mapObjectId.description + ".json"
-    //        let objectFileUrl = try getObjectDirectoryUrl().appendingPathComponent(fileName)
-    //        let data = try Data(contentsOf: objectFileUrl)
-    //        let mapObject = try JSONEncoder().decode(MapObject.self, from: data)
-    //        return mapObject
-    //    }
-    
     // MapPointObject
     func saveMapObject(mapObject: MapObject) throws {
         let fileName = mapObject.id.description + ".json"
