@@ -6,7 +6,7 @@ struct TopView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            MapObjectView(mapObjects: $viewState.mapObjects, mapType: $viewState.mapType, mapTileType: $viewState.mapTileType, route: $viewState.route) { mapObjectId in
+            MapObjectView(mapObjects: $viewState.mapObjects, mapType: $viewState.mapType, mapTileType: $viewState.mapTileType, route: $viewState.route, shouldReturnToLocation: $viewState.shouldReturnToLocation) { mapObjectId in
                 viewState.annotationTapped(mapObjectId: mapObjectId)
             } longPressEnded: { location in
                 viewState.longPressEnded(location: location)
@@ -14,14 +14,14 @@ struct TopView: View {
                 viewState.routeNotFound()
             }
             .ignoresSafeArea(.all, edges: .top)
-            
+
             HStack {
                 Button {
                     viewState.carButtonTapped()
                 } label: {
                     CommonButton(systemName: "car", active: viewState.mapType == .standard)
                 }
-                
+
                 Button {
                     viewState.airplaneButtonTapped()
                 } label: {
@@ -33,20 +33,25 @@ struct TopView: View {
                 } label: {
                     CommonButton(systemName: "bus", active: viewState.mapType == .hybrid)
                 }
-                
+
                 Button {
                     viewState.bicycleButtonTapped()
                 } label: {
                     CommonButton(systemName: "bicycle", active: viewState.mapType == .mutedStandard)
                 }
-                
+
                 Button {
                     viewState.minusButtonTapped()
                 } label: {
                     CommonButton(systemName: "minus.circle", active: true)
                 }
-                
-                
+
+                Button {
+                    viewState.locationButtonTapped()
+                } label: {
+                    CommonButton(systemName: "location", active: true)
+                }
+
                 Button {
                     viewState.mapTileButtonTapped()
                 } label: {

@@ -1,29 +1,31 @@
 import SwiftUI
 
 struct MapObjectListView: View {
-    @StateObject var  viewState: MapObjectListViewState
-    
+    @StateObject var viewState: MapObjectListViewState
+
     @Environment(\.dismiss) var dismiss
-    
+    @State private var selectedMapObject: MapObject?
+    @State private var route: Route?
+
     init(mapLayer: MapLayer) {
         _viewState = StateObject(wrappedValue: MapObjectListViewState(mapLayer: mapLayer))
     }
-    
+
     var body: some View {
         List {
             ForEach(viewState.mapObjects) { (mapObject: MapObject) in
-                NavigationLink {                    
-                    switch mapObject {
-                    case .point(let point):
-                        EditMapPointView(point: point)
-                    case .polyLine(let polyLine):
-                        EditMapPolylineView(polyLine: polyLine)
-                    case .polygon(let polygon):
-                        EditMapPolygonView(polygon: polygon)
-                    }
+                Button {
+                    selectedMapObject = mapObject
                 } label: {
-                    Text(mapObject.objectName)
+                    HStack {
+                        Text(mapObject.objectName)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.secondary)
+                            .font(.caption)
+                    }
                 }
+                .foregroundColor(.primary)
             }
             .onMove(perform: viewState.rowMove)
             .onDelete(perform: viewState.rowRemove)
@@ -60,7 +62,6 @@ struct MapObjectListView: View {
                 }
         )
         .sheet(isPresented: $viewState.showingSheet) {
-            // on dissmiss
             viewState.sheetDismiss()
         } content: {
             switch viewState.mapLayer.mapObjectType {
@@ -70,6 +71,16 @@ struct MapObjectListView: View {
                 AddMapPolylineView(mapLayerId: viewState.mapLayer.id)
             case .polygon:
                 AddMapPolygonView(mapLayerId: viewState.mapLayer.id)
+            }
+        }
+        .sheet(item: $selectedMapObject) { mapObject in
+            switch mapObject {
+            case .point(let point):
+                MapPointPreview(point: point, route: $route)
+            case .polyLine(let polyLine):
+                MapPolyLinePreview(polyline: polyLine, route: $route)
+            case .polygon(let polygon):
+                MapPolygonPreview(polygon: polygon, route: $route)
             }
         }
     }

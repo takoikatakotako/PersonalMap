@@ -109,6 +109,10 @@ public class UIMapObjectView: UIView {
     func changeMapType(mapType: MKMapType) {
         mapView.mapType = mapType
     }
+
+    func returnToCurrentLocation() {
+        mapView.setUserTrackingMode(.followWithHeading, animated: true)
+    }
     
     // MapTile
     func changeMapTile(mapTile: MapTileType) {
@@ -221,7 +225,8 @@ public struct MapObjectView: UIViewRepresentable {
     @Binding var mapType: MKMapType
     @Binding var mapTileType: MapTileType
     @Binding var route: Route?
-    
+    @Binding var shouldReturnToLocation: Bool
+
     let annotationTapped: (_ mapObjectId: UUID) -> Void
     let longPressEnded: (_ location: CLLocationCoordinate2D) -> Void
     let routeNotFound: () -> Void
@@ -293,6 +298,11 @@ public struct MapObjectView: UIViewRepresentable {
         
         if let route = route {
             uiView.drawRoute(route: route)
+        }
+
+        if shouldReturnToLocation {
+            uiView.returnToCurrentLocation()
+            DispatchQueue.main.async { shouldReturnToLocation = false }
         }
     }
 }
