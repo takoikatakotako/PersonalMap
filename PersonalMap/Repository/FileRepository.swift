@@ -49,11 +49,13 @@ struct FileRepository {
         let fileUrl = try getDocumentsDirectoryUrl().appendingPathComponent(layerDirectoryName, isDirectory: true).appendingPathComponent(fileName)
         try data.write(to: fileUrl, options: .atomic)
         
-        // layers.json を更新する
+        // layers.json を更新する（新規レイヤーの場合のみ追加）
         let layersFileUrl = try getLayersFileUrl()
         let mapLayersIdsData = try Data(contentsOf: layersFileUrl)
         var mapLayersIds = try JSONDecoder().decode([UUID].self, from: mapLayersIdsData)
-        mapLayersIds.append(mapLayer.id)
+        if !mapLayersIds.contains(mapLayer.id) {
+            mapLayersIds.append(mapLayer.id)
+        }
         try saveMapLayerIds(mapLayerIds: mapLayersIds)
     }
     
