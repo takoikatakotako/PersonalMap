@@ -170,7 +170,7 @@ extension UIMapObjectView: MKMapViewDelegate {
             // 吹き出しにinfoボタンを表示
             let infoButton = UIButton()
             infoButton.addAction(
-                .init{ [weak self] _ in self?.delegate?.anotationTapped(mapObjectId: mapObjectId) }, for: .touchUpInside)
+                .init{ [weak self] _ in self?.delegate?.annotationTapped(mapObjectId: mapObjectId) }, for: .touchUpInside)
             infoButton.frame.size = CGSize(width: 32, height: 32)
             infoButton.setImage(UIImage(systemName: "info.circle"), for: .normal)
             annoView.rightCalloutAccessoryView = infoButton
@@ -217,7 +217,7 @@ extension UIMapObjectView: MKMapViewDelegate {
     //    public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
     //        if let annotation = view.annotation as? CustomAnnotation,
     //           let mapObjectId = annotation.id {
-    //            delegate?.anotationTapped(mapObjectId: mapObjectId)
+    //            delegate?.annotationTapped(mapObjectId: mapObjectId)
     //        }
     //    }
 }
@@ -228,43 +228,43 @@ public struct MapObjectView: UIViewRepresentable {
     @Binding var mapTileType: MapTileType
     @Binding var route: Route?
     
-    let anotationTapped: (_ mapObjectId: UUID) -> Void
+    let annotationTapped: (_ mapObjectId: UUID) -> Void
     let longPressEnded: (_ location: CLLocationCoordinate2D) -> Void
-    let routeNotFound2: () -> Void
+    let routeNotFound: () -> Void
     
     final public class Coordinator: NSObject, UIMapObjectViewDelegate {
         private var mapView: MapObjectView
-        let anotationTapped: (_ mapObjectId: UUID) -> Void
+        let annotationTapped: (_ mapObjectId: UUID) -> Void
         let longPressEnded: (_ location: CLLocationCoordinate2D) -> Void
-        let routeNotFound3: () -> Void
-        
+        let onRouteNotFound: () -> Void
+
         init(
             _ mapView: MapObjectView,
-            anotationTapped: @escaping (_ mapObjectId: UUID) -> Void,
+            annotationTapped: @escaping (_ mapObjectId: UUID) -> Void,
             longPressEnded: @escaping (_ location: CLLocationCoordinate2D) -> Void,
-            routeNotFound3: @escaping () -> Void
+            onRouteNotFound: @escaping () -> Void
         ) {
             self.mapView = mapView
-            self.anotationTapped = anotationTapped
+            self.annotationTapped = annotationTapped
             self.longPressEnded = longPressEnded
-            self.routeNotFound3 = routeNotFound3
+            self.onRouteNotFound = onRouteNotFound
         }
-        
-        public func anotationTapped(mapObjectId: UUID) {
-            self.anotationTapped(mapObjectId)
+
+        public func annotationTapped(mapObjectId: UUID) {
+            self.annotationTapped(mapObjectId)
         }
-        
+
         public func longPressEnded(location: CLLocationCoordinate2D) {
             self.longPressEnded(location)
         }
-        
+
         public func routeNotFound() {
-            self.routeNotFound3()
+            self.onRouteNotFound()
         }
     }
-    
+
     public func makeCoordinator() -> Coordinator {
-        Coordinator(self, anotationTapped: anotationTapped, longPressEnded: longPressEnded, routeNotFound3: routeNotFound2)
+        Coordinator(self, annotationTapped: annotationTapped, longPressEnded: longPressEnded, onRouteNotFound: routeNotFound)
     }
     
     public func makeUIView(context: Context) -> UIMapObjectView {

@@ -48,7 +48,7 @@ class MapObjectListViewState: ObservableObject {
         }
     }
     
-    func sheetDissmiss() {
+    func sheetDismiss() {
         try? getMapPointObjects()
     }
     

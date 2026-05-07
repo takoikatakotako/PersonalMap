@@ -71,7 +71,7 @@ struct FileRepository {
         return try getMapLayer(fileName: fileName)
     }
     
-    func getMapLyers() throws -> [MapLayer] {
+    func getMapLayers() throws -> [MapLayer] {
         var mapLayers: [MapLayer] = []
         // MapLayerのID達を取得
         let mapLayersIds = try getMapLayerIds()

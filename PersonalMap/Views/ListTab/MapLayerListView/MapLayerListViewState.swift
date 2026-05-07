@@ -11,7 +11,7 @@ class MapLayerListViewState: ObservableObject {
         showingSheet = true
     }
 
-    func sheetDissmiss() {
+    func sheetDismiss() {
         do { try getMapLayers() } catch { errorMessage = "データの読み込みに失敗しました" }
     }
 
@@ -38,6 +38,6 @@ class MapLayerListViewState: ObservableObject {
     }
 
     private func getMapLayers() throws {
-        mapLayers = try fileRepository.getMapLyers()
+        mapLayers = try fileRepository.getMapLayers()
     }
 }

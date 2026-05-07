@@ -58,7 +58,7 @@ struct SingleLocationSelecter: View {
             do {
                 var updatedMapObjects: [MapObject] = []
                 let fileRepository = FileRepository()
-                let mapLayers = try fileRepository.getMapLyers()
+                let mapLayers = try fileRepository.getMapLayers()
                 for mapLayer in mapLayers {
                     for mapObjectId in mapLayer.objectIds {
                         let mapObject = try fileRepository.getMapObject(mapObjectId: mapObjectId)
