@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MapObjectEditLocation: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) var dismiss
     
     @Binding var coordinates: [Coordinate]
     let index: Int
@@ -51,8 +51,10 @@ struct MapObjectEditLocation: View {
                 latitudeString = coordinates[index].latitude.description
                 longitudeString = coordinates[index].longitude.description
             }
-            .alert(isPresented: $showingAlert)  {
-                Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("閉じる")))
+            .alert("", isPresented: $showingAlert) {
+                Button("閉じる", role: .cancel) {}
+            } message: {
+                Text(alertMessage)
             }
             .navigationBarItems(
                 trailing:
@@ -77,7 +79,7 @@ struct MapObjectEditLocation: View {
         }
         
         coordinates[index] = Coordinate(latitude: latitude, longitude: longitude)
-        presentationMode.wrappedValue.dismiss()
+        dismiss()
     }
 }
 

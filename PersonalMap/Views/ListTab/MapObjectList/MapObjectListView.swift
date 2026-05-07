@@ -3,7 +3,7 @@ import SwiftUI
 struct MapObjectListView: View {
     @StateObject var  viewState: MapObjectListViewState
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) var dismiss
     
     init(mapLayer: MapLayer) {
         _viewState = StateObject(wrappedValue: MapObjectListViewState(mapLayer: mapLayer))
@@ -36,7 +36,7 @@ struct MapObjectListView: View {
         .navigationBarItems(
             leading:
                 Button(action: {
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }, label: {
                     Image(systemName: "chevron.backward")
                 }),

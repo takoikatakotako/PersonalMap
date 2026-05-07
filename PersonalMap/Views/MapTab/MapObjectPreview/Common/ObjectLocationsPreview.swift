@@ -36,8 +36,6 @@ struct ObjectLocationsPreview: View {
     }
 }
 
-struct ObjectLocationsPreview_Previews: PreviewProvider {
-    static var previews: some View {
-        ObjectLocationsPreview(coordinates: [], routeButtonTapped: {coordinate in })
-    }
+#Preview {
+    ObjectLocationsPreview(coordinates: [], routeButtonTapped: { _ in })
 }

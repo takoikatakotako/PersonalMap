@@ -3,7 +3,7 @@ import SwiftUI
 struct SymbolSelecter: View {
     @Binding var symbolName: String
     
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
 
     private let columns: Int = 5
     private let systemNames: [[String]] = [
@@ -24,7 +24,7 @@ struct SymbolSelecter: View {
                         ForEach(0..<5) { j in
                             Button {
                                 symbolName = systemNames[i][j]
-                                presentationMode.wrappedValue.dismiss()
+                                dismiss()
                             } label: {
                                 Image(systemName: systemNames[i][j])
                                     .resizable()
@@ -36,7 +36,7 @@ struct SymbolSelecter: View {
                 HStack(spacing: 12) {
                     Button {
                         symbolName = systemNames[6][0]
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     } label: {
                         Image(systemName: systemNames[6][0])
                             .resizable()

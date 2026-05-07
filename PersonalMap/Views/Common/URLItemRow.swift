@@ -12,9 +12,7 @@ struct URLItemRow: View {
     }
 }
 
-struct URLItemRow_Previews: PreviewProvider {
-    static var previews: some View {
-        URLItemRow(item: Item(id: UUID(), itemType: .text, key: "Key", value: "Value"))
-            .previewLayout(.sizeThatFits)
-    }
+#Preview {
+    URLItemRow(item: Item(id: UUID(), itemType: .text, key: "Key", value: "Value"))
+        .previewLayout(.sizeThatFits)
 }

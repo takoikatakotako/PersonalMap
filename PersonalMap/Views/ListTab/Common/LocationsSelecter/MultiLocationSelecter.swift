@@ -4,7 +4,7 @@ import MapKit
 struct MultiLocationSelecter: View {
     @Binding var coordinates: [Coordinate]
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) var dismiss
     
     @State private var mapType: MKMapType = MKMapType.standard
     @State private var location: CLLocationCoordinate2D?
@@ -29,7 +29,7 @@ struct MultiLocationSelecter: View {
                   Spacer()
                                   
                 Button {
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 } label: {
                     Text("Cancel")
                 }
@@ -44,7 +44,7 @@ struct MultiLocationSelecter: View {
                 
                 Button {
                     coordinates = locations.map { $0.coordinate }
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 } label: {
                     Text("OK")
                 }

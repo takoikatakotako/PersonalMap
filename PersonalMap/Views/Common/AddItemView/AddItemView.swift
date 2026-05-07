@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AddItemView: View {
-    @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) private var dismiss
     
     @StateObject var viewState: AddItemViewState
     
@@ -84,8 +84,10 @@ struct AddItemView: View {
                             .font(Font.system(size: 16).bold())
                     })
             )
-            .alert(isPresented: $viewState.showingAlert)  {
-                Alert(title: Text(""), message: Text(viewState.alertMessage), dismissButton: .default(Text("閉じる")))
+            .alert("", isPresented: $viewState.showingAlert) {
+                Button("閉じる", role: .cancel) {}
+            } message: {
+                Text(viewState.alertMessage)
             }
             .sheet(item: $viewState.showingSheet) { item in
                 switch item {
@@ -95,9 +97,9 @@ struct AddItemView: View {
                     PDFPickerView(document: $viewState.pdfDocument)
                 }
             }
-            .onReceive(viewState.$dismiss, perform: { dismiss in
-                if dismiss {
-                    presentationMode.wrappedValue.dismiss()
+            .onReceive(viewState.$dismiss, perform: { shouldDismiss in
+                if shouldDismiss {
+                    dismiss()
                 }
             })
             .navigationTitle("項目の追加")

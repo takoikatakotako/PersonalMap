@@ -86,19 +86,34 @@ struct TopView: View {
         }, message: {
             Text("マップタイルを選択してください。")
         })
-        .alert(item: $viewState.alert) { item in
-            switch item {
-            case .routeConfirmAlert(let location):
-                return Alert(
-                    title: Text(""),
-                    message: Text("現在地から\(location.latitude), \(location.longitude)へのアクセスを表示しますか？"),
-                    primaryButton: .default(Text("キャンセル")),
-                    secondaryButton: .default(Text("はい"), action: {
-                        viewState.showRoute(destination: location)
-                    })
-                )
-            case .messageAlert(let message):
-                return Alert(title: Text(""), message: Text(message), dismissButton: .default(Text("閉じる")))
+        .alert("", isPresented: Binding(
+            get: { viewState.routeConfirmLocation != nil },
+            set: { if !$0 { viewState.routeConfirmLocation = nil } }
+        )) {
+            Button("キャンセル", role: .cancel) {
+                viewState.routeConfirmLocation = nil
+            }
+            Button("はい") {
+                if let location = viewState.routeConfirmLocation {
+                    viewState.showRoute(destination: location)
+                }
+                viewState.routeConfirmLocation = nil
+            }
+        } message: {
+            if let location = viewState.routeConfirmLocation {
+                Text("現在地から\(location.latitude), \(location.longitude)へのアクセスを表示しますか？")
+            }
+        }
+        .alert("", isPresented: Binding(
+            get: { viewState.messageAlertText != nil },
+            set: { if !$0 { viewState.messageAlertText = nil } }
+        )) {
+            Button("閉じる", role: .cancel) {
+                viewState.messageAlertText = nil
+            }
+        } message: {
+            if let message = viewState.messageAlertText {
+                Text(message)
             }
         }
         .onAppear {
@@ -107,8 +122,6 @@ struct TopView: View {
     }
 }
 
-struct TopView_Previews: PreviewProvider {
-    static var previews: some View {
-        TopView()
-    }
+#Preview {
+    TopView()
 }

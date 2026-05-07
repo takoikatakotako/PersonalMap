@@ -5,7 +5,7 @@ struct SingleLocationSelecter: View {
     @Binding var latitudeString: String
     @Binding var longitudeString: String
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) var dismiss
     @State private var mapType: MKMapType = MKMapType.standard
     @State private var mapObjects: [MapObject] = []
     @State private var latitude: Double?
@@ -33,18 +33,18 @@ struct SingleLocationSelecter: View {
                 
                 HStack {
                     Button {
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     } label: {
                         Text("Cancel")
                     }
-                    
+
                     Button {
                         guard let latitude = latitude, let longitude = longitude else {
                             return
                         }
                         latitudeString = latitude.description
                         longitudeString = longitude.description
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     } label: {
                         Text("OK")
                     }

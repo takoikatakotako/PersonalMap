@@ -27,9 +27,7 @@ struct ImageItemRow: View {
     }
 }
 
-struct ImageItemRow_Previews: PreviewProvider {
-    static var previews: some View {
-        ImageItemRow(item: Item(id: UUID(), itemType: .text, key: "Key", value: "Value"))
-            .previewLayout(.sizeThatFits)
-    }
+#Preview {
+    ImageItemRow(item: Item(id: UUID(), itemType: .text, key: "Key", value: "Value"))
+        .previewLayout(.sizeThatFits)
 }
