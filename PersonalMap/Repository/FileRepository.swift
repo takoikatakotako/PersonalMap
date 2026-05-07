@@ -249,8 +249,7 @@ struct FileRepository {
     }
     
     private func saveMapLayerIds(mapLayerIds: [UUID]) throws {
-        // 重複して保存することを防ぐために Set にする
-        let mapLayersData = try JSONEncoder().encode(Set(mapLayerIds))
+        let mapLayersData = try JSONEncoder().encode(mapLayerIds)
         let layersFileUrl = try getLayersFileUrl()
         try mapLayersData.write(to: layersFileUrl, options: .atomic)
     }
