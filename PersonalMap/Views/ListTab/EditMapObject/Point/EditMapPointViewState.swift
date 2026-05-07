@@ -24,8 +24,12 @@ class EditMapPointViewState: ObservableObject {
         }
         
         point.coordinate = Coordinate(latitude: latitude, longitude: longnitude)
-        try! fileRepository.saveMapObject(mapObject: MapObject.point(point))
-        
-        dismiss = true
+        do {
+            try fileRepository.saveMapObject(mapObject: MapObject.point(point))
+            dismiss = true
+        } catch {
+            message = "保存に失敗しました"
+            showingAlert = true
+        }
     }
 }

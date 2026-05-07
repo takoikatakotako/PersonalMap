@@ -21,24 +21,32 @@ class TopViewState: ObservableObject {
     }
     
     func onAppear() {
-        var updatedMapObjects: [MapObject] = []
-        let mapLayers: [MapLayer] = try! fileRepository.getMapLyers()
-        for mapLayer in mapLayers {
-            for mapObjectId in mapLayer.objectIds {
-                let mapObject: MapObject = try! fileRepository.getMapObject(mapObjectId: mapObjectId)
-                updatedMapObjects.append(mapObject)
+        do {
+            var updatedMapObjects: [MapObject] = []
+            let mapLayers = try fileRepository.getMapLyers()
+            for mapLayer in mapLayers {
+                for mapObjectId in mapLayer.objectIds {
+                    let mapObject = try fileRepository.getMapObject(mapObjectId: mapObjectId)
+                    updatedMapObjects.append(mapObject)
+                }
             }
-        }
-        
-        // 差分がある場合は更新する
-        if mapObjects != updatedMapObjects {
-            mapObjects = updatedMapObjects
+
+            // 差分がある場合は更新する
+            if mapObjects != updatedMapObjects {
+                mapObjects = updatedMapObjects
+            }
+        } catch {
+            messageAlertText = "データの読み込みに失敗しました"
         }
     }
-    
+
     func anotationTapped(mapObjectId: UUID) {
-        let mapObject = try! fileRepository.getMapObject(mapObjectId: mapObjectId)
-        sheet = .showMapObject(mapObject: mapObject)
+        do {
+            let mapObject = try fileRepository.getMapObject(mapObjectId: mapObjectId)
+            sheet = .showMapObject(mapObject: mapObject)
+        } catch {
+            messageAlertText = "データの読み込みに失敗しました"
+        }
     }
     
     func longPressEnded(location: CLLocationCoordinate2D) {

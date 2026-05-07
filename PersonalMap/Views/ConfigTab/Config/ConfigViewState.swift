@@ -4,6 +4,7 @@ import StoreKit
 class ConfigViewState: ObservableObject {
     @Published var showingAlert: Bool = false
     @Published var showingActivityIndicator: Bool = false
+    @Published var errorMessage: String?
 
     let fileRepository = FileRepository()
     
@@ -30,7 +31,11 @@ class ConfigViewState: ObservableObject {
     }
     
     func reset() {
-        try! fileRepository.reset()
-        NotificationCenter.default.post(name: .reset, object: nil)
+        do {
+            try fileRepository.reset()
+            NotificationCenter.default.post(name: .reset, object: nil)
+        } catch {
+            errorMessage = "リセットに失敗しました"
+        }
     }
 }
