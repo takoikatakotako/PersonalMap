@@ -8,6 +8,8 @@ class TopViewState: ObservableObject {
     @Published var route: Route?
     @Published var sheet: TopSheetItem?
     
+    @Published var shouldReturnToLocation: Bool = false
+
     // Alert
     @Published var showingMapTileAlert: Bool = false
     @Published var routeConfirmLocation: Coordinate?
@@ -75,6 +77,10 @@ class TopViewState: ObservableObject {
     
     func minusButtonTapped() {
         route = nil
+    }
+
+    func locationButtonTapped() {
+        shouldReturnToLocation = true
     }
     
     func mapTileButtonTapped() {
