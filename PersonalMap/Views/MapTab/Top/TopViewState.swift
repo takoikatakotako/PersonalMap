@@ -9,7 +9,6 @@ class TopViewState: ObservableObject {
     @Published var sheet: TopSheetItem?
     
     // Alert
-    @Published var alert: TopAlertItem?
     @Published var showingMapTileAlert: Bool = false
     @Published var routeConfirmLocation: Coordinate?
     @Published var messageAlertText: String?
@@ -50,13 +49,11 @@ class TopViewState: ObservableObject {
     }
     
     func longPressEnded(location: CLLocationCoordinate2D) {
-        alert = .routeConfirmAlert(location.coordinate)
         routeConfirmLocation = location.coordinate
     }
 
     func routeNotFound() {
         route = nil
-        alert = .messageAlert("ルートが見つかりませんでした")
         messageAlertText = "ルートが見つかりませんでした"
     }
     
@@ -90,7 +87,6 @@ class TopViewState: ObservableObject {
     
     func showRoute(destination: Coordinate) {
         guard let lastKnownLocation: CLLocationCoordinate2D = LocationManager.shared.lastKnownLocation else {
-            alert = .messageAlert("現在地が取得できませんでした。")
             messageAlertText = "現在地が取得できませんでした。"
             return
         }
@@ -104,7 +100,6 @@ class TopViewState: ObservableObject {
             self.mapType = .standard
             self.route = nil
             self.sheet = nil
-            self.alert = nil
             self.routeConfirmLocation = nil
             self.messageAlertText = nil
         }
