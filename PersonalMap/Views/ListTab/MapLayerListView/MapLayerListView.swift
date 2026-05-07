@@ -43,8 +43,6 @@ struct MapLayerListView: View {
     }
 }
 
-struct LayerListView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapLayerListView()
-    }
+#Preview {
+    MapLayerListView()
 }

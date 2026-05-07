@@ -4,7 +4,7 @@ struct MapPolygonPreview: View {
     let polygon: MapPolygon
     @Binding var route: Route?
 
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @State var showingAlert = false
 
     var body: some View {
@@ -16,7 +16,7 @@ struct MapPolygonPreview: View {
                     ObjectLocationsPreview(coordinates: polygon.coordinates, routeButtonTapped: { coordinate in
                         if let myCoordinate = LocationManager.shared.lastKnownLocation?.coordinate {
                             route = Route(source: myCoordinate.locationCoordinate2D, destination: coordinate.locationCoordinate2D)
-                            presentationMode.wrappedValue.dismiss()
+                            dismiss()
                         } else {
                             showingAlert = true
                         }
@@ -25,10 +25,10 @@ struct MapPolygonPreview: View {
                     ObjectItemsPreview(items: polygon.items)
                 }
             }
-            .alert(isPresented: $showingAlert) {
-                Alert(title: Text("エラー"),
-                      message: Text("現在の座標を取得できませんでした。権限を確認してください"),
-                      dismissButton: .default(Text("閉じる")))
+            .alert("エラー", isPresented: $showingAlert) {
+                Button("閉じる", role: .cancel) {}
+            } message: {
+                Text("現在の座標を取得できませんでした。権限を確認してください")
             }
             .padding(.horizontal, 16)
             .navigationBarTitleDisplayMode(.inline)

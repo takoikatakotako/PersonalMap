@@ -16,21 +16,18 @@ struct CommonButton: View {
     }
 }
 
-struct CommonButton_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            CommonButton(systemName: "airplane", active: true)
-                .previewLayout(.sizeThatFits)
-            
-            CommonButton(systemName: "car", active: false)
-                .previewLayout(.sizeThatFits)
-            
-            CommonButton(systemName: "lightbulb", active: true)
-                .previewLayout(.sizeThatFits)
-            
-            CommonButton(systemName: "lightbulb.fill", active: false)
-                .previewLayout(.sizeThatFits)
-            
-        }
+#Preview {
+    Group {
+        CommonButton(systemName: "airplane", active: true)
+            .previewLayout(.sizeThatFits)
+
+        CommonButton(systemName: "car", active: false)
+            .previewLayout(.sizeThatFits)
+
+        CommonButton(systemName: "lightbulb", active: true)
+            .previewLayout(.sizeThatFits)
+
+        CommonButton(systemName: "lightbulb.fill", active: false)
+            .previewLayout(.sizeThatFits)
     }
 }

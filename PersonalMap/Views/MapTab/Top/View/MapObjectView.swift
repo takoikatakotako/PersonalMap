@@ -14,7 +14,6 @@ public class UIMapObjectView: UIView {
         super.init(frame: frame)
         
         mapView.delegate = self
-        mapView.userTrackingMode = MKUserTrackingMode.follow
         mapView.userTrackingMode = MKUserTrackingMode.followWithHeading
         addSubview(mapView)
         
@@ -130,10 +129,10 @@ public class UIMapObjectView: UIView {
         let destinationLocation = route.destination
         
         // calc direction
-        let sourcePlacemark = MKPlacemark(coordinate: sourceLocation, addressDictionary: nil)
+        let sourcePlacemark = MKPlacemark(coordinate: sourceLocation)
         let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
-        
-        let destinationPlacemark = MKPlacemark(coordinate: destinationLocation, addressDictionary: nil)
+
+        let destinationPlacemark = MKPlacemark(coordinate: destinationLocation)
         let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
         
         let directionsRequest = MKDirections.Request()

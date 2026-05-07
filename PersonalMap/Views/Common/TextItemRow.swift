@@ -12,9 +12,7 @@ struct TextItemRow: View {
     }
 }
 
-struct TextItemRow_Previews: PreviewProvider {
-    static var previews: some View {
-        TextItemRow(item: Item(id: UUID(), itemType: .text, key: "Key", value: "Value"))
-            .previewLayout(.sizeThatFits)
-    }
+#Preview {
+    TextItemRow(item: Item(id: UUID(), itemType: .text, key: "Key", value: "Value"))
+        .previewLayout(.sizeThatFits)
 }

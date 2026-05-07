@@ -14,8 +14,6 @@ struct ObjectNamePreview: View {
     }
 }
 
-struct ObjectNamePreview_Previews: PreviewProvider {
-    static var previews: some View {
-        ObjectNamePreview(objectName: "ラインオブジェクト")
-    }
+#Preview {
+    ObjectNamePreview(objectName: "ラインオブジェクト")
 }

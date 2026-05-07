@@ -16,8 +16,6 @@ struct MyWebView: UIViewRepresentable {
     }
 }
 
-struct MyWebView_Previews: PreviewProvider {
-    static var previews: some View {
-        MyWebView(urlString: "https://www.google.com/")
-    }
+#Preview {
+    MyWebView(urlString: "https://www.google.com/")
 }

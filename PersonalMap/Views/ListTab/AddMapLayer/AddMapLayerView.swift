@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AddMapLayerView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) var dismiss
     
     @StateObject var viewState = AddMapLayerViewState()
     
@@ -29,7 +29,7 @@ struct AddMapLayerView: View {
                     Spacer()
                     Button {
                         viewState.save()
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     } label: {
                         Text("追加")
                             .foregroundColor(Color.black)
@@ -46,9 +46,9 @@ struct AddMapLayerView: View {
                 
                 Spacer()
             }
-            .onReceive(viewState.$dismiss, perform: { dismiss in
-                if dismiss {
-                    presentationMode.wrappedValue.dismiss()
+            .onReceive(viewState.$dismiss, perform: { shouldDismiss in
+                if shouldDismiss {
+                    dismiss()
                 }
             })
             .padding(.horizontal, 16)
@@ -58,8 +58,6 @@ struct AddMapLayerView: View {
     }
 }
 
-struct AddMapObjectView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddMapLayerView()
-    }
+#Preview {
+    AddMapLayerView()
 }

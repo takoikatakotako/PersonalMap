@@ -4,7 +4,7 @@ struct MapPointPreview: View {
     let point: MapPoint
     @Binding var route: Route?
     
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @State var showingAlert = false
     
     var body: some View {
@@ -16,7 +16,7 @@ struct MapPointPreview: View {
                     ObjectLocationPreview(latitude: point.coordinate.latitude, longitude: point.coordinate.longitude, routeButtonTapped: {
                         if let coordinate = LocationManager.shared.lastKnownLocation?.coordinate {
                             route = Route(source: coordinate.locationCoordinate2D, destination: point.coordinate.locationCoordinate2D)
-                            presentationMode.wrappedValue.dismiss()
+                            dismiss()
                         } else {
                             showingAlert = true
                         }
@@ -25,10 +25,10 @@ struct MapPointPreview: View {
                     ObjectItemsPreview(items: point.items)
                 }
             }
-            .alert(isPresented: $showingAlert) {
-                Alert(title: Text("エラー"),
-                      message: Text("現在の座標を取得できませんでした。権限を確認してください"),
-                      dismissButton: .default(Text("閉じる")))
+            .alert("エラー", isPresented: $showingAlert) {
+                Button("閉じる", role: .cancel) {}
+            } message: {
+                Text("現在の座標を取得できませんでした。権限を確認してください")
             }
             .padding(.horizontal, 16)
             .navigationBarTitleDisplayMode(.inline)

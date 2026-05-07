@@ -2,7 +2,7 @@ import SwiftUI
 import PhotosUI
 
 struct ImagePicker: UIViewControllerRepresentable {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @Binding var image: UIImage?
     
     func makeCoordinator() -> Coordinator {
@@ -28,7 +28,7 @@ struct ImagePicker: UIViewControllerRepresentable {
         }
         
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-            parent.presentationMode.wrappedValue.dismiss()
+            parent.dismiss()
 
             if let itemProvider = results.first?.itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
                 itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in

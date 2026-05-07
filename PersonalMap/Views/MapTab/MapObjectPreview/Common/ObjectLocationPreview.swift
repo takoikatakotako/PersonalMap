@@ -34,10 +34,6 @@ struct ObjectLocationPreview: View {
 }
 
 
-struct ObjectLocationPreview_Previews: PreviewProvider {
-    static var previews: some View {
-        ObjectLocationPreview(latitude: 100, longitude: 100, routeButtonTapped: {
-            
-        })
-    }
+#Preview {
+    ObjectLocationPreview(latitude: 100, longitude: 100, routeButtonTapped: {})
 }

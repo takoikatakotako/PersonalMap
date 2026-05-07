@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AddMapPointView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) var dismiss
     
     @StateObject var viewState: AddMapPointViewState
     
@@ -24,12 +24,14 @@ struct AddMapPointView: View {
                     MapObjectItems(items: $viewState.items)
                 }
             }
-            .alert(isPresented: $viewState.showingAlert)  {
-                Alert(title: Text(""), message: Text(viewState.message), dismissButton: .default(Text("閉じる")))
+            .alert("", isPresented: $viewState.showingAlert) {
+                Button("閉じる", role: .cancel) {}
+            } message: {
+                Text(viewState.message)
             }
-            .onReceive(viewState.$dismiss, perform: { dismiss in
-                if dismiss {
-                    presentationMode.wrappedValue.dismiss()
+            .onReceive(viewState.$dismiss, perform: { shouldDismiss in
+                if shouldDismiss {
+                    dismiss()
                 }
             })
             .padding(.horizontal, 16)
@@ -48,8 +50,6 @@ struct AddMapPointView: View {
     }
 }
 
-struct AddMapPointObjectView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddMapPointView(mapLayerId: UUID())
-    }
+#Preview {
+    AddMapPointView(mapLayerId: UUID())
 }

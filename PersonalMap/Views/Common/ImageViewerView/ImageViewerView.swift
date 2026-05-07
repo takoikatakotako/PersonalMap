@@ -18,8 +18,6 @@ struct ImageViewerView: View {
     }
 }
 
-struct ImageViewerView_Previews: PreviewProvider {
-    static var previews: some View {
-        ImageViewerView(imageName: "")
-    }
+#Preview {
+    ImageViewerView(imageName: "")
 }

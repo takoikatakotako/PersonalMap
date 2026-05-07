@@ -73,8 +73,6 @@ struct ObjectItemsPreview: View {
     }
 }
 
-struct ObjectItemsPreview_Previews: PreviewProvider {
-    static var previews: some View {
-        ObjectItemsPreview(items: [])
-    }
+#Preview {
+    ObjectItemsPreview(items: [])
 }

@@ -97,15 +97,13 @@ struct ConfigView: View {
                     }
                 }
             }
-            .alert(isPresented: $viewState.showingAlert){
-                Alert(
-                    title: Text("リセット"),
-                    message: Text("データを削除し、初期設定に戻しますがよろしいですか？"),
-                    primaryButton: .cancel(Text("キャンセル")),
-                    secondaryButton: .destructive(Text("削除"), action: {
-                        viewState.reset()
-                    })
-                )
+            .alert("リセット", isPresented: $viewState.showingAlert) {
+                Button("キャンセル", role: .cancel) {}
+                Button("削除", role: .destructive) {
+                    viewState.reset()
+                }
+            } message: {
+                Text("データを削除し、初期設定に戻しますがよろしいですか？")
             }
             .sheet(isPresented: $viewState.showingActivityIndicator, content: {
                 ActivityViewController(activityItems: [URL(string: SHARE_URL_STRING)!])
@@ -116,8 +114,6 @@ struct ConfigView: View {
     }
 }
 
-struct ConfigView_Previews: PreviewProvider {
-    static var previews: some View {
-        ConfigView()
-    }
+#Preview {
+    ConfigView()
 }

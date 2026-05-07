@@ -3,7 +3,7 @@ import SwiftUI
 struct ItemListView: View {
     @Binding var items: [Item]
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) var dismiss
     @State private var showingSheet = false
     
     var body: some View {
@@ -30,7 +30,7 @@ struct ItemListView: View {
             .navigationBarItems(
                 leading:
                     Button {
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     } label: {
                         Text("閉じる")
                             .font(Font.system(size: 16).bold())

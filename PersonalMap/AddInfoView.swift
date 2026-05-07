@@ -5,7 +5,7 @@ protocol AddInfoViewDelegate {
 }
 
 struct AddInfoView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) var dismiss
 
     let delegate: AddInfoViewDelegate
     @State var key = ""
@@ -17,41 +17,39 @@ struct AddInfoView: View {
             TextField("Key", text: $key)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-            
+
             TextField("Value", text: $value)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-            
+
             Button(action: {
                 if key.isEmpty {
                     showingAlert = true
                     return
                 }
                 delegate.addInfo(info: Item(itemType: .text, key: key, value: value))
-                presentationMode.wrappedValue.dismiss()
+                dismiss()
             }, label: {
                 Text("保存")
             })
-            
+
             Spacer()
         }
-        .alert(isPresented: $showingAlert, content: {
-            Alert(title: Text("タイトル"),
-                     message: Text("キーが空です"),
-                     dismissButton: .default(Text("了解")))
-        })
+        .alert("タイトル", isPresented: $showingAlert) {
+            Button("了解", role: .cancel) {}
+        } message: {
+            Text("キーが空です")
+        }
     }
 }
 
-struct AddInfoView_Previews: PreviewProvider {
-    struct PreviewWrapper: View, AddInfoViewDelegate {
-        var body: some View {
-            AddInfoView(delegate: self)
-        }
-        func addInfo(info: Item) {}
+private struct PreviewWrapper: View, AddInfoViewDelegate {
+    var body: some View {
+        AddInfoView(delegate: self)
     }
-    
-    static var previews: some View {
-        PreviewWrapper()
-    }
+    func addInfo(info: Item) {}
+}
+
+#Preview {
+    PreviewWrapper()
 }
