@@ -22,7 +22,7 @@ struct MapLayerListView: View {
             }
             .sheet(
                 isPresented: $viewState.showingSheet, onDismiss: {
-                    viewState.sheetDissmiss()
+                    viewState.sheetDismiss()
                 }, content: {
                     AddMapLayerView()
                 })

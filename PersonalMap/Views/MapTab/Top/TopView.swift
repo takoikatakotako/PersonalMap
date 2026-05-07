@@ -7,10 +7,10 @@ struct TopView: View {
     var body: some View {
         ZStack(alignment: .top) {
             MapObjectView(mapObjects: $viewState.mapObjects, mapType: $viewState.mapType, mapTileType: $viewState.mapTileType, route: $viewState.route) { mapObjectId in
-                viewState.anotationTapped(mapObjectId: mapObjectId)
+                viewState.annotationTapped(mapObjectId: mapObjectId)
             } longPressEnded: { location in
                 viewState.longPressEnded(location: location)
-            } routeNotFound2: {
+            } routeNotFound: {
                 viewState.routeNotFound()
             }
             .ignoresSafeArea(.all, edges: .top)
@@ -35,7 +35,7 @@ struct TopView: View {
                 }
                 
                 Button {
-                    viewState.bycycleButtonTapped()
+                    viewState.bicycleButtonTapped()
                 } label: {
                     CommonButton(systemName: "bicycle", active: viewState.mapType == .mutedStandard)
                 }

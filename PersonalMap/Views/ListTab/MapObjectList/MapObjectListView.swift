@@ -61,7 +61,7 @@ struct MapObjectListView: View {
         )
         .sheet(isPresented: $viewState.showingSheet) {
             // on dissmiss
-            viewState.sheetDissmiss()
+            viewState.sheetDismiss()
         } content: {
             switch viewState.mapLayer.mapObjectType {
             case .point:

@@ -79,7 +79,7 @@
 		8DEC410C26F60B9B0052A7D2 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC410B26F60B9B0052A7D2 /* TopView.swift */; };
 		8DEC410F26F60BC20052A7D2 /* MapLayerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC410E26F60BC20052A7D2 /* MapLayerListView.swift */; };
 		8DEC411226F60BD50052A7D2 /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC411126F60BD50052A7D2 /* ConfigView.swift */; };
-		8DEC411426F61B180052A7D2 /* MapLayerProtcol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC411326F61B180052A7D2 /* MapLayerProtcol.swift */; };
+		8DEC411426F61B180052A7D2 /* MapLayerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC411326F61B180052A7D2 /* MapLayerProtocol.swift */; };
 		8DEC411726F623510052A7D2 /* AddMapLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC411626F623510052A7D2 /* AddMapLayerView.swift */; };
 		8DEC412326F63D950052A7D2 /* FileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC412226F63D950052A7D2 /* FileRepository.swift */; };
 		8DEC412626F63DE70052A7D2 /* InternalFileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC412526F63DE70052A7D2 /* InternalFileError.swift */; };
@@ -89,7 +89,7 @@
 		8DF609D2282191F2005C384E /* Notification+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF609D1282191F2005C384E /* Notification+extension.swift */; };
 		8DFBADF927089F93005B4611 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBADF827089F93005B4611 /* Coordinate.swift */; };
 		8DFBADFB2708AE03005B4611 /* MapObjectTypeDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBADFA2708AE03005B4611 /* MapObjectTypeDecoder.swift */; };
-		8DFBADFE2708AEA5005B4611 /* CLLocationCoordinate2D+extensinon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBADFD2708AEA5005B4611 /* CLLocationCoordinate2D+extensinon.swift */; };
+		8DFBADFE2708AEA5005B4611 /* CLLocationCoordinate2D+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBADFD2708AEA5005B4611 /* CLLocationCoordinate2D+extension.swift */; };
 		8DFBAE0027098498005B4611 /* EditMapPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBADFF27098498005B4611 /* EditMapPointView.swift */; };
 		8DFBAE022709854F005B4611 /* MapObjectInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE012709854F005B4611 /* MapObjectInfo.swift */; };
 		8DFBAE04270986A5005B4611 /* EditMapPolylineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE03270986A5005B4611 /* EditMapPolylineView.swift */; };
@@ -199,7 +199,7 @@
 		8DEC410B26F60B9B0052A7D2 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		8DEC410E26F60BC20052A7D2 /* MapLayerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLayerListView.swift; sourceTree = "<group>"; };
 		8DEC411126F60BD50052A7D2 /* ConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigView.swift; sourceTree = "<group>"; };
-		8DEC411326F61B180052A7D2 /* MapLayerProtcol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLayerProtcol.swift; sourceTree = "<group>"; };
+		8DEC411326F61B180052A7D2 /* MapLayerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLayerProtocol.swift; sourceTree = "<group>"; };
 		8DEC411626F623510052A7D2 /* AddMapLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapLayerView.swift; sourceTree = "<group>"; };
 		8DEC412226F63D950052A7D2 /* FileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRepository.swift; sourceTree = "<group>"; };
 		8DEC412526F63DE70052A7D2 /* InternalFileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalFileError.swift; sourceTree = "<group>"; };
@@ -209,7 +209,7 @@
 		8DF609D1282191F2005C384E /* Notification+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+extension.swift"; sourceTree = "<group>"; };
 		8DFBADF827089F93005B4611 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		8DFBADFA2708AE03005B4611 /* MapObjectTypeDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectTypeDecoder.swift; sourceTree = "<group>"; };
-		8DFBADFD2708AEA5005B4611 /* CLLocationCoordinate2D+extensinon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+extensinon.swift"; sourceTree = "<group>"; };
+		8DFBADFD2708AEA5005B4611 /* CLLocationCoordinate2D+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+extension.swift"; sourceTree = "<group>"; };
 		8DFBADFF27098498005B4611 /* EditMapPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMapPointView.swift; sourceTree = "<group>"; };
 		8DFBAE012709854F005B4611 /* MapObjectInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectInfo.swift; sourceTree = "<group>"; };
 		8DFBAE03270986A5005B4611 /* EditMapPolylineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMapPolylineView.swift; sourceTree = "<group>"; };
@@ -524,7 +524,7 @@
 				8DCE59DA25EBB36400D080D2 /* MapPolyline.swift */,
 				8D8255092607272700D73A6D /* MapPolygon.swift */,
 				8DCE59DF25EBB38F00D080D2 /* MapObject.swift */,
-				8DEC411326F61B180052A7D2 /* MapLayerProtcol.swift */,
+				8DEC411326F61B180052A7D2 /* MapLayerProtocol.swift */,
 				8DFBADF827089F93005B4611 /* Coordinate.swift */,
 				8DFBADFA2708AE03005B4611 /* MapObjectTypeDecoder.swift */,
 				8DFBAE012709854F005B4611 /* MapObjectInfo.swift */,
@@ -672,7 +672,7 @@
 		8DFBADFC2708AE95005B4611 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				8DFBADFD2708AEA5005B4611 /* CLLocationCoordinate2D+extensinon.swift */,
+				8DFBADFD2708AEA5005B4611 /* CLLocationCoordinate2D+extension.swift */,
 				8DF609D1282191F2005C384E /* Notification+extension.swift */,
 			);
 			path = Extension;
@@ -857,7 +857,7 @@
 				8DD13EF425E2308C00CEAB3B /* MapPoint.swift in Sources */,
 				8D2B8F8927522A800071E571 /* ImageItemRow.swift in Sources */,
 				8DB57DA527815D8D00CF6938 /* MapObjectSymbolSelecter.swift in Sources */,
-				8DFBADFE2708AEA5005B4611 /* CLLocationCoordinate2D+extensinon.swift in Sources */,
+				8DFBADFE2708AEA5005B4611 /* CLLocationCoordinate2D+extension.swift in Sources */,
 				8D346831280C73CC00822803 /* AddMapPolylineViewState.swift in Sources */,
 				8D7D7C2725D4F00A00BA86BF /* PersonalMapApp.swift in Sources */,
 				8DFBAE022709854F005B4611 /* MapObjectInfo.swift in Sources */,
@@ -899,7 +899,7 @@
 				8D346852280F207A00822803 /* ObjectItemsPreview.swift in Sources */,
 				8DF609D2282191F2005C384E /* Notification+extension.swift in Sources */,
 				8DFBAE0B2709EA68005B4611 /* MapPointPreview.swift in Sources */,
-				8DEC411426F61B180052A7D2 /* MapLayerProtcol.swift in Sources */,
+				8DEC411426F61B180052A7D2 /* MapLayerProtocol.swift in Sources */,
 				8DA5CD8327FD8A97006B8FB4 /* MapObjectListViewState.swift in Sources */,
 				8DFBAE12270CA2ED005B4611 /* AddMapPolylineObjectView.swift in Sources */,
 				8D6FE955270E0F0200FB8D5C /* CustomAnnotation.swift in Sources */,

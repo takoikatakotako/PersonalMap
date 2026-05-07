@@ -23,7 +23,7 @@ class TopViewState: ObservableObject {
     func onAppear() {
         do {
             var updatedMapObjects: [MapObject] = []
-            let mapLayers = try fileRepository.getMapLyers()
+            let mapLayers = try fileRepository.getMapLayers()
             for mapLayer in mapLayers {
                 for mapObjectId in mapLayer.objectIds {
                     let mapObject = try fileRepository.getMapObject(mapObjectId: mapObjectId)
@@ -40,7 +40,7 @@ class TopViewState: ObservableObject {
         }
     }
 
-    func anotationTapped(mapObjectId: UUID) {
+    func annotationTapped(mapObjectId: UUID) {
         do {
             let mapObject = try fileRepository.getMapObject(mapObjectId: mapObjectId)
             sheet = .showMapObject(mapObject: mapObject)
@@ -72,7 +72,7 @@ class TopViewState: ObservableObject {
         mapType = .hybrid
     }
     
-    func bycycleButtonTapped() {
+    func bicycleButtonTapped() {
         mapType = .mutedStandard
     }
     
