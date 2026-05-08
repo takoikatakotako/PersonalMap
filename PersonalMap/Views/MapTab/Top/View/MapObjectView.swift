@@ -5,6 +5,7 @@ import UIKit
 public class UIMapObjectView: UIView {
     private lazy var mapView = MKMapView()
     weak public var delegate: UIMapObjectViewDelegate?
+    private var currentTileType: MapTileType = .none
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -121,8 +122,10 @@ public class UIMapObjectView: UIView {
         mapView.setUserTrackingMode(.followWithHeading, animated: true)
     }
     
-    // MapTile
-    func setMapTile(mapTile: MapTileType) {
+    // MapTile: only update when type actually changes
+    func setMapTileIfNeeded(mapTile: MapTileType) {
+        guard currentTileType != mapTile else { return }
+        currentTileType = mapTile
         removeTileOverlays()
         switch mapTile {
         case .none:
@@ -248,7 +251,6 @@ public struct MapObjectView: UIViewRepresentable {
         let annotationTapped: (_ mapObjectId: UUID) -> Void
         let longPressEnded: (_ location: CLLocationCoordinate2D) -> Void
         let onRouteNotFound: () -> Void
-        var lastMapTileType: MapTileType?
 
         init(
             _ mapView: MapObjectView,
@@ -293,11 +295,8 @@ public struct MapObjectView: UIViewRepresentable {
         // Set map type
         uiView.changeMapType(mapType: mapType)
 
-        // Update tile overlay only when type changes
-        if context.coordinator.lastMapTileType != mapTileType {
-            uiView.setMapTile(mapTile: mapTileType)
-            context.coordinator.lastMapTileType = mapTileType
-        }
+        // Update tile overlay only when type changes (tracked inside UIMapObjectView)
+        uiView.setMapTileIfNeeded(mapTile: mapTileType)
         
         for mapObject in mapObjects {
             if mapObject.isHidden {

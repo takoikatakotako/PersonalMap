@@ -1,4 +1,4 @@
-enum MapTileType {
+enum MapTileType: Equatable {
     case none
     case standard
     case pale
