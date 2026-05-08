@@ -99,9 +99,16 @@ public class UIMapObjectView: UIView {
         mapView.removeAnnotations(mapView.annotations)
     }
     
-    // Remove All Overlay
-    func removeAllOverlays() {
-        for overlay in mapView.overlays {
+    // Remove data overlays (polylines, polygons, route) but keep tile overlays
+    func removeDataOverlays() {
+        for overlay in mapView.overlays where !(overlay is MKTileOverlay) {
+            mapView.removeOverlay(overlay)
+        }
+    }
+
+    // Remove only tile overlays
+    func removeTileOverlays() {
+        for overlay in mapView.overlays where overlay is MKTileOverlay {
             mapView.removeOverlay(overlay)
         }
     }
@@ -115,7 +122,8 @@ public class UIMapObjectView: UIView {
     }
     
     // MapTile
-    func changeMapTile(mapTile: MapTileType) {
+    func setMapTile(mapTile: MapTileType) {
+        removeTileOverlays()
         switch mapTile {
         case .none:
             break
@@ -240,6 +248,7 @@ public struct MapObjectView: UIViewRepresentable {
         let annotationTapped: (_ mapObjectId: UUID) -> Void
         let longPressEnded: (_ location: CLLocationCoordinate2D) -> Void
         let onRouteNotFound: () -> Void
+        var lastMapTileType: MapTileType?
 
         init(
             _ mapView: MapObjectView,
@@ -277,13 +286,18 @@ public struct MapObjectView: UIViewRepresentable {
     }
     
     public func updateUIView(_ uiView: UIMapObjectView, context: Context) {
-        // Clear
+        // Clear annotations and data overlays (tile overlays are managed separately)
         uiView.removeAllAnnotations()
-        uiView.removeAllOverlays()
-        
-        // Set
+        uiView.removeDataOverlays()
+
+        // Set map type
         uiView.changeMapType(mapType: mapType)
-        uiView.changeMapTile(mapTile: mapTileType)
+
+        // Update tile overlay only when type changes
+        if context.coordinator.lastMapTileType != mapTileType {
+            uiView.setMapTile(mapTile: mapTileType)
+            context.coordinator.lastMapTileType = mapTileType
+        }
         
         for mapObject in mapObjects {
             if mapObject.isHidden {
