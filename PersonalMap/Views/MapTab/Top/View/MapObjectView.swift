@@ -121,10 +121,12 @@ public class UIMapObjectView: UIView {
             break
         case .standard:
             let overlay = MKTileOverlay(urlTemplate: "https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png")
+            overlay.minimumZ = 2
             overlay.maximumZ = 18
             mapView.addOverlay(overlay)
         case .pale:
             let overlay = MKTileOverlay(urlTemplate: "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png")
+            overlay.minimumZ = 5
             overlay.maximumZ = 18
             mapView.addOverlay(overlay)
         }
