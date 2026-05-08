@@ -120,10 +120,12 @@ public class UIMapObjectView: UIView {
         case .none:
             break
         case .standard:
-            let overlay = MKTileOverlay.init(urlTemplate:"https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png")
+            let overlay = MKTileOverlay(urlTemplate: "https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png")
+            overlay.maximumZ = 18
             mapView.addOverlay(overlay)
         case .pale:
-            let overlay = MKTileOverlay.init(urlTemplate:"https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png")
+            let overlay = MKTileOverlay(urlTemplate: "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png")
+            overlay.maximumZ = 18
             mapView.addOverlay(overlay)
         }
     }
