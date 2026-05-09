@@ -17,8 +17,11 @@ class ConfigViewState: ObservableObject {
     }
     
     func review() {
-        if let windowScene = UIApplication.shared.windows.first?.windowScene {
-             SKStoreReviewController.requestReview(in: windowScene)
+        let activeScene = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .first { $0.activationState == .foregroundActive }
+        if let windowScene = activeScene {
+            SKStoreReviewController.requestReview(in: windowScene)
         }
     }
     
