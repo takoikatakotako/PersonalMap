@@ -27,7 +27,6 @@ struct ImageItemRow: View {
     }
 }
 
-#Preview {
+#Preview(traits: .sizeThatFitsLayout) {
     ImageItemRow(item: Item(id: UUID(), itemType: .text, key: "Key", value: "Value"))
-        .previewLayout(.sizeThatFits)
 }
