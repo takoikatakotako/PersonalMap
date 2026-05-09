@@ -75,22 +75,11 @@ public class UIMapObjectView: UIView {
         let locations = polygon.locationCoordinate2Ds
         let mkPolygon = MKPolygon(coordinates: locations, count: locations.count)
         mapView.addOverlay(mkPolygon)
-        
-        // 重心を求める
-        var latitudeAverage: Double = 0
-        var longitudeAverage: Double = 0
-        for location in locations {
-            latitudeAverage += location.latitude
-            longitudeAverage += location.longitude
-        }
-        latitudeAverage /= Double(locations.count)
-        longitudeAverage /= Double(locations.count)
-        
-        let polygonCenter = CLLocationCoordinate2D(latitude: latitudeAverage, longitude: longitudeAverage)
+
         let annotation = CustomAnnotation()
         annotation.id = polygon.id
         annotation.imageName = polygon.imageName
-        annotation.coordinate = polygonCenter
+        annotation.coordinate = polygon.centroid
         annotation.title = polygon.objectName
         mapView.addAnnotation(annotation)
     }
@@ -127,20 +116,14 @@ public class UIMapObjectView: UIView {
         guard currentTileType != mapTile else { return }
         currentTileType = mapTile
         removeTileOverlays()
-        switch mapTile {
-        case .none:
-            break
-        case .standard:
-            let overlay = MKTileOverlay(urlTemplate: "https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png")
-            overlay.minimumZ = 2
-            overlay.maximumZ = 18
-            mapView.addOverlay(overlay)
-        case .pale:
-            let overlay = MKTileOverlay(urlTemplate: "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png")
-            overlay.minimumZ = 5
-            overlay.maximumZ = 18
-            mapView.addOverlay(overlay)
-        }
+        guard let config = mapTile.config else { return }
+        let overlay = ScalableTileOverlay(
+            urlTemplate: config.urlTemplate,
+            maxNativeZ: config.maxNativeZ
+        )
+        overlay.minimumZ = config.minimumZ
+        overlay.maximumZ = config.maximumZ
+        mapView.addOverlay(overlay)
     }
     
     func drawRoute(route: Route) {
@@ -199,6 +182,7 @@ extension UIMapObjectView: MKMapViewDelegate {
         
         return nil
     }
+
     
     
     public func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
