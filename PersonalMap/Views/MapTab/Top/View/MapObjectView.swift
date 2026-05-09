@@ -5,6 +5,7 @@ import UIKit
 public class UIMapObjectView: UIView {
     private lazy var mapView = MKMapView()
     weak public var delegate: UIMapObjectViewDelegate?
+    private var currentTileType: MapTileType = .none
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -74,22 +75,11 @@ public class UIMapObjectView: UIView {
         let locations = polygon.locationCoordinate2Ds
         let mkPolygon = MKPolygon(coordinates: locations, count: locations.count)
         mapView.addOverlay(mkPolygon)
-        
-        // 重心を求める
-        var latitudeAverage: Double = 0
-        var longitudeAverage: Double = 0
-        for location in locations {
-            latitudeAverage += location.latitude
-            longitudeAverage += location.longitude
-        }
-        latitudeAverage /= Double(locations.count)
-        longitudeAverage /= Double(locations.count)
-        
-        let polygonCenter = CLLocationCoordinate2D(latitude: latitudeAverage, longitude: longitudeAverage)
+
         let annotation = CustomAnnotation()
         annotation.id = polygon.id
         annotation.imageName = polygon.imageName
-        annotation.coordinate = polygonCenter
+        annotation.coordinate = polygon.centroid
         annotation.title = polygon.objectName
         mapView.addAnnotation(annotation)
     }
@@ -99,9 +89,16 @@ public class UIMapObjectView: UIView {
         mapView.removeAnnotations(mapView.annotations)
     }
     
-    // Remove All Overlay
-    func removeAllOverlays() {
-        for overlay in mapView.overlays {
+    // Remove data overlays (polylines, polygons, route) but keep tile overlays
+    func removeDataOverlays() {
+        for overlay in mapView.overlays where !(overlay is MKTileOverlay) {
+            mapView.removeOverlay(overlay)
+        }
+    }
+
+    // Remove only tile overlays
+    func removeTileOverlays() {
+        for overlay in mapView.overlays where overlay is MKTileOverlay {
             mapView.removeOverlay(overlay)
         }
     }
@@ -114,18 +111,19 @@ public class UIMapObjectView: UIView {
         mapView.setUserTrackingMode(.followWithHeading, animated: true)
     }
     
-    // MapTile
-    func changeMapTile(mapTile: MapTileType) {
-        switch mapTile {
-        case .none:
-            break
-        case .standard:
-            let overlay = MKTileOverlay.init(urlTemplate:"https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png")
-            mapView.addOverlay(overlay)
-        case .pale:
-            let overlay = MKTileOverlay.init(urlTemplate:"https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png")
-            mapView.addOverlay(overlay)
-        }
+    // MapTile: only update when type actually changes
+    func setMapTileIfNeeded(mapTile: MapTileType) {
+        guard currentTileType != mapTile else { return }
+        currentTileType = mapTile
+        removeTileOverlays()
+        guard let config = mapTile.config else { return }
+        let overlay = ScalableTileOverlay(
+            urlTemplate: config.urlTemplate,
+            maxNativeZ: config.maxNativeZ
+        )
+        overlay.minimumZ = config.minimumZ
+        overlay.maximumZ = config.maximumZ
+        mapView.addOverlay(overlay)
     }
     
     func drawRoute(route: Route) {
@@ -184,6 +182,7 @@ extension UIMapObjectView: MKMapViewDelegate {
         
         return nil
     }
+
     
     
     public func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -273,13 +272,15 @@ public struct MapObjectView: UIViewRepresentable {
     }
     
     public func updateUIView(_ uiView: UIMapObjectView, context: Context) {
-        // Clear
+        // Clear annotations and data overlays (tile overlays are managed separately)
         uiView.removeAllAnnotations()
-        uiView.removeAllOverlays()
-        
-        // Set
+        uiView.removeDataOverlays()
+
+        // Set map type
         uiView.changeMapType(mapType: mapType)
-        uiView.changeMapTile(mapTile: mapTileType)
+
+        // Update tile overlay only when type changes (tracked inside UIMapObjectView)
+        uiView.setMapTileIfNeeded(mapTile: mapTileType)
         
         for mapObject in mapObjects {
             if mapObject.isHidden {

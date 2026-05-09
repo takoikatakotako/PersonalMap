@@ -15,9 +15,15 @@ class TopViewState: ObservableObject {
     @Published var routeConfirmLocation: Coordinate?
     @Published var messageAlertText: String?
 
-    private let fileRepository = FileRepository()
-    
-    init() {
+    private let fileRepository: FileRepositoryProtocol
+    private let locationProvider: LocationProviding
+
+    init(
+        fileRepository: FileRepositoryProtocol = FileRepository(),
+        locationProvider: LocationProviding = LocationManager.shared
+    ) {
+        self.fileRepository = fileRepository
+        self.locationProvider = locationProvider
         NotificationCenter.default.addObserver(self, selector: #selector(resetReceived(notification:)), name: .reset, object: nil)
     }
     
@@ -92,11 +98,11 @@ class TopViewState: ObservableObject {
     }
     
     func showRoute(destination: Coordinate) {
-        guard let lastKnownLocation: CLLocationCoordinate2D = LocationManager.shared.lastKnownLocation else {
+        guard let lastKnownLocation = locationProvider.lastKnownLocation else {
             messageAlertText = "現在地が取得できませんでした。"
             return
         }
-                                
+
         route = Route(source: lastKnownLocation, destination: destination.locationCoordinate2D)
     }
     

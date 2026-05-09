@@ -100,6 +100,18 @@
 		8DFBAE12270CA2ED005B4611 /* AddMapPolylineObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFBAE11270CA2ED005B4611 /* AddMapPolylineObjectView.swift */; };
 		8DFC44DF26FF4C2E00021E45 /* MapObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFC44DE26FF4C2E00021E45 /* MapObjectView.swift */; };
 		8DFC44E126FF7CC400021E45 /* UIMapObjectViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFC44E026FF7CC400021E45 /* UIMapObjectViewDelegate.swift */; };
+		8DCAFE0226FF4C2E00021E45 /* ScalableTileOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCAFE0126FF4C2E00021E45 /* ScalableTileOverlay.swift */; };
+		8DCAFE1126FF4C2E00021E45 /* MapTileConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCAFE2126FF4C2E00021E45 /* MapTileConfig.swift */; };
+		8DCAFE1226FF4C2E00021E45 /* TileMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCAFE2226FF4C2E00021E45 /* TileMath.swift */; };
+		8DCAFE1326FF4C2E00021E45 /* MapPolygon+Centroid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCAFE2326FF4C2E00021E45 /* MapPolygon+Centroid.swift */; };
+		8DCAFE1426FF4C2E00021E45 /* FileRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCAFE2426FF4C2E00021E45 /* FileRepositoryProtocol.swift */; };
+		8DCAFE1526FF4C2E00021E45 /* LocationProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCAFE2526FF4C2E00021E45 /* LocationProviding.swift */; };
+		8DCAFE3126FF4C2E00021E45 /* MapTileConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCAFE4126FF4C2E00021E45 /* MapTileConfigTests.swift */; };
+		8DCAFE3226FF4C2E00021E45 /* TileMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCAFE4226FF4C2E00021E45 /* TileMathTests.swift */; };
+		8DCAFE3326FF4C2E00021E45 /* MapPolygonCentroidTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCAFE4326FF4C2E00021E45 /* MapPolygonCentroidTests.swift */; };
+		8DCAFE3426FF4C2E00021E45 /* TopViewStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCAFE4426FF4C2E00021E45 /* TopViewStateTests.swift */; };
+		8DCAFE3526FF4C2E00021E45 /* MockFileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCAFE4526FF4C2E00021E45 /* MockFileRepository.swift */; };
+		8DCAFE3626FF4C2E00021E45 /* MockLocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCAFE4626FF4C2E00021E45 /* MockLocationProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -219,6 +231,18 @@
 		8DFBAE11270CA2ED005B4611 /* AddMapPolylineObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapPolylineObjectView.swift; sourceTree = "<group>"; };
 		8DFC44DE26FF4C2E00021E45 /* MapObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObjectView.swift; sourceTree = "<group>"; };
 		8DFC44E026FF7CC400021E45 /* UIMapObjectViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMapObjectViewDelegate.swift; sourceTree = "<group>"; };
+		8DCAFE0126FF4C2E00021E45 /* ScalableTileOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalableTileOverlay.swift; sourceTree = "<group>"; };
+		8DCAFE2126FF4C2E00021E45 /* MapTileConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTileConfig.swift; sourceTree = "<group>"; };
+		8DCAFE2226FF4C2E00021E45 /* TileMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileMath.swift; sourceTree = "<group>"; };
+		8DCAFE2326FF4C2E00021E45 /* MapPolygon+Centroid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapPolygon+Centroid.swift"; sourceTree = "<group>"; };
+		8DCAFE2426FF4C2E00021E45 /* FileRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRepositoryProtocol.swift; sourceTree = "<group>"; };
+		8DCAFE2526FF4C2E00021E45 /* LocationProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProviding.swift; sourceTree = "<group>"; };
+		8DCAFE4126FF4C2E00021E45 /* MapTileConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTileConfigTests.swift; sourceTree = "<group>"; };
+		8DCAFE4226FF4C2E00021E45 /* TileMathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileMathTests.swift; sourceTree = "<group>"; };
+		8DCAFE4326FF4C2E00021E45 /* MapPolygonCentroidTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPolygonCentroidTests.swift; sourceTree = "<group>"; };
+		8DCAFE4426FF4C2E00021E45 /* TopViewStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewStateTests.swift; sourceTree = "<group>"; };
+		8DCAFE4526FF4C2E00021E45 /* MockFileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFileRepository.swift; sourceTree = "<group>"; };
+		8DCAFE4626FF4C2E00021E45 /* MockLocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				8DB0353B27AFB865004B800F /* LocationManager.swift */,
+				8DCAFE2526FF4C2E00021E45 /* LocationProviding.swift */,
 			);
 			path = Singleton;
 			sourceTree = "<group>";
@@ -472,9 +497,23 @@
 			isa = PBXGroup;
 			children = (
 				8D7D7C3825D4F00C00BA86BF /* PersonalMapTests.swift */,
+				8DCAFE4126FF4C2E00021E45 /* MapTileConfigTests.swift */,
+				8DCAFE4226FF4C2E00021E45 /* TileMathTests.swift */,
+				8DCAFE4326FF4C2E00021E45 /* MapPolygonCentroidTests.swift */,
+				8DCAFE4426FF4C2E00021E45 /* TopViewStateTests.swift */,
+				8DCAFE3026FF4C2E00021E45 /* Mocks */,
 				8D7D7C3A25D4F00C00BA86BF /* Info.plist */,
 			);
 			path = PersonalMapTests;
+			sourceTree = "<group>";
+		};
+		8DCAFE3026FF4C2E00021E45 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				8DCAFE4526FF4C2E00021E45 /* MockFileRepository.swift */,
+				8DCAFE4626FF4C2E00021E45 /* MockLocationProvider.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		8D7D7C4225D4F00C00BA86BF /* PersonalMapUITests */ = {
@@ -517,10 +556,13 @@
 			isa = PBXGroup;
 			children = (
 				17ECD6012D2A5FC0002EEDA1 /* MapTile.swift */,
+				8DCAFE2126FF4C2E00021E45 /* MapTileConfig.swift */,
+				8DCAFE2226FF4C2E00021E45 /* TileMath.swift */,
 				8DD13EF325E2308C00CEAB3B /* MapPoint.swift */,
 				8DD13F0125E2389E00CEAB3B /* Item.swift */,
 				8DCE59DA25EBB36400D080D2 /* MapPolyline.swift */,
 				8D8255092607272700D73A6D /* MapPolygon.swift */,
+				8DCAFE2326FF4C2E00021E45 /* MapPolygon+Centroid.swift */,
 				8DCE59DF25EBB38F00D080D2 /* MapObject.swift */,
 				8DEC411326F61B180052A7D2 /* MapLayerProtocol.swift */,
 				8DFBADF827089F93005B4611 /* Coordinate.swift */,
@@ -560,6 +602,7 @@
 			children = (
 				8DFC44DE26FF4C2E00021E45 /* MapObjectView.swift */,
 				8DFC44E026FF7CC400021E45 /* UIMapObjectViewDelegate.swift */,
+				8DCAFE0126FF4C2E00021E45 /* ScalableTileOverlay.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -595,6 +638,7 @@
 			isa = PBXGroup;
 			children = (
 				8DEC412226F63D950052A7D2 /* FileRepository.swift */,
+				8DCAFE2426FF4C2E00021E45 /* FileRepositoryProtocol.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -849,6 +893,12 @@
 				8D3ABE252714011300584BDC /* AddMapPolygonObjectView.swift in Sources */,
 				8D2B8F85275228F70071E571 /* TextItemRow.swift in Sources */,
 				8DFC44DF26FF4C2E00021E45 /* MapObjectView.swift in Sources */,
+				8DCAFE0226FF4C2E00021E45 /* ScalableTileOverlay.swift in Sources */,
+				8DCAFE1126FF4C2E00021E45 /* MapTileConfig.swift in Sources */,
+				8DCAFE1226FF4C2E00021E45 /* TileMath.swift in Sources */,
+				8DCAFE1326FF4C2E00021E45 /* MapPolygon+Centroid.swift in Sources */,
+				8DCAFE1426FF4C2E00021E45 /* FileRepositoryProtocol.swift in Sources */,
+				8DCAFE1526FF4C2E00021E45 /* LocationProviding.swift in Sources */,
 				8DEC411726F623510052A7D2 /* AddMapLayerView.swift in Sources */,
 				8DD13EF425E2308C00CEAB3B /* MapPoint.swift in Sources */,
 				8D2B8F8927522A800071E571 /* ImageItemRow.swift in Sources */,
@@ -913,6 +963,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D7D7C3925D4F00C00BA86BF /* PersonalMapTests.swift in Sources */,
+				8DCAFE3126FF4C2E00021E45 /* MapTileConfigTests.swift in Sources */,
+				8DCAFE3226FF4C2E00021E45 /* TileMathTests.swift in Sources */,
+				8DCAFE3326FF4C2E00021E45 /* MapPolygonCentroidTests.swift in Sources */,
+				8DCAFE3426FF4C2E00021E45 /* TopViewStateTests.swift in Sources */,
+				8DCAFE3526FF4C2E00021E45 /* MockFileRepository.swift in Sources */,
+				8DCAFE3626FF4C2E00021E45 /* MockLocationProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,7 +12,6 @@ struct TextItemRow: View {
     }
 }
 
-#Preview {
+#Preview(traits: .sizeThatFitsLayout) {
     TextItemRow(item: Item(id: UUID(), itemType: .text, key: "Key", value: "Value"))
-        .previewLayout(.sizeThatFits)
 }
